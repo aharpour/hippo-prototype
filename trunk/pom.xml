@@ -21,7 +21,7 @@
 	<description>Hippo prototype</description>
 	<groupId>com.tdclighthouse.hippo</groupId>
 	<artifactId>hippo-prototype</artifactId>
-	<version>0.0.23-SNAPSHOT</version>
+	<version>0.0.23</version>
 	<packaging>pom</packaging>
 	
 	<developers>
@@ -34,9 +34,9 @@
 	<inceptionYear>2012</inceptionYear>
 
 	<scm>
-		<connection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/trunk/</developerConnection>
-		<url>https://svn.code.sf.net/p/hippoprototype/code/trunk/</url>
+		<connection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/tags/0.0.23</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/tags/0.0.23</developerConnection>
+		<url>https://svn.code.sf.net/p/hippoprototype/code/tags/0.0.23</url>
 	</scm>
 	<ciManagement />
 
@@ -112,7 +112,7 @@
 			<dependency>
 				<groupId>com.tdclighthouse</groupId>
 				<artifactId>commons-tools</artifactId>
-				<version>0.4.19-SNAPSHOT</version>
+				<version>0.4.18</version>
 			</dependency>
 			<!-- Apache libs -->
 			<dependency>

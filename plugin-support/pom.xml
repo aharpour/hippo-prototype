@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.tdclighthouse.hippo</groupId>
+		<artifactId>hippo-prototype</artifactId>
+		<version>0.0.23-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>hippo-prototype-plugin-support</artifactId>
+
+	<name>Hippo prototype plugin support</name>
+
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+
+		<dependency>
+			<groupId>com.tdclighthouse</groupId>
+			<artifactId>commons-tools</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.tdclighthouse.hippo</groupId>
+			<artifactId>bean-mapper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.onehippo.cms7</groupId>
+			<artifactId>hippo-repository-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.onehippo.cms7</groupId>
+			<artifactId>hippo-repository-builtin</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.onehippo.cms7</groupId>
+			<artifactId>hippo-addon-publication-workflow-repository</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.onehippo.cms7</groupId>
+			<artifactId>hippo-cms-gallery-common</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.jcr</groupId>
+			<artifactId>jcr</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.onehippo.cms7</groupId>
+			<artifactId>hippo-repository-connector</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+	</dependencies>
+</project>

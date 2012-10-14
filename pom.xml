@@ -34,21 +34,17 @@
 	<inceptionYear>2012</inceptionYear>
 
 	<scm>
-		<connection>scm:svn:https://svn.tdclighthouse.local/repos/shared_projects/tdclighthouse/hippo-7-7-prototype/trunk</connection>
-		<developerConnection>scm:svn:https://svn.tdclighthouse.local/repos/shared_projects/tdclighthouse/hippo-7-7-prototype/trunk</developerConnection>
-		<url>https://svn.tdclighthouse.local/repos/shared_projects/tdclighthouse/hippo-7-7-prototype/trunk</url>
+		<connection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/trunk/</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/trunk/</developerConnection>
+		<url>https://svn.code.sf.net/p/hippoprototype/code/trunk/</url>
 	</scm>
 	<ciManagement />
 
 	<distributionManagement>
 		<repository>
-			<id>com.tdclighthouse.repository.releases</id>
-			<url>http://nexus.tdclighthouse.local/content/repositories/releases</url>
+			<id>sf-hippo-prototype-repo</id>
+			<url>svn:https://svn.code.sf.net/p/hippoprototype/code/maven2/</url>
 		</repository>
-		<snapshotRepository>
-			<id>com.tdclighthouse.repository.snapshots</id>
-			<url>http://nexus.tdclighthouse.local/content/repositories/snapshots</url>
-		</snapshotRepository>
 	</distributionManagement>
 
 	<properties>
@@ -291,6 +287,13 @@
 		</profile>
 	</profiles>
 	<build>
+		<extensions>
+			<extension>
+				<groupId>org.jvnet.wagon-svn</groupId>
+				<artifactId>wagon-svn</artifactId>
+				<version>1.9</version>
+			</extension>
+		</extensions>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

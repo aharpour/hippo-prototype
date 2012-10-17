@@ -82,6 +82,14 @@
 				<updatePolicy>never</updatePolicy>
 			</releases>
 		</repository>
+		<repository>
+			<id>hippo-forge-beanmapper</id>
+			<url>https://forge.onehippo.org/svn/beanmapper/maven2/</url>
+			<name>Hippo forge bean mapper repo</name>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</repository>
 	</repositories>
 
 	<dependencyManagement>

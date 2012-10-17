@@ -42,7 +42,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.tdclighthouse</groupId>
+			<groupId>com.tdclighthouse.hippo</groupId>
 			<artifactId>hippo-common-tools</artifactId>
 		</dependency>
 

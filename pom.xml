@@ -73,6 +73,15 @@
 				<updatePolicy>never</updatePolicy>
 			</releases>		
 		</repository>
+		
+		<repository>
+			<id>sf-hippo-common-tools-repo</id>
+			<url>https://svn.code.sf.net/p/hippocommontool/code/maven2/</url>
+			<name>Source forge hippo common tools repo</name>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</repository>
 	</repositories>
 
 	<dependencyManagement>
@@ -110,9 +119,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.tdclighthouse</groupId>
+				<groupId>com.tdclighthouse.hippo</groupId>
 				<artifactId>hippo-common-tools</artifactId>
-				<version>0.4.19</version>
+				<version>0.4.20</version>
 			</dependency>
 			<!-- Apache libs -->
 			<dependency>

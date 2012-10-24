@@ -58,14 +58,6 @@
 			<url>http://maven.onehippo.com/maven2/</url>
 		</repository>
 		<repository>
-			<id>hippo-forge-beanmapper</id>
-			<name>Bean mapper</name>
-			<url>https://forge.onehippo.org/svn/beanmapper/maven2/</url>
-			<releases>
-				<updatePolicy>never</updatePolicy>
-			</releases>		
-		</repository>
-		<repository>
 			<id>hippo-forge</id>
 			<name>Hippo Forge</name>
 			<url>http://maven.onehippo.com/maven2-forge/</url>

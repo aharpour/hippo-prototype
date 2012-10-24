@@ -76,7 +76,7 @@
 		
 		<repository>
 			<id>sf-hippo-common-tools-repo</id>
-			<url>https://svn.code.sf.net/p/hippocommontool/code/maven2/</url>
+			<url>http://svn.code.sf.net/p/hippocommontool/code/maven2/</url>
 			<name>Source forge hippo common tools repo</name>
 			<releases>
 				<updatePolicy>never</updatePolicy>

@@ -23,12 +23,12 @@ import com.tdclighthouse.prototype.rmi.RepositoryConnector;
 
 /**
  * @author Ebrahim Aharpour
- *
+ * 
  */
 public class SessionTemplate {
 
 	private Session session;
-	private RepositoryConnector repositoryConnector; 
+	private RepositoryConnector repositoryConnector;
 
 	public SessionTemplate(Session session) {
 		this.session = session;
@@ -37,7 +37,7 @@ public class SessionTemplate {
 	public SessionTemplate(Repository repository) throws RepositoryException {
 		this.session = repository.login();
 	}
-	
+
 	public SessionTemplate(RepositoryConnector repositoryConnector) {
 		this.repositoryConnector = repositoryConnector;
 		this.session = repositoryConnector.getSession();
@@ -67,7 +67,13 @@ public class SessionTemplate {
 			session.logout();
 		}
 
-
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		if (session != null && (repositoryConnector != null || session.isLive())) {
+			logout();
+		}
+		super.finalize();
+	}
 }

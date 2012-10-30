@@ -19,7 +19,6 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
@@ -28,7 +27,8 @@ import org.apache.commons.pool.ObjectPool;
 import org.apache.commons.pool.PoolableObjectFactory;
 import org.apache.commons.pool.impl.GenericObjectPool;
 import org.apache.commons.pool.impl.GenericObjectPool.Config;
-import org.apache.jackrabbit.commons.JcrUtils;
+import org.hippoecm.repository.HippoRepository;
+import org.hippoecm.repository.HippoRepositoryFactory;
 
 /**
  * @author Ebrahim Aharopur
@@ -38,10 +38,11 @@ public class RepositoryConnector {
 
 	private String username;
 	private String password;
-	private Repository repository;
+	private final String repositoryUrl;
+	private HippoRepository repository;
 	private ObjectPool<Session> sessionPool;
 	private Config config;
-
+	
 	public RepositoryConnector(String username, String password, String repositoryUrl)
 			throws RepositoryException {
 		this(username, password, repositoryUrl, null);
@@ -51,9 +52,22 @@ public class RepositoryConnector {
 			throws RepositoryException {
 		this.username = username;
 		this.password = password;
-		this.repository = JcrUtils.getRepository(repositoryUrl);
+		this.repositoryUrl = repositoryUrl;
 		this.config = config;
 		sessionPool = new GenericObjectPool<Session>(new SessionFactory(), getPoolConfig());
+	}
+	
+	private HippoRepository getRepository() throws RepositoryException {
+		HippoRepository result = repository;
+		if (result == null) {
+            synchronized(this) {
+                result = repository;
+                if (result == null) {
+                	repository = result = HippoRepositoryFactory.getHippoRepository(repositoryUrl);
+                }
+            }
+        }
+		return repository;
 	}
 
 	private Config getPoolConfig() {
@@ -110,7 +124,7 @@ public class RepositoryConnector {
 
 		@Override
 		public Session makeObject() throws Exception {
-			return repository.login(new SimpleCredentials(username, password.toCharArray()));
+			return getRepository().login(new SimpleCredentials(username, password.toCharArray()));
 		}
 
 		@Override

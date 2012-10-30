@@ -19,13 +19,16 @@ import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import com.tdclighthouse.prototype.rmi.RepositoryConnector;
+
 /**
  * @author Ebrahim Aharpour
  *
  */
 public class SessionTemplate {
 
-	private final Session session;
+	private Session session;
+	private RepositoryConnector repositoryConnector; 
 
 	public SessionTemplate(Session session) {
 		this.session = session;
@@ -33,6 +36,11 @@ public class SessionTemplate {
 
 	public SessionTemplate(Repository repository) throws RepositoryException {
 		this.session = repository.login();
+	}
+	
+	public SessionTemplate(RepositoryConnector repositoryConnector) {
+		this.repositoryConnector = repositoryConnector;
+		this.session = repositoryConnector.getSession();
 	}
 
 	public <T> T execute(SessionCallBack<T> stub) throws RepositoryException {
@@ -52,7 +60,14 @@ public class SessionTemplate {
 	}
 
 	public void logout() {
-		session.logout();
+		if (repositoryConnector != null) {
+			repositoryConnector.returnSession(session);
+			session = null;
+		} else {
+			session.logout();
+		}
+
+
 	}
 
 }

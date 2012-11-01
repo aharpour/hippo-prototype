@@ -24,14 +24,14 @@ public class Constants {
 	protected Constants() {
 	}
 
-	public class NodeName {
+	public static class NodeName {
 		public static final String HIPPOTRANSLATION_TRANSLATIONS = "hippotranslation:translations";
 		public static final String TDC_FLEXIBLE_BLOCK = "tdc:flexibleBlock";
 		public static final String TDC_LINK = "tdc:link";
 		public static final String HIPPOGALLERY_ASSET = "hippogallery:asset";
 	}
 
-	public class NodeType {
+	public static class NodeType {
 		public static final String HIPPO_HANDLE = "hippo:handle";
 		public static final String HIPPOGALLERYPICKER_IMAGELINK = "hippogallerypicker:imagelink";
 		public static final String TDC_PARAGRAPH_IMAGE = "tdc:ParagraphImage";
@@ -46,7 +46,7 @@ public class Constants {
 		public static final String HIPPOGALLERY_STD_ASSET_GALLERY = "asset gallery";
 	}
 
-	public class PropertyName {
+	public static class PropertyName {
 		public static final String HIPPOTRANSLATION_ID = "hippotranslation:id";
 		public static final String HIPPOSTD_STATE = "hippostd:state";
 		public static final String HIPPOTRANSLATION_LOCALE = "hippotranslation:locale";
@@ -69,10 +69,14 @@ public class Constants {
 		public static final String HIPPOSTDPUBWF_LOCALE = "hippostdpubwf:locale";
 	}
 
-	public class WorkflowName {
+	public static class WorkflowName {
 		public static final String INTERNAL = "internal";
 		public static final String DEFAULT = "default";
 		public static final String SHORTCUTS = "shortcuts";
+	}
+	
+	public static class Uuids {
+		public static final String ROOT_NODE = "cafebabe-cafe-babe-cafe-babecafebabe";
 	}
 
 	public static class MixinTypes {

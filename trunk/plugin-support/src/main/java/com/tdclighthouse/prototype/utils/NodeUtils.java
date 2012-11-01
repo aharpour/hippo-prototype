@@ -62,6 +62,14 @@ public class NodeUtils {
 		return property;
 	}
 
+	public static String normalizeRelativePath(String relativePath) {
+		return (relativePath.startsWith("/") ? relativePath.substring(1) : relativePath);
+	}
+
+	public static String normalizeAbsolutePath(String relativePath) {
+		return (relativePath.startsWith("/") ? relativePath : "/" + relativePath);
+	}
+
 	private static void validateTranslatability(Node node) throws RepositoryException {
 		NodeType[] mixinNodeTypes = node.getMixinNodeTypes();
 		boolean hasTheRightMixin = false;

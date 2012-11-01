@@ -63,8 +63,7 @@ public class BinaryCreationCallBack implements SessionCallBack<String> {
 	@Override
 	public String doInSession(Session session) throws RepositoryException {
 		try {
-			Node node = createAssetNode(session,
-					Constants.NodeType.HIPPOGALLERY_EXAMPLE_ASSET_SET);
+			Node node = createAssetNode(session, Constants.NodeType.HIPPOGALLERY_EXAMPLE_ASSET_SET);
 			String mimeType = new MimetypesFileTypeMap().getContentType(file);
 			Node asset = getNode(node, Constants.NodeName.HIPPOGALLERY_ASSET, Constants.NodeType.HIPPO_RESOURCE);
 			asset.setProperty(Constants.PropertyName.JCR_DATA,
@@ -82,11 +81,19 @@ public class BinaryCreationCallBack implements SessionCallBack<String> {
 
 	private Node createAssetNode(Session session, String type) throws PathNotFoundException, RepositoryException,
 			MappingException, RemoteException, ItemNotFoundException {
+		Node result;
 		HippoWorkspace workspace = (HippoWorkspace) session.getWorkspace();
 		Node parent = session.getNode(parentPath);
-		GalleryWorkflow workflow = (GalleryWorkflow) workspace.getWorkflowManager().getWorkflow("gallery", parent);
-		Document document = workflow.createGalleryItem(Text.escapeIllegalJcrChars(file.getName()), type);
-		return session.getNodeByIdentifier(document.getIdentity());
+		String nodeName = Text.escapeIllegalJcrChars(file.getName());
+		
+		if (parent.hasNode(nodeName) && parent.getNode(nodeName).getNode(nodeName).isNodeType(type)) {
+			result = parent.getNode(nodeName).getNode(nodeName);
+		} else {
+			GalleryWorkflow workflow = (GalleryWorkflow) workspace.getWorkflowManager().getWorkflow("gallery", parent);
+			Document document = workflow.createGalleryItem(nodeName, type);
+			result = session.getNodeByIdentifier(document.getIdentity());
+		}
+		return result;
 	}
 
 	private Node getNode(Node node, String relPath, String nodeType) throws RepositoryException, ItemExistsException,

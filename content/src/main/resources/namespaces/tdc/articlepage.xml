@@ -36,7 +36,7 @@
         <sv:value>true</sv:value>
       </sv:property>
       <sv:property sv:name="hipposysedit:supertype" sv:type="String" sv:multiple="true">
-        <sv:value>tdc:basedocument</sv:value>
+        <sv:value>tdc:WebDocument</sv:value>
         <sv:value>hippostd:relaxed</sv:value>
       </sv:property>
       <sv:property sv:name="hipposysedit:uri" sv:type="String">

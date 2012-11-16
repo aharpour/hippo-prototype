@@ -60,6 +60,6 @@
 
 [tdc:WebDocument] > tdc:basedocument, hippostd:relaxed orderable
 
-[tdc:ArticlePage] > tdc:basedocument, hippostd:relaxed orderable
+[tdc:ArticlePage] > tdc:WebDocument, hippostd:relaxed orderable
 
 [tdc:TdcImageSet] > hippogallery:imageset, hippogallery:relaxed

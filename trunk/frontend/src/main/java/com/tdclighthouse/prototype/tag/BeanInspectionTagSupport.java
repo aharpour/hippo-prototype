@@ -150,6 +150,8 @@ public class BeanInspectionTagSupport {
 			result.add("node");
 			result.add("valueProvider");
 			result.add("equalComparator");
+			result.add("canonicalBean");
+			result.add("property");
 			return result;
 		}
 

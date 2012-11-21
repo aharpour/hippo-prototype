@@ -40,7 +40,7 @@ public class Constants {
 		public static final String TDC_TITLE = "tdc:title";
 	}
 
-	public static class HippoFactAttributes {
+	public static class HippoFacetAttributes {
 		public static final String HIPPOFACNAV_FACETNODENAMES = "hippofacnav:facetnodenames";
 		public static final String HIPPOFACNAV_FACETS = "hippofacnav:facets";
 	}

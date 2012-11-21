@@ -191,11 +191,9 @@
       <sv:property sv:multiple="true" sv:name="frontend:references" sv:type="String">
         <sv:value>wicket.model</sv:value>
         <sv:value>engine</sv:value>
-        <sv:value>validator.id</sv:value>
       </sv:property>
       <sv:property sv:multiple="true" sv:name="frontend:services" sv:type="String">
         <sv:value>wicket.id</sv:value>
-        <sv:value>validator.id</sv:value>
       </sv:property>
       <sv:property sv:name="type" sv:type="String">
         <sv:value>tdc:Image</sv:value>

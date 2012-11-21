@@ -143,11 +143,9 @@
         <sv:value>wicket.model</sv:value>
         <sv:value>model.compareTo</sv:value>
         <sv:value>engine</sv:value>
-        <sv:value>validator.id</sv:value>
       </sv:property>
       <sv:property sv:name="frontend:services" sv:type="String" sv:multiple="true">
         <sv:value>wicket.id</sv:value>
-        <sv:value>validator.id</sv:value>
       </sv:property>
       <sv:property sv:name="type" sv:type="String">
         <sv:value>tdc:Gallery</sv:value>

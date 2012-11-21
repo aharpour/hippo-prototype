@@ -23,10 +23,10 @@
 		<name>audioblock</name>
 		<path>/META-INF/tags/audioblock.tag</path>
 	</tag-file>
-	<tag-file>
+	<!-- <tag-file>
 		<name>bean-dump</name>
 		<path>/META-INF/tags/bean-dump.tag</path>
-	</tag-file>
+	</tag-file> -->
 	<tag-file>
 		<name>flexibleblock</name>
 		<path>/META-INF/tags/flexibleblock.tag</path>

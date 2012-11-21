@@ -9,9 +9,16 @@
 <%@ attribute name="bean" rtexprvalue="true" required="true" type="java.lang.Object" %>
 <%@ attribute name="depth" rtexprvalue="true" required="false" type="java.lang.Integer" %>
 <%@ attribute name="applyBlackList" rtexprvalue="true" required="false" type="java.lang.Boolean" %>
-<h4>In spection of bean of type ${bean.class.name}</h4>
+<c:choose>
+<c:when test="${not empty bean}">
+<h4>Inspection of bean of type ${bean.class.name}</h4>
 <pre>
 <%
 BeanInspectionTagSupport.inspectProperties(bean, out, applyBlackList, depth);
 %>
 </pre>
+</c:when>
+<c:otherwise>
+<h4>the given bean attribute has null value.</h4>
+</c:otherwise>
+</c:choose>

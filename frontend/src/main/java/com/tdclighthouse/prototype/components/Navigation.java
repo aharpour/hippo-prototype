@@ -95,6 +95,9 @@ public class Navigation extends BaseHstComponent {
 
 		private void setSelected(EditableMenuItem item) {
 			EditableMenuItem temp = item;
+			if (temp instanceof SimpleEditableMenuItem) {
+				((SimpleEditableMenuItem) temp).setSelected(true);
+			}
 			while (temp != null) {
 				temp.setExpanded(true);
 				temp = temp.getParentItem();
@@ -184,6 +187,10 @@ public class Navigation extends BaseHstComponent {
 		@Override
 		public HstLink getHstLink() {
 			return hstLink;
+		}
+		
+		public void setSelected(boolean selected) {
+			this.selected = selected;
 		}
 
 		@Override

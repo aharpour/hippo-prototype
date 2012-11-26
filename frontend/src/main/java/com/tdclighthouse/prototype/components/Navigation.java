@@ -51,7 +51,12 @@ public class Navigation extends BaseHstComponent {
 			this.request = request;
 			this.editableMenu = editableMenu;
 			String relativeContentPath = request.getRequestContext().getResolvedSiteMapItem().getRelativeContentPath();
-			selectedNodeCanonicalPath = getSiteContentBaseBean(request).<HippoBean>getBean(relativeContentPath).getCanonicalPath();
+			if (relativeContentPath != null) {
+				selectedNodeCanonicalPath = getSiteContentBaseBean(request).<HippoBean> getBean(relativeContentPath)
+						.getCanonicalPath();
+			} else {
+				selectedNodeCanonicalPath = null;
+			}
 		}
 
 		private void addRepoBasedMenuItems() {
@@ -113,7 +118,7 @@ public class Navigation extends BaseHstComponent {
 			HstLink hstLink = Essentials.createHstLink(document, request);
 			EditableMenuItem repoMenuItem = new SimpleEditableMenuItem(item, hstLink, localizedName);
 			item.addChildMenuItem(repoMenuItem);
-			if (selectedNodeCanonicalPath.equals(document.getCanonicalPath())) {
+			if (selectedNodeCanonicalPath != null && selectedNodeCanonicalPath.equals(document.getCanonicalPath())) {
 				setSelected(repoMenuItem);
 			}
 			return repoMenuItem;
@@ -188,7 +193,7 @@ public class Navigation extends BaseHstComponent {
 		public HstLink getHstLink() {
 			return hstLink;
 		}
-		
+
 		public void setSelected(boolean selected) {
 			this.selected = selected;
 		}

@@ -37,19 +37,18 @@ public class Navigation extends BaseHstComponent {
 		HstSiteMenu menu = request.getRequestContext().getHstSiteMenus().getSiteMenu(menuName);
 		if (menu != null) {
 			EditableMenu editableMenu = menu.getEditableMenu();
-			new RepoBasedMenuProssessor(editableMenu, request).addRepoBasedMenuItems();
+			List<EditableMenuItem> menuItems = editableMenu.getMenuItems();
+			new RepoBasedMenuProssessor(editableMenu, request).addRepoBasedMenuItems(menuItems);
 			request.setAttribute(Constants.Attributes.MENU, editableMenu);
 		}
 	}
 
 	private class RepoBasedMenuProssessor {
 		public final HstRequest request;
-		public final EditableMenu editableMenu;
 		public final String selectedNodeCanonicalPath;
 
 		public RepoBasedMenuProssessor(EditableMenu editableMenu, HstRequest request) {
 			this.request = request;
-			this.editableMenu = editableMenu;
 			String relativeContentPath = request.getRequestContext().getResolvedSiteMapItem().getRelativeContentPath();
 			if (relativeContentPath != null) {
 				selectedNodeCanonicalPath = getSiteContentBaseBean(request).<HippoBean> getBean(relativeContentPath)
@@ -59,9 +58,9 @@ public class Navigation extends BaseHstComponent {
 			}
 		}
 
-		private void addRepoBasedMenuItems() {
-			List<EditableMenuItem> menuItems = editableMenu.getMenuItems();
+		private void addRepoBasedMenuItems(List<EditableMenuItem> menuItems) {
 			for (EditableMenuItem item : menuItems) {
+				addRepoBasedMenuItems(item.getChildMenuItems());
 				if (item.isRepositoryBased()) {
 					String root = getRootParameterValue(item.getProperties());
 					HippoBean beanOfMenuItem = null;
@@ -70,9 +69,7 @@ public class Navigation extends BaseHstComponent {
 					} else {
 						beanOfMenuItem = getBeanOfMenuItem(item);
 					}
-
 					addSubitems(item, beanOfMenuItem, 1);
-
 				}
 			}
 		}

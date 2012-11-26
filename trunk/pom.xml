@@ -53,6 +53,10 @@
 
 	<properties>
 		<junit.version>4.10</junit.version>
+		<hst.version>2.24.10</hst.version>
+		<repository.version>2.24.00</repository.version> 
+		<workflow.repository.version>2.22.05</workflow.repository.version>
+		<hippo.gallary.version>2.22.13</hippo.gallary.version>
 	</properties>
 
 	<repositories>
@@ -166,45 +170,45 @@
 			<dependency>
 				<groupId>org.onehippo.cms7.hst.dependencies</groupId>
 				<artifactId>hst-client-dependencies</artifactId>
-				<version>2.24.05</version>
+				<version>${hst.version}</version>
 				<type>pom</type>
 			</dependency>
 
 			<dependency>
 				<groupId>org.onehippo.cms7.hst.dependencies</groupId>
 				<artifactId>hst-shared-dependencies</artifactId>
-				<version>2.24.05</version>
+				<version>${hst.version}</version>
 				<type>pom</type>
 			</dependency>
 
 			<dependency>
 				<groupId>org.onehippo.cms7</groupId>
 				<artifactId>hippo-repository-api</artifactId>
-				<version>2.22.05</version>
+				<version>${repository.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.onehippo.cms7</groupId>
 				<artifactId>hippo-addon-publication-workflow-repository</artifactId>
-				<version>2.22.02</version>
+				<version>${workflow.repository.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.onehippo.cms7</groupId>
 				<artifactId>hippo-cms-api</artifactId>
-				<version>2.22.04</version>
+				<version>${repository.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.onehippo.cms7</groupId>
 				<artifactId>hippo-cms-gallery-common</artifactId>
-				<version>2.22.05</version>
+				<version>${hippo.gallary.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.onehippo.cms7</groupId>
 				<artifactId>hippo-repository-builtin</artifactId>
-				<version>2.22.05</version>
+				<version>${repository.version}</version>
 			</dependency>
 
 			<dependency>

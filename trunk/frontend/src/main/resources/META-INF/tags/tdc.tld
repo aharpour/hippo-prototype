@@ -95,6 +95,14 @@
 		<name>menuitem</name>
 		<path>/META-INF/tags/menuitem.tag</path>
 	</tag-file>
+	<tag-file>
+		<name>breadcrumbitem</name>
+		<path>/META-INF/tags/breadcrumbitem.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>breadcrumbs</name>
+		<path>/META-INF/tags/breadcrumbs.tag</path>
+	</tag-file>
 
 	<!-- <function> <name>matches</name> <function-class>net.vivin.regula.validation.util.TagStringUtils</function-class> <function-signature>boolean matches(java.lang.String, 
 		java.lang.String, java.lang.String)</function-signature> </function> -->

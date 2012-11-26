@@ -52,6 +52,7 @@
 	</distributionManagement>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.10</junit.version>
 		<hst.version>2.24.10</hst.version>
 		<repository.version>2.24.00</repository.version> 

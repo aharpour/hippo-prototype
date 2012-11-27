@@ -75,4 +75,11 @@ public class Constants {
 	public static class Values {
 		public static final String DESCENDING = "descending";
 	}
+	
+	public static class PikcerTypes {
+		public static final String ASSET_PICKER = "cms-pickers/assets";
+		public static final String DOCUMENT_PICKER = "cms-pickers/documents";
+		public static final String FOLDER_PICKER = "cms-pickers/folders";
+		public static final String IMAGER_PICKER = "cms-pickers/images";
+	}
 }

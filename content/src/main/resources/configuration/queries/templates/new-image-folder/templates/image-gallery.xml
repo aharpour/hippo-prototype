@@ -1,5 +1,5 @@
 <sv:node xmlns:sv="http://www.jcp.org/jcr/sv/1.0" xmlns:h="http://www.onehippo.org/jcr/xmlimport" sv:name="image gallery" h:merge="combine">
   <sv:property sv:name="hippostd:gallerytype" sv:type="String" h:merge="override">
-    <sv:value>tdc:NwoImageSet</sv:value>
+    <sv:value>tdc:TdcImageSet</sv:value>
   </sv:property>
 </sv:node>

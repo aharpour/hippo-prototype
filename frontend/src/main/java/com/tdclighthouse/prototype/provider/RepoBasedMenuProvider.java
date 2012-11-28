@@ -9,6 +9,7 @@ import org.hippoecm.hst.content.beans.standard.HippoDocumentBean;
 import org.hippoecm.hst.content.beans.standard.HippoFolderBean;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.linking.HstLink;
+import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
 import org.hippoecm.hst.core.sitemenu.CommonMenuItem;
 import org.hippoecm.hst.core.sitemenu.EditableMenu;
 import org.hippoecm.hst.core.sitemenu.EditableMenuItem;
@@ -21,7 +22,7 @@ import com.tdclighthouse.commons.utils.hippo.Essentials;
 public class RepoBasedMenuProvider {
 	public static final String INDEX = "index";
 	public static final Logger log = LoggerFactory.getLogger(RepoBasedMenuProvider.class);
-	
+
 	private final HstRequest request;
 	private final String selectedNodeCanonicalPath;
 	private final HippoBean siteContentBaseBean;
@@ -36,7 +37,7 @@ public class RepoBasedMenuProvider {
 			selectedNodeCanonicalPath = null;
 		}
 	}
-	
+
 	public EditableMenu addRepoBasedMenuItems(EditableMenu editableMenu) {
 		List<EditableMenuItem> menuItems = editableMenu.getMenuItems();
 		addRepoBasedMenuItems(menuItems);
@@ -131,7 +132,11 @@ public class RepoBasedMenuProvider {
 	}
 
 	private HippoBean getBeanOfMenuItem(CommonMenuItem item) {
-		HippoBean bean = siteContentBaseBean.getBean(item.resolveToSiteMapItem(request).getRelativeContentPath());
+		HippoBean bean = null;
+		ResolvedSiteMapItem resolveToSiteMapItem = item.resolveToSiteMapItem(request);
+		if (resolveToSiteMapItem != null) {
+			bean = siteContentBaseBean.getBean(resolveToSiteMapItem.getRelativeContentPath());
+		}
 		return bean;
 	}
 

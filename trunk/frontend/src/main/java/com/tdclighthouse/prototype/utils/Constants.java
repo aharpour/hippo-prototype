@@ -15,6 +15,7 @@
  */
 package com.tdclighthouse.prototype.utils;
 
+
 /**
  * @author Ebrahim Aharpour
  *
@@ -80,6 +81,10 @@ public class Constants {
 		public static final String ASSET_PICKER = "cms-pickers/assets";
 		public static final String DOCUMENT_PICKER = "cms-pickers/documents";
 		public static final String FOLDER_PICKER = "cms-pickers/folders";
-		public static final String IMAGER_PICKER = "cms-pickers/images";
+		public static final String IMAGE_PICKER = "cms-pickers/images";
+	}
+	
+	public static class NodeName {
+		public static final String INDEX = "index";
 	}
 }

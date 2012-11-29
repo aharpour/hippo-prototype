@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.hippoecm.hst.configuration.HstNodeTypes;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
-import org.hippoecm.hst.content.beans.standard.HippoDocumentBean;
 import org.hippoecm.hst.content.beans.standard.HippoFolderBean;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.linking.HstLink;
@@ -18,9 +17,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.commons.utils.hippo.Essentials;
+import com.tdclighthouse.prototype.utils.NavigationUtils;
 
 public class RepoBasedMenuProvider {
-	public static final String INDEX = "index";
 	public static final Logger log = LoggerFactory.getLogger(RepoBasedMenuProvider.class);
 
 	private final HstRequest request;
@@ -65,7 +64,7 @@ public class RepoBasedMenuProvider {
 			HippoFolderBean folderBean = getFolder(indexPageBean);
 			if (folderBean != null) {
 				for (HippoFolderBean folder : folderBean.getFolders()) {
-					HippoBean foldersIndex = getIndexBean(folder);
+					HippoBean foldersIndex = NavigationUtils.getIndexBean(folder);
 					if (foldersIndex != null) {
 						EditableMenuItem folderItem = addItem(item, foldersIndex, folder.getLocalizedName());
 						addSubitems(folderItem, foldersIndex, depth + 1);
@@ -107,17 +106,7 @@ public class RepoBasedMenuProvider {
 		return repoMenuItem;
 	}
 
-	private HippoBean getIndexBean(HippoFolderBean folder) {
-		HippoBean result;
-		result = folder.getBean(INDEX);
-		// when there is no index document in a folder then the first
-		// document is selected instead
-		if (result == null) {
-			List<HippoDocumentBean> documents = folder.getDocuments();
-			result = (documents.size() > 0 ? documents.get(0) : null);
-		}
-		return result;
-	}
+	
 
 	private HippoFolderBean getFolder(HippoBean bean) {
 		HippoFolderBean result = null;

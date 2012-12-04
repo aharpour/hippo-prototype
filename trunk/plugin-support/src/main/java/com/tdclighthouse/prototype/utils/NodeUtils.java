@@ -40,9 +40,9 @@ public class NodeUtils {
 		validateTranslatability(node);
 		Node result = null;
 		if (!locale.getLanguage().equalsIgnoreCase(
-				node.getProperty(Constants.PropertyName.HIPPOTRANSLATION_LOCALE).getString())) {
+				node.getProperty(PluginConstants.PropertyName.HIPPOTRANSLATION_LOCALE).getString())) {
 			try {
-				Node translations = node.getNode(Constants.NodeName.HIPPOTRANSLATION_TRANSLATIONS);
+				Node translations = node.getNode(PluginConstants.NodeName.HIPPOTRANSLATION_TRANSLATIONS);
 				result = ((HippoNode) translations.getNode(locale.getLanguage())).getCanonicalNode();
 			} catch (PathNotFoundException e) {
 				// ignore

@@ -51,7 +51,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.prototype.support.SessionTemplate.SessionCallBack;
-import com.tdclighthouse.prototype.utils.Constants;
+import com.tdclighthouse.prototype.utils.PluginConstants;
 
 /**
  * @author Ebrahim Aharpour
@@ -79,14 +79,14 @@ public class ImageCreationCallBack implements SessionCallBack<String> {
 			// FIXME refactor
 			Node node = createImageSetNode(session, contentType);
 			String mimeType = new MimetypesFileTypeMap().getContentType(file);
-			Node galleryProcessorService = session.getNode(Constants.Paths.GALLERY_PROCESSOR_SERVICE);
+			Node galleryProcessorService = session.getNode(PluginConstants.Paths.GALLERY_PROCESSOR_SERVICE);
 
 			for (NodeIterator sizes = galleryProcessorService.getNodes(); sizes.hasNext();) {
 				Node size = sizes.nextNode();
-				if (size.isNodeType(Constants.NodeType.FRONTEND_PLUGINCONFIG)) {
-					Node subjectNode = getNode(node, size.getName(), Constants.NodeType.HIPPOGALLERY_IMAGE);
-					Long height = size.getProperty(Constants.PropertyName.HEIGHT).getLong();
-					Long width = size.getProperty(Constants.PropertyName.WIDTH).getLong();
+				if (size.isNodeType(PluginConstants.NodeType.FRONTEND_PLUGINCONFIG)) {
+					Node subjectNode = getNode(node, size.getName(), PluginConstants.NodeType.HIPPOGALLERY_IMAGE);
+					Long height = size.getProperty(PluginConstants.PropertyName.HEIGHT).getLong();
+					Long width = size.getProperty(PluginConstants.PropertyName.WIDTH).getLong();
 					BufferedImage bufferedImage = ImageIO.read(file);
 					InputStream inputStream;
 					if (height == 0 && width == 0) {
@@ -104,12 +104,12 @@ public class ImageCreationCallBack implements SessionCallBack<String> {
 						height = (long) scaledImage.getHeight();
 						width = (long) scaledImage.getWidth();
 					}
-					subjectNode.setProperty(Constants.PropertyName.JCR_DATA,
+					subjectNode.setProperty(PluginConstants.PropertyName.JCR_DATA,
 							session.getValueFactory().createBinary(inputStream));
-					subjectNode.setProperty(Constants.PropertyName.JCR_MIME_TYPE, mimeType);
-					subjectNode.setProperty(Constants.PropertyName.JCR_LAST_MODIFIED, new GregorianCalendar());
-					subjectNode.setProperty(Constants.PropertyName.HIPPOGALLERY_HEIGHT, height);
-					subjectNode.setProperty(Constants.PropertyName.HIPPOGALLERY_WIDTH, width);
+					subjectNode.setProperty(PluginConstants.PropertyName.JCR_MIME_TYPE, mimeType);
+					subjectNode.setProperty(PluginConstants.PropertyName.JCR_LAST_MODIFIED, new GregorianCalendar());
+					subjectNode.setProperty(PluginConstants.PropertyName.HIPPOGALLERY_HEIGHT, height);
+					subjectNode.setProperty(PluginConstants.PropertyName.HIPPOGALLERY_WIDTH, width);
 				}
 			}
 

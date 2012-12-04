@@ -21,7 +21,7 @@ import javax.jcr.Session;
 
 import org.hippoecm.repository.api.HippoNode;
 
-import com.tdclighthouse.prototype.utils.Constants;
+import com.tdclighthouse.prototype.utils.PluginConstants;
 
 /**
  * @author Ebrahim Aharpour
@@ -54,7 +54,7 @@ public class NewAssetFolderCallBack extends CreateNodeCallBack {
 
 	@Override
 	public String getNodeType(Session session) throws RepositoryException {
-		return Constants.NodeType.HIPPOGALLERY_STD_ASSET_GALLERY;
+		return PluginConstants.NodeType.HIPPOGALLERY_STD_ASSET_GALLERY;
 	}
 
 }

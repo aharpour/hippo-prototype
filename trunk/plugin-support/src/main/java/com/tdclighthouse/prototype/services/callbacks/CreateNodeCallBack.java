@@ -33,7 +33,7 @@ import org.hippoecm.repository.standardworkflow.EditableWorkflow;
 import org.hippoecm.repository.standardworkflow.FolderWorkflow;
 
 import com.tdclighthouse.prototype.support.SessionTemplate.SessionCallBack;
-import com.tdclighthouse.prototype.utils.Constants;
+import com.tdclighthouse.prototype.utils.PluginConstants;
 
 /**
  * @author Ebrahim Aharpour
@@ -64,11 +64,11 @@ public abstract class CreateNodeCallBack implements SessionCallBack<String> {
 				.getWorkflow("internal", getParentNode(session));
 		String nodeType = getNodeType(session);
 		String nodeName = Text.escapeIllegalJcrChars(getNodeName(session));
-		if (Constants.NodeType.HIPPOSTD_FOLDER.equals(nodeType)) {
+		if (PluginConstants.NodeType.HIPPOSTD_FOLDER.equals(nodeType)) {
 			nodePath = folderWorkflow.add("new-translated-folder", nodeType, nodeName);
-		} else if (Constants.NodeType.HIPPOGALLERY_STD_IMAGE_GALLERY.equals(nodeType)) {
+		} else if (PluginConstants.NodeType.HIPPOGALLERY_STD_IMAGE_GALLERY.equals(nodeType)) {
 			nodePath = folderWorkflow.add("new-image-folder", nodeType, nodeName);
-		} else if (Constants.NodeType.HIPPOGALLERY_STD_ASSET_GALLERY.equals(nodeType)) {
+		} else if (PluginConstants.NodeType.HIPPOGALLERY_STD_ASSET_GALLERY.equals(nodeType)) {
 			nodePath = folderWorkflow.add("new-file-folder", nodeType, nodeName);
 		} else {
 			nodePath = folderWorkflow.add("new-document", nodeType, nodeName);

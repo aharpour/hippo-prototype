@@ -41,7 +41,7 @@ import org.hippoecm.repository.standardworkflow.EditableWorkflow;
 import org.hippoecm.repository.standardworkflow.FolderWorkflow;
 
 import com.tdclighthouse.prototype.support.SessionTemplate.SessionCallBack;
-import com.tdclighthouse.prototype.utils.Constants;
+import com.tdclighthouse.prototype.utils.PluginConstants;
 
 /**
  * @author Ebrahim Aharpour
@@ -63,15 +63,15 @@ public class DocumentManager {
 			public String doInSession(Session session) throws RepositoryException {
 				try {
 					String nodePath;
-					Workflow workflow = getWorkflow(parentNode, session, Constants.WorkflowName.INTERNAL);
+					Workflow workflow = getWorkflow(parentNode, session, PluginConstants.WorkflowName.INTERNAL);
 					if (workflow instanceof FolderWorkflow) {
 						FolderWorkflow folderWorkflow = (FolderWorkflow) workflow;
 						String name = Text.escapeIllegalJcrChars(nodeName);
-						if (Constants.NodeType.HIPPOSTD_FOLDER.equals(nodeType)) {
+						if (PluginConstants.NodeType.HIPPOSTD_FOLDER.equals(nodeType)) {
 							nodePath = folderWorkflow.add("new-translated-folder", nodeType, name);
-						} else if (Constants.NodeType.HIPPOGALLERY_STD_IMAGE_GALLERY.equals(nodeType)) {
+						} else if (PluginConstants.NodeType.HIPPOGALLERY_STD_IMAGE_GALLERY.equals(nodeType)) {
 							nodePath = folderWorkflow.add("new-image-folder", nodeType, name);
-						} else if (Constants.NodeType.HIPPOGALLERY_STD_ASSET_GALLERY.equals(nodeType)) {
+						} else if (PluginConstants.NodeType.HIPPOGALLERY_STD_ASSET_GALLERY.equals(nodeType)) {
 							nodePath = folderWorkflow.add("new-file-folder", nodeType, name);
 						} else {
 							nodePath = folderWorkflow.add("new-document", nodeType, name);
@@ -95,7 +95,7 @@ public class DocumentManager {
 
 			@Override
 			public Object doInSession(Session session) throws RepositoryException {
-				Workflow workflow = getWorkflow(node, session, Constants.WorkflowName.SHORTCUTS);
+				Workflow workflow = getWorkflow(node, session, PluginConstants.WorkflowName.SHORTCUTS);
 				if (workflow instanceof GalleryWorkflow) {
 					@SuppressWarnings("unused")
 					GalleryWorkflow galleryWorkflow = (GalleryWorkflow) workflow;
@@ -184,7 +184,7 @@ public class DocumentManager {
 	public Node getHandle(Node node) throws RepositoryException {
 		Node result = null;
 		while (node != null) {
-			if (node.isNodeType(Constants.NodeType.HIPPO_HANDLE)) {
+			if (node.isNodeType(PluginConstants.NodeType.HIPPO_HANDLE)) {
 				result = node;
 				break;
 			}
@@ -208,15 +208,15 @@ public class DocumentManager {
 	}
 
 	public Node getNodeOfState(NodeState nodeState, Node handle) throws RepositoryException {
-		if (!handle.isNodeType(Constants.NodeType.HIPPO_HANDLE)) {
-			throw new IllegalArgumentException("the given node is not of the type " + Constants.NodeType.HIPPO_HANDLE);
+		if (!handle.isNodeType(PluginConstants.NodeType.HIPPO_HANDLE)) {
+			throw new IllegalArgumentException("the given node is not of the type " + PluginConstants.NodeType.HIPPO_HANDLE);
 		}
 		Node result = null;
 		for (NodeIterator nodes = handle.getNodes(); nodes.hasNext();) {
 			Node child = nodes.nextNode();
-			if (child.hasProperty(Constants.PropertyName.HIPPOSTD_STATE)
+			if (child.hasProperty(PluginConstants.PropertyName.HIPPOSTD_STATE)
 					&& nodeState.getStateString().equals(
-							child.getProperty(Constants.PropertyName.HIPPOSTD_STATE).getString())) {
+							child.getProperty(PluginConstants.PropertyName.HIPPOSTD_STATE).getString())) {
 				result = child;
 				break;
 			}
@@ -326,7 +326,7 @@ public class DocumentManager {
 	private EditableWorkflow getEditableWorkflow(final Node node, Session session) throws MappingException,
 	RepositoryException {
 		EditableWorkflow result;
-		Workflow workflow = getWorkflow(node, session, Constants.WorkflowName.DEFAULT);
+		Workflow workflow = getWorkflow(node, session, PluginConstants.WorkflowName.DEFAULT);
 		if (workflow instanceof EditableWorkflow) {
 			result = (EditableWorkflow) workflow;
 		} else {
@@ -339,7 +339,7 @@ public class DocumentManager {
 	private FullReviewedActionsWorkflow getFullReviewedActionsWorkflow(final Node node, Session session)
 			throws MappingException, RepositoryException {
 		FullReviewedActionsWorkflow result;
-		Workflow workflow = getWorkflow(node, session, Constants.WorkflowName.DEFAULT);
+		Workflow workflow = getWorkflow(node, session, PluginConstants.WorkflowName.DEFAULT);
 		if (workflow instanceof FullReviewedActionsWorkflow) {
 			result = (FullReviewedActionsWorkflow) workflow;
 		} else {

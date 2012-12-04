@@ -21,7 +21,7 @@ import javax.jcr.Session;
 
 import org.hippoecm.repository.api.HippoNode;
 
-import com.tdclighthouse.prototype.utils.Constants;
+import com.tdclighthouse.prototype.utils.PluginConstants;
 
 /**
  * @author Ebrahim Aharpour
@@ -53,7 +53,7 @@ public class NewFolderCallBack extends CreateNodeCallBack {
 
 	@Override
 	public String getNodeType(Session session) throws RepositoryException {
-		return Constants.NodeType.HIPPOSTD_FOLDER;
+		return PluginConstants.NodeType.HIPPOSTD_FOLDER;
 	}
 
 }

@@ -19,9 +19,9 @@ package com.tdclighthouse.prototype.utils;
  * @author Ebrahim Aharpour
  * 
  */
-public class Constants {
+public class PluginConstants {
 
-	protected Constants() {
+	protected PluginConstants() {
 	}
 
 	public static class NodeName {
@@ -87,6 +87,10 @@ public class Constants {
 		public static final String GALLERY = "/content/gallery";
 		public static final String ASSETS = "/content/assets";
 		public static final String DOCUMENTS = "/content/documents";
+	}
+	
+	public static class Regex {
+		public static final String COMMA_SEPARATOR = "\\s*,\\s*";
 	}
 
 }

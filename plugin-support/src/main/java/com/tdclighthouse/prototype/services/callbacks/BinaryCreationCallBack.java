@@ -42,7 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.prototype.support.SessionTemplate.SessionCallBack;
-import com.tdclighthouse.prototype.utils.Constants;
+import com.tdclighthouse.prototype.utils.PluginConstants;
 
 /**
  * @author Ebrahim Aharpour
@@ -63,13 +63,13 @@ public class BinaryCreationCallBack implements SessionCallBack<String> {
 	@Override
 	public String doInSession(Session session) throws RepositoryException {
 		try {
-			Node node = createAssetNode(session, Constants.NodeType.HIPPOGALLERY_EXAMPLE_ASSET_SET);
+			Node node = createAssetNode(session, PluginConstants.NodeType.HIPPOGALLERY_EXAMPLE_ASSET_SET);
 			String mimeType = new MimetypesFileTypeMap().getContentType(file);
-			Node asset = getNode(node, Constants.NodeName.HIPPOGALLERY_ASSET, Constants.NodeType.HIPPO_RESOURCE);
-			asset.setProperty(Constants.PropertyName.JCR_DATA,
+			Node asset = getNode(node, PluginConstants.NodeName.HIPPOGALLERY_ASSET, PluginConstants.NodeType.HIPPO_RESOURCE);
+			asset.setProperty(PluginConstants.PropertyName.JCR_DATA,
 					session.getValueFactory().createBinary(new FileInputStream(file)));
-			asset.setProperty(Constants.PropertyName.JCR_MIME_TYPE, mimeType);
-			asset.setProperty(Constants.PropertyName.JCR_LAST_MODIFIED, new GregorianCalendar());
+			asset.setProperty(PluginConstants.PropertyName.JCR_MIME_TYPE, mimeType);
+			asset.setProperty(PluginConstants.PropertyName.JCR_LAST_MODIFIED, new GregorianCalendar());
 
 		} catch (RemoteException e) {
 			throw new RepositoryException(e);

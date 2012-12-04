@@ -32,7 +32,7 @@ import com.tdclighthouse.prototype.services.callbacks.NewAssetFolderCallBack;
 import com.tdclighthouse.prototype.services.callbacks.NewImageFolderCallBack;
 import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.support.SessionTemplate.SessionCallBack;
-import com.tdclighthouse.prototype.utils.Constants;
+import com.tdclighthouse.prototype.utils.PluginConstants;
 import com.tdclighthouse.prototype.utils.ImageUtils;
 
 /**
@@ -89,7 +89,7 @@ public class BinaryImportService {
 	}
 
 	private void migrateBinaries(File file, String relPath) throws RepositoryException {
-		String absPath = folderCreationService.generateFolders(Constants.Paths.ASSETS, relPath,
+		String absPath = folderCreationService.generateFolders(PluginConstants.Paths.ASSETS, relPath,
 				new NewFolderCallBackFactory() {
 					@Override
 					public SessionCallBack<String> getNewFolderCallBack(String parentPath, String folderName) {
@@ -102,7 +102,7 @@ public class BinaryImportService {
 
 	private void migrateImages(File file, String relPath) throws RepositoryException {
 		try {
-			String absPath = folderCreationService.generateFolders(Constants.Paths.GALLERY, relPath,
+			String absPath = folderCreationService.generateFolders(PluginConstants.Paths.GALLERY, relPath,
 					new NewFolderCallBackFactory() {
 						@Override
 						public SessionCallBack<String> getNewFolderCallBack(String parentPath, String folderName) {

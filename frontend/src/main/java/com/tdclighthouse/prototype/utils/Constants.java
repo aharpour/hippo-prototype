@@ -87,4 +87,8 @@ public class Constants {
 	public static class NodeName {
 		public static final String INDEX = "index";
 	}
+	
+	public static class Regex {
+		public static final String COMMA_SEPARATOR = "\\s*,\\s*";
+	}
 }

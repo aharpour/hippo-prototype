@@ -16,6 +16,7 @@
 package com.tdclighthouse.prototype.beans.compounds;
 
 import org.hippoecm.hst.content.beans.Node;
+import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.content.beans.standard.HippoDocument;
 import org.hippoecm.hst.content.beans.standard.HippoMirror;
 
@@ -30,6 +31,7 @@ public class RelatedDocumentItemBean extends HippoDocument {
 
 	private String label;
 	private HippoMirror internalLink;
+	private HippoBean internalLinkBean;
 	private ExternalLinkBean externalLink;
 
 	public String getLabel() {
@@ -44,6 +46,13 @@ public class RelatedDocumentItemBean extends HippoDocument {
 			this.internalLink = getBean("tdc:internalLink");
 		}
 		return internalLink;
+	}
+	
+	public HippoBean getInternalLinkBean() {
+		if(this.internalLinkBean == null) {
+			this.internalLinkBean = getLinkedBean("tdc:internalLink", HippoBean.class);
+		}
+		return internalLinkBean;
 	}
 
 	public ExternalLinkBean getExternalLink() {

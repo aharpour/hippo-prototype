@@ -30,6 +30,7 @@ public class InternalLinkBean extends HippoDocument {
 
 	private String label;
 	private HippoMirror link;
+	private HippoDocument linkBean;
 
 	public String getLabel() {
 		if (this.label == null) {
@@ -43,6 +44,13 @@ public class InternalLinkBean extends HippoDocument {
 			this.link = getBean("tdc:link");
 		}
 		return link;
+	}
+
+	public HippoDocument getLinkBean() {
+		if (this.linkBean == null) {
+			this.linkBean = getLinkedBean("tdc:link", HippoDocument.class);
+		}
+		return linkBean;
 	}
 
 }

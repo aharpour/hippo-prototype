@@ -26,11 +26,11 @@ import com.tdclighthouse.prototype.utils.Constants;
  * @author Ebrahim Aharpour
  * 
  */
-public class Detail extends BaseTdcComponent {
+public class WebDocumentDetail extends BaseTdcComponent {
 
 	@Override
 	public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-		HippoBean contentBean = getContentBean(request);
+		HippoBean contentBean = getWebDocumetBean(request);
 		if (contentBean != null) {
 			request.setAttribute(Constants.Attributes.DOCUMENT, contentBean);
 		}

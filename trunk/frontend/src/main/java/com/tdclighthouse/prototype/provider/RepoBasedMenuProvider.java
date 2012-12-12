@@ -135,7 +135,7 @@ public class RepoBasedMenuProvider {
 		List<? extends HippoBean> result;
 		List<HippoFacetsAvailableNavigation> availableNavigation = facetNavigation
 				.getChildBeans(HippoFacetsAvailableNavigation.class);
-		if (availableNavigation == null || availableNavigation.size() > 1) {
+		if (availableNavigation == null || availableNavigation.size() != 1) {
 			result = new ArrayList<HippoBean>();
 		} else {
 			result = availableNavigation.get(0).getChildBeans(HippoFacetSubNavigation.class);

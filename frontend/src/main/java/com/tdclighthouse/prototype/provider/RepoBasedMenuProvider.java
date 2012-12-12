@@ -1,11 +1,16 @@
 package com.tdclighthouse.prototype.provider;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.hippoecm.hst.configuration.HstNodeTypes;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
+import org.hippoecm.hst.content.beans.standard.HippoDocumentBean;
 import org.hippoecm.hst.content.beans.standard.HippoFolderBean;
+import org.hippoecm.hst.content.beans.standard.facetnavigation.HippoFacetNavigation;
+import org.hippoecm.hst.content.beans.standard.facetnavigation.HippoFacetSubNavigation;
+import org.hippoecm.hst.content.beans.standard.facetnavigation.HippoFacetsAvailableNavigation;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.linking.HstLink;
 import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
@@ -19,16 +24,29 @@ import org.slf4j.LoggerFactory;
 import com.tdclighthouse.commons.utils.hippo.Essentials;
 import com.tdclighthouse.prototype.utils.NavigationUtils;
 
+/**
+ * @author Ebrahim Aharpour
+ * 
+ *         this component only shows sub-items of a faceted navigation item only
+ *         if there is just one facetsavailablenavigation under the facet
+ * 
+ */
 public class RepoBasedMenuProvider {
 	public static final Logger log = LoggerFactory.getLogger(RepoBasedMenuProvider.class);
 
 	private final HstRequest request;
 	private final String selectedNodeCanonicalPath;
 	private final HippoBean siteContentBaseBean;
+	private final boolean showFacetNavigations;
 
 	public RepoBasedMenuProvider(HippoBean siteContentBaseBean, HstRequest request) {
+		this(siteContentBaseBean, false, request);
+	}
+
+	public RepoBasedMenuProvider(HippoBean siteContentBaseBean, boolean showFacetNavigations, HstRequest request) {
 		this.request = request;
 		this.siteContentBaseBean = siteContentBaseBean;
+		this.showFacetNavigations = showFacetNavigations;
 		String relativeContentPath = request.getRequestContext().getResolvedSiteMapItem().getRelativeContentPath();
 		if (relativeContentPath != null) {
 			selectedNodeCanonicalPath = siteContentBaseBean.<HippoBean> getBean(relativeContentPath).getCanonicalPath();
@@ -61,23 +79,68 @@ public class RepoBasedMenuProvider {
 
 	private void addSubitems(EditableMenuItem item, HippoBean indexPageBean, int depth) {
 		if (item.getDepth() >= depth) {
-			HippoFolderBean folderBean = getFolder(indexPageBean);
-			if (folderBean != null) {
-				for (HippoFolderBean folder : folderBean.getFolders()) {
-					HippoBean foldersIndex = NavigationUtils.getIndexBean(folder);
+			HippoBean childbearingBean = getFolderOrFacet(indexPageBean);
+			if (childbearingBean != null) {
+				List<? extends HippoBean> childbearingChildren = getChildbearingChildren(childbearingBean);
+				for (HippoBean childbearingChild : childbearingChildren) {
+					HippoBean foldersIndex = NavigationUtils.getIndexBean(childbearingChild);
 					if (foldersIndex != null) {
-						EditableMenuItem folderItem = addItem(item, foldersIndex, folder.getLocalizedName());
+						EditableMenuItem folderItem = addItem(item, foldersIndex, childbearingChild.getLocalizedName());
 						addSubitems(folderItem, foldersIndex, depth + 1);
 					}
-
 				}
-				for (final HippoBean document : folderBean.getDocuments()) {
+				List<HippoDocumentBean> documents = getNonChildbearingChilds(childbearingBean);
+				for (final HippoBean document : documents) {
 					if (!document.getCanonicalPath().equals(indexPageBean.getCanonicalPath())) {
 						addItem(item, document);
 					}
 				}
 			}
 		}
+	}
+
+	private List<HippoDocumentBean> getNonChildbearingChilds(HippoBean childbearingBean) {
+		List<HippoDocumentBean> result;
+		if (childbearingBean instanceof HippoFolderBean) {
+			result = ((HippoFolderBean) childbearingBean).getDocuments();
+		} else {
+			result = new ArrayList<HippoDocumentBean>();
+		}
+		return result;
+	}
+
+	private List<? extends HippoBean> getChildbearingChildren(HippoBean childbearingBean) {
+		List<? extends HippoBean> result;
+		if (childbearingBean instanceof HippoFacetNavigation) {
+			result = getChildbearingChildrenOfFacet((HippoFacetNavigation) childbearingBean);
+		} else if (childbearingBean instanceof HippoFolderBean) {
+			result = getChildbearingChildrenOfFolder(childbearingBean);
+		} else {
+			throw new IllegalArgumentException(
+					"Expect childbearingBean to be either a HippoFolderBean or a HippoFacetNavigationBean");
+		}
+		return result;
+	}
+
+	private List<HippoBean> getChildbearingChildrenOfFolder(HippoBean childbearingBean) {
+		List<HippoBean> items = new ArrayList<HippoBean>();
+		items.addAll(((HippoFolderBean) childbearingBean).getFolders());
+		if (showFacetNavigations) {
+			items.addAll(childbearingBean.getChildBeans(HippoFacetNavigation.class));
+		}
+		return items;
+	}
+
+	private List<? extends HippoBean> getChildbearingChildrenOfFacet(HippoFacetNavigation facetNavigation) {
+		List<? extends HippoBean> result;
+		List<HippoFacetsAvailableNavigation> availableNavigation = facetNavigation
+				.getChildBeans(HippoFacetsAvailableNavigation.class);
+		if (availableNavigation == null || availableNavigation.size() > 1) {
+			result = new ArrayList<HippoBean>();
+		} else {
+			result = availableNavigation.get(0).getChildBeans(HippoFacetSubNavigation.class);
+		}
+		return result;
 	}
 
 	private void setSelected(EditableMenuItem item) {
@@ -106,17 +169,20 @@ public class RepoBasedMenuProvider {
 		return repoMenuItem;
 	}
 
-	
-
-	private HippoFolderBean getFolder(HippoBean bean) {
-		HippoFolderBean result = null;
-		while (bean != null) {
-			if (bean.isHippoFolderBean()) {
-				result = (HippoFolderBean) bean;
-				break;
+	private HippoBean getFolderOrFacet(HippoBean bean) {
+		HippoBean result = null;
+		if (bean instanceof HippoFacetNavigation) {
+			result = bean;
+		} else {
+			while (bean != null) {
+				if (bean.isHippoFolderBean()) {
+					result = bean;
+					break;
+				}
+				bean = bean.getParentBean();
 			}
-			bean = bean.getParentBean();
 		}
+
 		return result;
 	}
 
@@ -134,7 +200,6 @@ public class RepoBasedMenuProvider {
 		String[] paramNames = (String[]) properties.get(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_NAMES);
 		String[] paramValues = (String[]) properties.get(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_VALUES);
 		if (paramNames != null && paramValues != null) {
-
 			if (paramNames.length == paramValues.length) {
 				for (int i = 0; i < paramNames.length; i++) {
 					String propName = paramNames[i];
@@ -152,9 +217,9 @@ public class RepoBasedMenuProvider {
 
 	public static class SimpleEditableMenuItem extends EditableMenuItemImpl {
 
-		private HstLink hstLink;
-		private String localizedName;
-		private int depth;
+		private final HstLink hstLink;
+		private final String localizedName;
+		private final int depth;
 
 		public SimpleEditableMenuItem(EditableMenuItem item, HstLink hstLink, String localizedName) {
 			super(item);

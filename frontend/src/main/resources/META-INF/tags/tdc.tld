@@ -48,6 +48,10 @@
 		<path>/META-INF/tags/paginator.tag</path>
 	</tag-file>
 	<tag-file>
+		<name>simplepaginator</name>
+		<path>/META-INF/tags/simplepaginator.tag</path>
+	</tag-file>
+	<tag-file>
 		<name>paragraphblock</name>
 		<path>/META-INF/tags/paragraphblock.tag</path>
 	</tag-file>

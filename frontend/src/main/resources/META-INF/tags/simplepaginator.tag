@@ -15,18 +15,6 @@
 <c:if test="${paginator.firstShownPage < paginator.lastShownPage}">
 <div class="pager">
   <ul>
-  <fmt:message key="paginator.go.to.first" var="goToFirst" />
-  <c:choose>
-    <c:when test="${1 < paginator.page}">
-      <c:set var="url">
-        <tdc:add-query-param key="${pageParamerter}" value="${1}"/>
-      </c:set>
-      <li class="pager-first first"><a href="${url}" title="${goToFirst}">&laquo; <fmt:message key="paginator.first" /></a></li>
-    </c:when>
-    <c:otherwise>
-      <li class="pager-first first"><span>&laquo; <fmt:message key="paginator.first" /></span></li>
-    </c:otherwise>
-  </c:choose>
   <fmt:message key="paginator.go.to.previous" var="goToPrevious" />
   <c:choose>
     <c:when test="${paginator.page > 1}">
@@ -65,17 +53,6 @@
     </c:otherwise>
   </c:choose>
   <fmt:message key="paginator.go.to.last" var="goToLast" />
-  <c:choose>
-    <c:when test="${paginator.numberOfPages != paginator.page}">
-      <c:set var="url">
-        <tdc:add-query-param key="${pageParamerter}" value="${paginator.numberOfPages}"/>
-      </c:set>
-      <li class="pager-last last"><a href="${url}" title="${goToLast}"><fmt:message key="paginator.last" /> &raquo;</a></li>
-    </c:when>
-    <c:otherwise>
-      <li class="pager-last last"><span><fmt:message key="paginator.last" /> &raquo;</span></li>
-    </c:otherwise>
-  </c:choose>
   </ul>
 </div>
 </c:if>

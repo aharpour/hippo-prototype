@@ -353,7 +353,7 @@
             <sv:value>hippo:mirror</sv:value>
           </sv:property>
           <sv:property sv:name="hippo:docbase" sv:type="String">
-            <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
+            <sv:value></sv:value>
           </sv:property>
         </sv:node>
       </sv:node>
@@ -362,7 +362,7 @@
           <sv:value>hippo:mirror</sv:value>
         </sv:property>
         <sv:property sv:name="hippo:docbase" sv:type="String">
-          <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
+          <sv:value></sv:value>
         </sv:property>
       </sv:node>
       <sv:node sv:name="tdc:srt">
@@ -377,7 +377,7 @@
             <sv:value>hippo:mirror</sv:value>
           </sv:property>
           <sv:property sv:name="hippo:docbase" sv:type="String">
-            <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
+            <sv:value></sv:value>
           </sv:property>
         </sv:node>
       </sv:node>
@@ -393,7 +393,7 @@
             <sv:value>hippo:mirror</sv:value>
           </sv:property>
           <sv:property sv:name="hippo:docbase" sv:type="String">
-            <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
+            <sv:value></sv:value>
           </sv:property>
         </sv:node>
       </sv:node>
@@ -409,7 +409,7 @@
             <sv:value>hippogallerypicker:imagelink</sv:value>
           </sv:property>
           <sv:property sv:name="hippo:docbase" sv:type="String">
-            <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
+            <sv:value></sv:value>
           </sv:property>
           <sv:property sv:name="hippo:facets" sv:type="String" sv:multiple="true"/>
           <sv:property sv:name="hippo:modes" sv:type="String" sv:multiple="true"/>
@@ -420,7 +420,7 @@
             <sv:value>hippogallerypicker:imagelink</sv:value>
           </sv:property>
           <sv:property sv:name="hippo:docbase" sv:type="String">
-            <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
+            <sv:value></sv:value>
           </sv:property>
           <sv:property sv:name="hippo:facets" sv:type="String" sv:multiple="true"/>
           <sv:property sv:name="hippo:modes" sv:type="String" sv:multiple="true"/>
@@ -439,7 +439,7 @@
             <sv:value>hippo:mirror</sv:value>
           </sv:property>
           <sv:property sv:name="hippo:docbase" sv:type="String">
-            <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
+            <sv:value></sv:value>
           </sv:property>
         </sv:node>
       </sv:node>
@@ -455,7 +455,7 @@
             <sv:value>hippo:mirror</sv:value>
           </sv:property>
           <sv:property sv:name="hippo:docbase" sv:type="String">
-            <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
+            <sv:value></sv:value>
           </sv:property>
         </sv:node>
       </sv:node>
@@ -471,7 +471,7 @@
             <sv:value>hippo:mirror</sv:value>
           </sv:property>
           <sv:property sv:name="hippo:docbase" sv:type="String">
-            <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
+            <sv:value></sv:value>
           </sv:property>
         </sv:node>
       </sv:node>

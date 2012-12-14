@@ -396,7 +396,7 @@
             <sv:value>hippo:mirror</sv:value>
           </sv:property>
           <sv:property sv:name="hippo:docbase" sv:type="String">
-            <sv:value></sv:value>
+            <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
           </sv:property>
         </sv:node>
       </sv:node>

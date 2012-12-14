@@ -12,27 +12,22 @@
 <c:if test="${empty lastItemClass }">
 	<c:set var="lastItemClass" value="last"/>
 </c:if>
-<c:set var="hasExpandedItem" value="${true}"/>
+<c:set var="hasExpandedItem" value="${false}"/>
 <c:forEach items="${parentItem.childMenuItems}" var="item">
 <c:choose>
 <c:when test="${item.selected}">
 	<li class="${lastItemClass}"><c:out value="${item.name}"/></li>
-	<c:set var="hasExpandedItem" value="${false}"/>
+	<c:set var="hasExpandedItem" value="${true}"/>
 </c:when>
 <c:when test="${item.expanded}">
 	<li><a href="<hst:link link="${item.hstLink}"/>"><c:out value="${item.name}"/></a></li>
 	<tdc:breadcrumbitem parentItem="${item}"/>
-	<c:set var="hasExpandedItem" value="${false}"/>
+	<c:set var="hasExpandedItem" value="${true}"/>
 </c:when>
 </c:choose>
-<c:if test="${not hasExpandedItem  and not empty document}">
-	<c:catch var ="catchException">>
-	<li class="${lastItemClass}"><c:out value="${document.title}"/></li>
-	</c:catch>
-<c:catch>	
-	<c:if test="${not empty catchException}">
-	<li class="${lastItemClass}"><c:out value="${document.localizedName}"/></li>
-	</c:if>
-</c:catch>
-</c:if>
 </c:forEach>
+<c:if test="${not hasExpandedItem  and not empty document}">
+	<c:catch>	
+		<li class="${lastItemClass}"><c:out value="${document.localizedName}"/></li>
+	</c:catch>
+</c:if>

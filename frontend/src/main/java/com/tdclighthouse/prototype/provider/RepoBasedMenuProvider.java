@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.commons.utils.hippo.Essentials;
+import com.tdclighthouse.prototype.beans.WebDocumentBean;
 import com.tdclighthouse.prototype.utils.NavigationUtils;
 
 /**
@@ -148,15 +149,30 @@ public class RepoBasedMenuProvider {
 		if (temp instanceof SimpleEditableMenuItem) {
 			((SimpleEditableMenuItem) temp).setSelected(true);
 		}
+		temp = setExpanded(temp);
+	}
+
+	private EditableMenuItem setExpanded(EditableMenuItem temp) {
 		while (temp != null) {
 			temp.setExpanded(true);
 			temp = temp.getParentItem();
 		}
+		return temp;
 	}
 
-	private EditableMenuItem addItem(EditableMenuItem item, final HippoBean document) {
+	private void addItem(EditableMenuItem item, final HippoBean document) {
 		String localizedName = document.getLocalizedName();
-		return addItem(item, document, localizedName);
+		if (document instanceof WebDocumentBean) {
+			if (((WebDocumentBean) document).getHideFromSitemap()) {
+				if (selectedNodeCanonicalPath != null && selectedNodeCanonicalPath.equals(document.getCanonicalPath())) {
+					setExpanded(item);
+				}
+			} else {
+				addItem(item, document, localizedName);
+			}
+		} else {
+			addItem(item, document, localizedName);
+		}
 	}
 
 	private EditableMenuItem addItem(EditableMenuItem item, final HippoBean document, String localizedName) {

@@ -76,7 +76,7 @@ public class PluginConstants {
 	}
 	
 	public static class Uuids {
-		public static final String ROOT_NODE = "";
+		public static final String ROOT_NODE = "cafebabe-cafe-babe-cafe-babecafebabe";
 	}
 
 	public static class MixinTypes {

@@ -15,7 +15,6 @@
  */
 package com.tdclighthouse.prototype.components;
 
-import org.hippoecm.hst.component.support.bean.BaseHstComponent;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
@@ -34,12 +33,13 @@ import com.tdclighthouse.prototype.utils.Constants;
  * 
  */
 @ParametersInfo(type = NavigationInfo.class)
-public class Navigation extends BaseHstComponent {
+public class Navigation extends WebDocumentDetail {
 
 	protected static Logger log = LoggerFactory.getLogger(Navigation.class);
 
 	@Override
 	public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+		super.doBeforeRender(request, response);
 		NavigationInfo parametersInfo = this.<NavigationInfo> getParametersInfo(request);
 		String menuName = parametersInfo.getMenuName();
 		HstSiteMenu menu = request.getRequestContext().getHstSiteMenus().getSiteMenu(menuName);

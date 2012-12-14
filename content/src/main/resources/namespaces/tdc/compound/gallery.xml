@@ -119,7 +119,7 @@
             <sv:value>hippogallerypicker:imagelink</sv:value>
           </sv:property>
           <sv:property sv:name="hippo:docbase" sv:type="String">
-            <sv:value>4e557532-98ff-4673-a2a9-5cdbb2822eed</sv:value>
+            <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
           </sv:property>
           <sv:property sv:name="hippo:facets" sv:type="String" sv:multiple="true"/>
           <sv:property sv:name="hippo:modes" sv:type="String" sv:multiple="true"/>

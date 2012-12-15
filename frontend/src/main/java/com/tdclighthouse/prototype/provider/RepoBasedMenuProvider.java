@@ -144,15 +144,15 @@ public class RepoBasedMenuProvider {
 		return result;
 	}
 
-	private void setSelected(EditableMenuItem item) {
+	public static void markAsSeleted(EditableMenuItem item) {
 		EditableMenuItem temp = item;
 		if (temp instanceof SimpleEditableMenuItem) {
 			((SimpleEditableMenuItem) temp).setSelected(true);
 		}
-		temp = setExpanded(temp);
+		temp = markAsExpanded(temp);
 	}
 
-	private EditableMenuItem setExpanded(EditableMenuItem temp) {
+	public static EditableMenuItem markAsExpanded(EditableMenuItem temp) {
 		while (temp != null) {
 			temp.setExpanded(true);
 			temp = temp.getParentItem();
@@ -165,7 +165,7 @@ public class RepoBasedMenuProvider {
 		if (document instanceof WebDocumentBean) {
 			if (((WebDocumentBean) document).getHideFromSitemap()) {
 				if (selectedNodeCanonicalPath != null && selectedNodeCanonicalPath.equals(document.getCanonicalPath())) {
-					setExpanded(item);
+					markAsExpanded(item);
 				}
 			} else {
 				addItem(item, document, localizedName);
@@ -180,7 +180,7 @@ public class RepoBasedMenuProvider {
 		EditableMenuItem repoMenuItem = new SimpleEditableMenuItem(item, hstLink, localizedName);
 		item.addChildMenuItem(repoMenuItem);
 		if (selectedNodeCanonicalPath != null && selectedNodeCanonicalPath.equals(document.getCanonicalPath())) {
-			setSelected(repoMenuItem);
+			markAsSeleted(repoMenuItem);
 		}
 		return repoMenuItem;
 	}

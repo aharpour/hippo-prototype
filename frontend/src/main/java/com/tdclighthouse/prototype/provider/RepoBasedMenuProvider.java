@@ -66,16 +66,27 @@ public class RepoBasedMenuProvider {
 		for (EditableMenuItem item : menuItems) {
 			addRepoBasedMenuItems(item.getChildMenuItems());
 			if (item.isRepositoryBased()) {
-				String root = getRootParameterValue(item.getProperties());
-				HippoBean beanOfMenuItem = null;
-				if (root != null) {
-					beanOfMenuItem = siteContentBaseBean.getBean(root);
+				List<String> locations = getRootParameterValue(item.getProperties());
+				HippoBean[] beanOfMenuItems = null;
+				if (locations != null && locations.size() > 0) {
+					beanOfMenuItems = getBeans(locations);
 				} else {
-					beanOfMenuItem = getBeanOfMenuItem(item);
+					beanOfMenuItems = new HippoBean[] { getBeanOfMenuItem(item) };
 				}
-				addSubitems(item, beanOfMenuItem, 1);
+				for (HippoBean hippoBean : beanOfMenuItems) {
+					addSubitems(item, hippoBean, 1);
+				}
 			}
 		}
+	}
+
+	private HippoBean[] getBeans(List<String> locations) {
+		HippoBean[] beanOfMenuItems;
+		beanOfMenuItems = new HippoBean[locations.size()];
+		for (int i = 0; i < locations.size(); i++) {
+			beanOfMenuItems[i] = siteContentBaseBean.getBean(locations.get(i));
+		}
+		return beanOfMenuItems;
 	}
 
 	private void addSubitems(EditableMenuItem item, HippoBean indexPageBean, int depth) {
@@ -211,8 +222,8 @@ public class RepoBasedMenuProvider {
 		return bean;
 	}
 
-	private String getRootParameterValue(Map<String, Object> properties) {
-		String root = null;
+	private List<String> getRootParameterValue(Map<String, Object> properties) {
+		List<String> result = new ArrayList<String>();
 		String[] paramNames = (String[]) properties.get(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_NAMES);
 		String[] paramValues = (String[]) properties.get(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_VALUES);
 		if (paramNames != null && paramValues != null) {
@@ -220,15 +231,14 @@ public class RepoBasedMenuProvider {
 				for (int i = 0; i < paramNames.length; i++) {
 					String propName = paramNames[i];
 					if ("root".equals(propName)) {
-						root = paramValues[i];
-						break;
+						result.add(paramValues[i]);
 					}
 				}
 			} else {
 				log.warn("Parameter name array and parameter values arrays have different lengths");
 			}
 		}
-		return root;
+		return result;
 	}
 
 	public static class SimpleEditableMenuItem extends EditableMenuItemImpl {

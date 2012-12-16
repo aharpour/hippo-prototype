@@ -21,6 +21,8 @@ import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.content.beans.standard.HippoDocumentBean;
 import org.hippoecm.hst.content.beans.standard.HippoFolderBean;
 import org.hippoecm.hst.content.beans.standard.facetnavigation.HippoFacetNavigation;
+import org.hippoecm.hst.core.sitemenu.EditableMenu;
+import org.hippoecm.hst.core.sitemenu.EditableMenuItem;
 
 /**
  * @author Ebrahim Aharpour
@@ -49,5 +51,35 @@ public class NavigationUtils {
 					"Expect childbearingBean to be either a HippoFolderBean or a HippoFacetNavigation");
 		}
 		return result;
+	}
+
+	public static EditableMenuItem getSiteMapItemByPath(EditableMenu editableMenu, String relativePath) {
+		EditableMenuItem result = null;
+		relativePath = normalizePath(relativePath);
+		String[] split = relativePath.split("/");
+		List<EditableMenuItem> menuItems = editableMenu.getMenuItems();
+		EditableMenuItem temp = result;
+		for (String segment : split) {
+			for (EditableMenuItem editable : menuItems) {
+				if (editable.getName().equals(segment)) {
+					temp = editable;
+					menuItems = editable.getChildMenuItems();
+					break;
+				}
+			}
+			if (temp == result) {
+				break;
+			} else {
+				result = temp;
+			}
+		}
+		return result;
+	}
+
+	private static String normalizePath(String relativePath) {
+		if (relativePath.startsWith("/")) {
+			relativePath = relativePath.substring(1);
+		}
+		return relativePath;
 	}
 }

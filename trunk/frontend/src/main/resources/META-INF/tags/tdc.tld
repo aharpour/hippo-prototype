@@ -23,10 +23,7 @@
 		<name>audioblock</name>
 		<path>/META-INF/tags/audioblock.tag</path>
 	</tag-file>
-	<!-- <tag-file>
-		<name>bean-dump</name>
-		<path>/META-INF/tags/bean-dump.tag</path>
-	</tag-file> -->
+	<!-- <tag-file> <name>bean-dump</name> <path>/META-INF/tags/bean-dump.tag</path> </tag-file> -->
 	<tag-file>
 		<name>flexibleblock</name>
 		<path>/META-INF/tags/flexibleblock.tag</path>
@@ -108,7 +105,35 @@
 		<path>/META-INF/tags/breadcrumbs.tag</path>
 	</tag-file>
 
-	<!-- <function> <name>matches</name> <function-class>net.vivin.regula.validation.util.TagStringUtils</function-class> <function-signature>boolean matches(java.lang.String, 
-		java.lang.String, java.lang.String)</function-signature> </function> -->
+	<function>
+		<name>isSameDayDate</name>
+		<function-class>org.apache.commons.lang3.time.DateUtils</function-class>
+		<function-signature>boolean isSameDay(java.util.Date, java.util.Date)</function-signature>
+	</function>
+	<function>
+		<name>isSameDayCalendar</name>
+		<function-class>org.apache.commons.lang3.time.DateUtils</function-class>
+		<function-signature>boolean isSameDay(java.util.Calendar, java.util.Calendar)</function-signature>
+	</function>
+	<function>
+		<name>isSameMonthDate</name>
+		<function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+		<function-signature>boolean isSameMonth(java.util.Date, java.util.Date)</function-signature>
+	</function>
+	<function>
+		<name>isSameMonthCalendar</name>
+		<function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+		<function-signature>boolean isSameMonth(java.util.Calendar, java.util.Calendar)</function-signature>
+	</function>
+	<function>
+		<name>isSameYearDate</name>
+		<function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+		<function-signature>boolean isSameYear(java.util.Date, java.util.Date)</function-signature>
+	</function>
+	<function>
+		<name>isSameYearCalendar</name>
+		<function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+		<function-signature>boolean isSameYear(java.util.Calendar, java.util.Calendar)</function-signature>
+	</function>
 
 </taglib>

@@ -17,6 +17,7 @@ package com.tdclighthouse.prototype.beans.compounds;
 
 import org.hippoecm.hst.content.beans.Node;
 import org.hippoecm.hst.content.beans.standard.HippoDocument;
+import org.hippoecm.hst.content.beans.standard.HippoGalleryImageSetBean;
 import org.hippoecm.hst.content.beans.standard.HippoMirror;
 
 /**
@@ -25,13 +26,14 @@ import org.hippoecm.hst.content.beans.standard.HippoMirror;
  */
 @Node(jcrType = ImageBean.JCR_TYPE)
 public class ImageBean extends HippoDocument {
-	
+
 	public static final String JCR_TYPE = "tdc:Image";
-	
+
 	private String title;
 	private String alt;
 	private String caption;
 	private HippoMirror link;
+	private HippoGalleryImageSetBean linkBean;
 	private String credit;
 
 	public String getTitle() {
@@ -61,7 +63,14 @@ public class ImageBean extends HippoDocument {
 		}
 		return link;
 	}
-	
+
+	public HippoGalleryImageSetBean getLinkBean() {
+		if (this.linkBean == null) {
+			this.linkBean = getLinkedBean("tdc:link", HippoGalleryImageSetBean.class);
+		}
+		return linkBean;
+	}
+
 	public String getCredit() {
 		if (this.credit == null) {
 			this.credit = getProperty("tdc:credit");

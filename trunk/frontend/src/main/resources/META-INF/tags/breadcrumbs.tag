@@ -4,9 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="hst" uri="http://www.hippoecm.org/jsp/hst/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="k" uri="/META-INF/kenes.tld"%>
 <%@ taglib prefix="tdc" uri="http://www.tdclighthouse.com/hippo/prototype"%>
-<%@ taglib prefix="k" uri="/META-INF/kenes.tld"%>
 <%@ attribute name="menu" type="org.hippoecm.hst.core.sitemenu.AbstractMenu" rtexprvalue="true" required="true"%>
 <%@ attribute name="lastItemClass" type="java.lang.String" rtexprvalue="true" required="false"%>
 <c:if test="${empty lastItemClass }">

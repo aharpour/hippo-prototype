@@ -20,8 +20,7 @@ public class FileUtils {
 			if (entry.isDirectory()) {
 				new File(path).mkdir();
 			} else {
-				copyInputStream(zipFile.getInputStream(entry),
-						new BufferedOutputStream(new FileOutputStream(path)));
+				copyInputStream(zipFile.getInputStream(entry), new BufferedOutputStream(new FileOutputStream(path)));
 			}
 		}
 	}
@@ -62,6 +61,11 @@ public class FileUtils {
 			result = file.delete() && result;
 		}
 		return result;
+	}
+
+	public static String getFileName(String path) {
+		int lastIndexOf = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\'));
+		return path.substring(lastIndexOf + 1);
 	}
 
 }

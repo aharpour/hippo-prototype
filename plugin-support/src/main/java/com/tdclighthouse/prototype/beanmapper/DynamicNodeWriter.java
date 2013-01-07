@@ -22,19 +22,47 @@ import com.tdclighthouse.hippo.beanmapper.annotations.NodeType;
 import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.support.DocumentManager.NodeModificationCallBack;
 
+/**
+ * @author Ebrahim Aharpour
+ */
 public class DynamicNodeWriter {
 
-	private Logger log = LoggerFactory.getLogger(DynamicNodeWriter.class);
+	private final Logger log = LoggerFactory.getLogger(DynamicNodeWriter.class);
 
 	@Autowired
 	private DocumentManager documentManager;
+	private DynamicNodeUpdater beforeSaveUpdater;
 
 	private DateFormat dateFormat;
 
-	private UriEncoding uriEncoding = new UriEncoding();
+	private final UriEncoding uriEncoding = new UriEncoding();
 
 	public String createOrUpdateNode(Object bean, String pathToFolder, String name) throws RepositoryException,
-			PathNotFoundException, ParseException, BadFormatedBeanException, UnsupportedRepositoryOperationException {
+	PathNotFoundException, ParseException, BadFormatedBeanException, UnsupportedRepositoryOperationException {
+		Node node = perpareJcrNode(bean, pathToFolder, name);
+		DynamicNode dynamicNode = perpareDynamicNode(bean, node);
+		if (log.isDebugEnabled()) {
+			log.debug("Saving the following dynamic node at \"{}\":\n{}", node.getPath(), dynamicNode.toString());
+		}
+		saveDynamicNode(node, dynamicNode);
+		String identifier = node.getParent().getIdentifier();
+		if (bean instanceof UuidAware) {
+			((UuidAware) bean).setUuid(identifier);
+		}
+		return identifier;
+	}
+
+	private DynamicNode perpareDynamicNode(Object bean, Node node) throws ParseException, BadFormatedBeanException,
+	UnsupportedRepositoryOperationException, RepositoryException {
+		DynamicNode dynamicNode = DynamicNodeGenerator.generate(bean, node.getSession().getValueFactory(), dateFormat);
+		if (beforeSaveUpdater != null) {
+			dynamicNode = beforeSaveUpdater.update(dynamicNode);
+		}
+		return dynamicNode;
+	}
+
+	private Node perpareJcrNode(Object bean, String pathToFolder, String name) throws BadFormatedBeanException,
+	RepositoryException, PathNotFoundException {
 		NodeType annotation = bean.getClass().getAnnotation(NodeType.class);
 		if (annotation == null) {
 			throw new BadFormatedBeanException(MessageFormat.format("{0} annotation is required",
@@ -44,19 +72,11 @@ public class DynamicNodeWriter {
 		Node folder = documentManager.getNode(pathToFolder);
 		String nodeName = uriEncoding.encode(name);
 		Node node = createOrFetchNode(type, folder, nodeName);
-		final DynamicNode dynamicNode = DynamicNodeGenerator.generate(bean, node.getSession().getValueFactory(),
-				dateFormat);
-		log.debug("Saving the following dynamic node at \"{}\":\n{}", node.getPath(), dynamicNode.toString());
-		saveDynamicNode(node, dynamicNode);
-		String identifier = node.getIdentifier();
-		if (bean instanceof UuidAware) {
-			((UuidAware) bean).setUuid(identifier);
-		}
-		return identifier;
+		return node;
 	}
 
 	private Node createOrFetchNode(String type, Node folder, String nodeName) throws RepositoryException,
-			PathNotFoundException {
+	PathNotFoundException {
 		Node node;
 		if (folder.hasNode(nodeName) && folder.getNode(nodeName).hasNode(nodeName)
 				&& folder.getNode(nodeName).getNode(nodeName).isNodeType(type)) {
@@ -91,8 +111,18 @@ public class DynamicNodeWriter {
 		this.documentManager = documentManager;
 	}
 
+	public void setBeforeSaveUpdater(DynamicNodeUpdater beforeSaveUpdater) {
+		this.beforeSaveUpdater = beforeSaveUpdater;
+	}
+
 	@Required
 	public void setDateFormat(DateFormat dateFormat) {
 		this.dateFormat = dateFormat;
+	}
+
+	public interface DynamicNodeUpdater {
+
+		public DynamicNode update(DynamicNode dynamicNode) throws RepositoryException;
+
 	}
 }

@@ -135,5 +135,15 @@
 		<function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
 		<function-signature>boolean isSameYear(java.util.Calendar, java.util.Calendar)</function-signature>
 	</function>
+	<function>
+		<name>ceil</name>
+		<function-class>java.lang.Math</function-class>
+		<function-signature>double ceil(double)</function-signature>
+	</function>
+	<function>
+		<name>floor</name>
+		<function-class>java.lang.Math</function-class>
+		<function-signature>double floor(double)</function-signature>
+	</function>
 
 </taglib>

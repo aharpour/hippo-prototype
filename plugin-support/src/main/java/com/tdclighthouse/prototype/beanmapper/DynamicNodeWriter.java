@@ -1,5 +1,6 @@
 package com.tdclighthouse.prototype.beanmapper;
 
+import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -10,6 +11,7 @@ import javax.jcr.RepositoryException;
 import javax.jcr.UnsupportedRepositoryOperationException;
 
 import org.hippoecm.repository.api.StringCodecFactory.UriEncoding;
+import org.hippoecm.repository.api.WorkflowException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +34,14 @@ public class DynamicNodeWriter {
 	@Autowired
 	private DocumentManager documentManager;
 	private DynamicNodeUpdater beforeSaveUpdater;
-
+	private boolean publish = false;
 	private DateFormat dateFormat;
 
 	private final UriEncoding uriEncoding = new UriEncoding();
 
 	public String createOrUpdateNode(Object bean, String pathToFolder, String name) throws RepositoryException,
-	PathNotFoundException, ParseException, BadFormatedBeanException, UnsupportedRepositoryOperationException {
+			PathNotFoundException, ParseException, BadFormatedBeanException, UnsupportedRepositoryOperationException,
+			RemoteException, WorkflowException {
 		Node node = perpareJcrNode(bean, pathToFolder, name);
 		DynamicNode dynamicNode = perpareDynamicNode(bean, node);
 		if (log.isDebugEnabled()) {
@@ -46,6 +49,9 @@ public class DynamicNodeWriter {
 		}
 		saveDynamicNode(node, dynamicNode);
 		String identifier = node.getParent().getIdentifier();
+		if (publish) {
+			documentManager.publish(node);
+		}
 		if (bean instanceof UuidAware) {
 			((UuidAware) bean).setUuid(identifier);
 		}
@@ -53,7 +59,7 @@ public class DynamicNodeWriter {
 	}
 
 	private DynamicNode perpareDynamicNode(Object bean, Node node) throws ParseException, BadFormatedBeanException,
-	UnsupportedRepositoryOperationException, RepositoryException {
+			UnsupportedRepositoryOperationException, RepositoryException {
 		DynamicNode dynamicNode = DynamicNodeGenerator.generate(bean, node.getSession().getValueFactory(), dateFormat);
 		if (beforeSaveUpdater != null) {
 			dynamicNode = beforeSaveUpdater.update(dynamicNode);
@@ -62,7 +68,7 @@ public class DynamicNodeWriter {
 	}
 
 	private Node perpareJcrNode(Object bean, String pathToFolder, String name) throws BadFormatedBeanException,
-	RepositoryException, PathNotFoundException {
+			RepositoryException, PathNotFoundException {
 		NodeType annotation = bean.getClass().getAnnotation(NodeType.class);
 		if (annotation == null) {
 			throw new BadFormatedBeanException(MessageFormat.format("{0} annotation is required",
@@ -76,7 +82,7 @@ public class DynamicNodeWriter {
 	}
 
 	private Node createOrFetchNode(String type, Node folder, String nodeName) throws RepositoryException,
-	PathNotFoundException {
+			PathNotFoundException {
 		Node node;
 		if (folder.hasNode(nodeName) && folder.getNode(nodeName).hasNode(nodeName)
 				&& folder.getNode(nodeName).getNode(nodeName).isNodeType(type)) {
@@ -124,5 +130,9 @@ public class DynamicNodeWriter {
 
 		public DynamicNode update(DynamicNode dynamicNode) throws RepositoryException;
 
+	}
+
+	public void setPublish(boolean publish) {
+		this.publish = publish;
 	}
 }

@@ -1,12 +1,12 @@
 /*
  *  Copyright 2012 Finalist B.V.
- * 
+ *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
- * 
+ *
  *       http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -45,6 +45,7 @@ public class Constants {
 	public static class HippoFacetAttributes {
 		public static final String HIPPOFACNAV_FACETNODENAMES = "hippofacnav:facetnodenames";
 		public static final String HIPPOFACNAV_FACETS = "hippofacnav:facets";
+		public static final String HIPPO_DOCBASE = "hippo:docbase";
 	}
 
 	public static class HippoNodeTypes {
@@ -76,18 +77,18 @@ public class Constants {
 	public static class Values {
 		public static final String DESCENDING = "descending";
 	}
-	
+
 	public static class PikcerTypes {
 		public static final String ASSET_PICKER = "cms-pickers/assets";
 		public static final String DOCUMENT_PICKER = "cms-pickers/documents";
 		public static final String FOLDER_PICKER = "cms-pickers/folders";
 		public static final String IMAGE_PICKER = "cms-pickers/images";
 	}
-	
+
 	public static class NodeName {
 		public static final String INDEX = "index";
 	}
-	
+
 	public static class Regex {
 		public static final String COMMA_SEPARATOR = "\\s*,\\s*";
 	}

@@ -66,7 +66,7 @@ public class PaginatorWidget {
 	}
 
 	public int getFirstDisplayedItemIndex() {
-		return (page - 1) * rowsPerPage + totalRows > 0 ? 1 : 0;
+		return (page - 1) * rowsPerPage + (totalRows > 0 ? 1 : 0);
 	}
 
 	public int getLastDisplayedItemIndex() {

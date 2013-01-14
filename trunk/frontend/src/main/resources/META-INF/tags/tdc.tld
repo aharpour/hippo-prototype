@@ -61,6 +61,10 @@
 		<path>/META-INF/tags/public-parameters.tag</path>
 	</tag-file>
 	<tag-file>
+		<name>has-public-parameter</name>
+		<path>/META-INF/tags/has-public-parameter.tag</path>
+	</tag-file>
+	<tag-file>
 		<name>quotationblock</name>
 		<path>/META-INF/tags/quotationblock.tag</path>
 	</tag-file>

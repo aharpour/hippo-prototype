@@ -108,6 +108,14 @@
 		<name>breadcrumbs</name>
 		<path>/META-INF/tags/breadcrumbs.tag</path>
 	</tag-file>
+	<tag-file>
+		<name>remove-query-param</name>
+		<path>/META-INF/tags/remove-query-param.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>remove-query-parameters</name>
+		<path>/META-INF/tags/remove-query-parameters.tag</path>
+	</tag-file>
 
 	<function>
 		<name>isSameDayDate</name>

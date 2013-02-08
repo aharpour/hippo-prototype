@@ -92,4 +92,8 @@ public class Constants {
 	public static class Regex {
 		public static final String COMMA_SEPARATOR = "\\s*,\\s*";
 	}
+
+	public static class Encodings {
+		public static final String UTF8 = "UTF-8";
+	}
 }

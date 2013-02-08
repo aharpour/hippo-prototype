@@ -157,5 +157,10 @@
 		<function-class>java.lang.Math</function-class>
 		<function-signature>double floor(double)</function-signature>
 	</function>
+	<function>
+		<name>urlencode</name>
+		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+		<function-signature>java.lang.String encode(java.lang.String)</function-signature>
+	</function>
 
 </taglib>

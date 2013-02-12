@@ -162,5 +162,20 @@
 		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
 		<function-signature>java.lang.String encode(java.lang.String)</function-signature>
 	</function>
+	<function>
+		<name>collectioncontains</name>
+		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+		<function-signature>boolean collectionContains(java.util.Collection, java.lang.Object)</function-signature>
+	</function>
+	<function>
+		<name>mapcontainskey</name>
+		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+		<function-signature>boolean mapContainsKey(jjava.util.Map, java.lang.Object)</function-signature>
+	</function>
+	<function>
+		<name>mapcontainsvalue</name>
+		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+		<function-signature>boolean mapContainsValue(java.util.Map, java.lang.Object)</function-signature>
+	</function>
 
 </taglib>

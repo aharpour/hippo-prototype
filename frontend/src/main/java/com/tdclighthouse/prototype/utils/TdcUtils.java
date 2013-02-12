@@ -20,6 +20,7 @@ import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -84,6 +85,18 @@ public class TdcUtils {
 
 	public static String encode(String param) throws UnsupportedEncodingException {
 		return URLEncoder.encode(param, Constants.Encodings.UTF8);
+	}
+
+	public static boolean collectionContains(@SuppressWarnings("rawtypes") Collection collection, Object object) {
+		return collection.contains(object);
+	}
+
+	public static boolean mapContainsKey(@SuppressWarnings("rawtypes") Map map, Object key) {
+		return map.containsKey(key);
+	}
+
+	public static boolean mapContainsValue(@SuppressWarnings("rawtypes") Map map, Object value) {
+		return map.containsValue(value);
 	}
 
 }

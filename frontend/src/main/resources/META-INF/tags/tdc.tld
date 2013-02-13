@@ -158,24 +158,29 @@
 		<function-signature>double floor(double)</function-signature>
 	</function>
 	<function>
-		<name>urlencode</name>
+		<name>urlEncode</name>
 		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
 		<function-signature>java.lang.String encode(java.lang.String)</function-signature>
 	</function>
 	<function>
-		<name>collectioncontains</name>
+		<name>collectionContains</name>
 		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
 		<function-signature>boolean collectionContains(java.util.Collection, java.lang.Object)</function-signature>
 	</function>
 	<function>
-		<name>mapcontainskey</name>
+		<name>mapContainsKey</name>
 		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
 		<function-signature>boolean mapContainsKey(jjava.util.Map, java.lang.Object)</function-signature>
 	</function>
 	<function>
-		<name>mapcontainsvalue</name>
+		<name>mapContainsValue</name>
 		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
 		<function-signature>boolean mapContainsValue(java.util.Map, java.lang.Object)</function-signature>
+	</function>
+	<function>
+		<name>currentUrl</name>
+		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+		<function-signature>java.lang.String getCurrentUrl(javax.servlet.http.HttpServletRequest)</function-signature>
 	</function>
 
 </taglib>

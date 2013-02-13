@@ -29,6 +29,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.request.HstRequestContext;
 
@@ -97,6 +99,15 @@ public class TdcUtils {
 
 	public static boolean mapContainsValue(@SuppressWarnings("rawtypes") Map map, Object value) {
 		return map.containsValue(value);
+	}
+
+	public static String getCurrentUrl(HttpServletRequest request) {
+		String result = request.getRequestURL().toString();
+		String queryString = request.getQueryString(); // d=789
+		if (queryString != null) {
+			result += "?" + queryString;
+		}
+		return result;
 	}
 
 }

@@ -45,7 +45,7 @@
 			<groupId>com.tdclighthouse.hippo</groupId>
 			<artifactId>hippo-common-tools</artifactId>
 		</dependency>
-
+		
 		<!-- Apache libs -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -94,6 +94,12 @@
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<!-- This dependency is only needed for com.tdclighthouse.prototype.utils.URL so If you are not using tomcat then do not url this class -->
+		<dependency>
+		   <groupId>org.apache.tomcat</groupId>
+		   <artifactId>coyote</artifactId>
+		   <scope>provided</scope>
 		</dependency>
 
 	</dependencies>

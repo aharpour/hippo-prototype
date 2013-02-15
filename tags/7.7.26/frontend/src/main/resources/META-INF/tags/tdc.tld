@@ -1,0 +1,186 @@
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<short-name>tdc</short-name>
+	<uri>http://www.tdclighthouse.com/hippo/prototype</uri>
+	<jsp-version>2.0</jsp-version>
+	<tag-file>
+		<name>formgroup</name>
+		<path>/META-INF/tags/formgroup.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>formitem</name>
+		<path>/META-INF/tags/formitem.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>form</name>
+		<path>/META-INF/tags/form.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>add-query-param</name>
+		<path>/META-INF/tags/add-query-param.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>audioblock</name>
+		<path>/META-INF/tags/audioblock.tag</path>
+	</tag-file>
+	<!-- <tag-file> <name>bean-dump</name> <path>/META-INF/tags/bean-dump.tag</path> </tag-file> -->
+	<tag-file>
+		<name>flexibleblock</name>
+		<path>/META-INF/tags/flexibleblock.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>html-chopper</name>
+		<path>/META-INF/tags/html-chopper.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>imageblock</name>
+		<path>/META-INF/tags/imageblock.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>latexblock</name>
+		<path>/META-INF/tags/latexblock.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>paginator</name>
+		<path>/META-INF/tags/paginator.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>simplepaginator</name>
+		<path>/META-INF/tags/simplepaginator.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>paragraphblock</name>
+		<path>/META-INF/tags/paragraphblock.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>public-parameter</name>
+		<path>/META-INF/tags/public-parameter.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>public-parameters</name>
+		<path>/META-INF/tags/public-parameters.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>has-public-parameter</name>
+		<path>/META-INF/tags/has-public-parameter.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>quotationblock</name>
+		<path>/META-INF/tags/quotationblock.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>relateddocument</name>
+		<path>/META-INF/tags/relateddocument.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>relateddocumentsblock</name>
+		<path>/META-INF/tags/relateddocumentsblock.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>string-chopper</name>
+		<path>/META-INF/tags/string-chopper.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>videoblock</name>
+		<path>/META-INF/tags/videoblock.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>beaninspection</name>
+		<path>/META-INF/tags/beaninspection.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>assetsize</name>
+		<path>/META-INF/tags/assetsize.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>assettype</name>
+		<path>/META-INF/tags/assettype.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>menuitem</name>
+		<path>/META-INF/tags/menuitem.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>breadcrumbitem</name>
+		<path>/META-INF/tags/breadcrumbitem.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>breadcrumbs</name>
+		<path>/META-INF/tags/breadcrumbs.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>remove-query-param</name>
+		<path>/META-INF/tags/remove-query-param.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>remove-query-parameters</name>
+		<path>/META-INF/tags/remove-query-parameters.tag</path>
+	</tag-file>
+
+	<function>
+		<name>isSameDayDate</name>
+		<function-class>org.apache.commons.lang3.time.DateUtils</function-class>
+		<function-signature>boolean isSameDay(java.util.Date, java.util.Date)</function-signature>
+	</function>
+	<function>
+		<name>isSameDayCalendar</name>
+		<function-class>org.apache.commons.lang3.time.DateUtils</function-class>
+		<function-signature>boolean isSameDay(java.util.Calendar, java.util.Calendar)</function-signature>
+	</function>
+	<function>
+		<name>isSameMonthDate</name>
+		<function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+		<function-signature>boolean isSameMonth(java.util.Date, java.util.Date)</function-signature>
+	</function>
+	<function>
+		<name>isSameMonthCalendar</name>
+		<function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+		<function-signature>boolean isSameMonth(java.util.Calendar, java.util.Calendar)</function-signature>
+	</function>
+	<function>
+		<name>isSameYearDate</name>
+		<function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+		<function-signature>boolean isSameYear(java.util.Date, java.util.Date)</function-signature>
+	</function>
+	<function>
+		<name>isSameYearCalendar</name>
+		<function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+		<function-signature>boolean isSameYear(java.util.Calendar, java.util.Calendar)</function-signature>
+	</function>
+	<function>
+		<name>ceil</name>
+		<function-class>java.lang.Math</function-class>
+		<function-signature>double ceil(double)</function-signature>
+	</function>
+	<function>
+		<name>floor</name>
+		<function-class>java.lang.Math</function-class>
+		<function-signature>double floor(double)</function-signature>
+	</function>
+	<function>
+		<name>urlEncode</name>
+		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+		<function-signature>java.lang.String encode(java.lang.String)</function-signature>
+	</function>
+	<function>
+		<name>collectionContains</name>
+		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+		<function-signature>boolean collectionContains(java.util.Collection, java.lang.Object)</function-signature>
+	</function>
+	<function>
+		<name>mapContainsKey</name>
+		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+		<function-signature>boolean mapContainsKey(jjava.util.Map, java.lang.Object)</function-signature>
+	</function>
+	<function>
+		<name>mapContainsValue</name>
+		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+		<function-signature>boolean mapContainsValue(java.util.Map, java.lang.Object)</function-signature>
+	</function>
+	<function>
+		<name>currentUrl</name>
+		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+		<function-signature>java.lang.String getCurrentUrl(javax.servlet.http.HttpServletRequest)</function-signature>
+	</function>
+
+</taglib>

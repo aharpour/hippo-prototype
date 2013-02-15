@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Vertalingen voor veel voorkomende velden -->
+<sv:node sv:name="tdc-translator" xmlns:sv="http://www.jcp.org/jcr/sv/1.0">
+	<sv:property sv:name="jcr:primaryType" sv:type="Name">
+		<sv:value>frontend:plugin</sv:value>
+	</sv:property>
+	<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+		<sv:value>hippostd:translated</sv:value>
+	</sv:property>
+	<sv:property sv:name="plugin.class" sv:type="String">
+		<sv:value>org.hippoecm.frontend.i18n.ConfigTraversingPlugin</sv:value>
+	</sv:property>
+	<sv:property sv:name="translator.id" sv:type="String">
+		<sv:value>tdc.translator</sv:value>
+	</sv:property>
+	<sv:node sv:name="hippostd:translations">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippostd:translations</sv:value>
+		</sv:property>
+		<sv:node sv:name="title">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Titel</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Title</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="subtitle">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Onderkop</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Subtitle</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="introduction">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Lead</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Introduction</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="releaseDate">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Plaatsingsdatum</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Release date</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="keywords">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Trefwoorden Metatags (Zoekmachine)</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Keywords Metatags (Search engine)</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="browserTitle">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Browsertitel</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Browser title</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="description">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Beschrijving</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Description</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="hideFromSitemap">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Niet in sitemap</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Hide from sitemap</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="alt">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Alternatieve beschrijving (ALT)</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Textual alternative (ALT)</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="caption">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Bijschrift</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Caption</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="url">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>URL</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>URL</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="audio">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Audio</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Audio</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="transcript">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Script</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Transcript</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="relationship">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Relatie</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Relationship</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="image">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Afbeelding</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Image</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="images">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Afbeeldingen</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Images</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="latex">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>LaTex</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>LaTex</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="content">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Inhoud</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Content</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="author">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Auteur</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Author</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="quote">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Quote</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Quote</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="label">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Label</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Label</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="internalLink">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Interne link</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Internal link</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="externalLink">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Externe link</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>External link</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="link">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Link</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Link</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="relateddocumentitem">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Gerelateerd document</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Related document</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="flv">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>FLV</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>FLV</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="mp3">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>MP3</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>MP3</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="mp4">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>MP4</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>MP4</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="3gp">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>3GP</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>3GP</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="wmv">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>WMV</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>WMV</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="srt">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>SRT</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>SRT</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="binary">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Bestand</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Binary</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="flexibleBlock">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Contentlist</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Content list</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="credit">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Bron</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Credit</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="horizontalPosition">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Horizontale positie</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Horizontal Position</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="verticalPosition">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Verticale positie</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Vertical Position</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="asset">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Asset</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Asset</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="filename">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Bestandsnaam</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>File name</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+		<sv:node sv:name="thumbnail">
+			<sv:property sv:name="jcr:primaryType" sv:type="Name">
+				<sv:value>frontend:pluginconfig</sv:value>
+			</sv:property>
+			<sv:property sv:name="jcr:mixinTypes" sv:type="Name">
+				<sv:value>hippo:translated</sv:value>
+			</sv:property>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>nl</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Thumbnail</sv:value>
+				</sv:property>
+			</sv:node>
+			<sv:node sv:name="hippo:translation">
+				<sv:property sv:name="jcr:primaryType" sv:type="Name">
+					<sv:value>hippo:translation</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:language" sv:type="String">
+					<sv:value>en</sv:value>
+				</sv:property>
+				<sv:property sv:name="hippo:message" sv:type="String">
+					<sv:value>Thumbnail</sv:value>
+				</sv:property>
+			</sv:node>
+		</sv:node>
+	</sv:node>
+</sv:node>

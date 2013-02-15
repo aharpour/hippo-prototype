@@ -21,7 +21,7 @@
 	<description>Hippo prototype</description>
 	<groupId>com.tdclighthouse.hippo</groupId>
 	<artifactId>hippo-prototype</artifactId>
-	<version>7.7.26</version>
+	<version>7.7.27-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<developers>
@@ -34,9 +34,9 @@
 	<inceptionYear>2012</inceptionYear>
 
 	<scm>
-		<connection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/tags/7.7.26</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/tags/7.7.26</developerConnection>
-		<url>https://svn.code.sf.net/p/hippoprototype/code/tags/7.7.26</url>
+		<connection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/trunk/</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/trunk/</developerConnection>
+		<url>https://svn.code.sf.net/p/hippoprototype/code/trunk/</url>
 	</scm>
 	<ciManagement />
 

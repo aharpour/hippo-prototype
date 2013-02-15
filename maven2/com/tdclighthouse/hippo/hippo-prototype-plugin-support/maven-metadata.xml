@@ -3,11 +3,12 @@
   <groupId>com.tdclighthouse.hippo</groupId>
   <artifactId>hippo-prototype-plugin-support</artifactId>
   <versioning>
-    <release>7.7.25</release>
+    <release>7.7.26</release>
     <versions>
       <version>7.7.24</version>
       <version>7.7.25</version>
+      <version>7.7.26</version>
     </versions>
-    <lastUpdated>20121024120439</lastUpdated>
+    <lastUpdated>20130215141533</lastUpdated>
   </versioning>
 </metadata>

@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>com.tdclighthouse.hippo</groupId>
 		<artifactId>hippo-prototype</artifactId>
-		<version>7.7.26-SNAPSHOT</version>
+		<version>7.7.26</version>
 	</parent>
 
 	<name>Hippo prototype content</name>

@@ -182,5 +182,10 @@
 		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
 		<function-signature>java.lang.String getCurrentUrl(javax.servlet.http.HttpServletRequest)</function-signature>
 	</function>
+	<function>
+		<name>contextPath</name>
+		<function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+		<function-signature>java.lang.String getContextPath(org.hippoecm.hst.core.component.HstRequest)</function-signature>
+	</function>
 
 </taglib>

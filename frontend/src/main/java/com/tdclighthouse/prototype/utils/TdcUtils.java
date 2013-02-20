@@ -31,6 +31,7 @@ import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.request.HstRequestContext;
 
@@ -56,6 +57,15 @@ public class TdcUtils {
 	public static String dateToRFC1123(Date date) {
 		String result = dateFormat.format(date);
 		return result;
+	}
+	
+	public static String getContextPath(HstRequest request) {
+		String contextPath = request.getRequestContext().getVirtualHost().getVirtualHosts().getDefaultContextPath();
+		boolean contextPathInUrl = request.getRequestContext().getVirtualHost().getVirtualHosts().isContextPathInUrl();
+		if (StringUtils.isBlank(contextPath)) {
+			contextPath = request.getContextPath();
+		}
+		return contextPathInUrl ? contextPath : "";
 	}
 
 	public static String getExpiresDate(int hours) {

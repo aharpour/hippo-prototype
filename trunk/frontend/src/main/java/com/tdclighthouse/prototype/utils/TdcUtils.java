@@ -111,13 +111,4 @@ public class TdcUtils {
 		return map.containsValue(value);
 	}
 
-	public static String getCurrentUrl(HttpServletRequest request) {
-		String result = request.getRequestURL().toString();
-		String queryString = request.getQueryString(); // d=789
-		if (queryString != null) {
-			result += "?" + queryString;
-		}
-		return result;
-	}
-
 }

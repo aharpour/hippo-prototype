@@ -72,10 +72,13 @@ public class Constants {
 
 	public static class HstParameters {
 		public static final String CONTENT_BEAN_PATH = "contentBeanPath";
+		public static final String EXPANDED = "expanded";
+		public static final String ROOT = "root";
 	}
 
 	public static class Values {
 		public static final String DESCENDING = "descending";
+		public static final String TRUE = "true";
 	}
 
 	public static class PikcerTypes {

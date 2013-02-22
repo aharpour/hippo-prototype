@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.configuration.HstNodeTypes;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.content.beans.standard.HippoDocumentBean;
@@ -23,6 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.commons.utils.hippo.Essentials;
 import com.tdclighthouse.prototype.beans.WebDocumentBean;
+import com.tdclighthouse.prototype.utils.Constants;
 import com.tdclighthouse.prototype.utils.NavigationUtils;
 
 /**
@@ -33,6 +35,7 @@ import com.tdclighthouse.prototype.utils.NavigationUtils;
  * 
  */
 public class RepoBasedMenuProvider {
+
 	public static final Logger log = LoggerFactory.getLogger(RepoBasedMenuProvider.class);
 
 	private final HstRequest request;
@@ -65,8 +68,9 @@ public class RepoBasedMenuProvider {
 	private void addRepoBasedMenuItems(List<EditableMenuItem> menuItems) {
 		for (EditableMenuItem item : menuItems) {
 			addRepoBasedMenuItems(item.getChildMenuItems());
+			expandForcedExpandedItems(item);
 			if (item.isRepositoryBased()) {
-				List<String> locations = getRootParameterValue(item.getProperties());
+				List<String> locations = getParameterValues(Constants.HstParameters.ROOT, item);
 				HippoBean[] beanOfMenuItems = null;
 				if (locations != null && locations.size() > 0) {
 					beanOfMenuItems = getBeans(locations);
@@ -77,6 +81,13 @@ public class RepoBasedMenuProvider {
 					addSubitems(item, hippoBean, 1);
 				}
 			}
+		}
+	}
+
+	private void expandForcedExpandedItems(EditableMenuItem item) {
+		String value = getParameterValue(Constants.HstParameters.EXPANDED, item);
+		if (Constants.Values.TRUE.equals(value)) {
+			markAsExpanded(item);
 		}
 	}
 
@@ -222,15 +233,28 @@ public class RepoBasedMenuProvider {
 		return bean;
 	}
 
-	private List<String> getRootParameterValue(Map<String, Object> properties) {
+	public static String getParameterValue(String parameterName, EditableMenuItem menuItem) {
+		String result = null;
+		List<String> values = getParameterValues(parameterName, menuItem);
+		if (values.size() > 0) {
+			result = values.get(0);
+		}
+		return result;
+	}
+
+	public static List<String> getParameterValues(String parameterName, EditableMenuItem menuItem) {
+		if (StringUtils.isBlank(parameterName) || menuItem == null) {
+			throw new IllegalArgumentException("Both parameterName and menuItem are required.");
+		}
 		List<String> result = new ArrayList<String>();
+		Map<String, Object> properties = menuItem.getProperties();
 		String[] paramNames = (String[]) properties.get(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_NAMES);
 		String[] paramValues = (String[]) properties.get(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_VALUES);
 		if (paramNames != null && paramValues != null) {
 			if (paramNames.length == paramValues.length) {
 				for (int i = 0; i < paramNames.length; i++) {
 					String propName = paramNames[i];
-					if ("root".equals(propName)) {
+					if (parameterName.equals(propName)) {
 						result.add(paramValues[i]);
 					}
 				}

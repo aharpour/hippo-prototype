@@ -87,9 +87,15 @@ public class RepoBasedMenuProvider {
 	private void expandForcedExpandedItems(EditableMenuItem item) {
 		String value = getParameterValue(Constants.HstParameters.EXPANDED, item);
 		if (Constants.Values.TRUE.equals(value)) {
-			markAsExpanded(item);
+			String expandeOnlyCurrentItem = getParameterValue(Constants.HstParameters.EXPAND_ONLY_CURRENT_ITEM, item);
+			if (Constants.Values.TRUE.equals(expandeOnlyCurrentItem)) {
+				markOnlyCurrentItemAsExpanded(item);
+			} else {
+				markAsExpanded(item);
+			}
 		}
 	}
+
 
 	private HippoBean[] getBeans(List<String> locations) {
 		HippoBean[] beanOfMenuItems;
@@ -180,6 +186,18 @@ public class RepoBasedMenuProvider {
 			temp = temp.getParentItem();
 		}
 		return temp;
+	}
+	
+	private void markOnlyCurrentItemAsExpanded(EditableMenuItem item) {
+		EditableMenuItem parentItem = item.getParentItem();
+		if (parentItem != null) {
+			boolean isParentItemExpanded;
+			isParentItemExpanded = parentItem.isExpanded();
+			item.setExpanded(true);
+			item.setExpanded(isParentItemExpanded);
+		} else {
+			item.setExpanded(true);
+		}
 	}
 
 	private void addItem(EditableMenuItem item, final HippoBean document) {

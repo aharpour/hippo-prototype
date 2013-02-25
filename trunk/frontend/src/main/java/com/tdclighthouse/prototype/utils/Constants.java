@@ -72,6 +72,7 @@ public class Constants {
 	public static class HstParameters {
 		public static final String CONTENT_BEAN_PATH = "contentBeanPath";
 		public static final String EXPANDED = "expanded";
+		public static final String EXPAND_ONLY_CURRENT_ITEM = "expandOnlyCurrentItem";
 		public static final String ROOT = "root";
 	}
 

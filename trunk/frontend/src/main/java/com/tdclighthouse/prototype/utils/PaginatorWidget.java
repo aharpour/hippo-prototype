@@ -35,15 +35,11 @@ public class PaginatorWidget {
 	 * @param page
 	 */
 	public PaginatorWidget(int totalRows, int page, int rowsPerPage) {
-		this.totalRows = totalRows;
-		this.rowsPerPage = rowsPerPage;
-		this.numberOfPages = calcaulateNumberOfPages(totalRows, rowsPerPage);
-		this.page = Math.max(Math.min(page, numberOfPages), 1);
-		this.numberOfPagesDisplay = DEFAULT_NUMBER_OF_PAGES_DISPLAY;
-		init();
+		this(totalRows, page, rowsPerPage, DEFAULT_NUMBER_OF_PAGES_DISPLAY);
 	}
 
 	public PaginatorWidget(int totalRows, int page, int rowsPerPage, int numberOfPagesDisplay) {
+		rowsPerPage = Math.max(1, rowsPerPage);
 		this.totalRows = totalRows;
 		this.rowsPerPage = rowsPerPage;
 		this.numberOfPages = calcaulateNumberOfPages(totalRows, rowsPerPage);

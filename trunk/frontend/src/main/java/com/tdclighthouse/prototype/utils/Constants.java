@@ -15,10 +15,9 @@
  */
 package com.tdclighthouse.prototype.utils;
 
-
 /**
  * @author Ebrahim Aharpour
- *
+ * 
  */
 public class Constants {
 
@@ -99,4 +98,10 @@ public class Constants {
 	public static class Encodings {
 		public static final String UTF8 = "UTF-8";
 	}
+
+	public static class Schemes {
+		public static final String HTTP = "http";
+		public static final String HTTPS = "https";
+	}
+
 }

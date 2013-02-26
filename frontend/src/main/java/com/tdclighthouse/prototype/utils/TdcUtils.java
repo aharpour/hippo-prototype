@@ -29,8 +29,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.request.HstRequestContext;
@@ -91,7 +89,7 @@ public class TdcUtils {
 
 	public static String getCurrentPagePath(HstRequest request) {
 		HstRequestContext requestContext = request.getRequestContext();
-		return request.getContextPath() + requestContext.getResolvedMount().getResolvedMountPath() + "/"
+		return TdcUtils.getContextPath(request) + requestContext.getResolvedMount().getResolvedMountPath() + "/"
 				+ requestContext.getResolvedSiteMapItem().getPathInfo();
 	}
 

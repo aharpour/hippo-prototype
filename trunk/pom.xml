@@ -140,7 +140,7 @@
 			<dependency>
 				<groupId>com.tdclighthouse.hippo</groupId>
 				<artifactId>hippo-common-tools</artifactId>
-				<version>0.4.20</version>
+				<version>0.4.21-SNAPSHOT</version>
 			</dependency>
 			<!-- Apache libs -->
 			<dependency>

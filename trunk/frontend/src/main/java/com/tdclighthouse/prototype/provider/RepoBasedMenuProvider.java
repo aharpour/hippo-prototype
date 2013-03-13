@@ -194,7 +194,7 @@ public class RepoBasedMenuProvider {
 			boolean isParentItemExpanded;
 			isParentItemExpanded = parentItem.isExpanded();
 			item.setExpanded(true);
-			item.setExpanded(isParentItemExpanded);
+			parentItem.setExpanded(isParentItemExpanded);
 		} else {
 			item.setExpanded(true);
 		}

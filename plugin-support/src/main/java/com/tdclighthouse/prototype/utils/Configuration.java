@@ -29,10 +29,13 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 
 /**
  * @author Ebrahim Aharpour
- *
+ * 
  */
 public class Configuration {
 	private static final String TIME_FORMAT_STRING = "HH:mm";
@@ -45,10 +48,21 @@ public class Configuration {
 	}
 
 	public Configuration(String propertiesName) throws IOException {
-		InputStream inStream = Thread.currentThread().getContextClassLoader()
-				.getResourceAsStream(propertiesName);
+		InputStream inStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(propertiesName);
 		properties = new Properties();
 		properties.load(inStream);
+	}
+
+	public Configuration(String systemPropertyName, String defaultPropertiesFileLocation) throws IOException {
+		String propertyFilePath = System.getProperties().getProperty(systemPropertyName);
+		Resource location = null;
+		if (StringUtils.isNotBlank(propertyFilePath)) {
+			location = new FileSystemResource(propertyFilePath);
+		} else {
+			location = new ClassPathResource(defaultPropertiesFileLocation);
+		}
+		properties = new Properties();
+		properties.load(location.getInputStream());
 	}
 
 	public String getString(String key, String defaultValue) {
@@ -64,17 +78,15 @@ public class Configuration {
 				Calendar calendar = new GregorianCalendar();
 				calendar.setTime(TIME_FORMAT.parse(stringDate));
 				Calendar now = new GregorianCalendar();
-				calendar.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH),
-						now.get(Calendar.DAY_OF_MONTH));
+				calendar.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
 				if (calendar.before(now)) {
 					calendar.add(Calendar.DAY_OF_MONTH, 1);
 				}
 				result = calendar.getTime();
 			}
 		} catch (ParseException e) {
-			log.error("the given value \"" + stringDate + "\" of the key \"" + key
-					+ "\" is not of the format \"" + TIME_FORMAT_STRING
-					+ "\" so we default back to the default value");
+			log.error("the given value \"" + stringDate + "\" of the key \"" + key + "\" is not of the format \""
+					+ TIME_FORMAT_STRING + "\" so we default back to the default value");
 		}
 		return result;
 	}
@@ -87,8 +99,8 @@ public class Configuration {
 		if (clazz.isAssignableFrom(converted.getClass())) {
 			result = (T) converted;
 		} else {
-			log.error("the given value \"" + stringValue + "\" of the key \"" + key
-					+ "\" is not convertable to " + clazz.getSimpleName() + ". So we default back to the default value");
+			log.error("the given value \"" + stringValue + "\" of the key \"" + key + "\" is not convertable to "
+					+ clazz.getSimpleName() + ". So we default back to the default value");
 		}
 		return result;
 	}

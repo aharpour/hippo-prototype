@@ -31,7 +31,7 @@ import com.tdclighthouse.prototype.services.callbacks.ImageCreationCallBack;
 import com.tdclighthouse.prototype.services.callbacks.NewAssetFolderCallBack;
 import com.tdclighthouse.prototype.services.callbacks.NewImageFolderCallBack;
 import com.tdclighthouse.prototype.support.DocumentManager;
-import com.tdclighthouse.prototype.support.SessionTemplate.SessionCallBack;
+import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
 import com.tdclighthouse.prototype.utils.PluginConstants;
 import com.tdclighthouse.prototype.utils.ImageUtils;
 

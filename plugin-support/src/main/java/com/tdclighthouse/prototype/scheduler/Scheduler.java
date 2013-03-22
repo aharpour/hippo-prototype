@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.joda.time.DateTime;
@@ -38,6 +39,7 @@ public class Scheduler {
 	private static final String START_TIME_PROPERTY = "start.time";
 	public static Logger log = LoggerFactory.getLogger(Scheduler.class);
 	private final Timer timer;
+	private ExecutorService executor;
 
 	public Scheduler() {
 		timer = new Timer(true);
@@ -49,7 +51,11 @@ public class Scheduler {
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				runnable.run();
+				if (executor != null && !executor.isShutdown() && !executor.isTerminated()) {
+					executor.execute(runnable);
+				} else {
+					runnable.run();
+				}
 			}
 		}, initialDelayInMin, delayInMin);
 		log.info("a new task was schedule with the initailDelay of " + initialDelayInMin
@@ -65,6 +71,10 @@ public class Scheduler {
 	protected long getDelayInMilliseconds(Configuration configuration) {
 		double hours = configuration.getItem(INTERVAL_LENGTH_PROPERTY, 8.0, Double.class);
 		return Math.round(hours * 3600000);
+	}
+	
+	public void setExecutor(ExecutorService executor) {
+		this.executor = executor;
 	}
 
 	protected Date getMidnight() {

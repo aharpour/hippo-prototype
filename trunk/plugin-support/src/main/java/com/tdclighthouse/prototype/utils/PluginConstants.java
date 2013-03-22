@@ -68,6 +68,10 @@ public class PluginConstants {
 		public static final String HEIGHT = "height";
 		public static final String HIPPOSTDPUBWF_LOCALE = "hippostdpubwf:locale";
 	}
+	
+	public static class SystemPropertyName {
+		public static final String JAVA_IO_TMPDIR = "java.io.tmpdir";
+	}
 
 	public static class WorkflowName {
 		public static final String INTERNAL = "internal";

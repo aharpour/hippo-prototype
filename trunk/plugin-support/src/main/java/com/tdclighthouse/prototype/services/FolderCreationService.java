@@ -24,7 +24,7 @@ import org.apache.jackrabbit.util.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tdclighthouse.prototype.support.DocumentManager;
-import com.tdclighthouse.prototype.support.SessionTemplate.SessionCallBack;
+import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
 
 /**
  * @author Ebrahim Aharpour

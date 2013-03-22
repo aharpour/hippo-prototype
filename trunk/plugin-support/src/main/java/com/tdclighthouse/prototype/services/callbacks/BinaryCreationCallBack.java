@@ -41,7 +41,7 @@ import org.hippoecm.repository.gallery.GalleryWorkflow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.tdclighthouse.prototype.support.SessionTemplate.SessionCallBack;
+import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
 import com.tdclighthouse.prototype.utils.PluginConstants;
 
 /**

@@ -40,7 +40,7 @@ import org.hippoecm.repository.reviewedactions.FullReviewedActionsWorkflow;
 import org.hippoecm.repository.standardworkflow.EditableWorkflow;
 import org.hippoecm.repository.standardworkflow.FolderWorkflow;
 
-import com.tdclighthouse.prototype.support.SessionTemplate.SessionCallBack;
+import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
 import com.tdclighthouse.prototype.utils.PluginConstants;
 
 /**
@@ -49,9 +49,9 @@ import com.tdclighthouse.prototype.utils.PluginConstants;
  */
 public class DocumentManager {
 
-	private final SessionTemplate sessionTemplate;
+	private final AbstractSessionTemplate sessionTemplate;
 
-	public DocumentManager(SessionTemplate sessionTemplate) {
+	public DocumentManager(AbstractSessionTemplate sessionTemplate) {
 		this.sessionTemplate = sessionTemplate;
 	}
 

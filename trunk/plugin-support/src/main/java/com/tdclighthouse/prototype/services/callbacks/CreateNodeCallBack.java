@@ -73,7 +73,6 @@ public abstract class CreateNodeCallBack implements SessionCallBack<String> {
 		} else {
 			nodePath = folderWorkflow.add("new-document", nodeType, nodeName);
 		}
-		session.save();
 		return session.getNode(nodePath);
 	}
 

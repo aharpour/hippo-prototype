@@ -31,9 +31,17 @@ public class TransactionalSessionTemplate extends AbstractSessionTemplate {
 		}
 		return result;
 	}
-	
+
 	public void save() throws RepositoryException {
-		session.save();
+		synchronized (session) {
+			session.save();
+		}
+	}
+
+	public void refresh(boolean keepChanges) throws RepositoryException {
+		synchronized (session) {
+			session.refresh(keepChanges);
+		}
 	}
 
 }

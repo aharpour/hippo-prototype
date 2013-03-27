@@ -48,7 +48,8 @@ public class DynamicNodeWriter {
 			log.debug("Saving the following dynamic node at \"{}\":\n{}", node.getPath(), dynamicNode.toString());
 		}
 		saveDynamicNode(node, dynamicNode);
-		String identifier = node.getParent().getIdentifier();
+		String identifier = DocumentManager.getHandle(node).getIdentifier();
+		
 		if (publish) {
 			documentManager.publish(node);
 		}

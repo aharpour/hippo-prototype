@@ -181,7 +181,7 @@ public class DocumentManager {
 		return editAmendedNode(callBack, node);
 	}
 
-	public Node getHandle(Node node) throws RepositoryException {
+	public static Node getHandle(Node node) throws RepositoryException {
 		Node result = null;
 		while (node != null) {
 			if (node.isNodeType(PluginConstants.NodeType.HIPPO_HANDLE)) {
@@ -207,7 +207,7 @@ public class DocumentManager {
 		});
 	}
 
-	public Node getNodeOfState(NodeState nodeState, Node handle) throws RepositoryException {
+	public static Node getNodeOfState(NodeState nodeState, Node handle) throws RepositoryException {
 		if (!handle.isNodeType(PluginConstants.NodeType.HIPPO_HANDLE)) {
 			throw new IllegalArgumentException("the given node is not of the type " + PluginConstants.NodeType.HIPPO_HANDLE);
 		}

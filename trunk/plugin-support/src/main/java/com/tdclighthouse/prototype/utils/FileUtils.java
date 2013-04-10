@@ -23,6 +23,7 @@ public class FileUtils {
 				copyInputStream(zipFile.getInputStream(entry), new BufferedOutputStream(new FileOutputStream(path)));
 			}
 		}
+		zipFile.close();
 	}
 
 	public static void copyInputStream(InputStream in, OutputStream out) throws IOException {

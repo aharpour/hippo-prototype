@@ -1,0 +1,12 @@
+image/png png PNG
+image/bmp bmp BMP
+image/jpeg jpg JPG jpeg JPEG jpe JPE jif JIF jfif JFIF jfi JFI
+image/tiff tif TIF tiff TIFF
+audio/x-ms-wmv wmv WMV
+application/pdf pdf PDF
+application/msword doc DOC dot DOT 
+application/vnd.openxmlformats-officedocument.wordprocessingml.document docx DOCX
+application/vnd.openxmlformats-officedocument.wordprocessingml.template docm DOCM
+application/vnd.ms-word.template.macroEnabled.12 dotm DOTM
+application/vnd.ms-excel xls XLS xlt XLS xla XLA
+application/vnd.ms-powerpoint ppt PPT pot POT pps PPS ppa PPA

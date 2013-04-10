@@ -87,6 +87,7 @@ public class Scheduler {
 	}
 
 	public void shutdown() {
+		executor.shutdown();
 		timer.cancel();
 	}
 

@@ -19,7 +19,7 @@
 	<parent>
 		<groupId>com.tdclighthouse.hippo</groupId>
 		<artifactId>hippo-prototype</artifactId>
-		<version>7.8.31-SNAPSHOT</version>
+		<version>7.8.31</version>
 	</parent>
 
 	<artifactId>hippo-prototype-plugin-support</artifactId>

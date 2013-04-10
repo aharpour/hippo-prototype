@@ -87,7 +87,9 @@ public class Scheduler {
 	}
 
 	public void shutdown() {
-		executor.shutdown();
+		if (executor != null && !executor.isShutdown()) {
+			executor.shutdown();
+		}
 		timer.cancel();
 	}
 

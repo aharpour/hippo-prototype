@@ -83,7 +83,7 @@ public class GenericOverviewPage extends BaseTdcComponent {
 			}
 		}
 
-		getLimitAndOffset(request, query);
+		setLimitAndOffset(request, query);
 		addFilter(query);
 		return query;
 	}
@@ -91,7 +91,7 @@ public class GenericOverviewPage extends BaseTdcComponent {
 	protected void addFilter(HstQuery query) {
 	}
 
-	private void getLimitAndOffset(HstRequest request, HstQuery query) {
+	private void setLimitAndOffset(HstRequest request, HstQuery query) {
 		int pageSize = getPageSize(request);
 		int pageNumber = getPageNumber(request);
 		query.setLimit(pageSize);

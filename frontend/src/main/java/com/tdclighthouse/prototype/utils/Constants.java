@@ -77,6 +77,7 @@ public class Constants {
 	}
 
 	public static class Values {
+		public static final String ASCENDING = "ascending";
 		public static final String DESCENDING = "descending";
 		public static final String TRUE = "true";
 	}

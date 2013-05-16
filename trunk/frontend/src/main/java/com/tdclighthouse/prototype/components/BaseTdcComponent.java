@@ -32,7 +32,6 @@ import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.content.beans.standard.HippoBeanIterator;
 import org.hippoecm.hst.content.beans.standard.HippoDocumentBean;
 import org.hippoecm.hst.content.beans.standard.HippoDocumentIterator;
-import org.hippoecm.hst.content.beans.standard.HippoFacetNavigationBean;
 import org.hippoecm.hst.content.beans.standard.HippoFolderBean;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
@@ -50,7 +49,7 @@ import com.tdclighthouse.prototype.utils.TdcUtils;
 
 /**
  * @author Ebrahim Aharpour
- *
+ * 
  */
 public class BaseTdcComponent extends BaseHstComponent {
 
@@ -112,23 +111,6 @@ public class BaseTdcComponent extends BaseHstComponent {
 				}
 			} else {
 				result = (T) getBean(indexFilePath, request);
-			}
-		}
-		return result;
-	}
-
-	protected HippoFacetNavigationBean getFacetNavigationBean(HstRequest request) {
-		HippoFacetNavigationBean result = null;
-		HippoBean contentBean = getContentBean(request);
-		if (contentBean instanceof HippoFacetNavigationBean) {
-			result = (HippoFacetNavigationBean) contentBean;
-		} else {
-			Object parametersInfo = getParametersInfo(request);
-			if (parametersInfo instanceof ContentBeanPathInfo) {
-				HippoBean bean = getContentBeanViaParameters(request, (ContentBeanPathInfo) parametersInfo);
-				if (bean instanceof HippoFacetNavigationBean) {
-					result = (HippoFacetNavigationBean) bean;
-				}
 			}
 		}
 		return result;

@@ -22,6 +22,7 @@ import org.hippoecm.hst.content.beans.query.HstQuery;
 import org.hippoecm.hst.content.beans.query.HstQueryResult;
 import org.hippoecm.hst.content.beans.query.exceptions.QueryException;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
+import org.hippoecm.hst.content.beans.standard.HippoFolderBean;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
@@ -69,7 +70,7 @@ public class GenericOverviewPage extends BaseTdcComponent {
 
 	protected HstQuery getQuery(HstRequest request) throws QueryException {
 		GenericOverviewPageInfo parametersInfo = getParametersInfo(request);
-		HippoBean scope = getContentBeanViaParameters(request, parametersInfo);
+		HippoBean scope = getQueryScope(request, parametersInfo);
 		HstQuery query = getQueryManager(request).createQuery(scope, parametersInfo.getShowTypes());
 
 		String sortBy = parametersInfo.getSortBy();
@@ -94,6 +95,14 @@ public class GenericOverviewPage extends BaseTdcComponent {
 		int pageNumber = getPageNumber(request);
 		query.setLimit(pageSize);
 		query.setOffset((pageNumber - 1) * pageSize);
+	}
+	
+	protected HippoBean getQueryScope(HstRequest request, GenericOverviewPageInfo parametersInfo) {
+		HippoBean scope = getContentBean(request);
+		if (!(scope instanceof HippoFolderBean)) {
+			scope = getContentBeanViaParameters(request, parametersInfo);
+		}
+		return scope;
 	}
 
 }

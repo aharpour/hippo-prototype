@@ -21,20 +21,53 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.content.beans.query.HstQuery;
 import org.hippoecm.hst.content.beans.query.exceptions.QueryException;
+import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.content.beans.standard.HippoFacetNavigationBean;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.utils.BeanUtils;
 
+import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
 import com.tdclighthouse.prototype.componentsinfo.FacetedNavigationInfo;
 import com.tdclighthouse.prototype.utils.Constants;
 import com.tdclighthouse.prototype.utils.SearchQueryUtils;
 
 /**
  * @author Ebrahim Aharpour
- *
+ * 
  */
 public class FacetSupport extends BaseTdcComponent {
+
+	protected HippoFacetNavigationBean getFacetNavigationBean(HstRequest request) {
+		HippoFacetNavigationBean result = null;
+		HippoBean contentBean = getContentBean(request);
+		if (contentBean instanceof HippoFacetNavigationBean) {
+			result = (HippoFacetNavigationBean) contentBean;
+		} else {
+			Object parametersInfo = getParametersInfo(request);
+			if (parametersInfo instanceof ContentBeanPathInfo) {
+				HippoBean bean = getContentBeanViaParameters(request, (ContentBeanPathInfo) parametersInfo);
+				if (bean instanceof HippoFacetNavigationBean) {
+					result = (HippoFacetNavigationBean) bean;
+				}
+			}
+		}
+		return result;
+	}
+
+	protected HippoBean obtainContentBean(HstRequest request) {
+		HippoBean result = null;
+		HippoBean contentBean = getContentBean(request);
+		if (!(contentBean instanceof HippoFacetNavigationBean)) {
+			result = contentBean;
+		} else {
+			HippoBean bean = getContentBeanViaParameters(request, (ContentBeanPathInfo) getParametersInfo(request));
+			if (!(bean instanceof HippoFacetNavigationBean)) {
+				result = bean;
+			}
+		}
+		return result;
+	}
 
 	protected HippoFacetNavigationBean applyQueryToFacetBean(HstRequest request, HippoFacetNavigationBean facetedNavBean) {
 		try {

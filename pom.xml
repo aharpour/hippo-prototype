@@ -58,6 +58,7 @@
 		<repository.version>2.24.00</repository.version>
 		<workflow.repository.version>2.22.05</workflow.repository.version>
 		<hippo.gallary.version>2.22.13</hippo.gallary.version>
+		<jackson.version>2.2.1</jackson.version>
 	</properties>
 
 	<repositories>
@@ -112,6 +113,26 @@
 				<version>0.9.6</version>
 			</dependency>
 			<!-- /Latex dependency -->
+			
+			<!-- Jackson dependency -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<!-- /Jackson dependency -->
 
 			<dependency>
 				<groupId>javax.jdo</groupId>

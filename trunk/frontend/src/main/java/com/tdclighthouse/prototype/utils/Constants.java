@@ -23,6 +23,7 @@ public class Constants {
 
 	public static class Attributes {
 		public static final String DOCUMENT = "document";
+		public static final String MODEL = "model";
 		public static final String FACET_BEAN = "facetBean";
 		public static final String ITEMS = "items";
 		public static final String ANCESTORS = "ancestors";
@@ -60,6 +61,11 @@ public class Constants {
 
 	public static class MimeType {
 		public static final String APPLICATION_JSON = "application/json";
+		public static final String TEXT_XML = "text/xml";
+		public static final String APPLICATION_XML = "application/xml";
+		public static final String TEXT_JAVASCRIPT = "text/javascript";
+		public static final String TEXT_HTML = "text/html";
+		public static final String APPLICATION_XHTML_XML = "application/xhtml+xml";
 	}
 
 	public static class Parameters {

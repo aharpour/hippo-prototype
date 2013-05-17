@@ -15,6 +15,7 @@
  */
 package com.tdclighthouse.prototype.components;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,6 +23,7 @@ import org.hippoecm.hst.content.beans.query.HstQuery;
 import org.hippoecm.hst.content.beans.query.HstQueryResult;
 import org.hippoecm.hst.content.beans.query.exceptions.QueryException;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
+import org.hippoecm.hst.content.beans.standard.HippoBeanIterator;
 import org.hippoecm.hst.content.beans.standard.HippoFolderBean;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
@@ -47,10 +49,9 @@ public class GenericOverviewPage extends BaseTdcComponent {
 			GenericOverviewPageInfo parametersInfo = getParametersInfo(request);
 			HstQuery query = getQuery(request);
 			HstQueryResult queryResult = query.execute();
-			PaginatorWidget paginator = new PaginatorWidget(queryResult.getSize(), getPageNumber(request),
-					getPageSize(request));
-			List<HippoBean> items = getItemsFromHippoBeanIterator(queryResult.getHippoBeans(), paginator);
-
+			PaginatorWidget paginator = setPaginator(request, getPageSize(request), queryResult.getTotalSize());
+			List<HippoBean> items = getItems(queryResult);
+			
 			request.setAttribute(Constants.Attributes.ITEMS, items);
 			if (parametersInfo.getShowPaginator()) {
 				request.setAttribute(Constants.Attributes.PAGINATOR, paginator);
@@ -59,6 +60,14 @@ public class GenericOverviewPage extends BaseTdcComponent {
 		} catch (QueryException e) {
 			throw new HstComponentException(e);
 		}
+	}
+
+	private List<HippoBean> getItems(HstQueryResult queryResult) {
+		List<HippoBean> items = new ArrayList<HippoBean>();
+		for (HippoBeanIterator hippoBeans = queryResult.getHippoBeans(); hippoBeans.hasNext();) {
+			items.add(hippoBeans.nextHippoBean());
+		}
+		return items;
 	}
 
 	private void setDocumentToRequest(HstRequest request) {

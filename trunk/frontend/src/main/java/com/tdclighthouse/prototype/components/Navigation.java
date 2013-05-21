@@ -40,14 +40,14 @@ public class Navigation extends WebDocumentDetail {
 	@Override
 	public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
 		super.doBeforeRender(request, response);
-		NavigationInfo parametersInfo = this.<NavigationInfo> getParametersInfo(request);
+		NavigationInfo parametersInfo = this.<NavigationInfo> getComponentParametersInfo(request);
 		String menuName = parametersInfo.getMenuName();
 		HstSiteMenu menu = request.getRequestContext().getHstSiteMenus().getSiteMenu(menuName);
 		if (menu != null) {
 			EditableMenu editableMenu = menu.getEditableMenu();
 			boolean showFacet = parametersInfo.isShowFacetedNavigation();
 			new RepoBasedMenuProvider(getSiteContentBaseBean(request), showFacet, request)
-			.addRepoBasedMenuItems(editableMenu);
+					.addRepoBasedMenuItems(editableMenu);
 			request.setAttribute(Constants.Attributes.MENU, editableMenu);
 		}
 	}

@@ -44,7 +44,7 @@ public class FacetSupport extends BaseTdcComponent {
 		if (contentBean instanceof HippoFacetNavigationBean) {
 			result = (HippoFacetNavigationBean) contentBean;
 		} else {
-			Object parametersInfo = getParametersInfo(request);
+			Object parametersInfo = getComponentParametersInfo(request);
 			if (parametersInfo instanceof ContentBeanPathInfo) {
 				HippoBean bean = getContentBeanViaParameters(request, (ContentBeanPathInfo) parametersInfo);
 				if (bean instanceof HippoFacetNavigationBean) {
@@ -61,7 +61,8 @@ public class FacetSupport extends BaseTdcComponent {
 		if (!(contentBean instanceof HippoFacetNavigationBean)) {
 			result = contentBean;
 		} else {
-			HippoBean bean = getContentBeanViaParameters(request, (ContentBeanPathInfo) getParametersInfo(request));
+			HippoBean bean = getContentBeanViaParameters(request,
+					(ContentBeanPathInfo) getComponentParametersInfo(request));
 			if (!(bean instanceof HippoFacetNavigationBean)) {
 				result = bean;
 			}
@@ -102,7 +103,7 @@ public class FacetSupport extends BaseTdcComponent {
 
 	protected Map<String, String> getLabels(HstRequest request) {
 		Map<String, String> labels = new HashMap<String, String>();
-		Object parametersInfo = getParametersInfo(request);
+		Object parametersInfo = getComponentParametersInfo(request);
 		if (parametersInfo instanceof FacetedNavigationInfo) {
 			FacetedNavigationInfo parameters = (FacetedNavigationInfo) parametersInfo;
 			String labelPaths = parameters.getLabelPaths();

@@ -34,7 +34,7 @@ public class SimpleNavigation extends BaseHstComponent {
 
 	@Override
 	public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-		String menuName = this.<SimpleNavigationInfo> getParametersInfo(request).getMenuName();
+		String menuName = this.<SimpleNavigationInfo> getComponentParametersInfo(request).getMenuName();
 		HstSiteMenu menu = request.getRequestContext().getHstSiteMenus().getSiteMenu(menuName);
 		request.setAttribute(Constants.Attributes.MENU, menu);
 	}

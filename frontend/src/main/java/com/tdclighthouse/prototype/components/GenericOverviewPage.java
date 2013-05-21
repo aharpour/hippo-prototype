@@ -46,12 +46,12 @@ public class GenericOverviewPage extends BaseTdcComponent {
 		try {
 			setDocumentToRequest(request);
 
-			GenericOverviewPageInfo parametersInfo = getParametersInfo(request);
+			GenericOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
 			HstQuery query = getQuery(request);
 			HstQueryResult queryResult = query.execute();
 			PaginatorWidget paginator = setPaginator(request, getPageSize(request), queryResult.getTotalSize());
 			List<HippoBean> items = getItems(queryResult);
-			
+
 			request.setAttribute(Constants.Attributes.ITEMS, items);
 			if (parametersInfo.getShowPaginator()) {
 				request.setAttribute(Constants.Attributes.PAGINATOR, paginator);
@@ -78,7 +78,7 @@ public class GenericOverviewPage extends BaseTdcComponent {
 	}
 
 	protected HstQuery getQuery(HstRequest request) throws QueryException {
-		GenericOverviewPageInfo parametersInfo = getParametersInfo(request);
+		GenericOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
 		HippoBean scope = getQueryScope(request, parametersInfo);
 		HstQuery query = getQueryManager(request).createQuery(scope, parametersInfo.getShowTypes());
 
@@ -105,7 +105,7 @@ public class GenericOverviewPage extends BaseTdcComponent {
 		query.setLimit(pageSize);
 		query.setOffset((pageNumber - 1) * pageSize);
 	}
-	
+
 	protected HippoBean getQueryScope(HstRequest request, GenericOverviewPageInfo parametersInfo) {
 		HippoBean scope = getContentBean(request);
 		if (!(scope instanceof HippoFolderBean)) {

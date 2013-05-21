@@ -71,14 +71,15 @@ public class ValueListAjax extends BaseTdcComponent {
 	}
 
 	private void setCacheTime(HstRequest request, HstResponse response) {
-		double cacheTime = this.<ValueListAjaxInfo> getParametersInfo(request).getCacheTime();
+		double cacheTime = this.<ValueListAjaxInfo> getComponentParametersInfo(request).getCacheTime();
 		response.addHeader(Constants.HttpHeader.AGE, "0");
 		response.addHeader(Constants.HttpHeader.CACHE_CONTROL,
 				Constants.HttpHeader.MAX_AGE + "=" + Math.round(cacheTime * 3600));
 	}
 
 	protected HippoBeanIterator getAllValueLists(HstRequest request) throws QueryException {
-		HippoBean scope = getContentBeanViaParameters(request, this.<ContentBeanPathInfo> getParametersInfo(request));
+		HippoBean scope = getContentBeanViaParameters(request,
+				this.<ContentBeanPathInfo> getComponentParametersInfo(request));
 		@SuppressWarnings("unchecked")
 		HstQuery query = getQueryManager(request).createQuery(scope, ValueListBean.class);
 		return query.execute().getHippoBeans();
@@ -158,7 +159,7 @@ public class ValueListAjax extends BaseTdcComponent {
 		@SuppressWarnings("unchecked")
 		public BlackListChecker(HstRequest request) {
 			Set<String> set = new HashSet<String>();
-			BlacklistInfo parametersInfo = getParametersInfo(request);
+			BlacklistInfo parametersInfo = getComponentParametersInfo(request);
 			String blacklisted = parametersInfo.getBlacklisted();
 			String[] list = blacklisted.split("\\s*,\\s*");
 			for (String item : list) {

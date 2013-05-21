@@ -175,7 +175,7 @@ public class BaseTdcComponent extends BaseHstComponent {
 		if (StringUtils.isNotBlank(pageSzieString) && StringUtils.isNumeric(pageSzieString)) {
 			result = Integer.parseInt(pageSzieString);
 		} else {
-			Object parametersInfo = getParametersInfo(request);
+			Object parametersInfo = getComponentParametersInfo(request);
 			if (parametersInfo instanceof PaginatedInfo) {
 				result = ((PaginatedInfo) parametersInfo).getDefaultPageSzie();
 			}
@@ -210,7 +210,7 @@ public class BaseTdcComponent extends BaseHstComponent {
 		WebDocumentBean result = null;
 		HippoBean doc = getContentBean(request);
 		if (!(doc instanceof WebDocumentBean)) {
-			Object parameters = getParametersInfo(request);
+			Object parameters = getComponentParametersInfo(request);
 			if (parameters instanceof ContentBeanPathInfo) {
 				doc = getContentBeanViaParameters(request, (ContentBeanPathInfo) parameters);
 			}

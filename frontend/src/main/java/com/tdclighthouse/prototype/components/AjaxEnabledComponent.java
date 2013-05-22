@@ -51,6 +51,23 @@ public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
 
 	public abstract M getModel(HstRequest request, HstResponse response) throws HstComponentException;
 
+	@Override
+	public final void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+		request.setAttribute(Attributes.MODEL, getModel(request, response));
+	}
+
+	public Object getJsonAjaxModel(HstRequest request, HstResponse response) {
+		return getModel(request, response);
+	}
+
+	public Object getXmlAjaxModel(HstRequest request, HstResponse response) {
+		return getModel(request, response);
+	}
+
+	public Object getHtmlAjaxModel(HstRequest request, HstResponse response) {
+		return getModel(request, response);
+	}
+
 	/**
 	 * Override this method If you want to have different HTML template then default for you Ajax call.
 	 * 
@@ -60,11 +77,6 @@ public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
 	 */
 	protected String getAjaxTemplate(HstRequest request, HstResponse response) {
 		return null;
-	}
-
-	@Override
-	public final void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-		request.setAttribute(Attributes.MODEL, getModel(request, response));
 	}
 
 	@Override
@@ -79,7 +91,6 @@ public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
 					log.error("JSON is not support since a jsonSerializer has not been provied.");
 					returnHtmlResponse(request, response);
 				}
-
 			} else if (MimeType.APPLICATION_XML.equals(bestMatch) || MimeType.TEXT_XML.equals(bestMatch)) {
 				if (xmlSerializer != null) {
 					returnXmlResponse(request, response);
@@ -87,7 +98,6 @@ public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
 					log.error("XML is not support since a xmlSerializer has not been provied.");
 					returnHtmlResponse(request, response);
 				}
-
 			} else {
 				returnHtmlResponse(request, response);
 			}
@@ -98,7 +108,7 @@ public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
 	}
 
 	private final void returnHtmlResponse(HstRequest request, HstResponse response) throws Exception {
-		doBeforeRender(request, response);
+		request.setAttribute(Attributes.MODEL, getHtmlAjaxModel(request, response));
 		String ajaxTemplate = getAjaxTemplate(request, response);
 		if (ajaxTemplate != null) {
 			response.setServeResourcePath(ajaxTemplate);
@@ -106,7 +116,7 @@ public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
 	}
 
 	private void returnXmlResponse(HstRequest request, HstResponse response) throws Exception {
-		M model = getModel(request, response);
+		Object model = getXmlAjaxModel(request, response);
 		response.setServeResourcePath(BLANK_TEMPLATE);
 		response.setContentType(MimeType.APPLICATION_XML);
 		response.setCharacterEncoding(getCharacterEndcoding());
@@ -114,7 +124,7 @@ public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
 	}
 
 	private void returnJsonResponse(HstRequest request, HstResponse response) throws Exception {
-		M model = getModel(request, response);
+		Object model = getJsonAjaxModel(request, response);
 		jsonSerializer.serialize(model, response.getOutputStream());
 		response.setServeResourcePath(BLANK_TEMPLATE);
 		response.setContentType(MimeType.APPLICATION_JSON);

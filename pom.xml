@@ -132,6 +132,14 @@
 				<version>${jackson.version}</version>
 			</dependency>
 			<!-- /Jackson dependency -->
+			
+			<!-- Xstream dependency -->
+			<dependency>
+				<groupId>com.thoughtworks.xstream</groupId>
+				<artifactId>xstream</artifactId>
+				<version>1.4.4</version>
+			</dependency>
+		<!-- /Xstream dependency -->
 
 			<dependency>
 				<groupId>javax.jdo</groupId>
@@ -267,9 +275,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>javaee</groupId>
+				<groupId>javax</groupId>
 				<artifactId>javaee-api</artifactId>
-				<version>5</version>
+				<version>7.0</version>
 				<scope>provided</scope>
 			</dependency>
 

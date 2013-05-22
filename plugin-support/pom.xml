@@ -38,7 +38,7 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>javaee</groupId>
+			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 		</dependency>
 

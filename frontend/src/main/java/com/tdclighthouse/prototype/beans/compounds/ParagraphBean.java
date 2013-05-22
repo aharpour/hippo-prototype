@@ -16,22 +16,22 @@
 package com.tdclighthouse.prototype.beans.compounds;
 
 import org.hippoecm.hst.content.beans.Node;
-import org.hippoecm.hst.content.beans.standard.HippoDocument;
 import org.hippoecm.hst.content.beans.standard.HippoHtml;
+
+import com.tdclighthouse.prototype.beans.TdcDocument;
 
 /**
  * @author Ebrahim Aharpour
  *
  */
 @Node(jcrType = ParagraphBean.JCR_TYPE)
-public class ParagraphBean extends HippoDocument {
+public class ParagraphBean extends TdcDocument {
 
 	public static final String JCR_TYPE = "tdc:Paragraph";
 
 	private String title;
 	private HippoHtml content;
 	private ParagraphImageBean image;
-	
 
 	public String getTitle() {
 		if (this.title == null) {

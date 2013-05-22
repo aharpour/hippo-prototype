@@ -1,28 +1,66 @@
+/*
+ *  Copyright 2013 Smile B.V.
+ * 
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ * 
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package com.tdclighthouse.prototype.components;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.JAXB;
 
 import org.apache.commons.collections.ListUtils;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
+import org.hippoecm.hst.site.HstServices;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tdclighthouse.prototype.utils.Constants.Attributes;
+import com.tdclighthouse.prototype.utils.Constants.Encodings;
 import com.tdclighthouse.prototype.utils.Constants.MimeType;
+import com.tdclighthouse.prototype.utils.Constants.SpringComponents;
 import com.tdclighthouse.prototype.utils.MIMEParse;
+import com.tdclighthouse.prototype.utils.ObjectSerializer;
 
+/**
+ * @author Ebrahim Aharpour
+ *
+ */
 public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
 
 	public static final String BLANK_TEMPLATE = "prototype.blanktemplate";
 
+	private static Logger log = LoggerFactory.getLogger(AjaxEnabledComponent.class);
+
+	private final ObjectSerializer jsonSerializer = HstServices.getComponentManager().getComponent(
+			SpringComponents.JSON_SERIALIZER);
+
+	private final ObjectSerializer xmlSerializer = HstServices.getComponentManager().getComponent(
+			SpringComponents.XML_SERIALIZER);
+
 	public abstract M getModel(HstRequest request, HstResponse response) throws HstComponentException;
+
+	/**
+	 * Override this method If you want to have different HTML template then default for you Ajax call.
+	 * 
+	 * @param request HstRequest.
+	 * @param response HstResponse;
+	 * @return a String containing a template name or null if you want to use the template configured via HST configuration.
+	 */
+	protected String getAjaxTemplate(HstRequest request, HstResponse response) {
+		return null;
+	}
 
 	@Override
 	public final void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
@@ -35,42 +73,56 @@ public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
 			String acceptHeader = request.getHeader("Accept");
 			String bestMatch = MIMEParse.bestMatch(ECPECTED_MIME_TYPES, acceptHeader);
 			if (MimeType.APPLICATION_JSON.equals(bestMatch) || MimeType.TEXT_JAVASCRIPT.equals(bestMatch)) {
-				returnJsonResponse(request, response);
+				if (jsonSerializer != null) {
+					returnJsonResponse(request, response);
+				} else {
+					log.error("JSON is not support since a jsonSerializer has not been provied.");
+					returnHtmlResponse(request, response);
+				}
+
 			} else if (MimeType.APPLICATION_XML.equals(bestMatch) || MimeType.TEXT_XML.equals(bestMatch)) {
-				returnXmlResponse(request, response);
+				if (xmlSerializer != null) {
+					returnXmlResponse(request, response);
+				} else {
+					log.error("XML is not support since a xmlSerializer has not been provied.");
+					returnHtmlResponse(request, response);
+				}
+
 			} else {
-				doBeforeRender(request, response);
+				returnHtmlResponse(request, response);
 			}
-		} catch (JsonGenerationException e) {
-			throw new HstComponentException(e.getLocalizedMessage(), e);
-		} catch (JsonMappingException e) {
-			throw new HstComponentException(e.getLocalizedMessage(), e);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new HstComponentException(e.getLocalizedMessage(), e);
 		}
 
 	}
 
-	private void returnXmlResponse(HstRequest request, HstResponse response) throws IOException {
+	private final void returnHtmlResponse(HstRequest request, HstResponse response) throws Exception {
+		doBeforeRender(request, response);
+		String ajaxTemplate = getAjaxTemplate(request, response);
+		if (ajaxTemplate != null) {
+			response.setServeResourcePath(ajaxTemplate);
+		}
+	}
+
+	private void returnXmlResponse(HstRequest request, HstResponse response) throws Exception {
 		M model = getModel(request, response);
 		response.setServeResourcePath(BLANK_TEMPLATE);
 		response.setContentType(MimeType.APPLICATION_XML);
 		response.setCharacterEncoding(getCharacterEndcoding());
-		JAXB.marshal(model, response.getOutputStream());
+		xmlSerializer.serialize(model, response.getOutputStream());
 	}
 
-	private void returnJsonResponse(HstRequest request, HstResponse response) throws IOException,
-			JsonGenerationException, JsonMappingException {
+	private void returnJsonResponse(HstRequest request, HstResponse response) throws Exception {
 		M model = getModel(request, response);
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.writeValue(response.getOutputStream(), model);
+		jsonSerializer.serialize(model, response.getOutputStream());
 		response.setServeResourcePath(BLANK_TEMPLATE);
 		response.setContentType(MimeType.APPLICATION_JSON);
 		response.setCharacterEncoding(getCharacterEndcoding());
 	}
 
 	protected String getCharacterEndcoding() {
-		return "UTF-8";
+		return Encodings.UTF8;
 	}
 
 	@SuppressWarnings("unchecked")

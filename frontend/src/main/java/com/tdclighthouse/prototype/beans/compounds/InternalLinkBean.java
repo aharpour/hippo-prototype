@@ -19,12 +19,14 @@ import org.hippoecm.hst.content.beans.Node;
 import org.hippoecm.hst.content.beans.standard.HippoDocument;
 import org.hippoecm.hst.content.beans.standard.HippoMirror;
 
+import com.tdclighthouse.prototype.beans.TdcDocument;
+
 /**
  * @author Ebrahim Aharpour
  *
  */
 @Node(jcrType = InternalLinkBean.JCR_TYPE)
-public class InternalLinkBean extends HippoDocument {
+public class InternalLinkBean extends TdcDocument {
 
 	public static final String JCR_TYPE = "tdc:InternalLink";
 

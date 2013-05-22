@@ -16,14 +16,15 @@
 package com.tdclighthouse.prototype.beans.compounds;
 
 import org.hippoecm.hst.content.beans.Node;
-import org.hippoecm.hst.content.beans.standard.HippoDocument;
+
+import com.tdclighthouse.prototype.beans.TdcDocument;
 
 /**
  * @author Ebrahim Aharpour
  *
  */
 @Node(jcrType = ExternalLinkBean.JCR_TYPE)
-public class ExternalLinkBean extends HippoDocument {
+public class ExternalLinkBean extends TdcDocument {
 
 	public static final String JCR_TYPE = "tdc:ExternalLink";
 

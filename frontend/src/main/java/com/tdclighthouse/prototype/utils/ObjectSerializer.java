@@ -1,5 +1,5 @@
 /*
- *  Copyright 2012 Finalist B.V.
+ *  Copyright 2013 Smile B.V.
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -13,28 +13,16 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.tdclighthouse.prototype.beans.compounds;
+package com.tdclighthouse.prototype.utils;
 
-import java.util.List;
-
-import org.hippoecm.hst.content.beans.Node;
-
-import com.tdclighthouse.prototype.beans.TdcDocument;
+import java.io.OutputStream;
 
 /**
  * @author Ebrahim Aharpour
  *
  */
-@Node(jcrType = ValueListBean.JCR_NODE)
-public class ValueListBean extends TdcDocument {
+public interface ObjectSerializer {
 
-	public static final String JCR_NODE = "selection:valuelist";
-	private List<ListItemBean> listItem;
+	public void serialize(Object source, OutputStream outputStream) throws Exception;
 
-	public List<ListItemBean> getListItem() {
-		if (listItem == null) {
-			listItem = getChildBeansByName("selection:listitem");
-		}
-		return listItem;
-	}
 }

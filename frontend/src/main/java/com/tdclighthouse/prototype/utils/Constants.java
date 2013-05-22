@@ -112,4 +112,9 @@ public class Constants {
 		public static final String HTTPS = "https";
 	}
 
+	public static class SpringComponents {
+		public static final String JSON_SERIALIZER = "com.tdclighthouse.prototype.utils.JsonSerializer";
+		public static final String XML_SERIALIZER = "com.tdclighthouse.prototype.utils.XmlSerializer";
+	}
+
 }

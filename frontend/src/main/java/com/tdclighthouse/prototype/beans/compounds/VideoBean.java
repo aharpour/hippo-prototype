@@ -16,15 +16,16 @@
 package com.tdclighthouse.prototype.beans.compounds;
 
 import org.hippoecm.hst.content.beans.Node;
-import org.hippoecm.hst.content.beans.standard.HippoDocument;
 import org.hippoecm.hst.content.beans.standard.HippoHtml;
+
+import com.tdclighthouse.prototype.beans.TdcDocument;
 
 /**
  * @author Ebrahim Aharpour
  *
  */
 @Node(jcrType = VideoBean.JCR_TYPE)
-public class VideoBean extends HippoDocument {
+public class VideoBean extends TdcDocument {
 
 	public static final String JCR_TYPE = "tdc:Video";
 

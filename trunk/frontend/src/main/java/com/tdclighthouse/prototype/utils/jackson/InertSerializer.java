@@ -1,5 +1,5 @@
 /*
- *  Copyright 2012 Finalist B.V.
+ *  Copyright 2013 Smile B.V.
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -13,36 +13,29 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.tdclighthouse.prototype.beans.compounds;
+package com.tdclighthouse.prototype.utils.jackson;
 
-import org.hippoecm.hst.content.beans.Node;
+import java.io.IOException;
 
-import com.tdclighthouse.prototype.beans.TdcDocument;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 /**
  * @author Ebrahim Aharpour
  *
  */
-@Node(jcrType = QuotationBean.JCR_TYPE)
-public class QuotationBean extends TdcDocument {
+public class InertSerializer<T> extends StdSerializer<T> {
 
-	public static final String JCR_TYPE = "tdc:Quotation";
-
-	private String quote;
-	private String author;
-
-	public String getQuote() {
-		if (this.quote == null) {
-			this.quote = getProperty("tdc:quote");
-		}
-		return quote;
+	public InertSerializer(Class<T> clazz) {
+		super(clazz);
 	}
 
-	public String getAuthor() {
-		if (this.author == null) {
-			this.author = getProperty("tdc:author");
-		}
-		return author;
+	@Override
+	public void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
+			JsonGenerationException {
+		jgen.writeString("Blocked");
 	}
 
 }

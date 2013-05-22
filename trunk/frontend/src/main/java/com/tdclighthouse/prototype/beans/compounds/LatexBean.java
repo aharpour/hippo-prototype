@@ -20,14 +20,15 @@ import java.net.URLEncoder;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.hippoecm.hst.content.beans.Node;
-import org.hippoecm.hst.content.beans.standard.HippoDocument;
+
+import com.tdclighthouse.prototype.beans.TdcDocument;
 
 /**
  * @author Ebrahim Aharpour
  *
  */
 @Node(jcrType = LatexBean.JCR_TYPE)
-public class LatexBean extends HippoDocument {
+public class LatexBean extends TdcDocument {
 
 	public static final String JCR_TYPE = "tdc:Latex";
 

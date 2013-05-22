@@ -18,14 +18,15 @@ package com.tdclighthouse.prototype.beans.compounds;
 import java.util.List;
 
 import org.hippoecm.hst.content.beans.Node;
-import org.hippoecm.hst.content.beans.standard.HippoDocument;
+
+import com.tdclighthouse.prototype.beans.TdcDocument;
 
 /**
  * @author Ebrahim Aharpour
  *
  */
 @Node(jcrType = RelatedDocumentsBean.JCR_TYPE)
-public class RelatedDocumentsBean extends HippoDocument {
+public class RelatedDocumentsBean extends TdcDocument {
 
 	public static final String JCR_TYPE = "tdc:RelatedDocuments";
 

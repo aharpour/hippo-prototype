@@ -15,17 +15,21 @@
  */
 package com.tdclighthouse.prototype.beans.compounds;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 import org.hippoecm.hst.content.beans.Node;
-import org.hippoecm.hst.content.beans.standard.HippoDocument;
 import org.hippoecm.hst.content.beans.standard.HippoGalleryImageSetBean;
 import org.hippoecm.hst.content.beans.standard.HippoMirror;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tdclighthouse.prototype.beans.TdcDocument;
 
 /**
  * @author Ebrahim Aharpour
  *
  */
 @Node(jcrType = ImageBean.JCR_TYPE)
-public class ImageBean extends HippoDocument {
+public class ImageBean extends TdcDocument {
 
 	public static final String JCR_TYPE = "tdc:Image";
 
@@ -57,6 +61,8 @@ public class ImageBean extends HippoDocument {
 		return caption;
 	}
 
+	@JsonIgnore
+	@XmlTransient
 	public HippoMirror getLink() {
 		if (this.link == null) {
 			this.link = getBean("tdc:link");

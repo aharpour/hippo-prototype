@@ -19,12 +19,14 @@ import org.hippoecm.hst.content.beans.Node;
 import org.hippoecm.hst.content.beans.standard.HippoDocument;
 import org.hippoecm.hst.content.beans.standard.HippoMirror;
 
+import com.tdclighthouse.prototype.beans.TdcDocument;
+
 /**
  * @author Ebrahim Aharpour
  *
  */
 @Node(jcrType = RelatedDocumentItemBean.JCR_TYPE)
-public class RelatedDocumentItemBean extends HippoDocument {
+public class RelatedDocumentItemBean extends TdcDocument {
 
 	public static final String JCR_TYPE = "tdc:RelatedDocumentItem";
 
@@ -48,7 +50,7 @@ public class RelatedDocumentItemBean extends HippoDocument {
 	}
 
 	public HippoDocument getInternalLinkBean() {
-		if(this.internalLinkBean == null) {
+		if (this.internalLinkBean == null) {
 			this.internalLinkBean = getLinkedBean("tdc:internalLink", HippoDocument.class);
 		}
 		return internalLinkBean;

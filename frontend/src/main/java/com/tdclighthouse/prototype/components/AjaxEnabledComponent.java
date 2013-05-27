@@ -39,7 +39,7 @@ import com.tdclighthouse.prototype.utils.ObjectSerializer;
  */
 public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
 
-	public static final String BLANK_TEMPLATE = "prototype.blanktemplate";
+	public static final String BLANK_TEMPLATE = "";
 
 	private static Logger log = LoggerFactory.getLogger(AjaxEnabledComponent.class);
 
@@ -75,7 +75,7 @@ public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
 	 * @param response HstResponse;
 	 * @return a String containing a template name or null if you want to use the template configured via HST configuration.
 	 */
-	protected String getAjaxTemplate(HstRequest request, HstResponse response) {
+	public String getAjaxTemplate(HstRequest request, HstResponse response) {
 		return null;
 	}
 

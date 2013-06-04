@@ -15,10 +15,12 @@
  */
 package com.tdclighthouse.prototype.components;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.hippoecm.hst.content.beans.standard.HippoFacetChildNavigationBean;
 import org.hippoecm.hst.content.beans.standard.HippoFacetNavigationBean;
+import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.parameters.ParametersInfo;
@@ -33,22 +35,25 @@ import com.tdclighthouse.prototype.utils.Constants;
  *
  */
 @ParametersInfo(type = FacetedOverviewPageInfo.class)
-public class FacetNavigation extends FacetSupport {
+public class FacetNavigation extends FacetSupport<Map<String, Object>> {
 
 	public static final Logger log = LoggerFactory.getLogger(FacetNavigation.class);
 
 	@Override
-	public void doBeforeRender(HstRequest request, HstResponse response) {
+	public Map<String, Object> getModel(HstRequest request, HstResponse response) throws HstComponentException {
+		Map<String, Object> model = new HashMap<String, Object>();
 		HippoFacetNavigationBean facetedNavBean = getFacetNavigationBean(request);
 		if (facetedNavBean != null) {
 			facetedNavBean = applyQueryToFacetBean(request, facetedNavBean);
-			request.setAttribute(Constants.Attributes.FACETNAV, facetedNavBean);
+			model.put(Constants.Attributes.FACETNAV, facetedNavBean);
 			Map<String, String> labels = getLabels(request);
-			request.setAttribute(Constants.Attributes.LABELS, labels);
+			model.put(Constants.Attributes.LABELS, labels);
 
 			if (facetedNavBean instanceof HippoFacetChildNavigationBean) {
-				request.setAttribute(Constants.Attributes.CHILDNAV, "true");
+				model.put(Constants.Attributes.CHILDNAV, "true");
 			}
 		}
+		return model;
 	}
+	
 }

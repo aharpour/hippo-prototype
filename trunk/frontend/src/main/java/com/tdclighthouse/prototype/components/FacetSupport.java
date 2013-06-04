@@ -36,7 +36,7 @@ import com.tdclighthouse.prototype.utils.SearchQueryUtils;
  * @author Ebrahim Aharpour
  * 
  */
-public class FacetSupport extends BaseTdcComponent {
+public abstract class FacetSupport<M> extends AjaxEnabledComponent<M> {
 
 	protected HippoFacetNavigationBean getFacetNavigationBean(HstRequest request) {
 		HippoFacetNavigationBean result = null;

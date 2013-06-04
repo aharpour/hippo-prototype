@@ -77,7 +77,7 @@ public class FacetedOverview extends FacetSupport<Map<String, Object>> {
 		if (facetedNavBean != null) {
 			facetedNavBean = applyQueryToFacetBean(request, facetedNavBean);
 			HippoResultSetBean resultSet = facetedNavBean.getResultSet();
-			PaginatorWidget paginatorWidget = setPaginator(request, getPageSize(request), resultSet.getCount()
+			PaginatorWidget paginatorWidget = getPaginator(request, getPageSize(request), resultSet.getCount()
 					.intValue());
 			model.put(Constants.Attributes.FACET_BEAN, facetedNavBean);
 			model.put(Constants.Attributes.ITEMS, getItemsFromResultSet(resultSet, paginatorWidget));

@@ -225,9 +225,8 @@ public class BaseTdcComponent extends BaseHstComponent {
 
 	}
 
-	protected PaginatorWidget setPaginator(HstRequest request, int defaultPageSzie, int totalRows) {
+	protected PaginatorWidget getPaginator(HstRequest request, int defaultPageSzie, int totalRows) {
 		PaginatorWidget paginator = new PaginatorWidget(totalRows, getPageNumber(request), defaultPageSzie);
-		request.setAttribute(Constants.Attributes.PAGINATOR, paginator);
 		return paginator;
 	}
 

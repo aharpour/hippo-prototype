@@ -92,15 +92,18 @@
 			</releases>
 		</repository>
 		<repository>
-			<id>InternalSmileSnapshots</id>
-			<url>http://pic-java.smile.fr/nexus/content/repositories/InternalSmileSnapshots/</url>
+			<id>sf-hst-mixin-support</id>
+			<url>http://svn.code.sf.net/p/hstmixinsupport/code/maven2/</url>
+			<name>Source forge HST mixin support module</name>
 			<releases>
-				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
 			</releases>
 			<snapshots>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		
 	</repositories>
 
 	<dependencyManagement>
@@ -175,6 +178,12 @@
 				<groupId>com.tdclighthouse.hippo</groupId>
 				<artifactId>hippo-common-tools</artifactId>
 				<version>0.4.21</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>net.sourceforge.hstmixinsupport</groupId>
+				<artifactId>hst-mixin-support</artifactId>
+				<version>1.0-SNAPSHOT</version>
 			</dependency>
 			<!-- Apache libs -->
 			<dependency>

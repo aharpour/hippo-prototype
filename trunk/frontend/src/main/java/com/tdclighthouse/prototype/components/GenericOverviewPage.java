@@ -49,7 +49,7 @@ public class GenericOverviewPage extends BaseTdcComponent {
 			GenericOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
 			HstQuery query = getQuery(request);
 			HstQueryResult queryResult = query.execute();
-			PaginatorWidget paginator = setPaginator(request, getPageSize(request), queryResult.getTotalSize());
+			PaginatorWidget paginator = getPaginator(request, getPageSize(request), queryResult.getTotalSize());
 			List<HippoBean> items = getItems(queryResult);
 
 			request.setAttribute(Constants.Attributes.ITEMS, items);

@@ -72,6 +72,13 @@ public class TdcCompound extends HippoCompound {
 	@Override
 	@JsonIgnore
 	@XmlTransient
+	public <T extends HippoBean> HippoAvailableTranslationsBean<T> getAvailableTranslations() {
+		return super.getAvailableTranslations();
+	}
+
+	@Override
+	@JsonIgnore
+	@XmlTransient
 	public HippoBean getParentBean() {
 		return super.getParentBean();
 	}

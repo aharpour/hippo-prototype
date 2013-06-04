@@ -15,6 +15,9 @@
  */
 package com.tdclighthouse.prototype.components;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.content.beans.standard.HippoFacetNavigationBean;
@@ -35,44 +38,58 @@ import com.tdclighthouse.prototype.utils.PaginatorWidget;
  * 
  */
 @ParametersInfo(type = FacetedOverviewPageInfo.class)
-public class FacetedOverview extends FacetSupport {
+public class FacetedOverview extends FacetSupport<Map<String, Object>> {
 
 	public static final Logger log = LoggerFactory.getLogger(FacetedOverview.class);
 
 	@Override
-	public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-		setContentBean(request);
-		setItems(request);
-		setQueryIfExists(request);
+	public Map<String, Object> getModel(HstRequest request, HstResponse response) throws HstComponentException {
+		Map<String, Object> model = new HashMap<String, Object>();
+		setContentBean(request, model);
+		setItems(request, model);
+		setQueryIfExists(request, model);
+		return model;
 	}
 
-	protected void setContentBean(HstRequest request) {
+	@Override
+	public Object getJsonAjaxModel(HstRequest request, HstResponse response) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		setItems(request, map);
+		return map.get(Constants.Attributes.ITEMS);
+	}
+
+	@Override
+	public Object getXmlAjaxModel(HstRequest request, HstResponse response) {
+		return getJsonAjaxModel(request, response);
+	};
+
+	protected void setContentBean(HstRequest request, Map<String, Object> model) {
 		HippoBean contentBean = obtainContentBean(request);
 		if (contentBean != null) {
-			request.setAttribute(Constants.Attributes.DOCUMENT, contentBean);
+			model.put(Constants.Attributes.DOCUMENT, contentBean);
 		} else {
 			log.error("No content bean was found.");
 		}
 	}
 
-	protected void setItems(HstRequest request) {
+	protected void setItems(HstRequest request, Map<String, Object> model) {
 		HippoFacetNavigationBean facetedNavBean = getFacetNavigationBean(request);
 		if (facetedNavBean != null) {
 			facetedNavBean = applyQueryToFacetBean(request, facetedNavBean);
 			HippoResultSetBean resultSet = facetedNavBean.getResultSet();
 			PaginatorWidget paginatorWidget = setPaginator(request, getPageSize(request), resultSet.getCount()
 					.intValue());
-			request.setAttribute(Constants.Attributes.FACET_BEAN, facetedNavBean);
-			request.setAttribute(Constants.Attributes.ITEMS, getItemsFromResultSet(resultSet, paginatorWidget));
+			model.put(Constants.Attributes.FACET_BEAN, facetedNavBean);
+			model.put(Constants.Attributes.ITEMS, getItemsFromResultSet(resultSet, paginatorWidget));
 		} else {
 			throw new HstComponentException("content Bean is not of the type HippoFactNavigation");
 		}
 	}
 
-	protected void setQueryIfExists(HstRequest request) {
+	protected void setQueryIfExists(HstRequest request, Map<String, Object> model) {
 		String query = getPublicRequestParameter(request, Constants.Parameters.QUERY);
 		if (StringUtils.isNotBlank(query)) {
-			request.setAttribute(Constants.Attributes.QUERY, query);
+			model.put(Constants.Attributes.QUERY, query);
 		}
 	}
 

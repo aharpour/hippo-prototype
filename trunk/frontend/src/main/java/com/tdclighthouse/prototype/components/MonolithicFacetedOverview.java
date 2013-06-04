@@ -6,9 +6,12 @@ import org.hippoecm.hst.content.beans.standard.HippoFacetChildNavigationBean;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
+import org.hippoecm.hst.core.parameters.ParametersInfo;
 
+import com.tdclighthouse.prototype.componentsinfo.FacetedOverviewPageInfo;
 import com.tdclighthouse.prototype.utils.Constants;
 
+@ParametersInfo(type = FacetedOverviewPageInfo.class)
 public class MonolithicFacetedOverview extends FacetedOverview {
 
 	@Override

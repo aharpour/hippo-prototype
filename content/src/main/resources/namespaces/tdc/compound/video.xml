@@ -130,29 +130,6 @@
           <sv:value>hippostd:html</sv:value>
         </sv:property>
       </sv:node>
-      <sv:node sv:name="videoLink">
-        <sv:property sv:name="jcr:primaryType" sv:type="Name">
-          <sv:value>hipposysedit:field</sv:value>
-        </sv:property>
-        <sv:property sv:name="hipposysedit:mandatory" sv:type="Boolean">
-          <sv:value>false</sv:value>
-        </sv:property>
-        <sv:property sv:name="hipposysedit:multiple" sv:type="Boolean">
-          <sv:value>false</sv:value>
-        </sv:property>
-        <sv:property sv:name="hipposysedit:ordered" sv:type="Boolean">
-          <sv:value>false</sv:value>
-        </sv:property>
-        <sv:property sv:name="hipposysedit:path" sv:type="String">
-          <sv:value>tdc:videoLink</sv:value>
-        </sv:property>
-        <sv:property sv:name="hipposysedit:primary" sv:type="Boolean">
-          <sv:value>false</sv:value>
-        </sv:property>
-        <sv:property sv:name="hipposysedit:type" sv:type="String">
-          <sv:value>hippo:mirror</sv:value>
-        </sv:property>
-      </sv:node>
       <sv:node sv:name="flv">
         <sv:property sv:name="jcr:primaryType" sv:type="Name">
           <sv:value>hipposysedit:field</sv:value>
@@ -356,14 +333,6 @@
             <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
           </sv:property>
         </sv:node>
-      </sv:node>
-      <sv:node sv:name="tdc:videoLink">
-        <sv:property sv:name="jcr:primaryType" sv:type="Name">
-          <sv:value>hippo:mirror</sv:value>
-        </sv:property>
-        <sv:property sv:name="hippo:docbase" sv:type="String">
-          <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
-        </sv:property>
       </sv:node>
       <sv:node sv:name="tdc:srt">
         <sv:property sv:name="jcr:primaryType" sv:type="Name">
@@ -593,6 +562,9 @@
         </sv:property>
         <sv:property sv:name="engine" sv:type="String">
           <sv:value>${engine}</sv:value>
+        </sv:property>
+        <sv:property sv:name="field" sv:type="String">
+          <sv:value>caption</sv:value>
         </sv:property>
         <sv:property sv:name="translator.id" sv:type="String">
 			<sv:value>tdc.translator</sv:value>

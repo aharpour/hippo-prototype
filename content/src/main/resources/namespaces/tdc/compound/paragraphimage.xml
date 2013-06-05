@@ -35,6 +35,10 @@
       <sv:property sv:name="hipposysedit:node" sv:type="Boolean">
         <sv:value>true</sv:value>
       </sv:property>
+      <sv:property sv:multiple="true" sv:name="hipposysedit:supertype" sv:type="String">
+        <sv:value>hippo:compound</sv:value>
+        <sv:value>hippostd:relaxed</sv:value>
+      </sv:property>
       <sv:property sv:name="hipposysedit:uri" sv:type="String">
         <sv:value>http://tdclighthouse.com/tdc/nt/1.0</sv:value>
       </sv:property>
@@ -200,7 +204,7 @@
         <sv:value>wicket.id</sv:value>
       </sv:property>
       <sv:property sv:name="type" sv:type="String">
-        <sv:value>tdc:Image</sv:value>
+        <sv:value>tdc:ParagraphImage</sv:value>
       </sv:property>
       <sv:node sv:name="root">
         <sv:property sv:name="jcr:primaryType" sv:type="Name">
@@ -420,13 +424,13 @@
             <sv:value>frontend:pluginconfig</sv:value>
           </sv:property>
           <sv:property sv:name="sortBy" sv:type="String">
-            <sv:value/>
+            <sv:value>label</sv:value>
           </sv:property>
           <sv:property sv:name="sortComparator" sv:type="String">
-            <sv:value/>
+            <sv:value>org.onehippo.forge.selection.frontend.plugin.sorting.DefaultListItemComparator</sv:value>
           </sv:property>
           <sv:property sv:name="sortOrder" sv:type="String">
-            <sv:value/>
+            <sv:value>ascending</sv:value>
           </sv:property>
           <sv:property sv:name="source" sv:type="String">
             <sv:value>/content/documents/valuelist/tdc/en/horizontal-position/horizontal-position</sv:value>

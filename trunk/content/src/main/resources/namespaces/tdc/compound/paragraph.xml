@@ -36,6 +36,7 @@
       </sv:property>
       <sv:property sv:multiple="true" sv:name="hipposysedit:supertype" sv:type="String">
         <sv:value>hippo:compound</sv:value>
+        <sv:value>hippostd:relaxed</sv:value>
       </sv:property>
       <sv:property sv:name="hipposysedit:uri" sv:type="String">
         <sv:value>http://tdclighthouse.com/tdc/nt/1.0</sv:value>
@@ -258,35 +259,18 @@
         <sv:property sv:name="jcr:primaryType" sv:type="Name">
           <sv:value>tdc:ParagraphImage</sv:value>
         </sv:property>
+        <sv:property sv:name="tdc:title" sv:type="String">
+          <sv:value/>
+        </sv:property>
         <sv:property sv:name="tdc:alt" sv:type="String">
           <sv:value/>
         </sv:property>
         <sv:property sv:name="tdc:caption" sv:type="String">
           <sv:value/>
         </sv:property>
-        <sv:property sv:name="tdc:credit" sv:type="String">
-          <sv:value/>
-        </sv:property>
         <sv:property sv:name="tdc:horizontalPosition" sv:type="String">
           <sv:value/>
         </sv:property>
-        <sv:property sv:name="tdc:title" sv:type="String">
-          <sv:value/>
-        </sv:property>
-        <sv:property sv:name="tdc:verticalPosition" sv:type="String">
-          <sv:value/>
-        </sv:property>
-        <sv:node sv:name="tdc:link">
-          <sv:property sv:name="jcr:primaryType" sv:type="Name">
-            <sv:value>hippogallerypicker:imagelink</sv:value>
-          </sv:property>
-          <sv:property sv:name="hippo:docbase" sv:type="String">
-            <sv:value>cafebabe-cafe-babe-cafe-babecafebabe</sv:value>
-          </sv:property>
-          <sv:property sv:multiple="true" sv:name="hippo:facets" sv:type="String"/>
-          <sv:property sv:multiple="true" sv:name="hippo:modes" sv:type="String"/>
-          <sv:property sv:multiple="true" sv:name="hippo:values" sv:type="String"/>
-        </sv:node>
       </sv:node>
     </sv:node>
   </sv:node>

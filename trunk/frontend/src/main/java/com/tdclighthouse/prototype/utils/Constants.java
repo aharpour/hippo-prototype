@@ -93,6 +93,7 @@ public class Constants {
 		public static final String DOCUMENT_PICKER = "cms-pickers/documents";
 		public static final String FOLDER_PICKER = "cms-pickers/folders";
 		public static final String IMAGE_PICKER = "cms-pickers/images";
+		public static final String DOCUMENT_PICKER_ONLY = "cms-pickers/documents-only";
 	}
 
 	public static class NodeName {

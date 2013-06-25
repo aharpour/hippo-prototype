@@ -43,6 +43,7 @@ import com.tdclighthouse.prototype.beans.WebDocumentBean;
 import com.tdclighthouse.prototype.beans.compounds.ValueListBean;
 import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
 import com.tdclighthouse.prototype.componentsinfo.PaginatedInfo;
+import com.tdclighthouse.prototype.utils.ComponentUtils;
 import com.tdclighthouse.prototype.utils.Constants;
 import com.tdclighthouse.prototype.utils.PaginatorWidget;
 import com.tdclighthouse.prototype.utils.TdcUtils;
@@ -277,4 +278,28 @@ public class BaseTdcComponent extends BaseHstComponent {
 			}
 		}
 	}
+	
+	/**
+	 * This method fetched value of component specific parameter 
+	 * 
+	 * @param name simple name of parameter without suffix
+	 * @param request HstRequest
+	 * @return return the value of the corresponding public parameter
+	 */
+	protected String getComponentSpecificParameter(HstRequest request, String name) {
+		return getPublicRequestParameter(request, ComponentUtils.getComponentSpecificParameterName(request, name));
+	}
+
+	/**
+	 * This method fetched value of component specific parameter 
+	 * 
+	 * @param name simple name of parameter without suffix
+	 * @param request HstRequest
+	 * @return return the value of the corresponding public parameter
+	 */
+	protected String[] getComponentSpecificParameters(HstRequest request, String name) {
+		return getPublicRequestParameters(request, ComponentUtils.getComponentSpecificParameterName(request, name));
+		
+	}
+		
 }

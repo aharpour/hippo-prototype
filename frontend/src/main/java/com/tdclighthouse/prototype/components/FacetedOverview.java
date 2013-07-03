@@ -81,6 +81,10 @@ public class FacetedOverview extends FacetSupport<Map<String, Object>> {
 					.intValue());
 			model.put(Constants.Attributes.FACET_BEAN, facetedNavBean);
 			model.put(Constants.Attributes.ITEMS, getItemsFromResultSet(resultSet, paginatorWidget));
+			FacetedOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
+			if (parametersInfo.getShowPaginator()) {
+				request.setAttribute(Constants.Attributes.PAGINATOR, paginatorWidget);
+			}
 		} else {
 			throw new HstComponentException("content Bean is not of the type HippoFactNavigation");
 		}

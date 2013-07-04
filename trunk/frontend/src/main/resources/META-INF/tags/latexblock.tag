@@ -7,8 +7,7 @@
 <%@ taglib prefix="tdc" uri="http://www.tdclighthouse.com/hippo/prototype" %>
 <%@ attribute name="content" rtexprvalue="true" required="true" type="com.tdclighthouse.prototype.beans.compounds.LatexBean" %>
 <c:if test="${not empty content.latex }" >
-  <hst:link path="/latex" var="contextPath"/>
-  <img src="${contextPath}/?latex=${content.encodeLatex}" alt="${content.latex}" title="${content.latex}"/>
+  <img src="${pageContext.request.contextPath}/latex/?latex=${content.encodeLatex}" alt="${content.latex}" title="${content.latex}"/>
   <c:if test="${not empty content.caption }">
     <p class="note"><c:out value="${content.caption }" escapeXml="true" /></p>
   </c:if>

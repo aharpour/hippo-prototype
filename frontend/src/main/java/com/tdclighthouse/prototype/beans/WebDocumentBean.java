@@ -34,6 +34,7 @@ public class WebDocumentBean extends BaseDocumentBean {
 	private String author;
 	private Boolean hideFromSitemap;
 	private GregorianCalendar releaseDate;
+	private Boolean hideFromSearch;
 
 	public String getBrowserTitle() {
 		if (this.browserTitle == null) {
@@ -75,6 +76,13 @@ public class WebDocumentBean extends BaseDocumentBean {
 			this.releaseDate = getProperty("tdc:releaseDate");
 		}
 		return releaseDate;
+	}
+	
+	public Boolean getHideFromSearch() {
+		if (this.hideFromSearch == null) {
+			this.hideFromSearch = getProperty("tdc:hideFromSearch");
+		}
+		return hideFromSearch;
 	}
 
 }

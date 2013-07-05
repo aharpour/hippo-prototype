@@ -6,6 +6,8 @@
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
+	<import resource="classpath:/net/sourceforge/hstmixinsupport/configuration/mixin-support-context.xml"/>
+	
 	<bean id="com.tdclighthouse.prototype.utils.JsonSerializer" class="com.tdclighthouse.prototype.utils.JacksonSerializer" init-method="initialize">
 		<property name="objectMapper">
 			<bean class="com.fasterxml.jackson.databind.ObjectMapper" />

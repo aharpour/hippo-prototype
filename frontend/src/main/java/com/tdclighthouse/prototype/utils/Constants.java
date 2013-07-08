@@ -35,6 +35,8 @@ public class Constants {
 		public static final String JSON = "json";
 		public static final String ERROR_MESSAGE = "errorMessage";
 		public static final String WARN_MESSAGE = "warningMessage";
+		public static final String WEBMASTER_ERROR_MESSAGE = "webmasterErrorMessage";
+		public static final String WEBMASTER_WARN_MESSAGE = "webmasterWarningMessage";
 		public static final String MENU = "menu";
 	}
 

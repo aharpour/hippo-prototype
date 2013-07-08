@@ -22,6 +22,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.jcr.RepositoryException;
+
+import net.sourceforge.hstmixinsupport.DynamicProxyFactory;
+
 import org.apache.commons.lang3.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.component.support.bean.BaseHstComponent;
@@ -37,6 +41,7 @@ import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.linking.HstLink;
 import org.hippoecm.hst.core.request.HstRequestContext;
+import org.hippoecm.hst.site.HstServices;
 import org.hippoecm.hst.util.PathUtils;
 
 import com.tdclighthouse.prototype.beans.WebDocumentBean;
@@ -53,6 +58,9 @@ import com.tdclighthouse.prototype.utils.TdcUtils;
  * 
  */
 public class BaseTdcComponent extends BaseHstComponent {
+	
+	private final DynamicProxyFactory dynamicProxyFactory = HstServices
+			.getComponentManager().getComponent(DynamicProxyFactory.class);
 
 	@SuppressWarnings("unchecked")
 	public <T extends HippoBean> T getBean(String relativePath, HstRequest request) {
@@ -60,6 +68,10 @@ public class BaseTdcComponent extends BaseHstComponent {
 		String path = PathUtils.normalizePath(relativePath);
 		result = (T) getSiteContentBaseBean(request).getBean(path);
 		return result;
+	}
+	
+	public HippoBean getMixinProxy(HippoBean bean) throws RepositoryException {
+		return dynamicProxyFactory.getProxy(bean);
 	}
 
 	@Override

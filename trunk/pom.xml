@@ -58,6 +58,8 @@
 		<workflow.repository.version>2.22.06</workflow.repository.version>
 		<hippo.gallary.version>2.22.15</hippo.gallary.version>
 		<jackson.version>2.2.1</jackson.version>
+		<selection.plugin.version>2.06.02</selection.plugin.version>
+		<hippo.hst.version>2.26.03</hippo.hst.version>
 	</properties>
 
 	<repositories>
@@ -159,13 +161,13 @@
 			<dependency>
 				<groupId>org.onehippo.forge.selectionplugins</groupId>
 				<artifactId>selectionplugins-addon-repository</artifactId>
-				<version>2.06.02</version>
+				<version>${selection.plugin.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.onehippo.forge.selectionplugins</groupId>
 				<artifactId>selectionplugins-addon-cms</artifactId>
-				<version>2.06.02</version>
+				<version>${selection.plugin.version}</version>
 			</dependency>
 
 			<dependency>
@@ -214,8 +216,14 @@
 			<dependency>
 				<groupId>org.onehippo.cms7.hst.dependencies</groupId>
 				<artifactId>hst-client-dependencies</artifactId>
-				<version>2.26.02</version>
+				<version>${hippo.hst.version}</version>
 				<type>pom</type>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.onehippo.cms7.hst</groupId>
+				<artifactId>hst-api</artifactId>
+				<version>${hippo.hst.version}</version>
 			</dependency>
 
 			<dependency>

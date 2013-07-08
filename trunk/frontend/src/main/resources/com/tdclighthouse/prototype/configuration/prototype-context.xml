@@ -56,4 +56,22 @@
 			</map>
 		</property>
 	</bean>
+	
+	<!-- <bean name="daemonThreadFactory" class="com.tdclighthouse.prototype.utils.DaemonThreadFactory">
+		<constructor-arg value=""/>
+	</bean>
+
+	<bean id="backgroundExecutor" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass">
+			<value>java.util.concurrent.Executors</value>
+		</property>
+		<property name="targetMethod">
+			<value>newSingleThreadExecutor</value>
+		</property>
+		<property name="arguments">
+			<list>
+				<ref bean="daemonThreadFactory"/>
+			</list>
+		</property>
+	</bean> -->
 </beans>

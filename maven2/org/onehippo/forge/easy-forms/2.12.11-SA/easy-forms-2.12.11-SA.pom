@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2012-2013 Hippo B.V. (http://www.onehippo.com)
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.onehippo.cms7</groupId>
+    <artifactId>hippo-cms7-project</artifactId>
+    <version>19</version>
+  </parent>
+
+  <groupId>org.onehippo.forge</groupId>
+  <artifactId>easy-forms</artifactId>
+  <packaging>pom</packaging>
+  <version>2.12.11-SA</version>
+  <name>Hippo Forge Easy Forms Addon</name>
+  <description>Hippo Forge Easy Forms Addon</description>
+  <url>http://easy-forms.forge.onehippo.org/</url>
+
+  <inceptionYear>2009</inceptionYear>
+
+  <properties>
+    <!-- use root project name for all project modules NOTICE files, should be the same as in the root NOTICE file -->
+    <notice.project.name>Hippo Forge Easy Forms Addon</notice.project.name>
+
+    <!-- Hippo CMS -->
+    <hippo.repository.version>2.24.02</hippo.repository.version>
+    <hippo.cms.version>2.24.00</hippo.cms.version>
+    <hippo.hst.version>2.26.00</hippo.hst.version>
+
+    <!-- third party -->
+    <lib.wicket.version>1.4.19-h1</lib.wicket.version>
+    <jstl.version>1.1.2</jstl.version>
+    <taglibs.version>1.1.2</taglibs.version>
+    <jta.version>1.1</jta.version>
+    <spring.version>3.0.5.RELEASE</spring.version>
+    <xalan.version>2.4.1</xalan.version>
+    <xerces.version>2.4.0</xerces.version>
+    <xercesImpl.version>2.9.1</xercesImpl.version>
+    <commons-proxy.version>1.0</commons-proxy.version>
+    <commons-logging.version>1.1.1</commons-logging.version>
+    <commons-fileupload.version>1.2.2</commons-fileupload.version>
+    <guava.version>12.0.1</guava.version>
+    <spring.js.version>2.0.5.RELEASE</spring.js.version>
+    <spring-support.version>2.0.8</spring-support.version>
+    <velocity.version>1.6.4</velocity.version>
+    <freemarker.version>2.3.16</freemarker.version>
+    <pdfbox.version>1.7.1</pdfbox.version>
+    <jsoup.version>1.7.1</jsoup.version>
+
+
+    <!-- dev related -->
+    <testng.version>5.7</testng.version>
+    <mockito.version>1.7</mockito.version>
+    <sonar.l10n.locales>nl,fr,it,de</sonar.l10n.locales>
+    <junit.version>4.8.2</junit.version>
+    <wagon.ftp.version>1.0-alpha-6</wagon.ftp.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+        <type>jar</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <repositories>
+    <repository>
+      <id>hippo-maven2</id>
+      <name>Hippo maven 2 repository.</name>
+      <url>http://maven.onehippo.com/maven2/</url>
+      <snapshots />
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <layout>default</layout>
+    </repository>
+  </repositories>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>org.jvnet.wagon-svn</groupId>
+        <artifactId>wagon-svn</artifactId>
+        <version>1.9</version>
+      </extension>
+    </extensions>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>pedantic</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.rat</groupId>
+            <artifactId>apache-rat-plugin</artifactId>
+            <inherited>false</inherited>
+            <configuration>
+              <excludes combine.children="append">
+                <!-- repository content XML -->
+                <exclude>repository/src/main/resources/*.xml</exclude>
+                <!-- icons from http://famfamfam.com/lab/icons/silk/, see LICENSE file -->
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/properties/form.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/properties/properties.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/properties/panels/add.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/properties/panels/remove.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/form/remove.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/exporter/exporter-perspective-32.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/fileupload.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/simpletext.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/email.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/checkbox.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/date.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/textfield.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/dropdown.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/radio.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/picker.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/font.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/textarea.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/time.png</exclude>
+                <exclude>cms/src/main/java/org/onehippo/forge/easyforms/picker/radiobutton.png</exclude>
+              </excludes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <distributionManagement>
+    <repository>
+		<id>sf-hippo-prototype-repo</id>
+		<url>svn:https://svn.code.sf.net/p/hippoprototype/code/maven2/</url>
+	</repository>
+  </distributionManagement>
+
+  <scm>
+    <connection>scm:svn:https://aharpour.unfuddle.com/svn/aharpour_miscellaneous/easy-forms/tags/2.12.11-SA</connection>
+    <developerConnection>scm:svn:https://aharpour.unfuddle.com/svn/aharpour_miscellaneous/easy-forms/tags/2.12.11-SA</developerConnection>
+    <url>https://forge.onehippo.org/gf/project/easy-forms/tags/2.12.11-SA</url>
+  </scm>
+
+  <issueManagement>
+    <url>https://issues.onehippo.com/browse/HIPPLUG/component/10984</url>
+  </issueManagement>
+
+
+  <modules>
+    <module>cms</module>
+    <module>repository</module>
+    <module>hst</module>
+  </modules>
+
+</project>

@@ -31,6 +31,7 @@ public class VideoBean extends TdcDocument {
 
 	private String title;
 	private String alt;
+	private String caption;
 	private HippoHtml transcript;
 	private VideoImageBean image;
 	private VideoItemBean wmv;
@@ -52,6 +53,13 @@ public class VideoBean extends TdcDocument {
 			this.alt = getProperty("tdc:alt");
 		}
 		return alt;
+	}
+	
+	public String getCaption() {
+		if (this.caption == null) {
+			this.caption = getProperty("tdc:caption");
+		}
+		return caption;
 	}
 
 	public HippoHtml getTranscript() {

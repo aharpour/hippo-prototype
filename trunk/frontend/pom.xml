@@ -36,6 +36,13 @@
 	</developers>
 
 	<dependencies>
+	
+		<dependency>
+		    <groupId>com.tdclighthouse.hippo</groupId>
+   			<artifactId>hippo-prototype-shared</artifactId>
+    		<version>${project.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.scilab.forge</groupId>
 			<artifactId>jlatexmath</artifactId>

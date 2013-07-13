@@ -36,6 +36,13 @@
 	<url>http://maven.apache.org</url>
 
 	<dependencies>
+	
+			
+		<dependency>
+		    <groupId>com.tdclighthouse.hippo</groupId>
+   			<artifactId>hippo-prototype-shared</artifactId>
+    		<version>${project.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax</groupId>

@@ -118,6 +118,15 @@
 			</dependency>
 			<!-- /Latex dependency -->
 			
+			<!-- Hippo Maven Plugin dependency -->
+			<dependency>
+				<groupId>com.aharpour.ebrahim</groupId>
+				<artifactId>hippo-maven-plugin</artifactId>
+				<version>0.1.0-RC-4-SNAPSHOT</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- /Hippo Maven Plugin dependency -->
+			
 			<!-- Jackson dependency -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>

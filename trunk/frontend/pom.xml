@@ -48,6 +48,23 @@
 			<artifactId>jlatexmath</artifactId>
 		</dependency>
 		
+		<!-- Hippo Maven Plugin dependency -->
+		<dependency>
+			<groupId>com.aharpour.ebrahim</groupId>
+			<artifactId>hippo-maven-plugin</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.onehippo.cms7.hst</groupId>
+					<artifactId>hst-content-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.onehippo.cms7.hst</groupId>
+					<artifactId>hst-client</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- /Hippo Maven Plugin dependency -->
+		
 		<!-- Jackson dependencies -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -147,6 +164,7 @@
 				<filtering>false</filtering>
 				<includes>
 					<include>**/*.properties</include>
+					<include>**/*.ftl</include>
 				</includes>
 			</resource>
 			<resource>

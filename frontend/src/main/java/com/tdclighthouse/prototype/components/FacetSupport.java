@@ -15,9 +15,6 @@
  */
 package com.tdclighthouse.prototype.components;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.content.beans.query.HstQuery;
 import org.hippoecm.hst.content.beans.query.exceptions.QueryException;
@@ -28,7 +25,6 @@ import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.utils.BeanUtils;
 
 import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
-import com.tdclighthouse.prototype.componentsinfo.FacetedNavigationInfo;
 import com.tdclighthouse.prototype.utils.Constants;
 import com.tdclighthouse.prototype.utils.SearchQueryUtils;
 
@@ -101,19 +97,4 @@ public abstract class FacetSupport<M> extends AjaxEnabledComponent<M> {
 		return null;
 	}
 
-	protected Map<String, String> getLabels(HstRequest request) {
-		Map<String, String> labels = new HashMap<String, String>();
-		Object parametersInfo = getComponentParametersInfo(request);
-		if (parametersInfo instanceof FacetedNavigationInfo) {
-			FacetedNavigationInfo parameters = (FacetedNavigationInfo) parametersInfo;
-			String labelPaths = parameters.getLabelPaths();
-			if (StringUtils.isNotBlank(labelPaths)) {
-				String[] paths = labelPaths.split(",");
-				for (String path : paths) {
-					labels.putAll(getSelectionOptionsMap(request, path, request.getLocale().getLanguage()));
-				}
-			}
-		}
-		return labels;
-	}
 }

@@ -18,6 +18,7 @@ package com.tdclighthouse.prototype.components;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -47,6 +48,7 @@ import org.hippoecm.hst.util.PathUtils;
 import com.tdclighthouse.prototype.beans.WebDocumentBean;
 import com.tdclighthouse.prototype.beans.compounds.ValueListBean;
 import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
+import com.tdclighthouse.prototype.componentsinfo.LabelsInfo;
 import com.tdclighthouse.prototype.componentsinfo.PaginatedInfo;
 import com.tdclighthouse.prototype.utils.ComponentUtils;
 import com.tdclighthouse.prototype.utils.Constants;
@@ -94,6 +96,22 @@ public class BaseTdcComponent extends BaseHstComponent {
 			contextNamespaceReference = "";
 		}
 		return request.getParameterMap(contextNamespaceReference);
+	}
+	
+	protected Map<String, String> getLabels(HstRequest request) {
+		Map<String, String> labels = new HashMap<String, String>();
+		Object parametersInfo = getComponentParametersInfo(request);
+		if (parametersInfo instanceof LabelsInfo) {
+			LabelsInfo parameters = (LabelsInfo) parametersInfo;
+			String labelPaths = parameters.getLabelPaths();
+			if (StringUtils.isNotBlank(labelPaths)) {
+				String[] paths = labelPaths.split(",");
+				for (String path : paths) {
+					labels.putAll(getSelectionOptionsMap(request, path, request.getLocale().getLanguage()));
+				}
+			}
+		}
+		return labels;
 	}
 
 	protected String absolutToRelativePath(String absolutPath, HstRequest request) {

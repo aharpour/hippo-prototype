@@ -10,18 +10,26 @@
 <%@ attribute name="count" rtexprvalue="true" required="true" type="java.lang.Integer" %>
 <%@ attribute name="flexibleblockid" type="java.lang.String" rtexprvalue="true" required="false" %>
 
-<hst:link var="pathToPlayer" path="/themes/mediaplayer/flvplayer.swf"/>
-<c:if test="${not empty content.flv.binary.deref}">
-	<hst:link var="flvPath" hippobean="${content.flv.binary }" />
-</c:if>
+<hst:headContribution keyHint="generic.swfobject.js">
+	<script type="text/javascript" src="<hst:link path="/js/swfobject.js" />"></script>
+</hst:headContribution>
+
+<hst:link var="pathToPlayer" path="/swf/flvplayer.swf"/>
 <c:if test="${not empty content.threeGp.binary.deref}">
 	<hst:link var="threeGpPath" hippobean="${content.threeGp.binary }" />
+	<c:set var="videoPath" value="${threeGpPath}"/>
 </c:if>
 <c:if test="${not empty content.wmv.binary.deref}">
 	<hst:link var="wmvPath" hippobean="${content.wmv.binary }" />
+	<c:set var="videoPath" value="${wmvPath}"/>
+</c:if>
+<c:if test="${not empty content.flv.binary.deref}">
+	<hst:link var="flvPath" hippobean="${content.flv.binary }" />
+	<c:set var="videoPath" value="${flvPath}"/>
 </c:if>
 <c:if test="${not empty content.mp4.binary.deref}">
 	<hst:link var="mp4Path" hippobean="${content.mp4.binary }" />
+	<c:set var="videoPath" value="${mp4Path}"/>
 </c:if>
 <c:if test="${not empty content.srt.binary.deref}">
 	<hst:link var="srtPath" hippobean="${content.srt.binary }" />
@@ -38,17 +46,17 @@
 	</c:if>
 	<div class="mediaspace">
 		<div id='mediaspace-${flexibleblockid }${count }'>
-      <hst:html hippohtml="${content.transcript }" />
+      		<hst:html hippohtml="${content.transcript }" />
 		</div>
 	</div>
 	<script type='text/javascript'>
-		var s${flexibleblockid }${count } = new SWFObject("${pathToPlayer}","single","430","300","7");
+		var s${flexibleblockid }${count } = new SWFObject("${pathToPlayer}","single","584","300","7");
 		s${flexibleblockid }${count }.addParam("allowfullscreen","true");
-		s${flexibleblockid }${count }.addVariable("file","${flvPath }");
+		s${flexibleblockid }${count }.addVariable("file","${videoPath }");
 		<c:if test="${not empty imagePath}">
 			s${flexibleblockid }${count }.addVariable("image","${imagePath }");
 		</c:if>
-		s${flexibleblockid }${count }.addVariable("width","430");
+		s${flexibleblockid }${count }.addVariable("width","584");
 		s${flexibleblockid }${count }.addVariable("height","300");
 		<c:if test="${not empty audioPath }">
 			s${flexibleblockid }${count }.addVariable("audio","${audioPath }");
@@ -58,6 +66,9 @@
 		</c:if>
 		s${flexibleblockid }${count }.write("mediaspace-${flexibleblockid }${count }"); 
 	</script>
+	<div class="note">
+		<c:out value="${content.caption }" escapeXml="true" />
+	</div>
 	<c:if test="${not empty threeGpPath or not empty wmvPath or not empty mp4Path or not empty srtPath or not empty audioPath}">
 		<p><fmt:message key="media.alternative.text"/></p>
 		<ul class="link-list">

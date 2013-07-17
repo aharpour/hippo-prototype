@@ -10,7 +10,11 @@
 <%@ attribute name="count" rtexprvalue="true" required="true" type="java.lang.Integer" %>
 <%@ attribute name="flexibleblockid" type="java.lang.String" rtexprvalue="true" required="false" %>
 
-<hst:link var="pathToPlayer" path="/themes/mediaplayer/flvplayer.swf"/>
+<hst:headContribution keyHint="generic.swfobject.js">
+	<script type="text/javascript" src="<hst:link path="/js/swfobject.js" />"></script>
+</hst:headContribution>
+
+<hst:link var="pathToPlayer" path="/swf/flvplayer.swf"/>
 <hst:link var="pathToMp3" hippobean="${content.audio.binary.deref }" />
 
 <div class="audio block mediaspace">
@@ -22,10 +26,10 @@
 	</div>
 	
 	<script type='text/javascript'>
-		var s${flexibleblockid }${count } = new SWFObject("${pathToPlayer}","single","430","20","7");
+		var s${flexibleblockid }${count } = new SWFObject("${pathToPlayer}","single","584","20","7");
 		s${flexibleblockid }${count }.addParam("allowfullscreen","false");
 		s${flexibleblockid }${count }.addVariable("file","${pathToMp3 }");
-		s${flexibleblockid }${count }.addVariable("width","430");
+		s${flexibleblockid }${count }.addVariable("width","584");
 		s${flexibleblockid }${count }.addVariable("height","20");
 		s${flexibleblockid }${count }.write("mediaspace-${flexibleblockid }${count }"); 
 	</script>

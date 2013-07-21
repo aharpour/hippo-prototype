@@ -27,6 +27,8 @@ import org.slf4j.LoggerFactory;
 import com.tdclighthouse.prototype.componentsinfo.NavigationInfo;
 import com.tdclighthouse.prototype.provider.RepoBasedMenuProvider;
 import com.tdclighthouse.prototype.utils.Constants;
+import com.tdclighthouse.prototype.utils.TdcUtils;
+import com.tdclighthouse.prototype.utils.TdcUtils.Call;
 
 /**
  * @author Ebrahim Aharpour
@@ -40,16 +42,32 @@ public class Navigation extends WebDocumentDetail {
 	@Override
 	public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
 		super.doBeforeRender(request, response);
-		NavigationInfo parametersInfo = this.<NavigationInfo> getComponentParametersInfo(request);
-		String menuName = parametersInfo.getMenuName();
-		HstSiteMenu menu = request.getRequestContext().getHstSiteMenus().getSiteMenu(menuName);
-		if (menu != null) {
-			EditableMenu editableMenu = menu.getEditableMenu();
-			boolean showFacet = parametersInfo.isShowFacetedNavigation();
-			new RepoBasedMenuProvider(getSiteContentBaseBean(request), showFacet, request)
-					.addRepoBasedMenuItems(editableMenu);
-			request.setAttribute(Constants.Attributes.MENU, editableMenu);
-		}
+		final NavigationInfo parametersInfo = this.<NavigationInfo> getComponentParametersInfo(request);
+		EditableMenu editableMenu = TdcUtils.getCachedCall(new Call<EditableMenu>() {
+
+			@Override
+			public EditableMenu makeCall(HstRequest request) {
+				EditableMenu result = null;
+				String menuName = parametersInfo.getMenuName();
+				HstSiteMenu menu = request.getRequestContext().getHstSiteMenus().getSiteMenu(menuName);
+				if (menu != null) {
+					result = menu.getEditableMenu();
+					boolean showFacet = parametersInfo.isShowFacetedNavigation();
+					new RepoBasedMenuProvider(getSiteContentBaseBean(request), showFacet, request)
+							.addRepoBasedMenuItems(result);
+				}
+				return result;
+			}
+
+			@Override
+			public Class<EditableMenu> getType() {
+				return EditableMenu.class;
+			}
+
+		}, request, "test");
+
+		request.setAttribute(Constants.Attributes.MENU, editableMenu);
+
 	}
 
 }

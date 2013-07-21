@@ -15,13 +15,11 @@
  */
 package com.tdclighthouse.prototype.componentsinfo;
 
-import org.hippoecm.hst.core.parameters.Parameter;
 
 /**
  * @author Ebrahim Aharpour
  *
  */
-public interface FacetedNavigationInfo {
-	@Parameter(name = "labelPaths", description = "A comma separated list of paths to selection dropdowns", defaultValue = "")
-	public String getLabelPaths();
+public interface FacetedNavigationInfo extends LabelsInfo{
+	
 }

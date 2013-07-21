@@ -73,11 +73,37 @@ public class TdcUtils {
 		return dateToRFC1123(date);
 
 	}
-
-	public static void main(String[] args) {
-		System.out.println(getExpiresDate(2));
+	
+	@SuppressWarnings("unchecked")
+	public static <T> T getCachedCall(Call<T> call, HstRequest request, String attributeName) {
+		T result;
+		Class<T> type = call.getType();
+		HstRequestContext requestContext = request.getRequestContext();
+		if (type == null) {
+			throw new IllegalArgumentException("Call Type is required.");
+		}
+		if (StringUtils.isBlank(attributeName)) {
+			throw new IllegalArgumentException("attributeName is required.");
+			
+		}
+		Object attribute = requestContext.getAttribute(attributeName);
+		if (attribute != null && type.isAssignableFrom(attribute.getClass())) {
+			result = (T) attribute;
+		} else {
+			result = call.makeCall(request);
+			requestContext.setAttribute(attributeName, result);
+		}
+		
+		return result;
+	}
+	
+	public static interface Call<T> {
+		public T makeCall(HstRequest request); 
+		
+		public Class<T> getType();
 	}
 
+	
 	public static Map<String, String> valueListBeanToMap(ValueListBean valueList) {
 		List<ListItemBean> listItem = valueList.getListItem();
 		Map<String, String> result = new HashMap<String, String>(listItem.size());

@@ -37,7 +37,7 @@ import com.tdclighthouse.prototype.utils.TdcUtils.Call;
 @ParametersInfo(type = NavigationInfo.class)
 public class Navigation extends WebDocumentDetail {
 
-	private static final String EDITABLE_MENU = "editableMenu";
+	private static final String EDITABLE_MENU_ATTRIBUTE = "editableMenu";
 	protected static Logger log = LoggerFactory.getLogger(Navigation.class);
 
 	@Override
@@ -65,7 +65,7 @@ public class Navigation extends WebDocumentDetail {
 				return EditableMenu.class;
 			}
 
-		}, request, EDITABLE_MENU);
+		}, request, EDITABLE_MENU_ATTRIBUTE);
 
 		request.setAttribute(Constants.Attributes.MENU, editableMenu);
 

@@ -26,6 +26,7 @@ public class MenuitemTag extends TagSupport {
 	private String expandedClass;
 	private String unexpandedClass;
 	private String leafClass;
+	private HstRequestContext requestContext;
 
 	public MenuitemTag() {
 		init();
@@ -45,17 +46,21 @@ public class MenuitemTag extends TagSupport {
 		unexpandedClass = "unexpanded";
 		leafClass = "leaf";
 		recurseOnlyExpanded = false;
+		requestContext = null;
 	}
 
 	@Override
 	public int doEndTag() throws JspException {
-		JspWriter out = pageContext.getOut();
 		try {
+			JspWriter out = pageContext.getOut();
 			printItemsRecursively(siteMenuItem, out, depth);
+
+			return EVAL_PAGE;
 		} catch (IOException e) {
 			throw new JspException("IOException while trying to write script tag", e);
+		} finally {
+			init();
 		}
-		return EVAL_PAGE;
 	}
 
 	private void printItemsRecursively(EditableMenuItem item, JspWriter out, int recursionDepth) throws IOException {
@@ -85,18 +90,21 @@ public class MenuitemTag extends TagSupport {
 			out.print("class=\"" + cssClass + "\"");
 		}
 		out.print("><a href=\"");
-		out.print(getLink(item));
+		out.print(getLink(item, getRequestContext(), false));
 		out.print("\">");
 		out.print(StringEscapeUtils.escapeXml(item.getName()));
 		out.print("</a>");
 	}
 
 	private HstRequestContext getRequestContext() {
-		HttpServletRequest servletRequest = (HttpServletRequest) pageContext.getRequest();
-		return HstRequestUtils.getHstRequestContext(servletRequest);
+		if (requestContext == null) {
+			HttpServletRequest servletRequest = (HttpServletRequest) pageContext.getRequest();
+			requestContext = HstRequestUtils.getHstRequestContext(servletRequest);
+		}
+		return requestContext;
 	}
 
-	private String getLink(EditableMenuItem item) {
+	private String getLink(EditableMenuItem item, HstRequestContext requestContext, boolean fullyQualified) {
 		String result = "";
 		String externalLink = item.getExternalLink();
 		if (StringUtils.isNotBlank(externalLink)) {
@@ -104,7 +112,7 @@ public class MenuitemTag extends TagSupport {
 		} else {
 			HstLink hstLink = item.getHstLink();
 			if (hstLink != null) {
-				result = hstLink.toUrlForm(getRequestContext(), false);
+				result = hstLink.toUrlForm(requestContext, fullyQualified);
 			}
 
 		}

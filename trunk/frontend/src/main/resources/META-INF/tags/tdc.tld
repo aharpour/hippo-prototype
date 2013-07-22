@@ -36,9 +36,9 @@
     <name>imageblock</name>
     <path>/META-INF/tags/imageblock.tag</path>
   </tag-file>
-  
+
   <tag>
-    <description>Renders a Latex block as an image.</description>
+    <description>Renders a Latex bean as an image.</description>
     <name>latexblock</name>
     <tag-class>com.tdclighthouse.prototype.tag.LatexBlockTag</tag-class>
     <body-content>JSP</body-content>
@@ -63,10 +63,21 @@
     <name>verysimplepaginator</name>
     <path>/META-INF/tags/verysimplepaginator.tag</path>
   </tag-file>
-  <tag-file>
+
+  <tag>
+    <description>Renders a paragraph bean.</description>
     <name>paragraphblock</name>
-    <path>/META-INF/tags/paragraphblock.tag</path>
-  </tag-file>
+    <tag-class>com.tdclighthouse.prototype.tag.ParagraphBlockTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>Paragraph bean</description>
+      <name>content</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>com.tdclighthouse.prototype.beans.compounds.ParagraphBean</type>
+    </attribute>
+  </tag>
+
   <tag-file>
     <name>public-parameter</name>
     <path>/META-INF/tags/public-parameter.tag</path>

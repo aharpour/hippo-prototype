@@ -36,10 +36,21 @@
     <name>imageblock</name>
     <path>/META-INF/tags/imageblock.tag</path>
   </tag-file>
-  <tag-file>
+  
+  <tag>
+    <description>Renders a Latex block as an image.</description>
     <name>latexblock</name>
-    <path>/META-INF/tags/latexblock.tag</path>
-  </tag-file>
+    <tag-class>com.tdclighthouse.prototype.tag.LatexBlockTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>Latex bean</description>
+      <name>content</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>com.tdclighthouse.prototype.beans.compounds.LatexBean</type>
+    </attribute>
+  </tag>
+
   <tag-file>
     <name>paginator</name>
     <path>/META-INF/tags/paginator.tag</path>

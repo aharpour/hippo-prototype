@@ -32,11 +32,21 @@
     <name>html-chopper</name>
     <path>/META-INF/tags/html-chopper.tag</path>
   </tag-file>
-  <tag-file>
-    <name>imageblock</name>
-    <path>/META-INF/tags/imageblock.tag</path>
-  </tag-file>
 
+  <tag>
+    <description>Renders a image bean.</description>
+    <name>imageblock</name>
+    <tag-class>com.tdclighthouse.prototype.tag.ImageBlockTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>Image bean</description>
+      <name>content</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>com.tdclighthouse.prototype.beans.compounds.ImageBean</type>
+    </attribute>
+  </tag>
+  
   <tag>
     <description>Renders a Latex bean as an image.</description>
     <name>latexblock</name>

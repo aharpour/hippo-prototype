@@ -39,7 +39,6 @@ public class TagUtils {
 
 	}
 
-
 	private static void validateHippoHtml(HippoHtml hippoHtml, HstRequest hstRequest, HstResponse hstResponse)
 			throws JspException {
 		if (hstRequest == null || hstResponse == null) {

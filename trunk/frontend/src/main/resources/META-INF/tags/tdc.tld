@@ -283,5 +283,10 @@
     <function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
     <function-signature>java.lang.String getContextPath(org.hippoecm.hst.core.component.HstRequest)</function-signature>
   </function>
+  <function>
+    <name>issubclassofwebdocument</name>
+    <function-class>com.tdclighthouse.prototype.tag.Functions</function-class>
+    <function-signature>boolean isSubclassOfWebdocument(org.hippoecm.hst.content.beans.standard.HippoBean)</function-signature>
+  </function>
 
 </taglib>

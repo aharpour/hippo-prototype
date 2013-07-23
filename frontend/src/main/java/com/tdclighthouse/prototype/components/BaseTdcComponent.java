@@ -54,12 +54,15 @@ import com.tdclighthouse.prototype.utils.ComponentUtils;
 import com.tdclighthouse.prototype.utils.Constants;
 import com.tdclighthouse.prototype.utils.PaginatorWidget;
 import com.tdclighthouse.prototype.utils.TdcUtils;
+import com.tdclighthouse.prototype.utils.TdcUtils.Call;
 
 /**
  * @author Ebrahim Aharpour
  * 
  */
 public class BaseTdcComponent extends BaseHstComponent {
+	
+	private static final String CONTENT_BEAN = "contentBean"; //TODO
 	
 	private final DynamicProxyFactory dynamicProxyFactory = HstServices
 			.getComponentManager().getComponent(DynamicProxyFactory.class);
@@ -78,16 +81,50 @@ public class BaseTdcComponent extends BaseHstComponent {
 
 	@Override
 	public HippoBean getContentBean(HstRequest request) {
-		HippoBean contentBean = super.getContentBean(request);
-		processAnnotations(contentBean, request);
-		return contentBean;
+		return TdcUtils.getCachedCall(new Call<HippoBean>() {
+
+			@Override
+			public HippoBean makeCall(HstRequest request) {
+				HippoBean contentBean = getContentBeanOnModified(request);
+				processAnnotations(contentBean, request);
+				return contentBean;
+			}
+
+			@Override
+			public Class<HippoBean> getType() {
+				return HippoBean.class;
+			}
+		}, request, CONTENT_BEAN);
 	}
+	
+	
+	private HippoBean getContentBeanOnModified(HstRequest request) {
+		return super.getContentBean(request);
+	}
+	
 
 	@Override
-	public <T extends HippoBean> T getContentBean(HstRequest request, Class<T> beanMappingClass) {
-		T contentBean = super.getContentBean(request, beanMappingClass);
-		processAnnotations(contentBean, request);
-		return contentBean;
+	public <T extends HippoBean> T getContentBean(final HstRequest request, final Class<T> beanMappingClass) {
+		
+		return TdcUtils.getCachedCall(new Call<T>() {
+
+			@Override
+			public T makeCall(HstRequest request) {
+				T contentBean = getContentBeanOnModified(request, beanMappingClass);
+				processAnnotations(contentBean, request);
+				return contentBean;
+			}
+
+			@Override
+			public Class<T> getType() {
+				return beanMappingClass;
+			}
+			
+		}, request, CONTENT_BEAN);
+	}
+	
+	private <T extends HippoBean> T getContentBeanOnModified(HstRequest request, Class<T> beanMappingClass) {
+		return super.getContentBean(request, beanMappingClass);
 	}
 
 	public Map<String, String[]> getPublicRequestParameterMap(HstRequest request) {

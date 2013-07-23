@@ -1,27 +1,20 @@
 package com.tdclighthouse.prototype.tag;
 
 import static com.tdclighthouse.prototype.tag.TagUtils.getLink;
-import static com.tdclighthouse.prototype.tag.TagUtils.printXmlEscaped;
 import static com.tdclighthouse.prototype.tag.TagUtils.renderHippoHtml;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
-import org.hippoecm.hst.core.component.HstRequest;
-import org.hippoecm.hst.core.component.HstResponse;
-import org.hippoecm.hst.util.HstRequestUtils;
 
 import com.tdclighthouse.prototype.beans.TdcImageSetBean;
 import com.tdclighthouse.prototype.beans.compounds.ParagraphBean;
 
-public class ParagraphBlockTag extends TagSupport {
+public class ParagraphBlockTag extends PrototypeTagSupport {
 
 	private static final String LEFT = "left";
 	private static final String RIGHT = "right";
@@ -29,16 +22,9 @@ public class ParagraphBlockTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
 
 	private ParagraphBean content;
-	private HstRequest hstRequest;
-	private HstResponse hstResponse;
 
 	public void setContent(ParagraphBean content) {
 		this.content = content;
-	}
-
-	private void cleanUp() {
-		hstRequest = null;
-		hstResponse = null;
 	}
 
 	@Override
@@ -59,13 +45,13 @@ public class ParagraphBlockTag extends TagSupport {
 				out.print("<img src=\"");
 				out.print(getLink(imageBean, getHstRequest().getRequestContext(), false));
 				out.print("\" alt=\"");
-				printXmlEscaped(out, content.getImage().getAlt());
+				out.print(escapeXml(content.getImage().getAlt()));
 				out.print("\" title=\"");
-				printXmlEscaped(out, content.getImage().getAlt());
+				out.print(escapeXml(content.getImage().getTitle()));
 				out.println("\" />");
 				if (StringUtils.isNotBlank(content.getImage().getCaption())) {
 					out.print("<span>");
-					printXmlEscaped(out, content.getImage().getCaption());
+					out.print(escapeXml(content.getImage().getCaption()));
 					out.println("</span>");
 				}
 				out.println("</p>");
@@ -79,7 +65,7 @@ public class ParagraphBlockTag extends TagSupport {
 		} catch (IOException e) {
 			throw new JspException(e.getMessage(), e);
 		} finally {
-			cleanUp();
+			reset();
 		}
 
 	}
@@ -95,7 +81,7 @@ public class ParagraphBlockTag extends TagSupport {
 	private void printTitle(JspWriter out) throws IOException {
 		if (StringUtils.isNotBlank(content.getTitle())) {
 			out.print("<h3>");
-			printXmlEscaped(out, content.getTitle());
+			out.print(escapeXml(content.getTitle()));
 			out.print("</h3>");
 		}
 	}
@@ -106,26 +92,8 @@ public class ParagraphBlockTag extends TagSupport {
 		}
 	}
 
-	private HstRequest getHstRequest() {
-		if (hstRequest == null) {
-			HttpServletRequest servletRequest = (HttpServletRequest) pageContext.getRequest();
-			hstRequest = HstRequestUtils.getHstRequest(servletRequest);
-		}
-		return hstRequest;
-	}
 
-	private HstResponse getHstResponse() {
-		if (hstResponse == null) {
-			HttpServletResponse servletResponse = (HttpServletResponse) pageContext.getResponse();
-			hstResponse = HstRequestUtils.getHstResponse(getHstRequest(), servletResponse);
-		}
-		return hstResponse;
-	}
 
-	@Override
-	public void release() {
-		super.release();
-		cleanUp();
-	}
+
 
 }

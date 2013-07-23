@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.content.beans.standard.HippoHtml;
 import org.hippoecm.hst.content.rewriter.impl.SimpleContentRewriter;
@@ -40,9 +39,6 @@ public class TagUtils {
 
 	}
 
-	public static void printXmlEscaped(JspWriter out, String value) throws IOException {
-		out.print(StringEscapeUtils.escapeXml(value));
-	}
 
 	private static void validateHippoHtml(HippoHtml hippoHtml, HstRequest hstRequest, HstResponse hstResponse)
 			throws JspException {

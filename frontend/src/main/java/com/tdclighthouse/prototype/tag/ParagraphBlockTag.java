@@ -43,7 +43,7 @@ public class ParagraphBlockTag extends PrototypeTagSupport {
 
 	}
 
-	private static void renderParagraph(ParagraphBean content, JspWriter out, HstRequest hstRequest,
+	public static void renderParagraph(ParagraphBean content, JspWriter out, HstRequest hstRequest,
 			HstResponse hstResponse) throws IOException, JspException {
 		printTitle(content, out);
 		if (content.getImage() != null && content.getImage().getLinkBean() != null) {

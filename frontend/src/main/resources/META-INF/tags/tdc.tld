@@ -23,11 +23,29 @@
     <name>audioblock</name>
     <path>/META-INF/tags/audioblock.tag</path>
   </tag-file>
-	<!-- <tag-file> <name>bean-dump</name> <path>/META-INF/tags/bean-dump.tag</path> </tag-file> -->
-  <tag-file>
+
+
+  <tag>
+    <description>Renders a flexible block.</description>
     <name>flexibleblock</name>
-    <path>/META-INF/tags/flexibleblock.tag</path>
-  </tag-file>
+    <tag-class>com.tdclighthouse.prototype.tag.FlexibleBlockTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>List of beans representing items in flexible block.</description>
+      <name>content</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.util.List</type>
+    </attribute>
+    <attribute>
+      <description>Unique id of this particular flexible block needed were there are more than one flexible block on the page.</description>
+      <name>flexibleblockid</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+  </tag>
+
   <tag-file>
     <name>html-chopper</name>
     <path>/META-INF/tags/html-chopper.tag</path>
@@ -46,7 +64,7 @@
       <type>com.tdclighthouse.prototype.beans.compounds.ImageBean</type>
     </attribute>
   </tag>
-  
+
   <tag>
     <description>Renders a Latex bean as an image.</description>
     <name>latexblock</name>
@@ -100,10 +118,21 @@
     <name>has-public-parameter</name>
     <path>/META-INF/tags/has-public-parameter.tag</path>
   </tag-file>
-  <tag-file>
+
+  <tag>
+    <description>Renders a quotation bean.</description>
     <name>quotationblock</name>
-    <path>/META-INF/tags/quotationblock.tag</path>
-  </tag-file>
+    <tag-class>com.tdclighthouse.prototype.tag.QuotationBlockTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>Quotation bean</description>
+      <name>content</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>com.tdclighthouse.prototype.beans.compounds.QuotationBean</type>
+    </attribute>
+  </tag>
+
   <tag-file>
     <name>relateddocument</name>
     <path>/META-INF/tags/relateddocument.tag</path>

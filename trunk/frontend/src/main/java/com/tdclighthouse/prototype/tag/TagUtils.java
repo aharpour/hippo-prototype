@@ -22,31 +22,36 @@ public class TagUtils {
 	public static void renderHippoHtml(HippoHtml hippoHtml, JspWriter out, boolean fullyQualifiedLinks,
 			HstRequest hstRequest, HstResponse hstResponse) throws JspException {
 		try {
-			validateHippoHtml(hippoHtml, hstRequest, hstResponse);
-
-			SimpleContentRewriter contentRewriter = new SimpleContentRewriter();
-			contentRewriter.setFullyQualifiedLinks(fullyQualifiedLinks);
-			String html = hippoHtml.getContent();
-			html = contentRewriter.rewrite(html, hippoHtml.getNode(), hstRequest.getRequestContext());
-
-			if (html == null) {
-				html = "";
-			}
-			out.print(html);
+			out.print(hippoHtmlToString(hippoHtml, fullyQualifiedLinks, hstRequest));
 		} catch (IOException ioe) {
 			throw new JspException(" Exception: cannot write to the output writer.");
+		} catch (IllegalArgumentException e) {
+			throw new JspException(e.getMessage(), e);
 		}
 
 	}
 
-	private static void validateHippoHtml(HippoHtml hippoHtml, HstRequest hstRequest, HstResponse hstResponse)
-			throws JspException {
-		if (hstRequest == null || hstResponse == null) {
-			throw new JspException(
+	public static String hippoHtmlToString(HippoHtml hippoHtml, boolean fullyQualifiedLinks, HstRequest hstRequest)  {
+		validateHippoHtml(hippoHtml, hstRequest);
+		SimpleContentRewriter contentRewriter = new SimpleContentRewriter();
+		contentRewriter.setFullyQualifiedLinks(fullyQualifiedLinks);
+		String html = hippoHtml.getContent();
+		html = contentRewriter.rewrite(html, hippoHtml.getNode(), hstRequest.getRequestContext());
+
+		if (html == null) {
+			html = "";
+		}
+		return html;
+	}
+
+	private static void validateHippoHtml(HippoHtml hippoHtml, HstRequest hstRequest)
+			throws IllegalArgumentException {
+		if (hstRequest == null) {
+			throw new IllegalArgumentException(
 					"Cannot continue HstHtmlTag because response/request not an instance of hst response/request");
 		}
 		if (hippoHtml == null || hippoHtml.getContent() == null || hippoHtml.getNode() == null) {
-			throw new JspException("Node or content is null.");
+			throw new IllegalArgumentException("Node or content is null.");
 		}
 	}
 	

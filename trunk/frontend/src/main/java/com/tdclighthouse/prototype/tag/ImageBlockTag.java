@@ -25,7 +25,7 @@ public class ImageBlockTag extends PrototypeTagSupport {
 	public int doEndTag() throws JspException {
 		try {
 			JspWriter out = pageContext.getOut();
-			printImageBean(content, out, getHstRequest());
+			renderImageBean(content, out, getHstRequest());
 
 			return EVAL_PAGE;
 		} catch (IOException e) {
@@ -35,7 +35,7 @@ public class ImageBlockTag extends PrototypeTagSupport {
 		}
 	}
 
-	private static void printImageBean(ImageBean imageBean, JspWriter out, HstRequest hstRequest) throws IOException {
+	public static void renderImageBean(ImageBean imageBean, JspWriter out, HstRequest hstRequest) throws IOException {
 		HippoGalleryImageSetBean linkBean = imageBean.getLinkBean();
 		if (linkBean != null) {
 			HippoBean image = getImageBean(linkBean);

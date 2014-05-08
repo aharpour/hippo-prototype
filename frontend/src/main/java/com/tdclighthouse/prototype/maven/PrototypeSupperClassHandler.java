@@ -83,8 +83,8 @@ public class PrototypeSupperClassHandler extends SupperClassHandler {
 			if (Constants.NodeType.HIPPO_COMPOUND.equals(superType)) {
 				Class<TdcDocument> tdcDocumentClass = TdcDocument.class;
 				supperClasses.add(tdcDocumentClass);
-			} else if (beansOnClassPath.containsKey(superType)) {
-				HippoBeanClass hippoBeanClass = beansOnClassPath.get(superType);
+			} else if (getBeansOnClassPath().containsKey(superType)) {
+				HippoBeanClass hippoBeanClass = getBeansOnClassPath().get(superType);
 				Class<?> clazz = getClass(hippoBeanClass);
 				supperClasses.add((Class<? extends HippoBean>) clazz);
 			}
@@ -99,7 +99,7 @@ public class PrototypeSupperClassHandler extends SupperClassHandler {
 		ClassReference result = null;
 		for (String superType : supertypes) {
 			String ns = NamespaceUtils.getNamespace(superType);
-			if (StringUtils.isNotBlank(ns) && namespaces.contains(ns) && !mixins.containsKey(superType)) {
+			if (StringUtils.isNotBlank(ns) && getNamespaces().contains(ns) && !getMixins().containsKey(superType)) {
 				result = new ClassReference(getClassName(packageName, superType));
 				break;
 			}
@@ -110,16 +110,16 @@ public class PrototypeSupperClassHandler extends SupperClassHandler {
 	private String getClassName(String packageName, String superType) {
 		String result;
 		if (StringUtils.isNotBlank(packageName)) {
-			result = packageName + Constants.Language.PACKAGE_SEPARATOR + classNameHandler.getClassName(superType);
+			result = packageName + Constants.Language.PACKAGE_SEPARATOR + getClassNameHandler().getClassName(superType);
 		} else {
-			result = classNameHandler.getClassName(superType);
+			result = getClassNameHandler().getClassName(superType);
 		}
 		return result;
 	}
 
 	private Class<?> getClass(HippoBeanClass hippoBeanClass) {
 		try {
-			return Class.forName(hippoBeanClass.getFullyQualifiedName(), true, classLoader);
+			return Class.forName(hippoBeanClass.getFullyQualifiedName(), true, getClassLoader());
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}

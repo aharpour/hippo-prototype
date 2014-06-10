@@ -21,7 +21,7 @@
 	<description>Hippo prototype</description>
 	<groupId>com.tdclighthouse.hippo</groupId>
 	<artifactId>hippo-prototype</artifactId>
-	<version>7.8.33-SNAPSHOT</version>
+	<version>7.8.33</version>
 	<packaging>pom</packaging>
 
 	<developers>
@@ -34,9 +34,9 @@
 	<inceptionYear>2012</inceptionYear>
 
 	<scm>
-		<connection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/trunk/</developerConnection>
-		<url>https://svn.code.sf.net/p/hippoprototype/code/trunk/</url>
+		<connection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/tags/7.8.33</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/tags/7.8.33</developerConnection>
+		<url>https://svn.code.sf.net/p/hippoprototype/code/tags/7.8.33</url>
 	</scm>
 	<ciManagement />
 
@@ -122,7 +122,7 @@
 			<dependency>
 				<groupId>com.aharpour.ebrahim</groupId>
 				<artifactId>hippo-maven-plugin</artifactId>
-				<version>0.1.0-RC-4-SNAPSHOT</version>
+				<version>0.1.0</version>
 				<scope>provided</scope>
 			</dependency>
 			<!-- /Hippo Maven Plugin dependency -->

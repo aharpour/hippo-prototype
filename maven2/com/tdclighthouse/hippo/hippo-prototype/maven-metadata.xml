@@ -3,7 +3,7 @@
   <groupId>com.tdclighthouse.hippo</groupId>
   <artifactId>hippo-prototype</artifactId>
   <versioning>
-    <release>7.8.32</release>
+    <release>7.8.33</release>
     <versions>
       <version>7.7.24</version>
       <version>7.7.25</version>
@@ -14,7 +14,8 @@
       <version>7.8.30</version>
       <version>7.8.31</version>
       <version>7.8.32</version>
+      <version>7.8.33</version>
     </versions>
-    <lastUpdated>20130709070801</lastUpdated>
+    <lastUpdated>20140610102923</lastUpdated>
   </versioning>
 </metadata>

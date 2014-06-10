@@ -1,0 +1,328 @@
+<taglib>
+  <tlib-version>1.0</tlib-version>
+  <short-name>tdc</short-name>
+  <uri>http://www.tdclighthouse.com/hippo/prototype</uri>
+  <jsp-version>2.0</jsp-version>
+  <tag-file>
+    <name>formgroup</name>
+    <path>/META-INF/tags/formgroup.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>formitem</name>
+    <path>/META-INF/tags/formitem.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>form</name>
+    <path>/META-INF/tags/form.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>add-query-param</name>
+    <path>/META-INF/tags/add-query-param.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>audioblock</name>
+    <path>/META-INF/tags/audioblock.tag</path>
+  </tag-file>
+
+
+  <tag>
+    <description>Renders a flexible block.</description>
+    <name>flexibleblock</name>
+    <tag-class>com.tdclighthouse.prototype.tag.FlexibleBlockTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>List of beans representing items in flexible block.</description>
+      <name>content</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.util.List</type>
+    </attribute>
+    <attribute>
+      <description>Unique id of this particular flexible block needed were there are more than one flexible block on the page.</description>
+      <name>flexibleblockid</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+  </tag>
+
+  <tag-file>
+    <name>html-chopper</name>
+    <path>/META-INF/tags/html-chopper.tag</path>
+  </tag-file>
+
+  <tag>
+    <description>Renders a image bean.</description>
+    <name>imageblock</name>
+    <tag-class>com.tdclighthouse.prototype.tag.ImageBlockTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>Image bean</description>
+      <name>content</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>com.tdclighthouse.prototype.beans.compounds.ImageBean</type>
+    </attribute>
+  </tag>
+
+  <tag>
+    <description>Renders a Latex bean as an image.</description>
+    <name>latexblock</name>
+    <tag-class>com.tdclighthouse.prototype.tag.LatexBlockTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>Latex bean</description>
+      <name>content</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>com.tdclighthouse.prototype.beans.compounds.LatexBean</type>
+    </attribute>
+  </tag>
+
+  <tag-file>
+    <name>paginator</name>
+    <path>/META-INF/tags/paginator.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>simplepaginator</name>
+    <path>/META-INF/tags/simplepaginator.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>verysimplepaginator</name>
+    <path>/META-INF/tags/verysimplepaginator.tag</path>
+  </tag-file>
+
+  <tag>
+    <description>Renders a paragraph bean.</description>
+    <name>paragraphblock</name>
+    <tag-class>com.tdclighthouse.prototype.tag.ParagraphBlockTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>Paragraph bean</description>
+      <name>content</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>com.tdclighthouse.prototype.beans.compounds.ParagraphBean</type>
+    </attribute>
+  </tag>
+
+  <tag-file>
+    <name>public-parameter</name>
+    <path>/META-INF/tags/public-parameter.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>public-parameters</name>
+    <path>/META-INF/tags/public-parameters.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>has-public-parameter</name>
+    <path>/META-INF/tags/has-public-parameter.tag</path>
+  </tag-file>
+
+  <tag>
+    <description>Renders a quotation bean.</description>
+    <name>quotationblock</name>
+    <tag-class>com.tdclighthouse.prototype.tag.QuotationBlockTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>Quotation bean</description>
+      <name>content</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>com.tdclighthouse.prototype.beans.compounds.QuotationBean</type>
+    </attribute>
+  </tag>
+
+  <tag-file>
+    <name>relateddocument</name>
+    <path>/META-INF/tags/relateddocument.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>relateddocumentsblock</name>
+    <path>/META-INF/tags/relateddocumentsblock.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>string-chopper</name>
+    <path>/META-INF/tags/string-chopper.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>videoblock</name>
+    <path>/META-INF/tags/videoblock.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>beaninspection</name>
+    <path>/META-INF/tags/beaninspection.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>assetsize</name>
+    <path>/META-INF/tags/assetsize.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>assettype</name>
+    <path>/META-INF/tags/assettype.tag</path>
+  </tag-file>
+
+  <tag>
+    <description>Renders a Menu Item.</description>
+    <name>menuitem</name>
+    <tag-class>com.tdclighthouse.prototype.tag.MenuitemTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>Menu Item</description>
+      <name>siteMenuItem</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>org.hippoecm.hst.core.sitemenu.EditableMenuItem</type>
+    </attribute>
+    <attribute>
+      <description>How many generations of children to be displayed.</description>
+      <name>depth</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Integer</type>
+    </attribute>
+    <attribute>
+      <description>CSS class of selected Items.</description>
+      <name>selectedClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>CSS class of expanded Items.</description>
+      <name>expandedClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>CSS class of unexpanded Items.</description>
+      <name>unexpandedClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>CSS class of leaf Items.</description>
+      <name>leafClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <description>recurse only expanded items</description>
+      <name>recurseOnlyExpanded</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Boolean</type>
+    </attribute>
+  </tag>
+  <tag-file>
+    <name>breadcrumbitem</name>
+    <path>/META-INF/tags/breadcrumbitem.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>breadcrumbs</name>
+    <path>/META-INF/tags/breadcrumbs.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>remove-query-param</name>
+    <path>/META-INF/tags/remove-query-param.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>remove-query-parameters</name>
+    <path>/META-INF/tags/remove-query-parameters.tag</path>
+  </tag-file>
+  <tag>
+    <description>Creates a component parameter name.</description>
+    <name>componentParameterName</name>
+    <tag-class>com.tdclighthouse.prototype.tag.ComponentParameterTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description>
+        Name of the exported scoped variable to hold the component parameter name
+      </description>
+      <name>var</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description>simple name of parameter.</description>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <function>
+    <name>isSameDayDate</name>
+    <function-class>org.apache.commons.lang3.time.DateUtils</function-class>
+    <function-signature>boolean isSameDay(java.util.Date, java.util.Date)</function-signature>
+  </function>
+  <function>
+    <name>isSameDayCalendar</name>
+    <function-class>org.apache.commons.lang3.time.DateUtils</function-class>
+    <function-signature>boolean isSameDay(java.util.Calendar, java.util.Calendar)</function-signature>
+  </function>
+  <function>
+    <name>isSameMonthDate</name>
+    <function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+    <function-signature>boolean isSameMonth(java.util.Date, java.util.Date)</function-signature>
+  </function>
+  <function>
+    <name>isSameMonthCalendar</name>
+    <function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+    <function-signature>boolean isSameMonth(java.util.Calendar, java.util.Calendar)</function-signature>
+  </function>
+  <function>
+    <name>isSameYearDate</name>
+    <function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+    <function-signature>boolean isSameYear(java.util.Date, java.util.Date)</function-signature>
+  </function>
+  <function>
+    <name>isSameYearCalendar</name>
+    <function-class>com.tdclighthouse.prototype.utils.DateUtils</function-class>
+    <function-signature>boolean isSameYear(java.util.Calendar, java.util.Calendar)</function-signature>
+  </function>
+  <function>
+    <name>ceil</name>
+    <function-class>java.lang.Math</function-class>
+    <function-signature>double ceil(double)</function-signature>
+  </function>
+  <function>
+    <name>floor</name>
+    <function-class>java.lang.Math</function-class>
+    <function-signature>double floor(double)</function-signature>
+  </function>
+  <function>
+    <name>urlEncode</name>
+    <function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+    <function-signature>java.lang.String encode(java.lang.String)</function-signature>
+  </function>
+  <function>
+    <name>collectionContains</name>
+    <function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+    <function-signature>boolean collectionContains(java.util.Collection, java.lang.Object)</function-signature>
+  </function>
+  <function>
+    <name>mapContainsKey</name>
+    <function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+    <function-signature>boolean mapContainsKey(jjava.util.Map, java.lang.Object)</function-signature>
+  </function>
+  <function>
+    <name>mapContainsValue</name>
+    <function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+    <function-signature>boolean mapContainsValue(java.util.Map, java.lang.Object)</function-signature>
+  </function>
+  <function>
+    <name>contextPath</name>
+    <function-class>com.tdclighthouse.prototype.utils.TdcUtils</function-class>
+    <function-signature>java.lang.String getContextPath(org.hippoecm.hst.core.component.HstRequest)</function-signature>
+  </function>
+  <function>
+    <name>issubclassofwebdocument</name>
+    <function-class>com.tdclighthouse.prototype.tag.Functions</function-class>
+    <function-signature>boolean isSubclassOfWebdocument(org.hippoecm.hst.content.beans.standard.HippoBean)</function-signature>
+  </function>
+
+</taglib>

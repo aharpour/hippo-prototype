@@ -39,79 +39,80 @@ import com.tdclighthouse.prototype.utils.PaginatorWidget;
  *
  */
 @ParametersInfo(type = GenericOverviewPageInfo.class)
-public class GenericOverviewPage extends BaseTdcComponent {
+public class GenericOverviewPage extends BaseComponent {
 
-	@Override
-	public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-		try {
-			setDocumentToRequest(request);
+    @Override
+    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+        try {
+            setDocumentToRequest(request);
 
-			GenericOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
-			HstQuery query = getQuery(request);
-			HstQueryResult queryResult = query.execute();
-			PaginatorWidget paginator = getPaginator(request, getPageSize(request), queryResult.getTotalSize());
-			List<HippoBean> items = getItems(queryResult);
+            GenericOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
+            HstQuery query = getQuery(request);
+            HstQueryResult queryResult = query.execute();
+            PaginatorWidget paginator = getPaginator(request, getPageSize(request), queryResult.getTotalSize());
+            List<HippoBean> items = getItems(queryResult);
 
-			request.setAttribute(Constants.Attributes.ITEMS, items);
-			if (parametersInfo.getShowPaginator()) {
-				request.setAttribute(Constants.Attributes.PAGINATOR, paginator);
-			}
+            request.setAttribute(Constants.Attributes.ITEMS, items);
+            if (parametersInfo.getShowPaginator()) {
+                request.setAttribute(Constants.Attributes.PAGINATOR, paginator);
+            }
 
-		} catch (QueryException e) {
-			throw new HstComponentException(e);
-		}
-	}
+        } catch (QueryException e) {
+            throw new HstComponentException(e);
+        }
+    }
 
-	private List<HippoBean> getItems(HstQueryResult queryResult) {
-		List<HippoBean> items = new ArrayList<HippoBean>();
-		for (HippoBeanIterator hippoBeans = queryResult.getHippoBeans(); hippoBeans.hasNext();) {
-			items.add(hippoBeans.nextHippoBean());
-		}
-		return items;
-	}
+    private List<HippoBean> getItems(HstQueryResult queryResult) {
+        List<HippoBean> items = new ArrayList<HippoBean>();
+        for (HippoBeanIterator hippoBeans = queryResult.getHippoBeans(); hippoBeans.hasNext();) {
+            items.add(hippoBeans.nextHippoBean());
+        }
+        return items;
+    }
 
-	private void setDocumentToRequest(HstRequest request) {
-		HippoBean contentBean = getContentBean(request);
-		if (contentBean != null) {
-			request.setAttribute(Constants.Attributes.DOCUMENT, contentBean);
-		}
-	}
+    private void setDocumentToRequest(HstRequest request) {
+        HippoBean contentBean = request.getRequestContext().getContentBean();
+        if (contentBean != null) {
+            request.setAttribute(Constants.Attributes.DOCUMENT, contentBean);
+        }
+    }
 
-	protected HstQuery getQuery(HstRequest request) throws QueryException {
-		GenericOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
-		HippoBean scope = getQueryScope(request, parametersInfo);
-		HstQuery query = getQueryManager(request).createQuery(scope, parametersInfo.getShowTypes());
+    protected HstQuery getQuery(HstRequest request) throws QueryException {
+        GenericOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
+        HippoBean scope = getQueryScope(request, parametersInfo);
+        HstQuery query = request.getRequestContext().getQueryManager()
+                .createQuery(scope, parametersInfo.getShowTypes());
 
-		String sortBy = parametersInfo.getSortBy();
-		if (StringUtils.isNotBlank(sortBy)) {
-			if (Constants.Values.DESCENDING.equals(parametersInfo.getSortOrder())) {
-				query.addOrderByDescending(sortBy);
-			} else {
-				query.addOrderByAscending(sortBy);
-			}
-		}
+        String sortBy = parametersInfo.getSortBy();
+        if (StringUtils.isNotBlank(sortBy)) {
+            if (Constants.Values.DESCENDING.equals(parametersInfo.getSortOrder())) {
+                query.addOrderByDescending(sortBy);
+            } else {
+                query.addOrderByAscending(sortBy);
+            }
+        }
 
-		setLimitAndOffset(request, query);
-		addFilter(query);
-		return query;
-	}
+        setLimitAndOffset(request, query);
+        addFilter(query);
+        return query;
+    }
 
-	protected void addFilter(HstQuery query) {
-	}
+    protected void addFilter(HstQuery query) {
+    }
 
-	private void setLimitAndOffset(HstRequest request, HstQuery query) {
-		int pageSize = getPageSize(request);
-		int pageNumber = getPageNumber(request);
-		query.setLimit(pageSize);
-		query.setOffset((pageNumber - 1) * pageSize);
-	}
+    private void setLimitAndOffset(HstRequest request, HstQuery query) {
+        int pageSize = getPageSize(request);
+        int pageNumber = getPageNumber(request);
+        query.setLimit(pageSize);
+        query.setOffset((pageNumber - 1) * pageSize);
+    }
 
-	protected HippoBean getQueryScope(HstRequest request, GenericOverviewPageInfo parametersInfo) {
-		HippoBean scope = getContentBean(request);
-		if (!(scope instanceof HippoFolderBean)) {
-			scope = getContentBeanViaParameters(request, parametersInfo);
-		}
-		return scope;
-	}
+    protected HippoBean getQueryScope(HstRequest request, GenericOverviewPageInfo parametersInfo) {
+        HippoBean scope = request.getRequestContext().getContentBean();
+        if (!(scope instanceof HippoFolderBean)) {
+            scope = getContentBeanViaParameters(request, parametersInfo);
+        }
+        return scope;
+    }
 
 }

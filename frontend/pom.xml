@@ -119,9 +119,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.onehippo.cms7.hst.dependencies</groupId>
-			<artifactId>hst-shared-dependencies</artifactId>
-			<type>pom</type>
+			<groupId>org.onehippo.cms7.hst</groupId>
+			<artifactId>hst-commons</artifactId>
 			<scope>provided</scope>
 		</dependency>
 

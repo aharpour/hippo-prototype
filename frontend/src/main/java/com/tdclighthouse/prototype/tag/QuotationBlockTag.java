@@ -6,9 +6,6 @@ import java.util.HashMap;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
-import org.hippoecm.hst.core.component.HstRequest;
-import org.hippoecm.hst.core.component.HstResponse;
-
 import com.tdclighthouse.prototype.beans.compounds.QuotationBean;
 import com.tdclighthouse.prototype.utils.FreemarkerUtils;
 

@@ -34,81 +34,60 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class TdcCompound extends HippoCompound {
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public Node getNode() {
-		return super.getNode();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public Node getNode() {
+        return super.getNode();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public <T extends HippoBean> T getCanonicalBean() {
-		return super.getCanonicalBean();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public <T extends HippoBean> T getCanonicalBean() {
+        return super.getCanonicalBean();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public JCRValueProvider getValueProvider() {
-		return super.getValueProvider();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public JCRValueProvider getValueProvider() {
+        return super.getValueProvider();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public Map<String, Object> getProperties() {
-		return super.getProperties();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public Map<String, Object> getProperties() {
+        return super.getProperties();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public <T extends HippoBean> HippoAvailableTranslationsBean<T> getAvailableTranslationsBean() {
-		return super.getAvailableTranslationsBean();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public <T extends HippoBean> HippoAvailableTranslationsBean<T> getAvailableTranslations() {
+        return super.getAvailableTranslations();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public <T extends HippoBean> HippoAvailableTranslationsBean<T> getAvailableTranslations() {
-		return super.getAvailableTranslations();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public HippoBean getParentBean() {
+        return super.getParentBean();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public HippoBean getParentBean() {
-		return super.getParentBean();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public Map<Object, Object> getEqualComparator() {
+        return super.getEqualComparator();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public HippoBean getContextualBean() {
-		return super.getContextualBean();
-	}
-
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public HippoBean getContextualParentBean() {
-		return super.getContextualParentBean();
-	}
-
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public Map<Object, Object> getEqualComparator() {
-		return super.getEqualComparator();
-	}
-
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public ObjectConverter getObjectConverter() {
-		return super.getObjectConverter();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public ObjectConverter getObjectConverter() {
+        return super.getObjectConverter();
+    }
 
 }

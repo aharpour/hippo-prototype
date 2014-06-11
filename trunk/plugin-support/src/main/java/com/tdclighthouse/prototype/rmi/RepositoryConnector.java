@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import javax.jcr.Credentials;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.SimpleCredentials;
@@ -124,7 +125,7 @@ public class RepositoryConnector {
 
 		@Override
 		public Session makeObject() throws Exception {
-			return getRepository().login(new SimpleCredentials(username, password.toCharArray()));
+			return getRepository().login((Credentials) new SimpleCredentials(username, password.toCharArray()));
 		}
 
 		@Override

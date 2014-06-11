@@ -29,7 +29,7 @@ import com.tdclighthouse.prototype.utils.Constants;
  * 
  */
 @ParametersInfo(type = ContentBeanPathInfo.class)
-public class WebDocumentDetail extends BaseTdcComponent {
+public class WebDocumentDetail extends BaseComponent {
 
 	@Override
 	public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {

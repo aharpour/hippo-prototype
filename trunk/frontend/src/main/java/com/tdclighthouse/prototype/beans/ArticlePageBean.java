@@ -48,7 +48,7 @@ public class ArticlePageBean extends WebDocumentBean {
 			if (hippoBean instanceof ParagraphBean) {
 				ParagraphBean paragraph = (ParagraphBean) hippoBean;
 				ParagraphImageBean image = paragraph.getImage();
-				if (image != null && image.getLink().getDeref() != null && image.getLink().getDeref() != null) {
+				if (image != null && image.getLink().getReferencedBean() != null && image.getLink().getReferencedBean() != null) {
 					result = image;
 					break;
 				}

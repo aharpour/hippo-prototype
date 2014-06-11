@@ -36,24 +36,23 @@ import com.tdclighthouse.prototype.utils.Constants;
 @ParametersInfo(type = ContentCatalogInfo.class)
 public class ContentCatalog extends AjaxEnabledComponent<Map<String, Object>> {
 
-	@Override
-	public Map<String, Object> getModel(HstRequest request, HstResponse response) throws HstComponentException {
-		Map<String, Object> model = new HashMap<String, Object>();
-		
-		ContentCatalogInfo parametersInfo = (ContentCatalogInfo) getComponentParametersInfo(request);
-		model.put("parameterInfo", parametersInfo);
-		
-		if (parametersInfo != null && StringUtils.isNotBlank(parametersInfo.getTemplate())) {
-			response.setRenderPath("jcr:" + parametersInfo.getTemplate());
-		}
-		
-		HippoBean contentBean = getContentBean(request);
-		if (contentBean != null) {
-			model.put(Constants.Attributes.DOCUMENT, contentBean);
-		}
+    @Override
+    public Map<String, Object> getModel(HstRequest request, HstResponse response) throws HstComponentException {
+        Map<String, Object> model = new HashMap<String, Object>();
 
-		
-		return model;
-	}
+        ContentCatalogInfo parametersInfo = (ContentCatalogInfo) getComponentParametersInfo(request);
+        model.put("parameterInfo", parametersInfo);
+
+        if (parametersInfo != null && StringUtils.isNotBlank(parametersInfo.getTemplate())) {
+            response.setRenderPath("jcr:" + parametersInfo.getTemplate());
+        }
+
+        HippoBean contentBean = request.getRequestContext().getContentBean();
+        if (contentBean != null) {
+            model.put(Constants.Attributes.DOCUMENT, contentBean);
+        }
+
+        return model;
+    }
 
 }

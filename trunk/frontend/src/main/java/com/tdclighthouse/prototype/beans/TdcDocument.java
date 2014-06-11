@@ -44,122 +44,101 @@ import com.tdclighthouse.prototype.utils.TdcUtils;
  */
 public class TdcDocument extends HippoDocument {
 
-	public Calendar getLastModificationDate() {
-		return getProperty("hippostdpubwf:lastModificationDate");
-	}
+    public Calendar getLastModificationDate() {
+        return getProperty("hippostdpubwf:lastModificationDate");
+    }
 
-	public SelectionBean getSelectionBean(String propertyName, String listAbslutePath) {
-		Object propertyValue = getProperty(propertyName);
-		Map<String, String> labelsMap = getSelectionOptionsMap(listAbslutePath);
-		return new SelectionBean(labelsMap, propertyValue);
-	}
+    public SelectionBean getSelectionBean(String propertyName, String listAbslutePath) {
+        Object propertyValue = getProperty(propertyName);
+        Map<String, String> labelsMap = getSelectionOptionsMap(listAbslutePath);
+        return new SelectionBean(labelsMap, propertyValue);
+    }
 
-	protected Map<String, String> getSelectionOptionsMap(String path) {
-		return TdcUtils.valueListBeanToMap(getValueListBean(path));
-	}
+    protected Map<String, String> getSelectionOptionsMap(String path) {
+        return TdcUtils.valueListBeanToMap(getValueListBean(path));
+    }
 
-	protected ValueListBean getValueListBean(String path) {
-		try {
-			ValueListBean valueListBean;
-			Node listValueNode = getNode().getSession().getRootNode().getNode(PathUtils.normalizePath(path));
-			Object object = getObjectConverter().getObject(listValueNode);
-			if (object instanceof ValueListBean) {
-				valueListBean = (ValueListBean) object;
-				String localeString = getLocaleString();
-				if (StringUtils.isNotBlank(localeString)) {
-					HippoBean translation = valueListBean.getAvailableTranslationsBean().getTranslation(localeString);
-					if (translation instanceof ValueListBean) {
-						valueListBean = (ValueListBean) translation;
-					}
-				}
-			} else {
-				throw new HstComponentException("the path given \"" + path + "\" is invalid");
-			}
-			return valueListBean;
-		} catch (ObjectBeanManagerException e) {
-			throw new RuntimeException(e);
-		} catch (PathNotFoundException e) {
-			throw new RuntimeException(e);
-		} catch (RepositoryException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    protected ValueListBean getValueListBean(String path) {
+        try {
+            ValueListBean valueListBean;
+            Node listValueNode = getNode().getSession().getRootNode().getNode(PathUtils.normalizePath(path));
+            Object object = getObjectConverter().getObject(listValueNode);
+            if (object instanceof ValueListBean) {
+                valueListBean = (ValueListBean) object;
+                String localeString = getLocaleString();
+                if (StringUtils.isNotBlank(localeString)) {
+                    HippoBean translation = valueListBean.getAvailableTranslations().getTranslation(localeString);
+                    if (translation instanceof ValueListBean) {
+                        valueListBean = (ValueListBean) translation;
+                    }
+                }
+            } else {
+                throw new HstComponentException("the path given \"" + path + "\" is invalid");
+            }
+            return valueListBean;
+        } catch (ObjectBeanManagerException e) {
+            throw new RuntimeException(e);
+        } catch (PathNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (RepositoryException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public Node getNode() {
-		return super.getNode();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public Node getNode() {
+        return super.getNode();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public <T extends HippoBean> T getCanonicalBean() {
-		return super.getCanonicalBean();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public <T extends HippoBean> T getCanonicalBean() {
+        return super.getCanonicalBean();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public JCRValueProvider getValueProvider() {
-		return super.getValueProvider();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public JCRValueProvider getValueProvider() {
+        return super.getValueProvider();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public Map<String, Object> getProperties() {
-		return super.getProperties();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public Map<String, Object> getProperties() {
+        return super.getProperties();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public <T extends HippoBean> HippoAvailableTranslationsBean<T> getAvailableTranslationsBean() {
-		return super.getAvailableTranslationsBean();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public <T extends HippoBean> HippoAvailableTranslationsBean<T> getAvailableTranslations() {
+        return super.getAvailableTranslations();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public <T extends HippoBean> HippoAvailableTranslationsBean<T> getAvailableTranslations() {
-		return super.getAvailableTranslations();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public HippoBean getParentBean() {
+        return super.getParentBean();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public HippoBean getParentBean() {
-		return super.getParentBean();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public Map<Object, Object> getEqualComparator() {
+        return super.getEqualComparator();
+    }
 
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public HippoBean getContextualBean() {
-		return super.getContextualBean();
-	}
-
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public HippoBean getContextualParentBean() {
-		return super.getContextualParentBean();
-	}
-
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public Map<Object, Object> getEqualComparator() {
-		return super.getEqualComparator();
-	}
-
-	@Override
-	@JsonIgnore
-	@XmlTransient
-	public ObjectConverter getObjectConverter() {
-		return super.getObjectConverter();
-	}
+    @Override
+    @JsonIgnore
+    @XmlTransient
+    public ObjectConverter getObjectConverter() {
+        return super.getObjectConverter();
+    }
 
 }

@@ -37,38 +37,38 @@ import com.tdclighthouse.prototype.utils.TdcUtils.Call;
 @ParametersInfo(type = NavigationInfo.class)
 public class Navigation extends WebDocumentDetail {
 
-	private static final String EDITABLE_MENU_ATTRIBUTE = "editableMenu";
-	protected static Logger log = LoggerFactory.getLogger(Navigation.class);
+    private static final String EDITABLE_MENU_ATTRIBUTE = "editableMenu";
+    protected static Logger log = LoggerFactory.getLogger(Navigation.class);
 
-	@Override
-	public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-		super.doBeforeRender(request, response);
-		final NavigationInfo parametersInfo = this.<NavigationInfo> getComponentParametersInfo(request);
-		EditableMenu editableMenu = TdcUtils.getCachedCall(new Call<EditableMenu>() {
+    @Override
+    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+        super.doBeforeRender(request, response);
+        final NavigationInfo parametersInfo = this.<NavigationInfo> getComponentParametersInfo(request);
+        EditableMenu editableMenu = TdcUtils.getCachedCall(new Call<EditableMenu>() {
 
-			@Override
-			public EditableMenu makeCall(HstRequest request) {
-				EditableMenu result = null;
-				String menuName = parametersInfo.getMenuName();
-				HstSiteMenu menu = request.getRequestContext().getHstSiteMenus().getSiteMenu(menuName);
-				if (menu != null) {
-					result = menu.getEditableMenu();
-					boolean showFacet = parametersInfo.isShowFacetedNavigation();
-					new RepoBasedMenuProvider(getSiteContentBaseBean(request), showFacet, request)
-							.addRepoBasedMenuItems(result);
-				}
-				return result;
-			}
+            @Override
+            public EditableMenu makeCall(HstRequest request) {
+                EditableMenu result = null;
+                String menuName = parametersInfo.getMenuName();
+                HstSiteMenu menu = request.getRequestContext().getHstSiteMenus().getSiteMenu(menuName);
+                if (menu != null) {
+                    result = menu.getEditableMenu();
+                    boolean showFacet = parametersInfo.isShowFacetedNavigation();
+                    new RepoBasedMenuProvider(request.getRequestContext().getSiteContentBaseBean(), showFacet, request)
+                            .addRepoBasedMenuItems(result);
+                }
+                return result;
+            }
 
-			@Override
-			public Class<EditableMenu> getType() {
-				return EditableMenu.class;
-			}
+            @Override
+            public Class<EditableMenu> getType() {
+                return EditableMenu.class;
+            }
 
-		}, request, EDITABLE_MENU_ATTRIBUTE);
+        }, request, EDITABLE_MENU_ATTRIBUTE);
 
-		request.setAttribute(Constants.Attributes.MENU, editableMenu);
+        request.setAttribute(Constants.Attributes.MENU, editableMenu);
 
-	}
+    }
 
 }

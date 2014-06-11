@@ -37,7 +37,7 @@ import com.tdclighthouse.prototype.utils.ObjectSerializer;
  * @author Ebrahim Aharpour
  *
  */
-public abstract class AjaxEnabledComponent<M> extends BaseTdcComponent {
+public abstract class AjaxEnabledComponent<M> extends BaseComponent {
 
 	public static final String BLANK_TEMPLATE = "";
 

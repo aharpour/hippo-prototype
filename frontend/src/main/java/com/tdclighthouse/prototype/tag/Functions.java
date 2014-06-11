@@ -2,7 +2,7 @@ package com.tdclighthouse.prototype.tag;
 
 import org.hippoecm.hst.content.beans.standard.HippoBean;
 
-import com.tdclighthouse.prototype.beans.WebDocumentBean;
+import com.tdclighthouse.prototype.beans.WebPage;
 
 public class Functions {
 	
@@ -11,7 +11,7 @@ public class Functions {
 	
 	public static boolean isSubclassOfWebdocument(HippoBean hippoBean) {
 		boolean result = false;
-		if (hippoBean instanceof WebDocumentBean) {
+		if (hippoBean instanceof WebPage) {
 			result = true;
 		}
 		return result;

@@ -43,7 +43,7 @@ import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.site.HstServices;
 import org.hippoecm.hst.util.PathUtils;
 
-import com.tdclighthouse.prototype.beans.WebDocumentBean;
+import com.tdclighthouse.prototype.beans.WebPage;
 import com.tdclighthouse.prototype.beans.compounds.ValueListBean;
 import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
 import com.tdclighthouse.prototype.componentsinfo.LabelsInfo;
@@ -221,16 +221,16 @@ public class BaseComponent extends BaseHstComponent {
     }
 
     protected HippoBean getWebDocumetBean(final HstRequest request) {
-        WebDocumentBean result = null;
+        WebPage result = null;
         HippoBean doc = request.getRequestContext().getContentBean();
-        if (!(doc instanceof WebDocumentBean)) {
+        if (!(doc instanceof WebPage)) {
             Object parameters = getComponentParametersInfo(request);
             if (parameters instanceof ContentBeanPathInfo) {
                 doc = getContentBeanViaParameters(request, (ContentBeanPathInfo) parameters);
             }
         }
-        if (doc instanceof WebDocumentBean) {
-            result = (WebDocumentBean) doc;
+        if (doc instanceof WebPage) {
+            result = (WebPage) doc;
         }
         return result;
     }

@@ -24,7 +24,7 @@ import org.hippoecm.hst.content.beans.Node;
  *
  */
 @Node(jcrType = WebDocumentBean.JCR_TYPE)
-public class WebDocumentBean extends BaseDocumentBean {
+public class WebDocumentBean extends BaseDocumentBean implements WebPage {
 
 	public static final String JCR_TYPE = "tdc:WebDocument";
 

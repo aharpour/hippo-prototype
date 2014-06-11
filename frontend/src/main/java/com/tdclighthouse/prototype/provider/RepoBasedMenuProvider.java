@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.commons.utils.hippo.Essentials;
-import com.tdclighthouse.prototype.beans.WebDocumentBean;
+import com.tdclighthouse.prototype.beans.WebPage;
 import com.tdclighthouse.prototype.utils.Constants;
 import com.tdclighthouse.prototype.utils.NavigationUtils;
 
@@ -202,8 +202,8 @@ public class RepoBasedMenuProvider {
 
 	private void addItem(EditableMenuItem item, final HippoBean document) {
 		String localizedName = document.getLocalizedName();
-		if (document instanceof WebDocumentBean) {
-			if (((WebDocumentBean) document).getHideFromSitemap()) {
+		if (document instanceof WebPage) {
+			if (((WebPage) document).getHideFromSitemap()) {
 				if (selectedNodeCanonicalPath != null && selectedNodeCanonicalPath.equals(document.getCanonicalPath())) {
 					markAsExpanded(item);
 				}

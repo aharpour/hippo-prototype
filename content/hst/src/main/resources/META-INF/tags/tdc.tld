@@ -1,0 +1,94 @@
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<short-name>tdc</short-name>
+	<uri>http://www.tdclighthouse.com/hippo/prototype</uri>
+	<jsp-version>2.0</jsp-version>
+	<tag-file>
+		<name>audioblock</name>
+		<path>/META-INF/tags/audioblock.tag</path>
+	</tag-file>
+	<tag>
+		<description>Renders a flexible block.</description>
+		<name>flexibleblock</name>
+		<tag-class>com.tdclighthouse.prototype.tag.FlexibleBlockTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description>List of beans representing items in flexible block.</description>
+			<name>content</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.List</type>
+		</attribute>
+		<attribute>
+			<description>Unique id of this particular flexible block needed were there are more than one flexible block on the page.</description>
+			<name>flexibleblockid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<description>Renders a image bean.</description>
+		<name>imageblock</name>
+		<tag-class>com.tdclighthouse.prototype.tag.ImageBlockTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description>Image bean</description>
+			<name>content</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>com.tdclighthouse.prototype.beans.compounds.ImageBean</type>
+		</attribute>
+	</tag>
+	<tag>
+		<description>Renders a Latex bean as an image.</description>
+		<name>latexblock</name>
+		<tag-class>com.tdclighthouse.prototype.tag.LatexBlockTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description>Latex bean</description>
+			<name>content</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>com.tdclighthouse.prototype.beans.compounds.LatexBean</type>
+		</attribute>
+	</tag>
+	<tag>
+		<description>Renders a paragraph bean.</description>
+		<name>paragraphblock</name>
+		<tag-class>com.tdclighthouse.prototype.tag.ParagraphBlockTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description>Paragraph bean</description>
+			<name>content</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>com.tdclighthouse.prototype.beans.compounds.ParagraphBean</type>
+		</attribute>
+	</tag>
+	<tag>
+		<description>Renders a quotation bean.</description>
+		<name>quotationblock</name>
+		<tag-class>com.tdclighthouse.prototype.tag.QuotationBlockTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description>Quotation bean</description>
+			<name>content</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>com.tdclighthouse.prototype.beans.compounds.QuotationBean</type>
+		</attribute>
+	</tag>
+	<tag-file>
+		<name>relateddocument</name>
+		<path>/META-INF/tags/relateddocument.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>relateddocumentsblock</name>
+		<path>/META-INF/tags/relateddocumentsblock.tag</path>
+	</tag-file>
+	<tag-file>
+		<name>videoblock</name>
+		<path>/META-INF/tags/videoblock.tag</path>
+	</tag-file>
+</taglib>

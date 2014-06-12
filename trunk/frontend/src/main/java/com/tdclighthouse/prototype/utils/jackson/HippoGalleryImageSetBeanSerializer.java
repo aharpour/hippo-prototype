@@ -19,7 +19,6 @@ import java.io.IOException;
 
 import org.hippoecm.hst.content.beans.standard.HippoGalleryImageSetBean;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
@@ -30,14 +29,14 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
  */
 public class HippoGalleryImageSetBeanSerializer extends StdSerializer<HippoGalleryImageSetBean> {
 
-	public HippoGalleryImageSetBeanSerializer() {
-		super(HippoGalleryImageSetBean.class);
-	}
+    public HippoGalleryImageSetBeanSerializer() {
+        super(HippoGalleryImageSetBean.class);
+    }
 
-	@Override
-	public void serialize(HippoGalleryImageSetBean value, JsonGenerator jgen, SerializerProvider provider)
-			throws IOException, JsonGenerationException {
-		jgen.writeString(value.getCanonicalPath());
-	}
+    @Override
+    public void serialize(HippoGalleryImageSetBean value, JsonGenerator jgen, SerializerProvider provider)
+            throws IOException {
+        jgen.writeString(value.getCanonicalPath());
+    }
 
 }

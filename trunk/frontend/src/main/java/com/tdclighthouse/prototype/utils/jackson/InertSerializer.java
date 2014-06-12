@@ -28,14 +28,14 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
  */
 public class InertSerializer<T> extends StdSerializer<T> {
 
-	public InertSerializer(Class<T> clazz) {
-		super(clazz);
-	}
+    public InertSerializer(Class<T> clazz) {
+        super(clazz);
+    }
 
-	@Override
-	public void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
-			JsonGenerationException {
-		jgen.writeString("Blocked");
-	}
+    @Override
+    public void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
+            JsonGenerationException {
+        jgen.writeString("Blocked");
+    }
 
 }

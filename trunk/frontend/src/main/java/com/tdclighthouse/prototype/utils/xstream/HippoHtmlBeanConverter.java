@@ -29,24 +29,24 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
  */
 public class HippoHtmlBeanConverter implements Converter {
 
-	public String marshal(HippoHtmlBean v) throws Exception {
-		return v.getContent();
-	}
+    public String marshal(HippoHtmlBean v) throws Exception {
+        return v.getContent();
+    }
 
-	@Override
-	@SuppressWarnings("rawtypes")
-	public boolean canConvert(Class type) {
-		return HippoHtmlBean.class.isAssignableFrom(type);
-	}
+    @Override
+    @SuppressWarnings("rawtypes")
+    public boolean canConvert(Class type) {
+        return HippoHtmlBean.class.isAssignableFrom(type);
+    }
 
-	@Override
-	public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
-		writer.setValue(((HippoHtmlBean) source).getContent());
-	}
+    @Override
+    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+        writer.setValue(((HippoHtmlBean) source).getContent());
+    }
 
-	@Override
-	public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
-		return null;
-	}
+    @Override
+    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+        return null;
+    }
 
 }

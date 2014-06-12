@@ -27,6 +27,8 @@ import javax.naming.NamingException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.core.component.HstComponentException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.commons.mail.util.MailClient;
 
@@ -36,49 +38,53 @@ import com.tdclighthouse.commons.mail.util.MailClient;
  */
 public class EmailUtils {
 
-	private final static Map<String, MailClient> mailClientRegistary = new Hashtable<String, MailClient>();
+    private static final Logger LOG = LoggerFactory.getLogger(EmailUtils.class);
+    private static final Map<String, MailClient> MAIL_CLIENT_REGISTARY = new Hashtable<String, MailClient>();
 
-	public static MailClient getMailClient(final String sessionName) {
-		MailClient result = mailClientRegistary.get(sessionName);
-		if (result == null) {
-			Session mailSession = getMailSession(sessionName);
-			result = new MailClient(mailSession);
-			mailClientRegistary.put(sessionName, result);
-		}
-		return result;
-	}
+    private EmailUtils() {
+    }
 
-	public static Session getMailSession(final String sessionName) {
-		Session result = null;
-		InitialContext initialContext = null;
-		try {
-			initialContext = new InitialContext();
-			Context context = (Context) initialContext.lookup("java:comp/env");
-			result = (Session) context.lookup(sessionName);
-		} catch (NamingException e) {
-			throw new HstComponentException(e);
-		} finally {
-			try {
-				if (initialContext != null) {
-					initialContext.close();
-				}
-			} catch (NamingException e) {
-				throw new HstComponentException(e);
-			}
-		}
+    public static MailClient getMailClient(final String sessionName) {
+        MailClient result = MAIL_CLIENT_REGISTARY.get(sessionName);
+        if (result == null) {
+            Session mailSession = getMailSession(sessionName);
+            result = new MailClient(mailSession);
+            MAIL_CLIENT_REGISTARY.put(sessionName, result);
+        }
+        return result;
+    }
 
-		return result;
-	}
+    public static Session getMailSession(final String sessionName) {
+        Session result = null;
+        InitialContext initialContext = null;
+        try {
+            initialContext = new InitialContext();
+            Context context = (Context) initialContext.lookup("java:comp/env");
+            result = (Session) context.lookup(sessionName);
+        } catch (NamingException e) {
+            throw new HstComponentException(e);
+        } finally {
+            try {
+                if (initialContext != null) {
+                    initialContext.close();
+                }
+            } catch (NamingException e) {
+                LOG.error(e.getMessage(), e);
+            }
+        }
 
-	public static String[] parseToAddress(String to) {
-		List<String> emails = new ArrayList<String>();
-		String[] split = to.split("(\\s*[;,]\\s*)+");
-		for (String email : split) {
-			if (StringUtils.isNotBlank(email)) {
-				emails.add(email);
-			}
-		}
-		return emails.toArray(new String[emails.size()]);
-	}
+        return result;
+    }
+
+    public static String[] parseToAddress(String to) {
+        List<String> emails = new ArrayList<String>();
+        String[] split = to.split("(\\s*[;,]\\s*)+");
+        for (String email : split) {
+            if (StringUtils.isNotBlank(email)) {
+                emails.add(email);
+            }
+        }
+        return emails.toArray(new String[emails.size()]);
+    }
 
 }

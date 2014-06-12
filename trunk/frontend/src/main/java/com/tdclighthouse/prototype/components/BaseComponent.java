@@ -215,7 +215,7 @@ public class BaseComponent extends BaseHstComponent {
                 throw new HstComponentException("the path: \"" + path + "\" is not valid path to a key value list");
             }
         } catch (ObjectBeanManagerException e) {
-            throw new RuntimeException(e);
+            throw new HstComponentException(e.getMessage(), e);
         }
         return TdcUtils.valueListBeanToMap(valueList);
     }
@@ -235,20 +235,14 @@ public class BaseComponent extends BaseHstComponent {
         return result;
     }
 
-    protected void processAnnotations(HippoBean hippoBean, HstRequest request) {
-
-    }
-
     protected PaginatorWidget getPaginator(HstRequest request, int defaultPageSzie, int totalRows) {
-        PaginatorWidget paginator = new PaginatorWidget(totalRows, getPageNumber(request), defaultPageSzie);
-        return paginator;
+        return new PaginatorWidget(totalRows, getPageNumber(request), defaultPageSzie);
     }
 
     protected String getLinkPath(HstRequest request, HippoBean bean) {
         HstLink link = getLink(request, bean);
-        String path = request.getContextPath() + request.getRequestContext().getResolvedMount().getResolvedMountPath()
+        return request.getContextPath() + request.getRequestContext().getResolvedMount().getResolvedMountPath()
                 + "/" + link.getPath();
-        return path;
     }
 
     protected HstLink getLink(HstRequest request, HippoBean bean) {

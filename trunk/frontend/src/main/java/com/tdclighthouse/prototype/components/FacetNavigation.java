@@ -20,12 +20,9 @@ import java.util.Map;
 
 import org.hippoecm.hst.content.beans.standard.HippoFacetChildNavigationBean;
 import org.hippoecm.hst.content.beans.standard.HippoFacetNavigationBean;
-import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.parameters.ParametersInfo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.prototype.componentsinfo.FacetedOverviewPageInfo;
 import com.tdclighthouse.prototype.utils.Constants;
@@ -37,23 +34,21 @@ import com.tdclighthouse.prototype.utils.Constants;
 @ParametersInfo(type = FacetedOverviewPageInfo.class)
 public class FacetNavigation extends FacetSupport<Map<String, Object>> {
 
-	public static final Logger log = LoggerFactory.getLogger(FacetNavigation.class);
+    @Override
+    public Map<String, Object> getModel(HstRequest request, HstResponse response) {
+        Map<String, Object> model = new HashMap<String, Object>();
+        HippoFacetNavigationBean facetedNavBean = getFacetNavigationBean(request);
+        if (facetedNavBean != null) {
+            facetedNavBean = applyQueryToFacetBean(request, facetedNavBean);
+            model.put(Constants.Attributes.FACETNAV, facetedNavBean);
+            Map<String, String> labels = getLabels(request);
+            model.put(Constants.Attributes.LABELS, labels);
 
-	@Override
-	public Map<String, Object> getModel(HstRequest request, HstResponse response) throws HstComponentException {
-		Map<String, Object> model = new HashMap<String, Object>();
-		HippoFacetNavigationBean facetedNavBean = getFacetNavigationBean(request);
-		if (facetedNavBean != null) {
-			facetedNavBean = applyQueryToFacetBean(request, facetedNavBean);
-			model.put(Constants.Attributes.FACETNAV, facetedNavBean);
-			Map<String, String> labels = getLabels(request);
-			model.put(Constants.Attributes.LABELS, labels);
+            if (facetedNavBean instanceof HippoFacetChildNavigationBean) {
+                model.put(Constants.Attributes.CHILDNAV, "true");
+            }
+        }
+        return model;
+    }
 
-			if (facetedNavBean instanceof HippoFacetChildNavigationBean) {
-				model.put(Constants.Attributes.CHILDNAV, "true");
-			}
-		}
-		return model;
-	}
-	
 }

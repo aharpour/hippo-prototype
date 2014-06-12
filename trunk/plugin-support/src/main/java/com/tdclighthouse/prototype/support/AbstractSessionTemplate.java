@@ -27,43 +27,36 @@ import com.tdclighthouse.prototype.rmi.RepositoryConnector;
  */
 public abstract class AbstractSessionTemplate {
 
-	protected Session session;
-	private RepositoryConnector repositoryConnector;
+    protected Session session;
+    private RepositoryConnector repositoryConnector;
 
-	public AbstractSessionTemplate(Session session) {
-		this.session = session;
-	}
+    public AbstractSessionTemplate(Session session) {
+        this.session = session;
+    }
 
-	public AbstractSessionTemplate(Repository repository) throws RepositoryException {
-		this.session = repository.login();
-	}
+    public AbstractSessionTemplate(Repository repository) throws RepositoryException {
+        this.session = repository.login();
+    }
 
-	public AbstractSessionTemplate(RepositoryConnector repositoryConnector) {
-		this.repositoryConnector = repositoryConnector;
-		this.session = repositoryConnector.getSession();
-	}
+    public AbstractSessionTemplate(RepositoryConnector repositoryConnector) {
+        this.repositoryConnector = repositoryConnector;
+        this.session = repositoryConnector.getSession();
+    }
 
-	public abstract <T> T execute(SessionCallBack<T> stub) throws RepositoryException;
+    public abstract <T> T execute(SessionCallBack<T> stub) throws RepositoryException;
 
-	public interface SessionCallBack<T> {
-		public T doInSession(Session session) throws RepositoryException;
-	}
+    public interface SessionCallBack<T> {
+        public T doInSession(Session session) throws RepositoryException;
+    }
 
-	public void logout() {
-		if (repositoryConnector != null) {
-			repositoryConnector.returnSession(session);
-			session = null;
-		} else {
-			session.logout();
-		}
+    public void logout() {
+        if (repositoryConnector != null) {
+            repositoryConnector.returnSession(session);
+            session = null;
+        } else {
+            session.logout();
+        }
 
-	}
+    }
 
-	@Override
-	protected void finalize() throws Throwable {
-		if (session != null && (repositoryConnector != null || session.isLive())) {
-			logout();
-		}
-		super.finalize();
-	}
 }

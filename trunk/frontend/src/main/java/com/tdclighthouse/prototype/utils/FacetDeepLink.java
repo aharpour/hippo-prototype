@@ -18,6 +18,7 @@ package com.tdclighthouse.prototype.utils;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
@@ -28,87 +29,104 @@ import org.hippoecm.hst.content.beans.standard.HippoBean;
  */
 public class FacetDeepLink {
 
-	public static HippoBean getDeepLinkBean(HippoBean facet, Map<String, String[]> filter)
-			throws NodeNotFoundExceptoin, NotFacetedPropertyExceptoin {
-		HippoBean targetNode = facet;
-		String[] facetedNames = facet.getProperty(Constants.HippoFacetAttributes.HIPPOFACNAV_FACETNODENAMES);
-		String[] facets = facet.getProperty(Constants.HippoFacetAttributes.HIPPOFACNAV_FACETS);
-		validateInput(facetedNames, facets);
-		Map<String, String> facetMap = getFacetMap(facetedNames, facets);
-		Iterator<String> keyIterator = filter.keySet().iterator();
-		while (keyIterator.hasNext()) {
-			String propertyName = keyIterator.next();
-			String[] propertyValues = filter.get(propertyName);
-			String facetName = facetMap.get(propertyName);
-			if (StringUtils.isNotBlank(facetName)) {
-				for (String value : propertyValues) {
-					targetNode = getFilterNode(targetNode, facetName, value);
-				}
-			} else {
-				throw new NotFacetedPropertyExceptoin("the given fact does not facet on the property: " + propertyName);
-			}
-		}
-		return targetNode;
-	}
+    private FacetDeepLink() {
+    }
 
-	private static HippoBean getFilterNode(HippoBean targetNode, String facetName, String value)
-			throws NodeNotFoundExceptoin {
-		targetNode = targetNode.getBean(facetName);
-		if (targetNode != null) {
-			targetNode = targetNode.getBean(value);
-		}
-		if (targetNode == null) {
-			throw new NodeNotFoundExceptoin();
-		}
-		return targetNode;
-	}
+    public static HippoBean getDeepLinkBean(HippoBean facet, Map<String, String[]> filter)
+            throws FacetDeepLinkExceptoin {
+        HippoBean targetNode = facet;
+        String[] facetedNames = facet.getProperty(Constants.HippoFacetAttributes.HIPPOFACNAV_FACETNODENAMES);
+        String[] facets = facet.getProperty(Constants.HippoFacetAttributes.HIPPOFACNAV_FACETS);
+        validateInput(facetedNames, facets);
+        Map<String, String> facetMap = getFacetMap(facetedNames, facets);
+        for (Iterator<Entry<String, String[]>> iterator = filter.entrySet().iterator(); iterator.hasNext();) {
+            Entry<String, String[]> entry = iterator.next();
+            String propertyName = entry.getKey();
+            String[] propertyValues = entry.getValue();
+            String facetName = facetMap.get(propertyName);
+            if (StringUtils.isNotBlank(facetName)) {
+                for (String value : propertyValues) {
+                    targetNode = getFilterNode(targetNode, facetName, value);
+                }
+            } else {
+                throw new NotFacetedPropertyExceptoin("the given fact does not facet on the property: " + propertyName);
+            }
+        }
+        return targetNode;
+    }
 
-	public static Map<String, String> getFacetMap(String[] facetedNames, String[] facets) {
-		Map<String, String> facetMap = new HashMap<String, String>();
-		for (int i = 0; i < facets.length; i++) {
-			facetMap.put(facets[i], cleanFacetName(facetedNames[i]));
-		}
-		return facetMap;
-	}
+    private static HippoBean getFilterNode(HippoBean targetNode, String facetName, String value)
+            throws NodeNotFoundExceptoin {
+        HippoBean result = targetNode.getBean(facetName);
+        if (result != null) {
+            result = result.getBean(value);
+        }
+        if (result == null) {
+            throw new NodeNotFoundExceptoin();
+        }
+        return result;
+    }
 
-	private static String cleanFacetName(String facetName) {
-		int indexOfExpression = facetName.indexOf("$");
-		if (indexOfExpression > 0) {
-			facetName = facetName.substring(0, indexOfExpression);
-		}
-		return facetName;
-	}
+    public static Map<String, String> getFacetMap(String[] facetedNames, String[] facets) {
+        Map<String, String> facetMap = new HashMap<String, String>();
+        for (int i = 0; i < facets.length; i++) {
+            facetMap.put(facets[i], cleanFacetName(facetedNames[i]));
+        }
+        return facetMap;
+    }
 
-	private static void validateInput(String[] facetedNames, String[] facets) {
-		if (facetedNames.length != facets.length) {
-			throw new IllegalArgumentException(
-					"\"hippofacnav:facetnodenames\" and \"hippofacnav:facets\" has to have the same lenght.");
-		}
-	}
+    private static String cleanFacetName(String facetName) {
+        String result = facetName;
+        int indexOfExpression = facetName.indexOf("$");
+        if (indexOfExpression > 0) {
+            result = facetName.substring(0, indexOfExpression);
+        }
+        return result;
+    }
 
-	public static class NodeNotFoundExceptoin extends Exception {
+    private static void validateInput(String[] facetedNames, String[] facets) {
+        if (facetedNames.length != facets.length) {
+            throw new IllegalArgumentException(
+                    "\"hippofacnav:facetnodenames\" and \"hippofacnav:facets\" has to have the same lenght.");
+        }
+    }
 
-		private static final long serialVersionUID = 1L;
+    public static class FacetDeepLinkExceptoin extends Exception {
 
-		public NodeNotFoundExceptoin() {
-		}
+        private static final long serialVersionUID = 1L;
 
-		public NodeNotFoundExceptoin(String string) {
-			super(string);
-		}
+        public FacetDeepLinkExceptoin() {
+        }
 
-	}
+        public FacetDeepLinkExceptoin(String string) {
+            super(string);
+        }
 
-	public static class NotFacetedPropertyExceptoin extends Exception {
+    }
 
-		private static final long serialVersionUID = 1L;
+    public static class NodeNotFoundExceptoin extends FacetDeepLinkExceptoin {
 
-		public NotFacetedPropertyExceptoin() {
-		}
+        private static final long serialVersionUID = 1L;
 
-		public NotFacetedPropertyExceptoin(String message) {
-			super(message);
-		}
+        public NodeNotFoundExceptoin() {
+        }
 
-	}
+        public NodeNotFoundExceptoin(String string) {
+            super(string);
+        }
+
+    }
+
+    public static class NotFacetedPropertyExceptoin extends FacetDeepLinkExceptoin {
+
+        private static final long serialVersionUID = 1L;
+
+        public NotFacetedPropertyExceptoin() {
+        }
+
+        public NotFacetedPropertyExceptoin(String message) {
+            super(message);
+        }
+
+    }
 }

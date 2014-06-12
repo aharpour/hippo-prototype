@@ -37,123 +37,126 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class BeanInspectionTagSupport {
 
-	public static void inspectProperties(Object bean, JspWriter out, Boolean applyHippoBlackList,
-			Integer inspectionDepth) {
-		try {
-			int depth = (inspectionDepth == null ? 5 : inspectionDepth);
-			PropertyInspector inspector = new PropertyInspector(out, applyHippoBlackList);
-			inspector.recursivePropertyInspector(bean, "", depth);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+    private BeanInspectionTagSupport() {
+    }
 
-	private static class PropertyInspector {
+    public static void inspectProperties(Object bean, JspWriter out, Boolean applyHippoBlackList,
+            Integer inspectionDepth) {
+        try {
+            int depth = inspectionDepth == null ? 5 : inspectionDepth;
+            PropertyInspector inspector = new PropertyInspector(out, applyHippoBlackList);
+            inspector.recursivePropertyInspector(bean, "", depth);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-		public static Set<String> hippoBlackList = getBlackList();
+    private static class PropertyInspector {
 
-		private final JspWriter out;
-		private final boolean applyHippoBlackList;
+        private static final Set<String> HIPPO_BLACK_LIST = getBlackList();
 
-		public PropertyInspector(JspWriter out, Boolean applyHippoBlackList) {
-			this.out = out;
-			if ((applyHippoBlackList != null) && (applyHippoBlackList == false)) {
-				this.applyHippoBlackList = false;
-			} else {
-				this.applyHippoBlackList = true;
-			}
-		}
+        private final JspWriter out;
+        private final boolean applyHippoBlackList;
 
-		public void recursivePropertyInspector(Object bean, String relativePath, int inspectionDepth)
-				throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, IOException {
-			if (inspectionDepth > 0) {
-				PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(bean);
-				for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
-					if ((propertyDescriptor.getReadMethod() != null)
-							&& (!applyHippoBlackList || isNotBlackListed(propertyDescriptor))) {
-						Class<?> propertyType = PropertyUtils.getPropertyType(bean, propertyDescriptor.getName());
-						String path = relativePath + (StringUtils.isNotBlank(relativePath) ? "." : "")
-								+ propertyDescriptor.getName();
-						try {
-							Object propertyValue = PropertyUtils.getProperty(bean, propertyDescriptor.getName());
-							if (propertyValue != null) {
-								doWithProperty(propertyType, propertyValue, path, inspectionDepth - 1);
-							} else {
-								print(path, propertyValue);
-							}
-						} catch (Exception e) {
-							print(path,
-									"<span style=\"color: red;\">an exeption of type " + e.getClass().getSimpleName()
-											+ " was throw with the following message: " + e.getMessage() + "</span>");
-						}
-					}
-				}
-			}
-		}
+        public PropertyInspector(JspWriter out, Boolean applyHippoBlackList) {
+            this.out = out;
+            if ((applyHippoBlackList != null) && (applyHippoBlackList == false)) {
+                this.applyHippoBlackList = false;
+            } else {
+                this.applyHippoBlackList = true;
+            }
+        }
 
-		private boolean isNotBlackListed(PropertyDescriptor propertyDescriptor) {
-			return !hippoBlackList.contains(propertyDescriptor.getName());
-		}
+        public void recursivePropertyInspector(Object bean, String relativePath, int inspectionDepth)
+                throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, IOException {
+            if (inspectionDepth > 0) {
+                PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(bean);
+                for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
+                    if ((propertyDescriptor.getReadMethod() != null)
+                            && (!applyHippoBlackList || isNotBlackListed(propertyDescriptor))) {
+                        Class<?> propertyType = PropertyUtils.getPropertyType(bean, propertyDescriptor.getName());
+                        String path = relativePath + (StringUtils.isNotBlank(relativePath) ? "." : "")
+                                + propertyDescriptor.getName();
+                        try {
+                            Object propertyValue = PropertyUtils.getProperty(bean, propertyDescriptor.getName());
+                            if (propertyValue != null) {
+                                doWithProperty(propertyType, propertyValue, path, inspectionDepth - 1);
+                            } else {
+                                print(path, propertyValue);
+                            }
+                        } catch (Exception e) {
+                            print(path,
+                                    "<span style=\"color: red;\">an exeption of type " + e.getClass().getSimpleName()
+                                            + " was throw with the following message: " + e.getMessage() + "</span>");
+                        }
+                    }
+                }
+            }
+        }
 
-		private void doWithProperty(Class<?> propertyType, Object propertyValue, String path, int inspectionDepth)
-				throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, IOException {
-			if (!(propertyType.isAssignableFrom(Class.class))) {
-				if (ClassUtils.isPrimitiveOrWrapper(propertyType) || String.class.isAssignableFrom(propertyType)
-						|| Date.class.isAssignableFrom(propertyType)) {
-					print(path, propertyValue);
-				} else if (Calendar.class.isAssignableFrom(propertyType)) {
-					print(path, ((Calendar) propertyValue).getTime());
-				} else if (propertyType.isArray()) {
-					int length = Array.getLength(propertyValue);
-					for (int i = 0; i < length; i++) {
-						Object object = Array.get(propertyValue, i);
-						doWithProperty(object.getClass(), object, path + "[" + i + "]", inspectionDepth);
-					}
-				} else if (Collection.class.isAssignableFrom(propertyType)) {
-					Collection<?> collection = (Collection<?>) propertyValue;
-					int i = 0;
-					for (Object object : collection) {
-						if (object != null) {
-							doWithProperty(object.getClass(), object, path + "[" + i + "]", inspectionDepth);
-						} else {
-							print(path + "[" + i + "]", object);
-						}
-						i++;
-					}
+        private boolean isNotBlackListed(PropertyDescriptor propertyDescriptor) {
+            return !HIPPO_BLACK_LIST.contains(propertyDescriptor.getName());
+        }
 
-				} else {
-					recursivePropertyInspector(propertyValue, path, inspectionDepth);
-				}
-			}
-		}
+        private void doWithProperty(Class<?> propertyType, Object propertyValue, String path, int inspectionDepth)
+                throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, IOException {
+            if (!(propertyType.isAssignableFrom(Class.class))) {
+                if (ClassUtils.isPrimitiveOrWrapper(propertyType) || String.class.isAssignableFrom(propertyType)
+                        || Date.class.isAssignableFrom(propertyType)) {
+                    print(path, propertyValue);
+                } else if (Calendar.class.isAssignableFrom(propertyType)) {
+                    print(path, ((Calendar) propertyValue).getTime());
+                } else if (propertyType.isArray()) {
+                    int length = Array.getLength(propertyValue);
+                    for (int i = 0; i < length; i++) {
+                        Object object = Array.get(propertyValue, i);
+                        doWithProperty(object.getClass(), object, path + "[" + i + "]", inspectionDepth);
+                    }
+                } else if (Collection.class.isAssignableFrom(propertyType)) {
+                    Collection<?> collection = (Collection<?>) propertyValue;
+                    int i = 0;
+                    for (Object object : collection) {
+                        if (object != null) {
+                            doWithProperty(object.getClass(), object, path + "[" + i + "]", inspectionDepth);
+                        } else {
+                            print(path + "[" + i + "]", object);
+                        }
+                        i++;
+                    }
 
-		private void print(String path, Object value) throws IOException {
-			out.println("<strong style=\"color: blue;\">" + path + "</strong> = " + value);
-		}
+                } else {
+                    recursivePropertyInspector(propertyValue, path, inspectionDepth);
+                }
+            }
+        }
 
-		private static HashSet<String> getBlackList() {
-			HashSet<String> result = new HashSet<String>();
-			result.add("canonicalPath");
-			result.add("canonicalHandleUUID");
-			result.add("canonicalHandlePath");
-			result.add("canonicalUUID");
-			result.add("hippoFolderBean");
-			result.add("hippoDocumentBean");
-			result.add("leaf");
-			result.add("localizedName");
-			result.add("localeString");
-			result.add("parentBean");
-			result.add("availableTranslationsBean");
-			result.add("contextualParentBean");
-			result.add("contextualBean");
-			result.add("UUID");
-			result.add("node");
-			result.add("valueProvider");
-			result.add("equalComparator");
-			result.add("canonicalBean");
-			result.add("property");
-			return result;
-		}
+        private void print(String path, Object value) throws IOException {
+            out.println("<strong style=\"color: blue;\">" + path + "</strong> = " + value);
+        }
 
-	}
+        private static Set<String> getBlackList() {
+            HashSet<String> result = new HashSet<String>();
+            result.add("canonicalPath");
+            result.add("canonicalHandleUUID");
+            result.add("canonicalHandlePath");
+            result.add("canonicalUUID");
+            result.add("hippoFolderBean");
+            result.add("hippoDocumentBean");
+            result.add("leaf");
+            result.add("localizedName");
+            result.add("localeString");
+            result.add("parentBean");
+            result.add("availableTranslationsBean");
+            result.add("contextualParentBean");
+            result.add("contextualBean");
+            result.add("UUID");
+            result.add("node");
+            result.add("valueProvider");
+            result.add("equalComparator");
+            result.add("canonicalBean");
+            result.add("property");
+            return result;
+        }
+
+    }
 }

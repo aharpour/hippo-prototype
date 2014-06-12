@@ -9,9 +9,8 @@ import com.tdclighthouse.prototype.utils.Constants;
 
 public interface ContentCatalogInfo extends ContentBeanPathInfo, TemplateInfo {
 
-	@JcrPath
-	@Parameter(name = Constants.HstParameters.CONTENT_BEAN_PATH, displayName = "Second document")
-	public String getContentBeanPath();
-	
-	
+    @JcrPath
+    @Parameter(name = Constants.HstParameters.CONTENT_BEAN_PATH, displayName = "Second document")
+    public String getContentBeanPath();
+
 }

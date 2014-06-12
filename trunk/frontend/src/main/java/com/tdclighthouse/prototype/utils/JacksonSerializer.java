@@ -18,6 +18,8 @@ package com.tdclighthouse.prototype.utils;
 import java.io.OutputStream;
 import java.util.List;
 
+import org.apache.commons.lang3.SerializationException;
+
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -27,28 +29,32 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  *
  */
 public class JacksonSerializer implements ObjectSerializer {
-	private ObjectMapper objectMapper;
-	private List<JsonSerializer<?>> serializers;
+    private ObjectMapper objectMapper;
+    private List<JsonSerializer<?>> serializers;
 
-	@Override
-	public void serialize(Object source, OutputStream outputStream) throws Exception {
-		objectMapper.writeValue(outputStream, source);
-	}
+    @Override
+    public void serialize(Object source, OutputStream outputStream) {
+        try {
+            objectMapper.writeValue(outputStream, source);
+        } catch (Exception e) {
+            throw new SerializationException(e.getMessage(), e);
+        }
+    }
 
-	public void setObjectMapper(ObjectMapper objectMapper) {
-		this.objectMapper = objectMapper;
-	}
+    public void setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
-	public void setSerializers(List<JsonSerializer<?>> serializers) {
-		this.serializers = serializers;
-	}
+    public void setSerializers(List<JsonSerializer<?>> serializers) {
+        this.serializers = serializers;
+    }
 
-	public void initialize() {
-		SimpleModule module = new SimpleModule();
-		for (JsonSerializer<?> jsonSerializer : serializers) {
-			module.addSerializer(jsonSerializer);
-		}
-		objectMapper.registerModule(module);
-	}
+    public void initialize() {
+        SimpleModule module = new SimpleModule();
+        for (JsonSerializer<?> jsonSerializer : serializers) {
+            module.addSerializer(jsonSerializer);
+        }
+        objectMapper.registerModule(module);
+    }
 
 }

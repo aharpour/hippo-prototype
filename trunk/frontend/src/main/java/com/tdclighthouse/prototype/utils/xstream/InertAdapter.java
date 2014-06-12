@@ -25,29 +25,29 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
  * @author Ebrahim Aharpour
  *
  */
-public class InertAdapter<BoundType> implements Converter {
+public class InertAdapter<T> implements Converter {
 
-	private final Class<? extends BoundType> type;
+    private final Class<? extends T> type;
 
-	public InertAdapter(Class<? extends BoundType> type) {
-		this.type = type;
-	}
+    public InertAdapter(Class<? extends T> type) {
+        this.type = type;
+    }
 
-	@SuppressWarnings("rawtypes")
-	@Override
-	public boolean canConvert(Class type) {
-		return this.type.isAssignableFrom(type);
-	}
+    @SuppressWarnings("rawtypes")
+    @Override
+    public boolean canConvert(Class type) {
+        return this.type.isAssignableFrom(type);
+    }
 
-	@Override
-	public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
-		writer.setValue("blocked");
+    @Override
+    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+        writer.setValue("blocked");
 
-	}
+    }
 
-	@Override
-	public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
-		return null;
-	}
+    @Override
+    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+        return null;
+    }
 
 }

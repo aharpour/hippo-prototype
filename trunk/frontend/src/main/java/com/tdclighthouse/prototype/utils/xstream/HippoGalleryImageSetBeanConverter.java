@@ -29,21 +29,21 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
  */
 public class HippoGalleryImageSetBeanConverter implements Converter {
 
-	@Override
-	@SuppressWarnings("rawtypes")
-	public boolean canConvert(Class clazz) {
-		return HippoGalleryImageSetBean.class.isAssignableFrom(clazz);
-	}
+    @Override
+    @SuppressWarnings("rawtypes")
+    public boolean canConvert(Class clazz) {
+        return HippoGalleryImageSetBean.class.isAssignableFrom(clazz);
+    }
 
-	@Override
-	public void marshal(Object obj, HierarchicalStreamWriter wirter, MarshallingContext context) {
-		HippoGalleryImageSetBean hippoGallery = (HippoGalleryImageSetBean) obj;
-		wirter.setValue(hippoGallery.getCanonicalPath());
-	}
+    @Override
+    public void marshal(Object obj, HierarchicalStreamWriter wirter, MarshallingContext context) {
+        HippoGalleryImageSetBean hippoGallery = (HippoGalleryImageSetBean) obj;
+        wirter.setValue(hippoGallery.getCanonicalPath());
+    }
 
-	@Override
-	public Object unmarshal(HierarchicalStreamReader arg0, UnmarshallingContext arg1) {
-		return null;
-	}
+    @Override
+    public Object unmarshal(HierarchicalStreamReader arg0, UnmarshallingContext arg1) {
+        return null;
+    }
 
 }

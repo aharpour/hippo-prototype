@@ -17,7 +17,6 @@ package com.tdclighthouse.prototype.jaxb;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -40,77 +39,76 @@ import org.xml.sax.XMLReader;
  */
 public class StreamParser {
 
-	private List<HandlerPair<?>> handlers = new ArrayList<HandlerPair<?>>();
+    private List<HandlerPair<?>> handlers = new ArrayList<HandlerPair<?>>();
 
-	public <T> StreamParser(EventListener<T> handleable, EventHandler<T> handler) {
-		if (handleable == null || handler == null) {
-			throw new IllegalArgumentException("handler or handleable can not be null");
-		}
-		handlers.add(new HandlerPair<T>(handleable, handler));
-	}
-	
-	public StreamParser(List<HandlerPair<?>> handlers) {
-		if (handlers.size() == 0) {
-			throw new IllegalArgumentException("there must at list be one handler in the list");
-		}
-		this.handlers.addAll(handlers);
-	}
+    public <T> StreamParser(EventListener<T> handleable, EventHandler<T> handler) {
+        if (handleable == null || handler == null) {
+            throw new IllegalArgumentException("handler or handleable can not be null");
+        }
+        handlers.add(new HandlerPair<T>(handleable, handler));
+    }
 
-	public void parse(File file) throws FileNotFoundException, JAXBException, SAXException,
-			ParserConfigurationException, IOException {
-		this.parse(new FileInputStream(file));
-	}
+    public StreamParser(List<HandlerPair<?>> handlers) {
+        if (handlers.isEmpty()) {
+            throw new IllegalArgumentException("there must at list be one handler in the list");
+        }
+        this.handlers.addAll(handlers);
+    }
 
-	public void parse(final InputStream inputStream) throws JAXBException, SAXException, ParserConfigurationException,
-			IOException {
-		JAXBContext jaxbContext = JAXBContext.newInstance(handlers.get(0).handleable.getClass().getPackage().getName());
-		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		unmarshaller.setListener(unmarshalerListener);
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		factory.setNamespaceAware(true);
-		XMLReader reader = factory.newSAXParser().getXMLReader();
-		reader.setContentHandler(unmarshaller.getUnmarshallerHandler());
-		reader.parse(new InputSource(inputStream));
-	}
+    public void parse(File file) throws JAXBException, SAXException, ParserConfigurationException, IOException {
+        this.parse(new FileInputStream(file));
+    }
 
-	private final Listener unmarshalerListener = new Listener() {
+    public void parse(final InputStream inputStream) throws JAXBException, SAXException, ParserConfigurationException,
+            IOException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(handlers.get(0).handleable.getClass().getPackage().getName());
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        unmarshaller.setListener(unmarshalerListener);
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        factory.setNamespaceAware(true);
+        XMLReader reader = factory.newSAXParser().getXMLReader();
+        reader.setContentHandler(unmarshaller.getUnmarshallerHandler());
+        reader.parse(new InputSource(inputStream));
+    }
 
-		@Override
-		public void beforeUnmarshal(Object target, Object parent) {
-			setHandlerToObject(target, StreamParser.this.handlers, false);
-		}
+    private final Listener unmarshalerListener = new Listener() {
 
-		@Override
-		public void afterUnmarshal(Object target, Object parent) {
-			setHandlerToObject(target, StreamParser.this.handlers, true);
-		}
+        @Override
+        public void beforeUnmarshal(Object target, Object parent) {
+            setHandlerToObject(target, StreamParser.this.handlers, false);
+        }
 
-		@SuppressWarnings("unchecked")
-		private void setHandlerToObject(Object target, List<HandlerPair<?>> handlers, boolean setNull) {
-			for (HandlerPair<?> handlerPair : handlers) {
-				
-				if (target != null && target.getClass().equals(handlerPair.handleable.getClass())) {
-					@SuppressWarnings("rawtypes")
-					EventListener casted = (EventListener) target;
-					if (!setNull) {
-						casted.setHandler(handlerPair.handler);
-					} else {
-						casted.setHandler(null);
-					}
-				}
-			}
-		}
-	};
+        @Override
+        public void afterUnmarshal(Object target, Object parent) {
+            setHandlerToObject(target, StreamParser.this.handlers, true);
+        }
 
-	public static class HandlerPair<T> {
-		private final EventListener<T> handleable;
-		private final EventHandler<T> handler;
+        @SuppressWarnings("unchecked")
+        private void setHandlerToObject(Object target, List<HandlerPair<?>> handlers, boolean setNull) {
+            for (HandlerPair<?> handlerPair : handlers) {
 
-		public HandlerPair(EventListener<T> handleable, EventHandler<T> handler) {
-			this.handleable = handleable;
-			this.handler = handler;
-		}
+                if (target != null && target.getClass().equals(handlerPair.handleable.getClass())) {
+                    @SuppressWarnings("rawtypes")
+                    EventListener casted = (EventListener) target;
+                    if (!setNull) {
+                        casted.setHandler(handlerPair.handler);
+                    } else {
+                        casted.setHandler(null);
+                    }
+                }
+            }
+        }
+    };
 
-	}
+    public static class HandlerPair<T> {
+        private final EventListener<T> handleable;
+        private final EventHandler<T> handler;
+
+        public HandlerPair(EventListener<T> handleable, EventHandler<T> handler) {
+            this.handleable = handleable;
+            this.handler = handler;
+        }
+
+    }
 
 }

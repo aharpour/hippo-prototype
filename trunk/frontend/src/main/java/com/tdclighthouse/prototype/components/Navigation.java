@@ -21,8 +21,6 @@ import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.parameters.ParametersInfo;
 import org.hippoecm.hst.core.sitemenu.EditableMenu;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenu;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.prototype.componentsinfo.NavigationInfo;
 import com.tdclighthouse.prototype.provider.RepoBasedMenuProvider;
@@ -38,7 +36,6 @@ import com.tdclighthouse.prototype.utils.TdcUtils.Call;
 public class Navigation extends WebDocumentDetail {
 
     private static final String EDITABLE_MENU_ATTRIBUTE = "editableMenu";
-    protected static Logger log = LoggerFactory.getLogger(Navigation.class);
 
     @Override
     public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {

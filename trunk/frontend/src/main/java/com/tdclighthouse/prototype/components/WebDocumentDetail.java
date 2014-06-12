@@ -16,7 +16,6 @@
 package com.tdclighthouse.prototype.components;
 
 import org.hippoecm.hst.content.beans.standard.HippoBean;
-import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.parameters.ParametersInfo;
@@ -31,12 +30,12 @@ import com.tdclighthouse.prototype.utils.Constants;
 @ParametersInfo(type = ContentBeanPathInfo.class)
 public class WebDocumentDetail extends BaseComponent {
 
-	@Override
-	public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-		HippoBean contentBean = getWebDocumetBean(request);
-		if (contentBean != null) {
-			request.setAttribute(Constants.Attributes.DOCUMENT, contentBean);
-		}
-	}
+    @Override
+    public void doBeforeRender(HstRequest request, HstResponse response) {
+        HippoBean contentBean = getWebDocumetBean(request);
+        if (contentBean != null) {
+            request.setAttribute(Constants.Attributes.DOCUMENT, contentBean);
+        }
+    }
 
 }

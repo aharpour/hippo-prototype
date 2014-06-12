@@ -39,114 +39,118 @@ import com.tdclighthouse.prototype.utils.ObjectSerializer;
  */
 public abstract class AjaxEnabledComponent<M> extends BaseComponent {
 
-	public static final String BLANK_TEMPLATE = "";
+    public static final String BLANK_TEMPLATE = "";
 
-	private static Logger log = LoggerFactory.getLogger(AjaxEnabledComponent.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AjaxEnabledComponent.class);
 
-	private final ObjectSerializer jsonSerializer = HstServices.getComponentManager().getComponent(
-			SpringComponents.JSON_SERIALIZER);
+    private final ObjectSerializer jsonSerializer = HstServices.getComponentManager().getComponent(
+            SpringComponents.JSON_SERIALIZER);
 
-	private final ObjectSerializer xmlSerializer = HstServices.getComponentManager().getComponent(
-			SpringComponents.XML_SERIALIZER);
+    private final ObjectSerializer xmlSerializer = HstServices.getComponentManager().getComponent(
+            SpringComponents.XML_SERIALIZER);
 
-	public abstract M getModel(HstRequest request, HstResponse response) throws HstComponentException;
+    public abstract M getModel(HstRequest request, HstResponse response) throws HstComponentException;
 
-	@Override
-	public final void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-		request.setAttribute(Attributes.MODEL, getModel(request, response));
-	}
+    @Override
+    public final void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+        request.setAttribute(Attributes.MODEL, getModel(request, response));
+    }
 
-	public Object getJsonAjaxModel(HstRequest request, HstResponse response) {
-		return getModel(request, response);
-	}
+    public Object getJsonAjaxModel(HstRequest request, HstResponse response) {
+        return getModel(request, response);
+    }
 
-	public Object getXmlAjaxModel(HstRequest request, HstResponse response) {
-		return getModel(request, response);
-	}
+    public Object getXmlAjaxModel(HstRequest request, HstResponse response) {
+        return getModel(request, response);
+    }
 
-	public Object getHtmlAjaxModel(HstRequest request, HstResponse response) {
-		return getModel(request, response);
-	}
+    public Object getHtmlAjaxModel(HstRequest request, HstResponse response) {
+        return getModel(request, response);
+    }
 
-	/**
-	 * Override this method If you want to have different HTML template then default for you Ajax call.
-	 * 
-	 * @param request HstRequest.
-	 * @param response HstResponse;
-	 * @return a String containing a template name or null if you want to use the template configured via HST configuration.
-	 */
-	public String getAjaxTemplate(HstRequest request, HstResponse response) {
-		return null;
-	}
+    /**
+     * Override this method If you want to have different HTML template then
+     * default for you Ajax call.
+     * 
+     * @param request
+     *            HstRequest.
+     * @param response
+     *            HstResponse;
+     * @return a String containing a template name or null if you want to use
+     *         the template configured via HST configuration.
+     */
+    public String getAjaxTemplate(HstRequest request, HstResponse response) {
+        return null;
+    }
 
-	@Override
-	public final void doBeforeServeResource(HstRequest request, HstResponse response) throws HstComponentException {
-		try {
-			String acceptHeader = request.getHeader("Accept");
-			String bestMatch = MIMEParse.bestMatch(ECPECTED_MIME_TYPES, acceptHeader);
-			if (MimeType.APPLICATION_JSON.equals(bestMatch) || MimeType.TEXT_JAVASCRIPT.equals(bestMatch)) {
-				if (jsonSerializer != null) {
-					returnJsonResponse(request, response);
-				} else {
-					log.error("JSON is not support since a jsonSerializer has not been provied.");
-					returnHtmlResponse(request, response);
-				}
-			} else if (MimeType.APPLICATION_XML.equals(bestMatch) || MimeType.TEXT_XML.equals(bestMatch)) {
-				if (xmlSerializer != null) {
-					returnXmlResponse(request, response);
-				} else {
-					log.error("XML is not support since a xmlSerializer has not been provied.");
-					returnHtmlResponse(request, response);
-				}
-			} else {
-				returnHtmlResponse(request, response);
-			}
-		} catch (Exception e) {
-			throw new HstComponentException(e.getLocalizedMessage(), e);
-		}
+    @Override
+    public final void doBeforeServeResource(HstRequest request, HstResponse response) throws HstComponentException {
+        try {
+            String acceptHeader = request.getHeader("Accept");
+            String bestMatch = MIMEParse.bestMatch(ECPECTED_MIME_TYPES, acceptHeader);
+            if (MimeType.APPLICATION_JSON.equals(bestMatch) || MimeType.TEXT_JAVASCRIPT.equals(bestMatch)) {
+                if (jsonSerializer != null) {
+                    returnJsonResponse(request, response);
+                } else {
+                    LOG.error("JSON is not support since a jsonSerializer has not been provied.");
+                    returnHtmlResponse(request, response);
+                }
+            } else if (MimeType.APPLICATION_XML.equals(bestMatch) || MimeType.TEXT_XML.equals(bestMatch)) {
+                if (xmlSerializer != null) {
+                    returnXmlResponse(request, response);
+                } else {
+                    LOG.error("XML is not support since a xmlSerializer has not been provied.");
+                    returnHtmlResponse(request, response);
+                }
+            } else {
+                returnHtmlResponse(request, response);
+            }
+        } catch (Exception e) {
+            throw new HstComponentException(e.getLocalizedMessage(), e);
+        }
 
-	}
+    }
 
-	private final void returnHtmlResponse(HstRequest request, HstResponse response) throws Exception {
-		request.setAttribute(Attributes.MODEL, getHtmlAjaxModel(request, response));
-		String ajaxTemplate = getAjaxTemplate(request, response);
-		if (ajaxTemplate != null) {
-			response.setServeResourcePath(ajaxTemplate);
-		}
-	}
+    private final void returnHtmlResponse(HstRequest request, HstResponse response) throws Exception {
+        request.setAttribute(Attributes.MODEL, getHtmlAjaxModel(request, response));
+        String ajaxTemplate = getAjaxTemplate(request, response);
+        if (ajaxTemplate != null) {
+            response.setServeResourcePath(ajaxTemplate);
+        }
+    }
 
-	private void returnXmlResponse(HstRequest request, HstResponse response) throws Exception {
-		Object model = getXmlAjaxModel(request, response);
-		response.setServeResourcePath(BLANK_TEMPLATE);
-		response.setContentType(MimeType.APPLICATION_XML);
-		response.setCharacterEncoding(getCharacterEndcoding());
-		xmlSerializer.serialize(model, response.getOutputStream());
-	}
+    private void returnXmlResponse(HstRequest request, HstResponse response) throws Exception {
+        Object model = getXmlAjaxModel(request, response);
+        response.setServeResourcePath(BLANK_TEMPLATE);
+        response.setContentType(MimeType.APPLICATION_XML);
+        response.setCharacterEncoding(getCharacterEndcoding());
+        xmlSerializer.serialize(model, response.getOutputStream());
+    }
 
-	private void returnJsonResponse(HstRequest request, HstResponse response) throws Exception {
-		Object model = getJsonAjaxModel(request, response);
-		jsonSerializer.serialize(model, response.getOutputStream());
-		response.setServeResourcePath(BLANK_TEMPLATE);
-		response.setContentType(MimeType.APPLICATION_JSON);
-		response.setCharacterEncoding(getCharacterEndcoding());
-	}
+    private void returnJsonResponse(HstRequest request, HstResponse response) throws Exception {
+        Object model = getJsonAjaxModel(request, response);
+        jsonSerializer.serialize(model, response.getOutputStream());
+        response.setServeResourcePath(BLANK_TEMPLATE);
+        response.setContentType(MimeType.APPLICATION_JSON);
+        response.setCharacterEncoding(getCharacterEndcoding());
+    }
 
-	protected String getCharacterEndcoding() {
-		return Encodings.UTF8;
-	}
+    protected String getCharacterEndcoding() {
+        return Encodings.UTF8;
+    }
 
-	@SuppressWarnings("unchecked")
-	private final static List<String> ECPECTED_MIME_TYPES = ListUtils.unmodifiableList(new ArrayList<String>() {
-		private static final long serialVersionUID = 1L;
+    @SuppressWarnings("unchecked")
+    private final static List<String> ECPECTED_MIME_TYPES = ListUtils.unmodifiableList(new ArrayList<String>() {
+        private static final long serialVersionUID = 1L;
 
-		{
-			add(MimeType.TEXT_HTML);
-			add(MimeType.APPLICATION_XHTML_XML);
-			add(MimeType.APPLICATION_JSON);
-			add(MimeType.TEXT_JAVASCRIPT);
-			add(MimeType.APPLICATION_XML);
-			add(MimeType.TEXT_XML);
-		}
-	});
+        {
+            add(MimeType.TEXT_HTML);
+            add(MimeType.APPLICATION_XHTML_XML);
+            add(MimeType.APPLICATION_JSON);
+            add(MimeType.TEXT_JAVASCRIPT);
+            add(MimeType.APPLICATION_XML);
+            add(MimeType.TEXT_XML);
+        }
+    });
 
 }

@@ -30,56 +30,63 @@ import org.hippoecm.hst.core.sitemenu.EditableMenuItem;
  */
 public class NavigationUtils {
 
-	private NavigationUtils() {
-	}
+    private NavigationUtils() {
+    }
 
-	public static HippoBean getIndexBean(HippoBean childbeering) {
-		HippoBean result;
-		if (childbeering instanceof HippoFacetNavigation) {
-			result = childbeering;
-		} else if (childbeering instanceof HippoFolderBean) {
-			HippoFolderBean folder = (HippoFolderBean) childbeering;
-			result = folder.getBean(Constants.NodeName.INDEX);
-			// when there is no index document in a folder then the first
-			// document is selected instead
-			if (result == null) {
-				List<HippoDocumentBean> documents = folder.getDocuments();
-				result = (documents.size() > 0 ? documents.get(0) : null);
-			}
-		} else {
-			throw new IllegalArgumentException(
-					"Expect childbearingBean to be either a HippoFolderBean or a HippoFacetNavigation");
-		}
-		return result;
-	}
+    public static HippoBean getIndexBean(HippoBean childbeering) {
+        HippoBean result;
+        if (childbeering instanceof HippoFacetNavigation) {
+            result = childbeering;
+        } else if (childbeering instanceof HippoFolderBean) {
+            HippoFolderBean folder = (HippoFolderBean) childbeering;
+            result = folder.getBean(Constants.NodeName.INDEX);
+            // when there is no index document in a folder then the first
+            // document is selected instead
+            if (result == null) {
+                List<HippoDocumentBean> documents = folder.getDocuments();
+                result = (!documents.isEmpty() ? documents.get(0) : null);
+            }
+        } else {
+            throw new IllegalArgumentException(
+                    "Expect childbearingBean to be either a HippoFolderBean or a HippoFacetNavigation");
+        }
+        return result;
+    }
 
-	public static EditableMenuItem getSiteMapItemByPath(EditableMenu editableMenu, String relativePath) {
-		EditableMenuItem result = null;
-		relativePath = normalizePath(relativePath);
-		String[] split = relativePath.split("/");
-		List<EditableMenuItem> menuItems = editableMenu.getMenuItems();
-		EditableMenuItem temp = result;
-		for (String segment : split) {
-			for (EditableMenuItem editable : menuItems) {
-				if (editable.getName().equals(segment)) {
-					temp = editable;
-					menuItems = editable.getChildMenuItems();
-					break;
-				}
-			}
-			if (temp == result) {
-				break;
-			} else {
-				result = temp;
-			}
-		}
-		return result;
-	}
+    public static EditableMenuItem getSiteMapItemByPath(EditableMenu editableMenu, String relativePath) {
+        EditableMenuItem result = null;
+        String normalizedPath = normalizePath(relativePath);
+        String[] split = normalizedPath.split("/");
+        List<EditableMenuItem> menuItems = editableMenu.getMenuItems();
+        for (String segment : split) {
+            EditableMenuItem temp = getSiteMenuItemByPathSegement(menuItems, segment);
+            if (temp == null) {
+                break;
+            } else {
+                result = temp;
+                menuItems = temp.getChildMenuItems();
+            }
+        }
+        return result;
+    }
 
-	private static String normalizePath(String relativePath) {
-		if (relativePath.startsWith("/")) {
-			relativePath = relativePath.substring(1);
-		}
-		return relativePath;
-	}
+    private static EditableMenuItem getSiteMenuItemByPathSegement(List<EditableMenuItem> menuItems, String pathSegment) {
+        EditableMenuItem result = null;
+        List<EditableMenuItem> currentMenuItems = menuItems;
+        for (EditableMenuItem editable : currentMenuItems) {
+            if (editable.getName().equals(pathSegment)) {
+                result = editable;
+                break;
+            }
+        }
+        return result;
+    }
+
+    private static String normalizePath(String relativePath) {
+        String result = relativePath;
+        if (relativePath.startsWith("/")) {
+            result = relativePath.substring(1);
+        }
+        return result;
+    }
 }

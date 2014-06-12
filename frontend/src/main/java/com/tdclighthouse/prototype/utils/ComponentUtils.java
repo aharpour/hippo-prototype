@@ -4,7 +4,10 @@ import org.hippoecm.hst.core.component.HstRequest;
 
 public class ComponentUtils {
 
-	public static String getComponentSpecificParameterName(HstRequest request, String name) {
-		return name + "_" + request.getReferenceNamespace();
-	}
+    private ComponentUtils() {
+    }
+
+    public static String getComponentSpecificParameterName(HstRequest request, String name) {
+        return name + "_" + request.getReferenceNamespace();
+    }
 }

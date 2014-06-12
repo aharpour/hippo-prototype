@@ -29,31 +29,32 @@ import com.tdclighthouse.prototype.utils.PluginConstants;
  */
 public class NewImageFolderCallBack extends CreateNodeCallBack {
 
-	private final String parentPath;
-	private final String folderName;
+    private final String parentPath;
+    private final String folderName;
 
-	public NewImageFolderCallBack(String parentPath, String folderName) {
-		this.parentPath = parentPath;
-		this.folderName = folderName;
-	}
+    public NewImageFolderCallBack(String parentPath, String folderName) {
+        this.parentPath = parentPath;
+        this.folderName = folderName;
+    }
 
-	@Override
-	public void edit(HippoNode editableNode) throws RepositoryException {
-	}
+    @Override
+    public void edit(HippoNode editableNode) throws RepositoryException {
+     // there is no need to edit the node in this case
+    }
 
-	@Override
-	protected Node getParentNode(Session session) throws RepositoryException {
-		return session.getNode(parentPath);
-	}
+    @Override
+    protected Node getParentNode(Session session) throws RepositoryException {
+        return session.getNode(parentPath);
+    }
 
-	@Override
-	public String getNodeName(Session session) throws RepositoryException {
-		return folderName;
-	}
+    @Override
+    public String getNodeName(Session session) throws RepositoryException {
+        return folderName;
+    }
 
-	@Override
-	public String getNodeType(Session session) throws RepositoryException {
-		return PluginConstants.NodeType.HIPPOGALLERY_STD_IMAGE_GALLERY;
-	}
+    @Override
+    public String getNodeType(Session session) throws RepositoryException {
+        return PluginConstants.NodeType.HIPPOGALLERY_STD_IMAGE_GALLERY;
+    }
 
 }

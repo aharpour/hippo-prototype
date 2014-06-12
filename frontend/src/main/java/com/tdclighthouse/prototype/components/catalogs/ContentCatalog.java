@@ -20,7 +20,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
-import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.parameters.ParametersInfo;
@@ -37,7 +36,7 @@ import com.tdclighthouse.prototype.utils.Constants;
 public class ContentCatalog extends AjaxEnabledComponent<Map<String, Object>> {
 
     @Override
-    public Map<String, Object> getModel(HstRequest request, HstResponse response) throws HstComponentException {
+    public Map<String, Object> getModel(HstRequest request, HstResponse response) {
         Map<String, Object> model = new HashMap<String, Object>();
 
         ContentCatalogInfo parametersInfo = (ContentCatalogInfo) getComponentParametersInfo(request);

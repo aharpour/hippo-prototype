@@ -11,41 +11,41 @@ import org.hippoecm.hst.util.HstRequestUtils;
 
 public abstract class PrototypeTagSupport extends TagSupport {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private HstRequest hstRequest;
-	private HstResponse hstResponse;
+    private HstRequest hstRequest;
+    private HstResponse hstResponse;
 
-	protected void reset() {
+    protected void reset() {
 
-		hstRequest = null;
-		hstResponse = null;
-	}
+        hstRequest = null;
+        hstResponse = null;
+    }
 
-	protected HstRequest getHstRequest() {
-		if (hstRequest == null) {
-			HttpServletRequest servletRequest = (HttpServletRequest) pageContext.getRequest();
-			hstRequest = HstRequestUtils.getHstRequest(servletRequest);
-		}
-		return hstRequest;
-	}
+    protected HstRequest getHstRequest() {
+        if (hstRequest == null) {
+            HttpServletRequest servletRequest = (HttpServletRequest) pageContext.getRequest();
+            hstRequest = HstRequestUtils.getHstRequest(servletRequest);
+        }
+        return hstRequest;
+    }
 
-	protected HstResponse getHstResponse() {
-		if (hstResponse == null) {
-			HttpServletResponse servletResponse = (HttpServletResponse) pageContext.getResponse();
-			hstResponse = HstRequestUtils.getHstResponse(getHstRequest(), servletResponse);
-		}
-		return hstResponse;
-	}
+    protected HstResponse getHstResponse() {
+        if (hstResponse == null) {
+            HttpServletResponse servletResponse = (HttpServletResponse) pageContext.getResponse();
+            hstResponse = HstRequestUtils.getHstResponse(getHstRequest(), servletResponse);
+        }
+        return hstResponse;
+    }
 
-	protected static String escapeXml(String value) {
-		return StringEscapeUtils.escapeXml(value);
-	}
+    protected static String escapeXml(String value) {
+        return StringEscapeUtils.escapeXml(value);
+    }
 
-	@Override
-	public void release() {
-		super.release();
-		reset();
-	}
+    @Override
+    public void release() {
+        super.release();
+        reset();
+    }
 
 }

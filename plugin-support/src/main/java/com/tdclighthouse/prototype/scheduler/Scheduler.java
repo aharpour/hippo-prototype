@@ -35,62 +35,62 @@ import com.tdclighthouse.prototype.utils.Configuration;
  * 
  */
 public class Scheduler {
-	private static final String INTERVAL_LENGTH_PROPERTY = "interval.length";
-	private static final String START_TIME_PROPERTY = "start.time";
-	public static Logger log = LoggerFactory.getLogger(Scheduler.class);
-	private final Timer timer;
-	private ExecutorService executor;
+    private static final String INTERVAL_LENGTH_PROPERTY = "interval.length";
+    private static final String START_TIME_PROPERTY = "start.time";
+    private static final Logger LOG = LoggerFactory.getLogger(Scheduler.class);
+    private final Timer timer;
+    private ExecutorService executor;
 
-	public Scheduler() {
-		timer = new Timer(true);
-	}
+    public Scheduler() {
+        timer = new Timer(true);
+    }
 
-	public synchronized void addTask(final Runnable runnable, Configuration configuration) {
-		long initialDelayInMin = getInitialDelayInMilliseconds(configuration);
-		long delayInMin = getDelayInMilliseconds(configuration);
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				if (executor != null && !executor.isShutdown() && !executor.isTerminated()) {
-					executor.execute(runnable);
-				} else {
-					runnable.run();
-				}
-			}
-		}, initialDelayInMin, delayInMin);
-		log.info("a new task was schedule with the initailDelay of " + initialDelayInMin
-				+ " miliseconds and delays of " + delayInMin + " miliseconds");
-	}
+    public synchronized void addTask(final Runnable runnable, Configuration configuration) {
+        long initialDelayInMin = getInitialDelayInMilliseconds(configuration);
+        long delayInMin = getDelayInMilliseconds(configuration);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (executor != null && !executor.isShutdown() && !executor.isTerminated()) {
+                    executor.execute(runnable);
+                } else {
+                    runnable.run();
+                }
+            }
+        }, initialDelayInMin, delayInMin);
+        LOG.info("a new task was schedule with the initailDelay of " + initialDelayInMin
+                + " miliseconds and delays of " + delayInMin + " miliseconds");
+    }
 
-	protected long getInitialDelayInMilliseconds(Configuration configuration) {
-		DateTime dateTime = new DateTime(configuration.getTime(START_TIME_PROPERTY, getMidnight()));
-		Seconds secondsBetween = Seconds.secondsBetween(new DateTime(), dateTime);
-		return TimeUnit.SECONDS.toMillis(((long) secondsBetween.getSeconds() + 30));
-	}
+    protected long getInitialDelayInMilliseconds(Configuration configuration) {
+        DateTime dateTime = new DateTime(configuration.getTime(START_TIME_PROPERTY, getMidnight()));
+        Seconds secondsBetween = Seconds.secondsBetween(new DateTime(), dateTime);
+        return TimeUnit.SECONDS.toMillis((long) secondsBetween.getSeconds() + 30);
+    }
 
-	protected long getDelayInMilliseconds(Configuration configuration) {
-		double hours = configuration.getItem(INTERVAL_LENGTH_PROPERTY, 8.0, Double.class);
-		return Math.round(hours * 3600000);
-	}
-	
-	public void setExecutor(ExecutorService executor) {
-		this.executor = executor;
-	}
+    protected long getDelayInMilliseconds(Configuration configuration) {
+        double hours = configuration.getItem(INTERVAL_LENGTH_PROPERTY, 8.0, Double.class);
+        return Math.round(hours * 3600000);
+    }
 
-	protected Date getMidnight() {
-		Calendar calendar = new GregorianCalendar();
-		calendar.set(Calendar.HOUR, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.AM_PM, Calendar.AM);
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		return calendar.getTime();
-	}
+    public void setExecutor(ExecutorService executor) {
+        this.executor = executor;
+    }
 
-	public void shutdown() {
-		if (executor != null && !executor.isShutdown()) {
-			executor.shutdown();
-		}
-		timer.cancel();
-	}
+    protected Date getMidnight() {
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.AM_PM, Calendar.AM);
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        return calendar.getTime();
+    }
+
+    public void shutdown() {
+        if (executor != null && !executor.isShutdown()) {
+            executor.shutdown();
+        }
+        timer.cancel();
+    }
 
 }

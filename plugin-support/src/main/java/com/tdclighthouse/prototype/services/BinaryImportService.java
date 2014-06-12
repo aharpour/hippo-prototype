@@ -30,10 +30,10 @@ import com.tdclighthouse.prototype.services.callbacks.BinaryCreationCallBack;
 import com.tdclighthouse.prototype.services.callbacks.ImageCreationCallBack;
 import com.tdclighthouse.prototype.services.callbacks.NewAssetFolderCallBack;
 import com.tdclighthouse.prototype.services.callbacks.NewImageFolderCallBack;
-import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
-import com.tdclighthouse.prototype.utils.PluginConstants;
+import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.utils.ImageUtils;
+import com.tdclighthouse.prototype.utils.PluginConstants;
 
 /**
  * @author Ebrahim Aharpour
@@ -41,87 +41,89 @@ import com.tdclighthouse.prototype.utils.ImageUtils;
  */
 public class BinaryImportService {
 
-	public static final Logger log = LoggerFactory.getLogger(BinaryImportService.class);
+    private static final String FILE_COPY_LOG_MESSAGE = "file: {} is going to be put in {}";
 
-	@Autowired
-	private DocumentManager documentManager;
+    private static final Logger LOG = LoggerFactory.getLogger(BinaryImportService.class);
 
-	@Autowired
-	private FolderCreationService folderCreationService;
+    @Autowired
+    private DocumentManager documentManager;
 
-	private String imageType;
+    @Autowired
+    private FolderCreationService folderCreationService;
 
-	@Required
-	public void setImageType(String imageType) {
-		this.imageType = imageType;
-	}
+    private String imageType;
 
-	private final FileFilter fileFilter = new FileFilter() {
+    private final FileFilter fileFilter = new FileFilter() {
 
-		@Override
-		public boolean accept(File file) {
-			return file.isDirectory() && !".svn".equals(file.getName());
-		}
-	};
-	private final FileFilter folderFilter = new FileFilter() {
+        @Override
+        public boolean accept(File file) {
+            return file.isDirectory() && !".svn".equals(file.getName());
+        }
+    };
+    private final FileFilter folderFilter = new FileFilter() {
 
-		@Override
-		public boolean accept(File file) {
-			return !file.isDirectory();
-		}
-	};
+        @Override
+        public boolean accept(File file) {
+            return !file.isDirectory();
+        }
+    };
 
-	public void migrateFolder(File folder, String path) throws RepositoryException {
-		// first take cares of the file in the folder
-		File[] files = folder.listFiles(folderFilter);
-		for (File file : files) {
-			if (ImageUtils.isHippoFriendlyImage(file)) {
-				migrateImages(file, path);
-			} else {
-				migrateBinaries(file, path);
-			}
-		}
-		// then recurse trough sub-folders
-		File[] folders = folder.listFiles(fileFilter);
-		for (File subfolder : folders) {
-			migrateFolder(subfolder, path + "/" + subfolder.getName());
-		}
-	}
+    @Required
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
 
-	private void migrateBinaries(File file, String relPath) throws RepositoryException {
-		String absPath = folderCreationService.generateFolders(PluginConstants.Paths.ASSETS, relPath,
-				new NewFolderCallBackFactory() {
-					@Override
-					public SessionCallBack<String> getNewFolderCallBack(String parentPath, String folderName) {
-						return new NewAssetFolderCallBack(parentPath, folderName);
-					}
-				});
-		log.debug("file: " + file.getAbsolutePath() + " is going to be put in " + absPath);
-		documentManager.runInSession(new BinaryCreationCallBack(absPath, file));
-	}
+    public void migrateFolder(File folder, String path) throws RepositoryException {
+        // first take cares of the file in the folder
+        File[] files = folder.listFiles(folderFilter);
+        for (File file : files) {
+            if (ImageUtils.isHippoFriendlyImage(file)) {
+                migrateImages(file, path);
+            } else {
+                migrateBinaries(file, path);
+            }
+        }
+        // then recurse trough sub-folders
+        File[] folders = folder.listFiles(fileFilter);
+        for (File subfolder : folders) {
+            migrateFolder(subfolder, path + "/" + subfolder.getName());
+        }
+    }
 
-	private void migrateImages(File file, String relPath) throws RepositoryException {
-		try {
-			String absPath = folderCreationService.generateFolders(PluginConstants.Paths.GALLERY, relPath,
-					new NewFolderCallBackFactory() {
-						@Override
-						public SessionCallBack<String> getNewFolderCallBack(String parentPath, String folderName) {
-							return new NewImageFolderCallBack(parentPath, folderName);
-						}
-					});
-			log.debug("file: " + file.getAbsolutePath() + " is going to be put in " + absPath);
-			documentManager.runInSession(new ImageCreationCallBack(absPath, file, imageType));
-		} catch (Exception e) {
-			log.error("Migration of image \"" + relPath + "\" fail for the following reason.", e);
-		}
-	}
+    private void migrateBinaries(File file, String relPath) throws RepositoryException {
+        String absPath = folderCreationService.generateFolders(PluginConstants.Paths.ASSETS, relPath,
+                new NewFolderCallBackFactory() {
+                    @Override
+                    public SessionCallBack<String> getNewFolderCallBack(String parentPath, String folderName) {
+                        return new NewAssetFolderCallBack(parentPath, folderName);
+                    }
+                });
+        LOG.debug(FILE_COPY_LOG_MESSAGE, file.getAbsolutePath(), absPath);
+        documentManager.runInSession(new BinaryCreationCallBack(absPath, file));
+    }
 
-	public void setDocumentManager(DocumentManager documentManager) {
-		this.documentManager = documentManager;
-	}
+    private void migrateImages(File file, String relPath) throws RepositoryException {
+        try {
+            String absPath = folderCreationService.generateFolders(PluginConstants.Paths.GALLERY, relPath,
+                    new NewFolderCallBackFactory() {
+                        @Override
+                        public SessionCallBack<String> getNewFolderCallBack(String parentPath, String folderName) {
+                            return new NewImageFolderCallBack(parentPath, folderName);
+                        }
+                    });
+            LOG.debug(FILE_COPY_LOG_MESSAGE, file.getAbsolutePath(), absPath);
+            documentManager.runInSession(new ImageCreationCallBack(absPath, file, imageType));
+        } catch (Exception e) {
+            LOG.error("Migration of image \"" + relPath + "\" fail for the following reason.", e);
+        }
+    }
 
-	public void setFolderCreationService(FolderCreationService folderCreationService) {
-		this.folderCreationService = folderCreationService;
-	}
+    public void setDocumentManager(DocumentManager documentManager) {
+        this.documentManager = documentManager;
+    }
+
+    public void setFolderCreationService(FolderCreationService folderCreationService) {
+        this.folderCreationService = folderCreationService;
+    }
 
 }

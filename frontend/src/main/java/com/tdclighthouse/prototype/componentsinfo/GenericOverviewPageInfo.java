@@ -24,7 +24,7 @@ import org.hippoecm.hst.core.parameters.Parameter;
  */
 public interface GenericOverviewPageInfo extends PaginatedInfo, ContentBeanPathInfo, SortedInfo {
 
-	@Parameter(name = "showTypes")
-	public Class<? extends HippoBean>[] getShowTypes();
+    @Parameter(name = "showTypes")
+    public Class<? extends HippoBean>[] getShowTypes();
 
 }

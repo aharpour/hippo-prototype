@@ -15,11 +15,10 @@
  */
 package com.tdclighthouse.prototype.componentsinfo;
 
-
 /**
  * @author Ebrahim Aharpour
  *
  */
-public interface FacetedNavigationInfo extends LabelsInfo{
-	
+public interface FacetedNavigationInfo extends LabelsInfo {
+
 }

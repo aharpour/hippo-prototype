@@ -19,7 +19,6 @@ import java.io.IOException;
 
 import org.hippoecm.hst.content.beans.standard.HippoHtmlBean;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
@@ -30,14 +29,13 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
  */
 public class HippoHtmlBeanSerializer extends StdSerializer<HippoHtmlBean> {
 
-	public HippoHtmlBeanSerializer() {
-		super(HippoHtmlBean.class);
-	}
+    public HippoHtmlBeanSerializer() {
+        super(HippoHtmlBean.class);
+    }
 
-	@Override
-	public void serialize(HippoHtmlBean value, JsonGenerator jgen, SerializerProvider provider)
-			throws IOException, JsonGenerationException {
-		jgen.writeString(value.getContent());
-	}
+    @Override
+    public void serialize(HippoHtmlBean value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+        jgen.writeString(value.getContent());
+    }
 
 }

@@ -23,6 +23,6 @@ import java.io.OutputStream;
  */
 public interface ObjectSerializer {
 
-	public void serialize(Object source, OutputStream outputStream) throws Exception;
+    public void serialize(Object source, OutputStream outputStream);
 
 }

@@ -85,12 +85,10 @@ public class ValueListAjax extends BaseComponent {
         return query.execute().getHippoBeans();
     }
 
-    protected JSON getAvilibleListsAsJson(HstRequest request, BlackListChecker blackListChecker)
-            throws HstComponentException {
+    protected JSON getAvilibleListsAsJson(HstRequest request, BlackListChecker blackListChecker) {
         try {
             HippoBeanIterator valueLists = getAllValueLists(request);
-            JSON json = valueListIteratorToJson(valueLists, blackListChecker);
-            return json;
+            return valueListIteratorToJson(valueLists, blackListChecker);
         } catch (QueryException e) {
             throw new HstComponentException(e);
         }

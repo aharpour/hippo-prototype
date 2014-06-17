@@ -40,7 +40,7 @@ public class Constants {
         public static final String WEBMASTER_WARN_MESSAGE = "webmasterWarningMessage";
         public static final String MENU = "menu";
 
-        private Attributes() {
+        protected Attributes() {
             super();
         }
 
@@ -51,7 +51,7 @@ public class Constants {
         public static final String TDC_RELEASE_DATE = "tdc:releaseDate";
         public static final String TDC_TITLE = "tdc:title";
 
-        private FieldName() {
+        protected FieldName() {
             super();
         }
     }
@@ -62,7 +62,7 @@ public class Constants {
         public static final String HIPPOFACNAV_FACETS = "hippofacnav:facets";
         public static final String HIPPO_DOCBASE = "hippo:docbase";
 
-        private HippoFacetAttributes() {
+        protected HippoFacetAttributes() {
             super();
         }
 
@@ -73,7 +73,7 @@ public class Constants {
         public static final String IMAGE_NODE_TYPE = "hippogallery:imageset";
         public static final String ASSET_NODE_TYPE = "hippogallery:exampleAssetSet";
 
-        private HippoNodeTypes() {
+        protected HippoNodeTypes() {
             super();
         }
 
@@ -85,7 +85,7 @@ public class Constants {
         public static final String CACHE_CONTROL = "Cache-Control";
         public static final String MAX_AGE = "max-age";
 
-        private HttpHeader() {
+        protected HttpHeader() {
             super();
         }
 
@@ -99,7 +99,7 @@ public class Constants {
         public static final String TEXT_HTML = "text/html";
         public static final String APPLICATION_XHTML_XML = "application/xhtml+xml";
 
-        private MimeType() {
+        protected MimeType() {
             super();
         }
 
@@ -111,7 +111,7 @@ public class Constants {
         public static final String PAGE_SIZE = "size";
         public static final String PATH = "path";
 
-        private Parameters() {
+        protected Parameters() {
             super();
         }
 
@@ -124,7 +124,7 @@ public class Constants {
         public static final String ROOT = "root";
         public static final String TEMPLATE = "template";
 
-        private HstParameters() {
+        protected HstParameters() {
             super();
         }
     }
@@ -134,7 +134,7 @@ public class Constants {
         public static final String DESCENDING = "descending";
         public static final String TRUE = "true";
 
-        private Values() {
+        protected Values() {
             super();
         }
     }
@@ -146,7 +146,7 @@ public class Constants {
         public static final String IMAGE_PICKER = "cms-pickers/images";
         public static final String DOCUMENT_PICKER_ONLY = "cms-pickers/documents-only";
 
-        private PikcerTypes() {
+        protected PikcerTypes() {
             super();
         }
 
@@ -155,7 +155,7 @@ public class Constants {
     public static class NodeName {
         public static final String INDEX = "index";
 
-        private NodeName() {
+        protected NodeName() {
             super();
         }
 
@@ -164,7 +164,7 @@ public class Constants {
     public static class Regex {
         public static final String COMMA_SEPARATOR = "\\s*,\\s*";
 
-        private Regex() {
+        protected Regex() {
             super();
         }
 
@@ -173,7 +173,7 @@ public class Constants {
     public static class Encodings {
         public static final String UTF8 = "UTF-8";
 
-        private Encodings() {
+        protected Encodings() {
             super();
         }
 
@@ -183,7 +183,7 @@ public class Constants {
         public static final String HTTP = "http";
         public static final String HTTPS = "https";
 
-        private Schemes() {
+        protected Schemes() {
             super();
         }
 
@@ -193,13 +193,13 @@ public class Constants {
         public static final String JSON_SERIALIZER = "com.tdclighthouse.prototype.utils.JsonSerializer";
         public static final String XML_SERIALIZER = "com.tdclighthouse.prototype.utils.XmlSerializer";
 
-        private SpringComponents() {
+        protected SpringComponents() {
             super();
         }
 
     }
 
-    private Constants() {
+    protected Constants() {
         super();
     }
 

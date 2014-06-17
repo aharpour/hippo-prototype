@@ -4,11 +4,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="hst" uri="http://www.hippoecm.org/jsp/hst/core" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
-<%@ taglib prefix="tdc" uri="http://www.tdclighthouse.com/hippo/prototype" %>
+<%@ taglib prefix="tag" uri="http://open-web.nl/hippo/prototype" %>
 
 <%@ attribute name="paginator" type="com.tdclighthouse.prototype.utils.PaginatorWidget" rtexprvalue="true" required="true" %>
 <%@ attribute name="pageParamerter" type="java.lang.String" rtexprvalue="true" required="false" %>
 <%@ attribute name="rowsPerPageParameter" type="java.lang.String" rtexprvalue="true" required="false" %>
+
 <c:if test="${empty pageParamerter}">
   <c:set var="pageParamerter" value="page"/>
 </c:if>
@@ -19,7 +20,7 @@
   <c:choose>
     <c:when test="${paginator.page > 1}">
       <c:set var="url">
-        <tdc:add-query-param key="${pageParamerter}" value="${paginator.page - 1}"/>
+        <tag:add-query-param key="${pageParamerter}" value="${paginator.page - 1}"/>
       </c:set>
       <li class="pager-previous"><a href="${url}" title="${goToPrevious}">&lsaquo; <fmt:message key="paginator.previous" /></a></li>
     </c:when>
@@ -31,7 +32,7 @@
   <c:choose>
     <c:when test="${paginator.numberOfPages > paginator.page}">
       <c:set var="url">
-        <tdc:add-query-param key="${pageParamerter}" value="${paginator.page + 1}"/>
+        <tag:add-query-param key="${pageParamerter}" value="${paginator.page + 1}"/>
       </c:set>
       <li class="pager-next"><a href="${url}" title="${goToNext}"><fmt:message key="paginator.next" /> &rsaquo;</a></li>
     </c:when>

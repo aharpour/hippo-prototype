@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="hst" uri="http://www.hippoecm.org/jsp/hst/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="tdc" uri="http://www.tdclighthouse.com/hippo/prototype" %>
+<%@ taglib prefix="tag" uri="http://open-web.nl/hippo/prototype" %>
 <%@ tag trimDirectiveWhitespaces="true" %>
 
 <%@ attribute name="form" type="com.tdclighthouse.commons.simpleform.html.Form" rtexprvalue="true" required="true" %>
@@ -26,7 +26,7 @@
 <c:set value="${form.group}" var="group"/>
 <form action="${action}" method="${method}" class="simpleform">
 	<input type="hidden" name="formname" value="${form.name}">
-	<tdc:formgroup group="${group}"/>
+	<tag:formgroup group="${group}"/>
   <div class="ef-buttons">
 	 <input type="submit" id="submit_button" value="${submitButtonLabel}"/>
   </div>

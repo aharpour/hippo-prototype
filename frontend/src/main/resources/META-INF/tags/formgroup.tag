@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="hst" uri="http://www.hippoecm.org/jsp/hst/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="tdc" uri="http://www.tdclighthouse.com/hippo/prototype" %>
+<%@ taglib prefix="tag" uri="http://open-web.nl/hippo/prototype" %>
 <%@ tag trimDirectiveWhitespaces="true" %>
 
 <%@ attribute name="group" type="com.tdclighthouse.commons.simpleform.html.FormItemGroup" rtexprvalue="true" required="true" %>
@@ -15,7 +15,7 @@
 <c:choose>
 	<c:when test="${fn:length(group.subgroups) > 0}">
 		<c:forEach items="group.subgroups" var="subgroup">
-			<tdc:formgroup group="subgroup"/>
+			<tag:formgroup group="subgroup"/>
 		</c:forEach>
 	</c:when>
 	<c:otherwise>
@@ -28,7 +28,7 @@
       <c:set var="fieldClass">${not empty formItem.errorMessage ? 'error' : ''}</c:set>
 			<div class="form-row">
 				<label for="${formItem.name}"><fmt:message key="${formItem.label}"/>${formItem.mandatory? ' *' : ''}</label>
-				<tdc:formitem formItem="${formItem}" fieldClass="${fieldClass }"/>
+				<tag:formitem formItem="${formItem}" fieldClass="${fieldClass }"/>
         <c:if test="${not empty formItem.errorMessage}">
           <span class="error"><fmt:message key="${formItem.errorMessage}"/></span>
         </c:if>

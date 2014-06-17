@@ -4,8 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="hst" uri="http://www.hippoecm.org/jsp/hst/core" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
-<%@ taglib prefix="tdc" uri="http://www.tdclighthouse.com/hippo/prototype" %>
-<%@ tag trimDirectiveWhitespaces="true"%>
+
 <%@ attribute name="content" required="true" type="org.hippoecm.hst.content.beans.standard.HippoHtml" rtexprvalue="true"%>
 <%@ attribute name="maxLength" required="true" type="java.lang.Integer" rtexprvalue="true"%>
 <%@ attribute name="showReadMore" required="false" type="java.lang.Boolean" rtexprvalue="true"%>

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="hst" uri="http://www.hippoecm.org/jsp/hst/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="tdc" uri="http://www.tdclighthouse.com/hippo/prototype"%>
+<%@ taglib prefix="tag" uri="http://open-web.nl/hippo/prototype"%>
 
 <%@ attribute name="siteMenuItem" type="org.hippoecm.hst.core.sitemenu.EditableMenuItem" rtexprvalue="true" required="true"%>
 <%@ attribute name="depth" type="java.lang.Integer" rtexprvalue="true" required="false" %>
@@ -62,7 +62,7 @@
 <c:if test="${not empty siteMenuItem.childMenuItems and depth >= 0}">
 		<ul>
 		<c:forEach var="child" items="${siteMenuItem.childMenuItems}">
-			<tdc:menuitem siteMenuItem="${child}" depth="${depth}" selectedClass="${selectedClass}" expandedClass="${expandedClass}" unexpandedClass="${unexpandedClass}" leafClass="${leafClass}"/>
+			<tag:menuitem siteMenuItem="${child}" depth="${depth}" selectedClass="${selectedClass}" expandedClass="${expandedClass}" unexpandedClass="${unexpandedClass}" leafClass="${leafClass}"/>
 		</c:forEach>
 		</ul>
 </c:if>

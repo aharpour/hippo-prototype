@@ -4,7 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="hst" uri="http://www.hippoecm.org/jsp/hst/core" %>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
-<%@ taglib prefix="tdc" uri="http://www.tdclighthouse.com/hippo/prototype" %>
 
 <%@ attribute name="parameterName" rtexprvalue="true" required="true" type="java.lang.String" %>
 <%@ attribute name="var" rtexprvalue="true" required="true" type="java.lang.String" %>

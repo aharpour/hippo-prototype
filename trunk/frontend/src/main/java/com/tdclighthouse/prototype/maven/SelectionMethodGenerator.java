@@ -27,6 +27,7 @@ import net.sourceforge.mavenhippo.gen.MethodGenerator;
 import net.sourceforge.mavenhippo.model.ContentTypeBean.Item;
 import net.sourceforge.mavenhippo.utils.FreemarkerUtils;
 import net.sourceforge.mavenhippo.utils.NammingUtils;
+import net.sourceforge.mavenhippo.utils.exceptions.GeneratorException;
 
 /**
  * @author Ebrahim Aharpour
@@ -45,7 +46,7 @@ public class SelectionMethodGenerator implements MethodGenerator {
     }
 
     @Override
-    public String getFragment() {
+    public String getFragment() throws GeneratorException {
         try {
             Map<String, Object> model = new HashMap<String, Object>();
             String fieldName = item.getSimpleName();
@@ -57,7 +58,7 @@ public class SelectionMethodGenerator implements MethodGenerator {
             return FreemarkerUtils.renderTemplate("com/tdclighthouse/prototype/maven/selection-method-generator.ftl",
                     model, this.getClass());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new GeneratorException(e.getMessage(), e);
         }
     }
 

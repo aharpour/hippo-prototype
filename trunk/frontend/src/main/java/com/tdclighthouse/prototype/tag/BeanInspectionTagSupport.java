@@ -1,7 +1,7 @@
 /*
  *  Copyright 2012 Finalist B.V.
  * 
- *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  Licensed under the Apache License, Version 2.0 (the "License")
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  * 
@@ -82,7 +82,7 @@ public class BeanInspectionTagSupport {
                             if (propertyValue != null) {
                                 doWithProperty(propertyType, propertyValue, path, inspectionDepth - 1);
                             } else {
-                                print(path, propertyValue);
+                                print(path, null);
                             }
                         } catch (Exception e) {
                             print(path,
@@ -119,7 +119,7 @@ public class BeanInspectionTagSupport {
                         if (object != null) {
                             doWithProperty(object.getClass(), object, path + "[" + i + "]", inspectionDepth);
                         } else {
-                            print(path + "[" + i + "]", object);
+                            print(path + "[" + i + "]", null);
                         }
                         i++;
                     }
@@ -135,7 +135,7 @@ public class BeanInspectionTagSupport {
         }
 
         private static Set<String> getBlackList() {
-            HashSet<String> result = new HashSet<String>();
+            Set<String> result = new HashSet<String>();
             result.add("canonicalPath");
             result.add("canonicalHandleUUID");
             result.add("canonicalHandlePath");

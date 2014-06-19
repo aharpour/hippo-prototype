@@ -1,8 +1,9 @@
 package com.tdclighthouse.prototype.maven;
+
 /*
  *    Copyright 2013 Smile B.V
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   Licensed under the Apache License, Version 2.0 (the "License")
  *   you may not use this file except in compliance with the License.
  *   You may obtain a copy of the License at
  *
@@ -44,32 +45,34 @@ import com.tdclighthouse.prototype.beans.compounds.SelectionBean;
 @Weight(value = -10.0)
 public class SelectionHandler extends ContentTypeItemHandler {
 
-	public SelectionHandler(Map<String, HippoBeanClass> beansOnClassPath, Map<String, HippoBeanClass> beansInProject,
-			Set<String> namespaces, PackageHandler packageHandler) {
-		super(beansOnClassPath, beansInProject, namespaces, packageHandler);
-	}
+    public SelectionHandler(Map<String, HippoBeanClass> beansOnClassPath, Map<String, HippoBeanClass> beansInProject,
+            Set<String> namespaces, PackageHandler packageHandler) {
+        super(beansOnClassPath, beansInProject, namespaces, packageHandler);
+    }
 
-	@Override
-	public HandlerResponse handle(Item item, ImportRegistry importRegistry) {
-		HandlerResponse result = null;
-		if ("DynamicDropdown".equals(item.getType())) {
-			Template template = item.getContentType().getTemplate(item);
-			if (template != null) {
-				String pathToValueList = template.getOptionsValue("source");
-				if (pathToValueList != null) {
-					ClassReference reutrnType = new ClassReference(SelectionBean.class);
-					importRegistry.register(reutrnType);
-					List<PropertyGenerator> propertyGenerators = Collections
-							.singletonList((PropertyGenerator) new DefaultPropertyGenerator(new AnalyzerResult(Type.PROPERTY, reutrnType), item, importRegistry));
-					List<MethodGenerator> methodGenerators = Collections
-							.singletonList((MethodGenerator) new SelectionMethodGenerator(item, pathToValueList, reutrnType));
+    @Override
+    public HandlerResponse handle(Item item, ImportRegistry importRegistry) {
+        HandlerResponse result = null;
+        if ("DynamicDropdown".equals(item.getType())) {
+            Template template = item.getContentType().getTemplate(item);
+            if (template != null) {
+                String pathToValueList = template.getOptionsValue("source");
+                if (pathToValueList != null) {
+                    ClassReference reutrnType = new ClassReference(SelectionBean.class);
+                    importRegistry.register(reutrnType);
+                    List<PropertyGenerator> propertyGenerators = Collections
+                            .singletonList((PropertyGenerator) new DefaultPropertyGenerator(new AnalyzerResult(
+                                    Type.PROPERTY, reutrnType), item, importRegistry));
+                    List<MethodGenerator> methodGenerators = Collections
+                            .singletonList((MethodGenerator) new SelectionMethodGenerator(item, pathToValueList,
+                                    reutrnType));
 
-					result = new HandlerResponse(propertyGenerators, methodGenerators);
-					
-				}
-			}
-		}
-		return result;
-	}
+                    result = new HandlerResponse(propertyGenerators, methodGenerators);
+
+                }
+            }
+        }
+        return result;
+    }
 
 }

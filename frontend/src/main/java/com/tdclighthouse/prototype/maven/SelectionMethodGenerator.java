@@ -1,8 +1,9 @@
 package com.tdclighthouse.prototype.maven;
+
 /*
  *    Copyright 2013 Smile B.V
  *
- *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   Licensed under the Apache License, Version 2.0 (the "License")
  *   you may not use this file except in compliance with the License.
  *   You may obtain a copy of the License at
  *
@@ -32,37 +33,37 @@ import net.sourceforge.mavenhippo.utils.NammingUtils;
  *
  */
 public class SelectionMethodGenerator implements MethodGenerator {
-	
-	private final Item item; 
-	private final String valueListPath;
-	private final ClassReference returnType;
 
-	public SelectionMethodGenerator(Item item, String valueListPath, ClassReference returnType) {
-		this.item = item;
-		this.valueListPath = valueListPath;
-		this.returnType = returnType;
-	}
+    private final Item item;
+    private final String valueListPath;
+    private final ClassReference returnType;
 
-	@Override
-	public String getFragment() {
-		try {
-			Map<String, Object> model = new HashMap<String, Object>();
-			String fieldName = item.getSimpleName();
-			model.put("fieldName", fieldName);
-			model.put("propertyName", item.getRelativePath());
-			model.put("methodName", NammingUtils.stringToClassName(fieldName));
-			model.put("valueListPath", valueListPath);
-			model.put("type", returnType);
-			return FreemarkerUtils.renderTemplate("com/tdclighthouse/prototype/maven/selection-method-generator.ftl",
-					model, this.getClass());
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+    public SelectionMethodGenerator(Item item, String valueListPath, ClassReference returnType) {
+        this.item = item;
+        this.valueListPath = valueListPath;
+        this.returnType = returnType;
+    }
 
-	@Override
-	public List<AnnotationGenerator> getAnnotations() {
-		return new ArrayList<AnnotationGenerator>();
-	}
+    @Override
+    public String getFragment() {
+        try {
+            Map<String, Object> model = new HashMap<String, Object>();
+            String fieldName = item.getSimpleName();
+            model.put("fieldName", fieldName);
+            model.put("propertyName", item.getRelativePath());
+            model.put("methodName", NammingUtils.stringToClassName(fieldName));
+            model.put("valueListPath", valueListPath);
+            model.put("type", returnType);
+            return FreemarkerUtils.renderTemplate("com/tdclighthouse/prototype/maven/selection-method-generator.ftl",
+                    model, this.getClass());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<AnnotationGenerator> getAnnotations() {
+        return new ArrayList<AnnotationGenerator>();
+    }
 
 }

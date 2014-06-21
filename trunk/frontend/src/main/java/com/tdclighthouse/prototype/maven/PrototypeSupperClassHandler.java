@@ -78,7 +78,7 @@ public class PrototypeSupperClassHandler extends SupperClassHandler {
             result = extendsGeneratedBean(packageName, supertypes);
 
             if (result == null) {
-                result = extendsExistingBeans(supertypes, null);
+                result = extendsExistingBeans(supertypes);
             }
             if (result == null) {
                 result = new ClassReference(TdcDocument.class);
@@ -90,8 +90,8 @@ public class PrototypeSupperClassHandler extends SupperClassHandler {
     }
 
     @SuppressWarnings("unchecked")
-    private ClassReference extendsExistingBeans(List<String> supertypes, ClassReference defaultValue) {
-        ClassReference result = defaultValue;
+    private ClassReference extendsExistingBeans(List<String> supertypes) {
+        ClassReference result = null;
         SortedSet<Class<? extends HippoBean>> supperClasses = new TreeSet<Class<? extends HippoBean>>(
                 classExtensionComparator);
         for (String superType : supertypes) {
@@ -104,7 +104,7 @@ public class PrototypeSupperClassHandler extends SupperClassHandler {
                 supperClasses.add((Class<? extends HippoBean>) clazz);
             }
         }
-        if (supperClasses.isEmpty()) {
+        if (!supperClasses.isEmpty()) {
             result = new ClassReference(supperClasses.last());
         }
         return result;

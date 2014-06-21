@@ -23,9 +23,9 @@ import java.util.Map;
 
 import net.sourceforge.mavenhippo.gen.AnnotationGenerator;
 import net.sourceforge.mavenhippo.gen.ClassReference;
+import net.sourceforge.mavenhippo.gen.FreemarkerUtils;
 import net.sourceforge.mavenhippo.gen.MethodGenerator;
 import net.sourceforge.mavenhippo.model.ContentTypeBean.Item;
-import net.sourceforge.mavenhippo.utils.FreemarkerUtils;
 import net.sourceforge.mavenhippo.utils.NammingUtils;
 import net.sourceforge.mavenhippo.utils.exceptions.GeneratorException;
 

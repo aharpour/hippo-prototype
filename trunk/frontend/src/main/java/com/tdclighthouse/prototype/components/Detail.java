@@ -31,7 +31,7 @@ public class Detail extends BaseComponent {
     public void doBeforeRender(HstRequest request, HstResponse response) {
         HippoBean contentBean = request.getRequestContext().getContentBean();
         if (contentBean != null) {
-            request.setAttribute(Constants.Attributes.DOCUMENT, contentBean);
+            request.setAttribute(Constants.AttributesConstants.DOCUMENT, contentBean);
         }
     }
 

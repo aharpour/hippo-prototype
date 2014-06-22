@@ -32,6 +32,6 @@ public interface ContentBeanPathInfo {
      * 
      */
     @JcrPath
-    @Parameter(name = Constants.HstParameters.CONTENT_BEAN_PATH, displayName = "Index file Path")
+    @Parameter(name = Constants.HstParametersConstants.CONTENT_BEAN_PATH, displayName = "Index file Path")
     public String getContentBeanPath();
 }

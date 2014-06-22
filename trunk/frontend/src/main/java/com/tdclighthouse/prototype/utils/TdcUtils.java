@@ -113,7 +113,7 @@ public class TdcUtils {
     }
 
     public static String encode(String param) throws UnsupportedEncodingException {
-        return URLEncoder.encode(param, Constants.Encodings.UTF8);
+        return URLEncoder.encode(param, Constants.EncodingsConstants.UTF8);
     }
 
     public static boolean collectionContains(@SuppressWarnings("rawtypes") Collection collection, Object object) {

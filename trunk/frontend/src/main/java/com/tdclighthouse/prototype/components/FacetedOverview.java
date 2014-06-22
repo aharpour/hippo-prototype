@@ -55,7 +55,7 @@ public class FacetedOverview extends FacetSupport<Map<String, Object>> {
     public Object getJsonAjaxModel(HstRequest request, HstResponse response) {
         Map<String, Object> map = new HashMap<String, Object>();
         setItems(request, map);
-        return map.get(Constants.Attributes.ITEMS);
+        return map.get(Constants.AttributesConstants.ITEMS);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class FacetedOverview extends FacetSupport<Map<String, Object>> {
     protected void setContentBean(HstRequest request, Map<String, Object> model) {
         HippoBean contentBean = obtainContentBean(request);
         if (contentBean != null) {
-            model.put(Constants.Attributes.DOCUMENT, contentBean);
+            model.put(Constants.AttributesConstants.DOCUMENT, contentBean);
         } else {
             LOG.error("No content bean was found.");
         }
@@ -79,11 +79,11 @@ public class FacetedOverview extends FacetSupport<Map<String, Object>> {
             HippoResultSetBean resultSet = facetedNavBean.getResultSet();
             PaginatorWidget paginatorWidget = getPaginator(request, getPageSize(request), resultSet.getCount()
                     .intValue());
-            model.put(Constants.Attributes.FACET_BEAN, facetedNavBean);
-            model.put(Constants.Attributes.ITEMS, getItemsFromResultSet(resultSet, paginatorWidget));
+            model.put(Constants.AttributesConstants.FACET_BEAN, facetedNavBean);
+            model.put(Constants.AttributesConstants.ITEMS, getItemsFromResultSet(resultSet, paginatorWidget));
             FacetedOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
             if (parametersInfo.getShowPaginator()) {
-                request.setAttribute(Constants.Attributes.PAGINATOR, paginatorWidget);
+                request.setAttribute(Constants.AttributesConstants.PAGINATOR, paginatorWidget);
             }
         } else {
             throw new HstComponentException("content Bean is not of the type HippoFactNavigation");
@@ -91,9 +91,9 @@ public class FacetedOverview extends FacetSupport<Map<String, Object>> {
     }
 
     protected void setQueryIfExists(HstRequest request, Map<String, Object> model) {
-        String query = getPublicRequestParameter(request, Constants.Parameters.QUERY);
+        String query = getPublicRequestParameter(request, Constants.ParametersConstants.QUERY);
         if (StringUtils.isNotBlank(query)) {
-            model.put(Constants.Attributes.QUERY, query);
+            model.put(Constants.AttributesConstants.QUERY, query);
         }
     }
 

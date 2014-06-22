@@ -64,7 +64,7 @@ public class Navigation extends WebDocumentDetail {
 
         }, request, EDITABLE_MENU_ATTRIBUTE);
 
-        request.setAttribute(Constants.Attributes.MENU, editableMenu);
+        request.setAttribute(Constants.AttributesConstants.MENU, editableMenu);
 
     }
 

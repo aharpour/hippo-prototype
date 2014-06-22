@@ -35,8 +35,8 @@ public class FacetDeepLink {
     public static HippoBean getDeepLinkBean(HippoBean facet, Map<String, String[]> filter)
             throws FacetDeepLinkExceptoin {
         HippoBean targetNode = facet;
-        String[] facetedNames = facet.getProperty(Constants.HippoFacetAttributes.HIPPOFACNAV_FACETNODENAMES);
-        String[] facets = facet.getProperty(Constants.HippoFacetAttributes.HIPPOFACNAV_FACETS);
+        String[] facetedNames = facet.getProperty(Constants.HippoFacetAttributesConstants.HIPPOFACNAV_FACETNODENAMES);
+        String[] facets = facet.getProperty(Constants.HippoFacetAttributesConstants.HIPPOFACNAV_FACETS);
         validateInput(facetedNames, facets);
         Map<String, String> facetMap = getFacetMap(facetedNames, facets);
         for (Iterator<Entry<String, String[]>> iterator = filter.entrySet().iterator(); iterator.hasNext();) {

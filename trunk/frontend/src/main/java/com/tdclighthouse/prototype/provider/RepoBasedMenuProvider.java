@@ -71,7 +71,7 @@ public class RepoBasedMenuProvider {
             addRepoBasedMenuItems(item.getChildMenuItems());
             expandForcedExpandedItems(item);
             if (item.isRepositoryBased()) {
-                List<String> locations = getParameterValues(Constants.HstParameters.ROOT, item);
+                List<String> locations = getParameterValues(Constants.HstParametersConstants.ROOT, item);
                 HippoBean[] beanOfMenuItems = null;
                 if (locations != null && !locations.isEmpty()) {
                     beanOfMenuItems = getBeans(locations);
@@ -86,10 +86,10 @@ public class RepoBasedMenuProvider {
     }
 
     private void expandForcedExpandedItems(EditableMenuItem item) {
-        String value = getParameterValue(Constants.HstParameters.EXPANDED, item);
-        if (Constants.Values.TRUE.equals(value)) {
-            String expandeOnlyCurrentItem = getParameterValue(Constants.HstParameters.EXPAND_ONLY_CURRENT_ITEM, item);
-            if (Constants.Values.TRUE.equals(expandeOnlyCurrentItem)) {
+        String value = getParameterValue(Constants.HstParametersConstants.EXPANDED, item);
+        if (Constants.ValuesConstants.TRUE.equals(value)) {
+            String expandeOnlyCurrentItem = getParameterValue(Constants.HstParametersConstants.EXPAND_ONLY_CURRENT_ITEM, item);
+            if (Constants.ValuesConstants.TRUE.equals(expandeOnlyCurrentItem)) {
                 markOnlyCurrentItemAsExpanded(item);
             } else {
                 markAsExpanded(item);

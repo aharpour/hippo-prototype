@@ -65,16 +65,16 @@ public class ValueListAjax extends BaseComponent {
         } else {
             json = getAvilibleListsAsJson(request, blackListChecker);
         }
-        request.setAttribute(Constants.Attributes.JSON, json);
+        request.setAttribute(Constants.AttributesConstants.JSON, json);
         setCacheTime(request, response);
-        response.setContentType(Constants.MimeType.APPLICATION_JSON);
+        response.setContentType(Constants.MimeTypeConstants.APPLICATION_JSON);
     }
 
     private void setCacheTime(HstRequest request, HstResponse response) {
         double cacheTime = this.<ValueListAjaxInfo> getComponentParametersInfo(request).getCacheTime();
-        response.addHeader(Constants.HttpHeader.AGE, "0");
-        response.addHeader(Constants.HttpHeader.CACHE_CONTROL,
-                Constants.HttpHeader.MAX_AGE + "=" + Math.round(cacheTime * 3600));
+        response.addHeader(Constants.HttpHeaderConstants.AGE, "0");
+        response.addHeader(Constants.HttpHeaderConstants.CACHE_CONTROL,
+                Constants.HttpHeaderConstants.MAX_AGE + "=" + Math.round(cacheTime * 3600));
     }
 
     protected HippoBeanIterator getAllValueLists(HstRequest request) throws QueryException {
@@ -96,9 +96,9 @@ public class ValueListAjax extends BaseComponent {
 
     protected String getPath(HstRequest request) {
         String path = null;
-        path = request.getRequestContext().getResolvedSiteMapItem().getParameter(Constants.Parameters.PATH);
+        path = request.getRequestContext().getResolvedSiteMapItem().getParameter(Constants.ParametersConstants.PATH);
         if (StringUtils.isBlank(path)) {
-            path = getPublicRequestParameter(request, Constants.Parameters.PATH);
+            path = getPublicRequestParameter(request, Constants.ParametersConstants.PATH);
         }
 
         if (StringUtils.isNotBlank(path) && !path.startsWith("/")) {
@@ -135,7 +135,7 @@ public class ValueListAjax extends BaseComponent {
 
     protected void setErrorMessage(JSONObject json, String message) {
         json.clear();
-        json.put(Constants.Attributes.ERROR_MESSAGE, message);
+        json.put(Constants.AttributesConstants.ERROR_MESSAGE, message);
     }
 
     protected JSON valueListIteratorToJson(HippoBeanIterator valueLists, BlackListChecker blackListChecker) {

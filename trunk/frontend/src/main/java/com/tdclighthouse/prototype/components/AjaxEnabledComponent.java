@@ -26,10 +26,10 @@ import org.hippoecm.hst.site.HstServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.tdclighthouse.prototype.utils.Constants.Attributes;
-import com.tdclighthouse.prototype.utils.Constants.Encodings;
-import com.tdclighthouse.prototype.utils.Constants.MimeType;
-import com.tdclighthouse.prototype.utils.Constants.SpringComponents;
+import com.tdclighthouse.prototype.utils.Constants.AttributesConstants;
+import com.tdclighthouse.prototype.utils.Constants.EncodingsConstants;
+import com.tdclighthouse.prototype.utils.Constants.MimeTypeConstants;
+import com.tdclighthouse.prototype.utils.Constants.SpringComponentsConstants;
 import com.tdclighthouse.prototype.utils.MIMEParse;
 import com.tdclighthouse.prototype.utils.ObjectSerializer;
 
@@ -44,16 +44,16 @@ public abstract class AjaxEnabledComponent<M> extends BaseComponent {
     private static final Logger LOG = LoggerFactory.getLogger(AjaxEnabledComponent.class);
 
     private final ObjectSerializer jsonSerializer = HstServices.getComponentManager().getComponent(
-            SpringComponents.JSON_SERIALIZER);
+            SpringComponentsConstants.JSON_SERIALIZER);
 
     private final ObjectSerializer xmlSerializer = HstServices.getComponentManager().getComponent(
-            SpringComponents.XML_SERIALIZER);
+            SpringComponentsConstants.XML_SERIALIZER);
 
     public abstract M getModel(HstRequest request, HstResponse response) throws HstComponentException;
 
     @Override
     public final void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-        request.setAttribute(Attributes.MODEL, getModel(request, response));
+        request.setAttribute(AttributesConstants.MODEL, getModel(request, response));
     }
 
     public Object getJsonAjaxModel(HstRequest request, HstResponse response) {
@@ -88,14 +88,14 @@ public abstract class AjaxEnabledComponent<M> extends BaseComponent {
         try {
             String acceptHeader = request.getHeader("Accept");
             String bestMatch = MIMEParse.bestMatch(ECPECTED_MIME_TYPES, acceptHeader);
-            if (MimeType.APPLICATION_JSON.equals(bestMatch) || MimeType.TEXT_JAVASCRIPT.equals(bestMatch)) {
+            if (MimeTypeConstants.APPLICATION_JSON.equals(bestMatch) || MimeTypeConstants.TEXT_JAVASCRIPT.equals(bestMatch)) {
                 if (jsonSerializer != null) {
                     returnJsonResponse(request, response);
                 } else {
                     LOG.error("JSON is not support since a jsonSerializer has not been provied.");
                     returnHtmlResponse(request, response);
                 }
-            } else if (MimeType.APPLICATION_XML.equals(bestMatch) || MimeType.TEXT_XML.equals(bestMatch)) {
+            } else if (MimeTypeConstants.APPLICATION_XML.equals(bestMatch) || MimeTypeConstants.TEXT_XML.equals(bestMatch)) {
                 if (xmlSerializer != null) {
                     returnXmlResponse(request, response);
                 } else {
@@ -112,7 +112,7 @@ public abstract class AjaxEnabledComponent<M> extends BaseComponent {
     }
 
     private final void returnHtmlResponse(HstRequest request, HstResponse response) throws Exception {
-        request.setAttribute(Attributes.MODEL, getHtmlAjaxModel(request, response));
+        request.setAttribute(AttributesConstants.MODEL, getHtmlAjaxModel(request, response));
         String ajaxTemplate = getAjaxTemplate(request, response);
         if (ajaxTemplate != null) {
             response.setServeResourcePath(ajaxTemplate);
@@ -122,7 +122,7 @@ public abstract class AjaxEnabledComponent<M> extends BaseComponent {
     private void returnXmlResponse(HstRequest request, HstResponse response) throws Exception {
         Object model = getXmlAjaxModel(request, response);
         response.setServeResourcePath(BLANK_TEMPLATE);
-        response.setContentType(MimeType.APPLICATION_XML);
+        response.setContentType(MimeTypeConstants.APPLICATION_XML);
         response.setCharacterEncoding(getCharacterEndcoding());
         xmlSerializer.serialize(model, response.getOutputStream());
     }
@@ -131,12 +131,12 @@ public abstract class AjaxEnabledComponent<M> extends BaseComponent {
         Object model = getJsonAjaxModel(request, response);
         jsonSerializer.serialize(model, response.getOutputStream());
         response.setServeResourcePath(BLANK_TEMPLATE);
-        response.setContentType(MimeType.APPLICATION_JSON);
+        response.setContentType(MimeTypeConstants.APPLICATION_JSON);
         response.setCharacterEncoding(getCharacterEndcoding());
     }
 
     protected String getCharacterEndcoding() {
-        return Encodings.UTF8;
+        return EncodingsConstants.UTF8;
     }
 
     @SuppressWarnings("unchecked")
@@ -144,12 +144,12 @@ public abstract class AjaxEnabledComponent<M> extends BaseComponent {
         private static final long serialVersionUID = 1L;
 
         {
-            add(MimeType.TEXT_HTML);
-            add(MimeType.APPLICATION_XHTML_XML);
-            add(MimeType.APPLICATION_JSON);
-            add(MimeType.TEXT_JAVASCRIPT);
-            add(MimeType.APPLICATION_XML);
-            add(MimeType.TEXT_XML);
+            add(MimeTypeConstants.TEXT_HTML);
+            add(MimeTypeConstants.APPLICATION_XHTML_XML);
+            add(MimeTypeConstants.APPLICATION_JSON);
+            add(MimeTypeConstants.TEXT_JAVASCRIPT);
+            add(MimeTypeConstants.APPLICATION_XML);
+            add(MimeTypeConstants.TEXT_XML);
         }
     });
 

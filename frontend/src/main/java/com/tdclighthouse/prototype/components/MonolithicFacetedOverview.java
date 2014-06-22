@@ -22,13 +22,13 @@ public class MonolithicFacetedOverview extends FacetedOverview {
     }
 
     private void setChildNavAttribute(Map<String, Object> model) {
-        if (model.get(Constants.Attributes.FACET_BEAN) instanceof HippoFacetChildNavigationBean) {
-            model.put(Constants.Attributes.CHILDNAV, "true");
+        if (model.get(Constants.AttributesConstants.FACET_BEAN) instanceof HippoFacetChildNavigationBean) {
+            model.put(Constants.AttributesConstants.CHILDNAV, "true");
         }
     }
 
     private void setLabels(HstRequest request, Map<String, Object> model) {
         Map<String, String> labels = getLabels(request);
-        model.put(Constants.Attributes.LABELS, labels);
+        model.put(Constants.AttributesConstants.LABELS, labels);
     }
 }

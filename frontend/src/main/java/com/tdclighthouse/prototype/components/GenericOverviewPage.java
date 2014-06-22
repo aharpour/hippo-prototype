@@ -52,9 +52,9 @@ public class GenericOverviewPage extends BaseComponent {
             PaginatorWidget paginator = getPaginator(request, getPageSize(request), queryResult.getTotalSize());
             List<HippoBean> items = getItems(queryResult);
 
-            request.setAttribute(Constants.Attributes.ITEMS, items);
+            request.setAttribute(Constants.AttributesConstants.ITEMS, items);
             if (parametersInfo.getShowPaginator()) {
-                request.setAttribute(Constants.Attributes.PAGINATOR, paginator);
+                request.setAttribute(Constants.AttributesConstants.PAGINATOR, paginator);
             }
 
         } catch (QueryException e) {
@@ -73,7 +73,7 @@ public class GenericOverviewPage extends BaseComponent {
     private void setDocumentToRequest(HstRequest request) {
         HippoBean contentBean = request.getRequestContext().getContentBean();
         if (contentBean != null) {
-            request.setAttribute(Constants.Attributes.DOCUMENT, contentBean);
+            request.setAttribute(Constants.AttributesConstants.DOCUMENT, contentBean);
         }
     }
 
@@ -85,7 +85,7 @@ public class GenericOverviewPage extends BaseComponent {
 
         String sortBy = parametersInfo.getSortBy();
         if (StringUtils.isNotBlank(sortBy)) {
-            if (Constants.Values.DESCENDING.equals(parametersInfo.getSortOrder())) {
+            if (Constants.ValuesConstants.DESCENDING.equals(parametersInfo.getSortOrder())) {
                 query.addOrderByDescending(sortBy);
             } else {
                 query.addOrderByAscending(sortBy);

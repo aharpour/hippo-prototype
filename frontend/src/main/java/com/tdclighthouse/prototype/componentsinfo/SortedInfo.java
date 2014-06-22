@@ -25,10 +25,10 @@ import com.tdclighthouse.prototype.utils.Constants;
  */
 public interface SortedInfo {
 
-    @Parameter(name = "sortOrder", defaultValue = Constants.Values.DESCENDING)
+    @Parameter(name = "sortOrder", defaultValue = Constants.ValuesConstants.DESCENDING)
     public String getSortOrder();
 
-    @Parameter(name = "sortBy", defaultValue = Constants.FieldName.TDC_RELEASE_DATE)
+    @Parameter(name = "sortBy", defaultValue = Constants.FieldNameConstants.TDC_RELEASE_DATE)
     public String getSortBy();
 
 }

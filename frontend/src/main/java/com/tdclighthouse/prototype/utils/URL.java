@@ -114,9 +114,9 @@ public class URL {
                     } else {
                         result.append("&");
                     }
-                    result.append(URLEncoder.encode(key, Constants.Encodings.UTF8));
+                    result.append(URLEncoder.encode(key, Constants.EncodingsConstants.UTF8));
                     result.append('=');
-                    result.append(URLEncoder.encode(values[i], Constants.Encodings.UTF8));
+                    result.append(URLEncoder.encode(values[i], Constants.EncodingsConstants.UTF8));
                 }
             }
         }
@@ -128,7 +128,7 @@ public class URL {
         Parameters parameters = new Parameters();
         MessageBytes messagebytes = MessageBytes.newInstance();
         messagebytes.setString(queryString);
-        parameters.processParameters(messagebytes, Constants.Encodings.UTF8);
+        parameters.processParameters(messagebytes, Constants.EncodingsConstants.UTF8);
         Enumeration<String> parameterNames = parameters.getParameterNames();
         while (parameterNames.hasMoreElements()) {
             String parameterName = parameterNames.nextElement();

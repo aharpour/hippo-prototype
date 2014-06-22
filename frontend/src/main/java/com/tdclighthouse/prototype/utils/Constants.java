@@ -21,7 +21,7 @@ package com.tdclighthouse.prototype.utils;
  */
 public class Constants {
 
-    public static class Attributes {
+    public static class AttributesConstants {
 
         public static final String DOCUMENT = "document";
         public static final String MODEL = "model";
@@ -40,58 +40,58 @@ public class Constants {
         public static final String WEBMASTER_WARN_MESSAGE = "webmasterWarningMessage";
         public static final String MENU = "menu";
 
-        protected Attributes() {
+        protected AttributesConstants() {
             super();
         }
 
     }
 
-    public static class FieldName {
+    public static class FieldNameConstants {
 
         public static final String TDC_RELEASE_DATE = "tdc:releaseDate";
         public static final String TDC_TITLE = "tdc:title";
 
-        protected FieldName() {
+        protected FieldNameConstants() {
             super();
         }
     }
 
-    public static class HippoFacetAttributes {
+    public static class HippoFacetAttributesConstants {
 
         public static final String HIPPOFACNAV_FACETNODENAMES = "hippofacnav:facetnodenames";
         public static final String HIPPOFACNAV_FACETS = "hippofacnav:facets";
         public static final String HIPPO_DOCBASE = "hippo:docbase";
 
-        protected HippoFacetAttributes() {
+        protected HippoFacetAttributesConstants() {
             super();
         }
 
     }
 
-    public static class HippoNodeTypes {
+    public static class HippoNodeTypesConstants {
 
         public static final String IMAGE_NODE_TYPE = "hippogallery:imageset";
         public static final String ASSET_NODE_TYPE = "hippogallery:exampleAssetSet";
 
-        protected HippoNodeTypes() {
+        protected HippoNodeTypesConstants() {
             super();
         }
 
     }
 
-    public static class HttpHeader {
+    public static class HttpHeaderConstants {
 
         public static final String AGE = "Age";
         public static final String CACHE_CONTROL = "Cache-Control";
         public static final String MAX_AGE = "max-age";
 
-        protected HttpHeader() {
+        protected HttpHeaderConstants() {
             super();
         }
 
     }
 
-    public static class MimeType {
+    public static class MimeTypeConstants {
         public static final String APPLICATION_JSON = "application/json";
         public static final String TEXT_XML = "text/xml";
         public static final String APPLICATION_XML = "application/xml";
@@ -99,101 +99,101 @@ public class Constants {
         public static final String TEXT_HTML = "text/html";
         public static final String APPLICATION_XHTML_XML = "application/xhtml+xml";
 
-        protected MimeType() {
+        protected MimeTypeConstants() {
             super();
         }
 
     }
 
-    public static class Parameters {
+    public static class ParametersConstants {
         public static final String QUERY = "q";
         public static final String PAGE = "page";
         public static final String PAGE_SIZE = "size";
         public static final String PATH = "path";
 
-        protected Parameters() {
+        protected ParametersConstants() {
             super();
         }
 
     }
 
-    public static class HstParameters {
+    public static class HstParametersConstants {
         public static final String CONTENT_BEAN_PATH = "contentBeanPath";
         public static final String EXPANDED = "expanded";
         public static final String EXPAND_ONLY_CURRENT_ITEM = "expandOnlyCurrentItem";
         public static final String ROOT = "root";
         public static final String TEMPLATE = "template";
 
-        protected HstParameters() {
+        protected HstParametersConstants() {
             super();
         }
     }
 
-    public static class Values {
+    public static class ValuesConstants {
         public static final String ASCENDING = "ascending";
         public static final String DESCENDING = "descending";
         public static final String TRUE = "true";
 
-        protected Values() {
+        protected ValuesConstants() {
             super();
         }
     }
 
-    public static class PikcerTypes {
+    public static class PikcerTypesConstants {
         public static final String ASSET_PICKER = "cms-pickers/assets";
         public static final String DOCUMENT_PICKER = "cms-pickers/documents";
         public static final String FOLDER_PICKER = "cms-pickers/folders";
         public static final String IMAGE_PICKER = "cms-pickers/images";
         public static final String DOCUMENT_PICKER_ONLY = "cms-pickers/documents-only";
 
-        protected PikcerTypes() {
+        protected PikcerTypesConstants() {
             super();
         }
 
     }
 
-    public static class NodeName {
+    public static class NodeNameConstants {
         public static final String INDEX = "index";
 
-        protected NodeName() {
+        protected NodeNameConstants() {
             super();
         }
 
     }
 
-    public static class Regex {
+    public static class RegexConstants {
         public static final String COMMA_SEPARATOR = "\\s*,\\s*";
 
-        protected Regex() {
+        protected RegexConstants() {
             super();
         }
 
     }
 
-    public static class Encodings {
+    public static class EncodingsConstants {
         public static final String UTF8 = "UTF-8";
 
-        protected Encodings() {
+        protected EncodingsConstants() {
             super();
         }
 
     }
 
-    public static class Schemes {
+    public static class SchemesConstants {
         public static final String HTTP = "http";
         public static final String HTTPS = "https";
 
-        protected Schemes() {
+        protected SchemesConstants() {
             super();
         }
 
     }
 
-    public static class SpringComponents {
+    public static class SpringComponentsConstants {
         public static final String JSON_SERIALIZER = "com.tdclighthouse.prototype.utils.JsonSerializer";
         public static final String XML_SERIALIZER = "com.tdclighthouse.prototype.utils.XmlSerializer";
 
-        protected SpringComponents() {
+        protected SpringComponentsConstants() {
             super();
         }
 

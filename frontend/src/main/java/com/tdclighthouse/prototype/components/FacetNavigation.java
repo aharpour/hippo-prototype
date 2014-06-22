@@ -40,12 +40,12 @@ public class FacetNavigation extends FacetSupport<Map<String, Object>> {
         HippoFacetNavigationBean facetedNavBean = getFacetNavigationBean(request);
         if (facetedNavBean != null) {
             facetedNavBean = applyQueryToFacetBean(request, facetedNavBean);
-            model.put(Constants.Attributes.FACETNAV, facetedNavBean);
+            model.put(Constants.AttributesConstants.FACETNAV, facetedNavBean);
             Map<String, String> labels = getLabels(request);
-            model.put(Constants.Attributes.LABELS, labels);
+            model.put(Constants.AttributesConstants.LABELS, labels);
 
             if (facetedNavBean instanceof HippoFacetChildNavigationBean) {
-                model.put(Constants.Attributes.CHILDNAV, "true");
+                model.put(Constants.AttributesConstants.CHILDNAV, "true");
             }
         }
         return model;

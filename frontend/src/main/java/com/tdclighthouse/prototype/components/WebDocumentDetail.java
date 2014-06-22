@@ -34,7 +34,7 @@ public class WebDocumentDetail extends BaseComponent {
     public void doBeforeRender(HstRequest request, HstResponse response) {
         HippoBean contentBean = getWebDocumetBean(request);
         if (contentBean != null) {
-            request.setAttribute(Constants.Attributes.DOCUMENT, contentBean);
+            request.setAttribute(Constants.AttributesConstants.DOCUMENT, contentBean);
         }
     }
 

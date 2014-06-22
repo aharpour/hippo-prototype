@@ -112,7 +112,7 @@ public class BaseComponent extends BaseHstComponent {
     protected <T extends HippoBean> T getContentBeanViaParameters(HstRequest request, ContentBeanPathInfo parametersInfo) {
         T result = null;
         String indexFilePath = request.getRequestContext().getResolvedSiteMapItem()
-                .getParameter(Constants.HstParameters.CONTENT_BEAN_PATH);
+                .getParameter(Constants.HstParametersConstants.CONTENT_BEAN_PATH);
         if (StringUtils.isBlank(indexFilePath)) {
             indexFilePath = parametersInfo.getContentBeanPath();
         }
@@ -176,7 +176,7 @@ public class BaseComponent extends BaseHstComponent {
 
     protected int getPageNumber(HstRequest request) {
         int result = 1;
-        String pageString = getPublicRequestParameter(request, Constants.Parameters.PAGE);
+        String pageString = getPublicRequestParameter(request, Constants.ParametersConstants.PAGE);
         if (StringUtils.isNotBlank(pageString) && StringUtils.isNumeric(pageString)) {
             result = Integer.parseInt(pageString);
         }
@@ -185,7 +185,7 @@ public class BaseComponent extends BaseHstComponent {
 
     protected int getPageSize(HstRequest request) {
         int result = 25;
-        String pageSzieString = getPublicRequestParameter(request, Constants.Parameters.PAGE_SIZE);
+        String pageSzieString = getPublicRequestParameter(request, Constants.ParametersConstants.PAGE_SIZE);
         if (StringUtils.isNotBlank(pageSzieString) && StringUtils.isNumeric(pageSzieString)) {
             result = Integer.parseInt(pageSzieString);
         } else {

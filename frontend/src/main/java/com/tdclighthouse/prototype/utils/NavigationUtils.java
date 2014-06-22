@@ -39,7 +39,7 @@ public class NavigationUtils {
             result = childbeering;
         } else if (childbeering instanceof HippoFolderBean) {
             HippoFolderBean folder = (HippoFolderBean) childbeering;
-            result = folder.getBean(Constants.NodeName.INDEX);
+            result = folder.getBean(Constants.NodeNameConstants.INDEX);
             // when there is no index document in a folder then the first
             // document is selected instead
             if (result == null) {

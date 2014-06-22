@@ -48,7 +48,7 @@ public class ContentCatalog extends AjaxEnabledComponent<Map<String, Object>> {
 
         HippoBean contentBean = request.getRequestContext().getContentBean();
         if (contentBean != null) {
-            model.put(Constants.Attributes.DOCUMENT, contentBean);
+            model.put(Constants.AttributesConstants.DOCUMENT, contentBean);
         }
 
         return model;

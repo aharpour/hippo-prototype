@@ -73,7 +73,7 @@ public abstract class FacetSupport<M> extends AjaxEnabledComponent<M> {
                 facetedNavBean = ContentBeanUtils.getFacetNavigationBean(hstQuery,
                         absolutToRelativePath(facetedNavBean.getPath(), request));
             } else {
-                String queryString = getPublicRequestParameter(request, Constants.Parameters.QUERY);
+                String queryString = getPublicRequestParameter(request, Constants.ParametersConstants.QUERY);
                 if (StringUtils.isNotBlank(queryString)) {
                     queryString = SearchQueryUtils.parseAndEscapeBadCharacters(enhanceQuery(queryString));
                     if (StringUtils.isNotBlank(queryString)) {

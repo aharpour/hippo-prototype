@@ -10,6 +10,7 @@
 	<c:when test="${asset.mimeType eq ''}"><fmt:message key="file.type."/></c:when>
 	<c:when test="${asset.mimeType eq 'application/pdf' or asset.mimeType eq 'application/x-pdf' or asset.mimeType eq 'application/acrobat' or asset.mimeType eq 'applications/vnd.pdf' or asset.mimeType eq 'text/x-pdf' or asset.mimeType eq 'text/pdf'}"><fmt:message key="file.type.pdf"/></c:when>
 	<c:when test="${asset.mimeType eq 'application/msword'}"><fmt:message key="file.type.doc"/></c:when>
+	<c:when test="${asset.mimeType eq 'application/excel'}"><fmt:message key="file.type.xls"/></c:when>
 	<c:when test="${asset.mimeType eq 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'}"><fmt:message key="file.type.docx"/></c:when>
 	<c:when test="${asset.mimeType eq 'application/vnd.openxmlformats-officedocument.wordprocessingml.template'}"><fmt:message key="file.type.dotx"/></c:when>
 	<c:when test="${asset.mimeType eq 'application/vnd.ms-word.document.macroEnabled.12'}"><fmt:message key="file.type.docm"/></c:when>

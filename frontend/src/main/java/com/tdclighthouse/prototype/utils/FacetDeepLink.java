@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hippoecm.hst.content.beans.standard.HippoBean;
+import org.hippoecm.hst.content.beans.standard.HippoFacetNavigationBean;
 
 /**
  * @author Ebrahim Aharpour
@@ -32,9 +32,9 @@ public class FacetDeepLink {
     private FacetDeepLink() {
     }
 
-    public static HippoBean getDeepLinkBean(HippoBean facet, Map<String, String[]> filter)
+    public static HippoFacetNavigationBean getDeepLinkBean(HippoFacetNavigationBean facet, Map<String, String[]> filter)
             throws FacetDeepLinkExceptoin {
-        HippoBean targetNode = facet;
+        HippoFacetNavigationBean targetNode = facet;
         String[] facetedNames = facet.getProperty(Constants.HippoFacetAttributesConstants.HIPPOFACNAV_FACETNODENAMES);
         String[] facets = facet.getProperty(Constants.HippoFacetAttributesConstants.HIPPOFACNAV_FACETS);
         validateInput(facetedNames, facets);
@@ -55,9 +55,9 @@ public class FacetDeepLink {
         return targetNode;
     }
 
-    private static HippoBean getFilterNode(HippoBean targetNode, String facetName, String value)
-            throws NodeNotFoundExceptoin {
-        HippoBean result = targetNode.getBean(facetName);
+    private static HippoFacetNavigationBean getFilterNode(HippoFacetNavigationBean targetNode, String facetName,
+            String value) throws NodeNotFoundExceptoin {
+        HippoFacetNavigationBean result = targetNode.getBean(facetName);
         if (result != null) {
             result = result.getBean(value);
         }

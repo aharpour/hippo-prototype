@@ -49,7 +49,7 @@ public class FacetDeepLink {
                     targetNode = getFilterNode(targetNode, facetName, value);
                 }
             } else {
-                throw new NotFacetedPropertyExceptoin("the given fact does not facet on the property: " + propertyName);
+                throw new NotFacetedPropertyExceptoin("the given facet does not facet on the property: " + propertyName);
             }
         }
         return targetNode;

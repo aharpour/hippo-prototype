@@ -1,18 +1,17 @@
 package com.tdclighthouse.prototype.utils;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.easymock.EasyMock;
+import org.apache.commons.collections.map.LinkedMap;
 import org.hippoecm.hst.content.beans.standard.HippoFacetNavigationBean;
-import org.hippoecm.hst.content.beans.standard.facetnavigation.HippoFacetNavigation;
-import org.hippoecm.hst.content.beans.standard.facetnavigation.HippoFacetSubNavigation;
-import org.hippoecm.hst.content.beans.standard.facetnavigation.HippoFacetsAvailableNavigation;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.tdclighthouse.prototype.utils.Constants.HippoFacetAttributesConstants;
 import com.tdclighthouse.prototype.utils.FacetDeepLink.FacetDeepLinkExceptoin;
+import com.tdclighthouse.prototype.utils.FacetDeepLink.NotFacetedPropertyExceptoin;
+import com.tdclighthouse.prototype.utils.FacetMockUtils.FacetChild;
 
 public class FacetDeepLinkTest {
 
@@ -27,7 +26,7 @@ public class FacetDeepLinkTest {
     @Test
     public void emptyFilterTest() throws FacetDeepLinkExceptoin {
         Map<String, String[]> filter = new HashMap<String, String[]>();
-        HippoFacetNavigationBean facet = createMockFacet(new FacetChild[] {}, FACET_NAMES, FACETS);
+        HippoFacetNavigationBean facet = FacetMockUtils.createMockFacet(new FacetChild[] {}, FACET_NAMES, FACETS);
         HippoFacetNavigationBean bean = FacetDeepLink.getDeepLinkBean(facet, filter);
         Assert.assertEquals(facet, bean);
     }
@@ -36,7 +35,7 @@ public class FacetDeepLinkTest {
     public void invalidFilterTest() {
         Map<String, String[]> filter = new HashMap<String, String[]>();
         filter.put("hsl:subjecttags", new String[] { "over-hl" });
-        HippoFacetNavigationBean facet = createMockFacet(new FacetChild[] {}, FACET_NAMES, FACETS);
+        HippoFacetNavigationBean facet = FacetMockUtils.createMockFacet(new FacetChild[] {}, FACET_NAMES, FACETS);
         boolean exception = false;
         try {
             FacetDeepLink.getDeepLinkBean(facet, filter);
@@ -47,71 +46,67 @@ public class FacetDeepLinkTest {
     }
 
     @Test
-    public void commonCaseTest() throws FacetDeepLinkExceptoin {
+    public void basicTest() throws FacetDeepLinkExceptoin {
         Map<String, String[]> filter = new HashMap<String, String[]>();
         filter.put("hsl:subjecttags", new String[] { "over-hl" });
-        HippoFacetNavigationBean facet = createMockFacet(new FacetChild[] { new FacetChild("Over",
+        HippoFacetNavigationBean facet = FacetMockUtils.createMockFacet(new FacetChild[] { new FacetChild("Over",
                 new FacetChild[] { new FacetChild("over-hl", new FacetChild[] {}) }) }, FACET_NAMES, FACETS);
         HippoFacetNavigationBean bean = FacetDeepLink.getDeepLinkBean(facet, filter);
-        HippoFacetNavigationBean target = ((HippoFacetNavigationBean) facet.getBean("Over")).getBean("over-hl");
+        HippoFacetNavigationBean target = fetchSubbean(facet, "Over/over-hl");
         Assert.assertEquals(target, bean);
     }
 
-    private HippoFacetNavigation createMockFacet(FacetChild[] children, String[] facetNames, String[] facets) {
-        HippoFacetNavigation mock = EasyMock.createMock(HippoFacetNavigation.class);
-        EasyMock.expect(mock.getProperty(HippoFacetAttributesConstants.HIPPOFACNAV_FACETNODENAMES))
-                .andReturn(facetNames).anyTimes();
-        EasyMock.expect(mock.getProperty(HippoFacetAttributesConstants.HIPPOFACNAV_FACETS)).andReturn(facets)
-                .anyTimes();
-        for (FacetChild child : children) {
-            EasyMock.expect(mock.getBean(child.name))
-                    .andReturn(mockHippoFacetsAvailableNavigation(child.getChildren())).anyTimes();
+    @Test
+    public void inconsistencyTest() throws FacetDeepLinkExceptoin {
+        HippoFacetNavigationBean facet = FacetMockUtils.createMockFacet(new FacetChild[] {}, new String[] { "Over",
+                "Thema", "Periode" }, new String[] { "hsl:subjecttags", "hsl:thematags" });
+        Map<String, String[]> filter = new HashMap<String, String[]>();
+        boolean exception = false;
+        try {
+            FacetDeepLink.getDeepLinkBean(facet, filter);
+        } catch (IllegalArgumentException e) {
+            exception = true;
         }
-        EasyMock.expect(mock.getBean(EasyMock.anyString())).andReturn(null).anyTimes();
-        EasyMock.replay(mock);
-        return mock;
+        Assert.assertEquals(true, exception);
     }
 
-    private HippoFacetsAvailableNavigation mockHippoFacetsAvailableNavigation(FacetChild[] children) {
-        HippoFacetsAvailableNavigation mock = EasyMock.createMock(HippoFacetsAvailableNavigation.class);
-        for (FacetChild child : children) {
-            EasyMock.expect(mock.getBean(child.name)).andReturn(mockHippoFacetSubNavigation(child.getChildren()))
-                    .anyTimes();
+    @Test
+    public void inconsistencyTest2() throws FacetDeepLinkExceptoin {
+        HippoFacetNavigationBean facet = FacetMockUtils.createMockFacet(new FacetChild[] {}, new String[] { "Over",
+                "Thema" }, new String[] { "hsl:subjecttags", "hsl:thematags" });
+        Map<String, String[]> filter = new HashMap<String, String[]>();
+        filter.put("hsl:noneExistingProperty", new String[] { "value" });
+        boolean exception = false;
+        try {
+            FacetDeepLink.getDeepLinkBean(facet, filter);
+        } catch (NotFacetedPropertyExceptoin e) {
+            exception = true;
         }
-        EasyMock.expect(mock.getBean(EasyMock.anyString())).andReturn(null).anyTimes();
-        EasyMock.replay(mock);
-        return mock;
+        Assert.assertEquals(true, exception);
     }
 
-    private HippoFacetSubNavigation mockHippoFacetSubNavigation(FacetChild[] children) {
-        HippoFacetSubNavigation mock = EasyMock.createMock(HippoFacetSubNavigation.class);
-        for (FacetChild child : children) {
-            EasyMock.expect(mock.getBean(child.getName()))
-                    .andReturn(mockHippoFacetsAvailableNavigation(child.getChildren())).anyTimes();
-        }
-        EasyMock.expect(mock.getBean(EasyMock.anyString())).andReturn(null).anyTimes();
-        EasyMock.replay(mock);
-        return mock;
+    @Test
+    public void commonCaseTest() throws FacetDeepLinkExceptoin, IOException {
+        @SuppressWarnings("unchecked")
+        Map<String, String[]> filter = new LinkedMap();
+        filter.put("hsl:subjecttags", new String[] { "over-hl", "hl-media" });
+        filter.put("hsl:thematags", new String[] { "management" });
+        HippoFacetNavigationBean facet = FacetMockUtils.createMockFacet(
+                ClassLoader.getSystemResourceAsStream("com/tdclighthouse/prototype/utils/TestFacet.json"), FACET_NAMES,
+                FACETS);
+        HippoFacetNavigationBean bean = FacetDeepLink.getDeepLinkBean(facet, filter);
+        HippoFacetNavigationBean target = fetchSubbean(facet, "Over/over-hl/Over/hl-media/Thema/management");
+        Assert.assertEquals(target, bean);
     }
 
-    private static class FacetChild {
-
-        private final String name;
-        private final FacetChild[] children;
-
-        private FacetChild(String name, FacetChild[] children) {
-            this.name = name;
-            this.children = children;
+    private HippoFacetNavigationBean fetchSubbean(HippoFacetNavigationBean bean, String path) {
+        HippoFacetNavigationBean result = bean;
+        String normalizedPath = path.startsWith("/") ? path.substring(1) : path;
+        String[] segments = normalizedPath.split("/");
+        for (String segment : segments) {
+            result = result.getBean(segment);
         }
-
-        public String getName() {
-            return name;
-        }
-
-        public FacetChild[] getChildren() {
-            return children;
-        }
-
+        return result;
     }
 
 }

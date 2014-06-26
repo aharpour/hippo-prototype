@@ -64,14 +64,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -125,14 +125,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -186,14 +186,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -246,14 +246,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -306,14 +306,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -374,14 +374,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -435,14 +435,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -496,14 +496,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -556,14 +556,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -616,14 +616,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -684,14 +684,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -745,14 +745,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -806,14 +806,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -866,14 +866,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -926,14 +926,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -994,14 +994,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -1055,14 +1055,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -1116,14 +1116,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -1176,14 +1176,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -1236,14 +1236,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -1304,14 +1304,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -1365,14 +1365,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -1426,14 +1426,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -1486,14 +1486,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -1546,14 +1546,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -1619,14 +1619,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -1680,14 +1680,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -1741,14 +1741,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -1801,14 +1801,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -1861,14 +1861,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -1929,14 +1929,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -1990,14 +1990,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -2051,14 +2051,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -2111,14 +2111,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -2171,14 +2171,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -2239,14 +2239,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -2300,14 +2300,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -2361,14 +2361,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -2421,14 +2421,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -2481,14 +2481,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -2506,10 +2506,10 @@
                                         ]
                                     },
                                     {
-                                        "name": "Period",
+                                        "name": "Periode",
                                         "children": [
                                             {
-                                                "name": "binnen 30 dagen",
+                                                "name": "last 30 days",
                                                 "children": [
                                                     {
                                                         "name": "Over",
@@ -2554,14 +2554,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -2615,14 +2615,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -2676,14 +2676,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -2736,14 +2736,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -2796,14 +2796,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -2819,7 +2819,7 @@
                                                 ]
                                             },
                                             {
-                                                "name": "binnen 6 maanden",
+                                                "name": "last 6 months",
                                                 "children": [
                                                     {
                                                         "name": "Over",
@@ -2864,14 +2864,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -2925,14 +2925,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -2986,14 +2986,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -3046,14 +3046,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -3106,14 +3106,14 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "name": "Period",
+                                                                                        "name": "Periode",
                                                                                         "children": [
                                                                                             {
-                                                                                                "name": "binnen 30 dagen",
+                                                                                                "name": "last 30 days",
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "name": "binnen 6 maanden",
+                                                                                                "name": "last 6 months",
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
@@ -3179,14 +3179,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -3240,14 +3240,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -3300,14 +3300,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -3360,14 +3360,14 @@
                                                                         ]
                                                                     },
                                                                     {
-                                                                        "name": "Period",
+                                                                        "name": "Periode",
                                                                         "children": [
                                                                             {
-                                                                                "name": "binnen 30 dagen",
+                                                                                "name": "last 30 days",
                                                                                 "children": []
                                                                             },
                                                                             {
-                                                                                "name": "binnen 6 maanden",
+                                                                                "name": "last 6 months",
                                                                                 "children": []
                                                                             }
                                                                         ]
@@ -3414,14 +3414,14 @@
                         ]
                     },
                     {
-                        "name": "Period",
+                        "name": "Periode",
                         "children": [
                             {
-                                "name": "binnen 30 dagen",
+                                "name": "last 30 days",
                                 "children": []
                             },
                             {
-                                "name": "binnen 6 maanden",
+                                "name": "last 6 months",
                                 "children": []
                             }
                         ]
@@ -3475,14 +3475,14 @@
                                         ]
                                     },
                                     {
-                                        "name": "Period",
+                                        "name": "Periode",
                                         "children": [
                                             {
-                                                "name": "binnen 30 dagen",
+                                                "name": "last 30 days",
                                                 "children": []
                                             },
                                             {
-                                                "name": "binnen 6 maanden",
+                                                "name": "last 6 months",
                                                 "children": []
                                             }
                                         ]
@@ -3536,14 +3536,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -3596,14 +3596,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -3656,14 +3656,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -3724,14 +3724,14 @@
                         ]
                     },
                     {
-                        "name": "Period",
+                        "name": "Periode",
                         "children": [
                             {
-                                "name": "binnen 30 dagen",
+                                "name": "last 30 days",
                                 "children": []
                             },
                             {
-                                "name": "binnen 6 maanden",
+                                "name": "last 6 months",
                                 "children": []
                             }
                         ]
@@ -3785,14 +3785,14 @@
                                         ]
                                     },
                                     {
-                                        "name": "Period",
+                                        "name": "Periode",
                                         "children": [
                                             {
-                                                "name": "binnen 30 dagen",
+                                                "name": "last 30 days",
                                                 "children": []
                                             },
                                             {
-                                                "name": "binnen 6 maanden",
+                                                "name": "last 6 months",
                                                 "children": []
                                             }
                                         ]
@@ -3846,14 +3846,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -3906,14 +3906,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -3966,14 +3966,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -4034,14 +4034,14 @@
                         ]
                     },
                     {
-                        "name": "Period",
+                        "name": "Periode",
                         "children": [
                             {
-                                "name": "binnen 30 dagen",
+                                "name": "last 30 days",
                                 "children": []
                             },
                             {
-                                "name": "binnen 6 maanden",
+                                "name": "last 6 months",
                                 "children": []
                             }
                         ]
@@ -4095,14 +4095,14 @@
                                         ]
                                     },
                                     {
-                                        "name": "Period",
+                                        "name": "Periode",
                                         "children": [
                                             {
-                                                "name": "binnen 30 dagen",
+                                                "name": "last 30 days",
                                                 "children": []
                                             },
                                             {
-                                                "name": "binnen 6 maanden",
+                                                "name": "last 6 months",
                                                 "children": []
                                             }
                                         ]
@@ -4156,14 +4156,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -4216,14 +4216,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -4276,14 +4276,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -4344,14 +4344,14 @@
                         ]
                     },
                     {
-                        "name": "Period",
+                        "name": "Periode",
                         "children": [
                             {
-                                "name": "binnen 30 dagen",
+                                "name": "last 30 days",
                                 "children": []
                             },
                             {
-                                "name": "binnen 6 maanden",
+                                "name": "last 6 months",
                                 "children": []
                             }
                         ]
@@ -4405,14 +4405,14 @@
                                         ]
                                     },
                                     {
-                                        "name": "Period",
+                                        "name": "Periode",
                                         "children": [
                                             {
-                                                "name": "binnen 30 dagen",
+                                                "name": "last 30 days",
                                                 "children": []
                                             },
                                             {
-                                                "name": "binnen 6 maanden",
+                                                "name": "last 6 months",
                                                 "children": []
                                             }
                                         ]
@@ -4466,14 +4466,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -4526,14 +4526,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -4586,14 +4586,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -4654,14 +4654,14 @@
                         ]
                     },
                     {
-                        "name": "Period",
+                        "name": "Periode",
                         "children": [
                             {
-                                "name": "binnen 30 dagen",
+                                "name": "last 30 days",
                                 "children": []
                             },
                             {
-                                "name": "binnen 6 maanden",
+                                "name": "last 6 months",
                                 "children": []
                             }
                         ]
@@ -4715,14 +4715,14 @@
                                         ]
                                     },
                                     {
-                                        "name": "Period",
+                                        "name": "Periode",
                                         "children": [
                                             {
-                                                "name": "binnen 30 dagen",
+                                                "name": "last 30 days",
                                                 "children": []
                                             },
                                             {
-                                                "name": "binnen 6 maanden",
+                                                "name": "last 6 months",
                                                 "children": []
                                             }
                                         ]
@@ -4776,14 +4776,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -4836,14 +4836,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -4896,14 +4896,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -4969,14 +4969,14 @@
                         ]
                     },
                     {
-                        "name": "Period",
+                        "name": "Periode",
                         "children": [
                             {
-                                "name": "binnen 30 dagen",
+                                "name": "last 30 days",
                                 "children": []
                             },
                             {
-                                "name": "binnen 6 maanden",
+                                "name": "last 6 months",
                                 "children": []
                             }
                         ]
@@ -5030,14 +5030,14 @@
                                         ]
                                     },
                                     {
-                                        "name": "Period",
+                                        "name": "Periode",
                                         "children": [
                                             {
-                                                "name": "binnen 30 dagen",
+                                                "name": "last 30 days",
                                                 "children": []
                                             },
                                             {
-                                                "name": "binnen 6 maanden",
+                                                "name": "last 6 months",
                                                 "children": []
                                             }
                                         ]
@@ -5091,14 +5091,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -5151,14 +5151,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -5211,14 +5211,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -5279,14 +5279,14 @@
                         ]
                     },
                     {
-                        "name": "Period",
+                        "name": "Periode",
                         "children": [
                             {
-                                "name": "binnen 30 dagen",
+                                "name": "last 30 days",
                                 "children": []
                             },
                             {
-                                "name": "binnen 6 maanden",
+                                "name": "last 6 months",
                                 "children": []
                             }
                         ]
@@ -5340,14 +5340,14 @@
                                         ]
                                     },
                                     {
-                                        "name": "Period",
+                                        "name": "Periode",
                                         "children": [
                                             {
-                                                "name": "binnen 30 dagen",
+                                                "name": "last 30 days",
                                                 "children": []
                                             },
                                             {
-                                                "name": "binnen 6 maanden",
+                                                "name": "last 6 months",
                                                 "children": []
                                             }
                                         ]
@@ -5401,14 +5401,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -5461,14 +5461,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -5521,14 +5521,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -5589,14 +5589,14 @@
                         ]
                     },
                     {
-                        "name": "Period",
+                        "name": "Periode",
                         "children": [
                             {
-                                "name": "binnen 30 dagen",
+                                "name": "last 30 days",
                                 "children": []
                             },
                             {
-                                "name": "binnen 6 maanden",
+                                "name": "last 6 months",
                                 "children": []
                             }
                         ]
@@ -5650,14 +5650,14 @@
                                         ]
                                     },
                                     {
-                                        "name": "Period",
+                                        "name": "Periode",
                                         "children": [
                                             {
-                                                "name": "binnen 30 dagen",
+                                                "name": "last 30 days",
                                                 "children": []
                                             },
                                             {
-                                                "name": "binnen 6 maanden",
+                                                "name": "last 6 months",
                                                 "children": []
                                             }
                                         ]
@@ -5711,14 +5711,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -5771,14 +5771,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -5831,14 +5831,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -5856,10 +5856,14 @@
         ]
     },
     {
-        "name": "Period",
+        "name": "Periode",
         "children": [
             {
-                "name": "binnen 30 dagen",
+                "name": "last year",
+                "children": []
+            },
+            {
+                "name": "this week",
                 "children": [
                     {
                         "name": "Over",
@@ -5904,14 +5908,14 @@
                         ]
                     },
                     {
-                        "name": "Period",
+                        "name": "Periode",
                         "children": [
                             {
-                                "name": "binnen 30 dagen",
+                                "name": "last 30 days",
                                 "children": []
                             },
                             {
-                                "name": "binnen 6 maanden",
+                                "name": "last 6 months",
                                 "children": []
                             }
                         ]
@@ -5965,14 +5969,14 @@
                                         ]
                                     },
                                     {
-                                        "name": "Period",
+                                        "name": "Periode",
                                         "children": [
                                             {
-                                                "name": "binnen 30 dagen",
+                                                "name": "last 30 days",
                                                 "children": []
                                             },
                                             {
-                                                "name": "binnen 6 maanden",
+                                                "name": "last 6 months",
                                                 "children": []
                                             }
                                         ]
@@ -6026,14 +6030,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -6086,14 +6090,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -6146,14 +6150,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -6169,7 +6173,11 @@
                 ]
             },
             {
-                "name": "binnen 6 maanden",
+                "name": "last 30 days",
+                "children": []
+            },
+            {
+                "name": "last 6 months",
                 "children": [
                     {
                         "name": "Over",
@@ -6214,14 +6222,14 @@
                         ]
                     },
                     {
-                        "name": "Period",
+                        "name": "Periode",
                         "children": [
                             {
-                                "name": "binnen 30 dagen",
+                                "name": "last 30 days",
                                 "children": []
                             },
                             {
-                                "name": "binnen 6 maanden",
+                                "name": "last 6 months",
                                 "children": []
                             }
                         ]
@@ -6275,14 +6283,14 @@
                                         ]
                                     },
                                     {
-                                        "name": "Period",
+                                        "name": "Periode",
                                         "children": [
                                             {
-                                                "name": "binnen 30 dagen",
+                                                "name": "last 30 days",
                                                 "children": []
                                             },
                                             {
-                                                "name": "binnen 6 maanden",
+                                                "name": "last 6 months",
                                                 "children": []
                                             }
                                         ]
@@ -6336,14 +6344,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -6396,14 +6404,14 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
@@ -6456,269 +6464,19 @@
                                                         ]
                                                     },
                                                     {
-                                                        "name": "Period",
+                                                        "name": "Periode",
                                                         "children": [
                                                             {
-                                                                "name": "binnen 30 dagen",
+                                                                "name": "last 30 days",
                                                                 "children": []
                                                             },
                                                             {
-                                                                "name": "binnen 6 maanden",
+                                                                "name": "last 6 months",
                                                                 "children": []
                                                             }
                                                         ]
                                                     }
                                                 ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Year",
-        "children": [
-            {
-                "name": "2014",
-                "children": [
-                    {
-                        "name": "Over",
-                        "children": [
-                            {
-                                "name": "over-hl",
-                                "children": []
-                            },
-                            {
-                                "name": "hl-media",
-                                "children": []
-                            },
-                            {
-                                "name": "onderwijs",
-                                "children": []
-                            },
-                            {
-                                "name": "onderzoek",
-                                "children": []
-                            },
-                            {
-                                "name": "actueel",
-                                "children": []
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Thema",
-                        "children": [
-                            {
-                                "name": "management",
-                                "children": []
-                            },
-                            {
-                                "name": "gezondhiedszorg",
-                                "children": []
-                            },
-                            {
-                                "name": "life-sciences",
-                                "children": []
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Period",
-                        "children": [
-                            {
-                                "name": "binnen 30 dagen",
-                                "children": []
-                            },
-                            {
-                                "name": "binnen 6 maanden",
-                                "children": []
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Month",
-                        "children": [
-                            {
-                                "name": "4",
-                                "children": [
-                                    {
-                                        "name": "Over",
-                                        "children": [
-                                            {
-                                                "name": "over-hl",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "hl-media",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "onderwijs",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "onderzoek",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "actueel",
-                                                "children": []
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Thema",
-                                        "children": [
-                                            {
-                                                "name": "management",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "gezondhiedszorg",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "life-sciences",
-                                                "children": []
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Period",
-                                        "children": [
-                                            {
-                                                "name": "binnen 30 dagen",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "binnen 6 maanden",
-                                                "children": []
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "5",
-                                "children": [
-                                    {
-                                        "name": "Over",
-                                        "children": [
-                                            {
-                                                "name": "over-hl",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "hl-media",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "onderwijs",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "onderzoek",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "actueel",
-                                                "children": []
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Thema",
-                                        "children": [
-                                            {
-                                                "name": "management",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "gezondhiedszorg",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "life-sciences",
-                                                "children": []
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Period",
-                                        "children": [
-                                            {
-                                                "name": "binnen 30 dagen",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "binnen 6 maanden",
-                                                "children": []
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "6",
-                                "children": [
-                                    {
-                                        "name": "Over",
-                                        "children": [
-                                            {
-                                                "name": "over-hl",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "hl-media",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "onderwijs",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "onderzoek",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "actueel",
-                                                "children": []
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Thema",
-                                        "children": [
-                                            {
-                                                "name": "management",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "gezondhiedszorg",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "life-sciences",
-                                                "children": []
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Period",
-                                        "children": [
-                                            {
-                                                "name": "binnen 30 dagen",
-                                                "children": []
-                                            },
-                                            {
-                                                "name": "binnen 6 maanden",
-                                                "children": []
                                             }
                                         ]
                                     }

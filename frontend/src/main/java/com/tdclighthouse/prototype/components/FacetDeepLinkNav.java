@@ -20,7 +20,7 @@ import com.tdclighthouse.prototype.beans.FacetLinkConfigBean;
 import com.tdclighthouse.prototype.componentsinfo.FacetDeepLinkNavInfo;
 import com.tdclighthouse.prototype.utils.Constants.AttributesConstants;
 import com.tdclighthouse.prototype.utils.FacetDeepLink;
-import com.tdclighthouse.prototype.utils.FacetDeepLink.FacetDeepLinkExceptoin;
+import com.tdclighthouse.prototype.utils.exceptions.FacetDeepLinkExceptoin;
 
 @ParametersInfo(type = FacetDeepLinkNavInfo.class)
 public class FacetDeepLinkNav extends BaseHstComponent {
@@ -43,9 +43,9 @@ public class FacetDeepLinkNav extends BaseHstComponent {
         }
     }
 
-    private Map<String, String[]> getFilters(HstRequest request) {
+    private Map<String, Object[]> getFilters(HstRequest request) {
         try {
-            Map<String, String[]> result = new HashMap<String, String[]>();
+            Map<String, Object[]> result = new HashMap<String, Object[]>();
             HippoBean contentBean = request.getRequestContext().getContentBean();
             Map<String, Object> properties = contentBean.getProperties();
             FacetDeepLinkNavInfo parametersInfo = getComponentParametersInfo(request);
@@ -53,7 +53,7 @@ public class FacetDeepLinkNav extends BaseHstComponent {
                     .getPropertyNames();
             for (Iterator<String> iterator = propertyNames.iterator(); iterator.hasNext();) {
                 String propertyName = iterator.next();
-                String[] value = getPropertyAsStringArray(properties, propertyName);
+                Object[] value = getPropertyAsArray(properties, propertyName);
                 if (value != null) {
                     result.put(propertyName, value);
                 }
@@ -64,13 +64,13 @@ public class FacetDeepLinkNav extends BaseHstComponent {
         }
     }
 
-    private String[] getPropertyAsStringArray(Map<String, Object> properties, String propertyName) {
-        String[] result = null;
+    private Object[] getPropertyAsArray(Map<String, Object> properties, String propertyName) {
+        Object[] result = null;
         Object object = properties.get(propertyName);
-        if (object instanceof String[]) {
-            result = (String[]) object;
-        } else if (object instanceof String) {
-            result = new String[] { (String) object };
+        if (object.getClass().isArray()) {
+            result = (Object[]) object;
+        } else {
+            result = new Object[] { object };
         }
         return result;
     }

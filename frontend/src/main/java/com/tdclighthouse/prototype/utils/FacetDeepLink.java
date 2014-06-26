@@ -86,13 +86,13 @@ public class FacetDeepLink {
         DateTime then = new DateTime(calendar);
         DateTime now = new DateTime();
         if (Calendar.DAY_OF_MONTH == res) {
-            result = Days.daysBetween(then, now).getDays();
+            result = Days.daysBetween(now, then).getDays();
         } else if (Calendar.WEEK_OF_YEAR == res) {
-            result = Weeks.weeksBetween(then, now).getWeeks();
+            result = Weeks.weeksBetween(now, then).getWeeks();
         } else if (Calendar.MONTH == res) {
-            result = Months.monthsBetween(then, now).getMonths();
+            result = Months.monthsBetween(now, then).getMonths();
         } else if (Calendar.YEAR == res) {
-            result = Years.yearsBetween(then, now).getYears();
+            result = Years.yearsBetween(now, then).getYears();
         }
         return result;
     }

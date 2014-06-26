@@ -20,7 +20,7 @@ public class FacetDeepLinkTest {
     private static final String[] FACETS = new String[] {
             "hsl:subjecttags",
             "hsl:thematags",
-            "hsl:eventDate$[{name:'this week', resolution:'week', begin:0, end:1}, {name:'last 30 days', resolution:'day', begin:0, end:30}, {name:'last 6 months', resolution:'month', begin:0, end:6}, {name:'last year', resolution:'year', begin:0, end:2}]", };
+            "hsl:eventDate$[{name:'this week', resolution:'week', begin:0, end:1}, {name:'next 30 days', resolution:'day', begin:0, end:30}, {name:'next 6 months', resolution:'month', begin:0, end:6}, {name:'next year', resolution:'year', begin:0, end:2}]", };
 
     @Test
     public void emptyFilterTest() throws FacetDeepLinkExceptoin {
@@ -114,13 +114,13 @@ public class FacetDeepLinkTest {
     public void dateFieldCase2Test() throws FacetDeepLinkExceptoin, IOException {
         Map<String, Object[]> filter = new HashMap<String, Object[]>();
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -8);
+        calendar.add(Calendar.DAY_OF_YEAR, 8);
         filter.put("hsl:eventDate", new Object[] { calendar });
         HippoFacetNavigationBean facet = FacetMockUtils.createMockFacet(
                 ClassLoader.getSystemResourceAsStream("com/tdclighthouse/prototype/utils/TestFacet.json"), FACET_NAMES,
                 FACETS);
         HippoFacetNavigationBean bean = FacetDeepLink.getDeepLinkBean(facet, filter);
-        HippoFacetNavigationBean target = fetchSubbean(facet, "Periode/last 30 days");
+        HippoFacetNavigationBean target = fetchSubbean(facet, "Periode/next 30 days");
         Assert.assertEquals(target, bean);
     }
 
@@ -128,13 +128,13 @@ public class FacetDeepLinkTest {
     public void dateFieldCase3Test() throws FacetDeepLinkExceptoin, IOException {
         Map<String, Object[]> filter = new HashMap<String, Object[]>();
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -31);
+        calendar.add(Calendar.DAY_OF_YEAR, 31);
         filter.put("hsl:eventDate", new Object[] { calendar });
         HippoFacetNavigationBean facet = FacetMockUtils.createMockFacet(
                 ClassLoader.getSystemResourceAsStream("com/tdclighthouse/prototype/utils/TestFacet.json"), FACET_NAMES,
                 FACETS);
         HippoFacetNavigationBean bean = FacetDeepLink.getDeepLinkBean(facet, filter);
-        HippoFacetNavigationBean target = fetchSubbean(facet, "Periode/last 6 months");
+        HippoFacetNavigationBean target = fetchSubbean(facet, "Periode/next 6 months");
         Assert.assertEquals(target, bean);
     }
 
@@ -142,13 +142,13 @@ public class FacetDeepLinkTest {
     public void dateFieldCase4Test() throws FacetDeepLinkExceptoin, IOException {
         Map<String, Object[]> filter = new HashMap<String, Object[]>();
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.YEAR, -1);
+        calendar.add(Calendar.YEAR, 1);
         filter.put("hsl:eventDate", new Object[] { calendar });
         HippoFacetNavigationBean facet = FacetMockUtils.createMockFacet(
                 ClassLoader.getSystemResourceAsStream("com/tdclighthouse/prototype/utils/TestFacet.json"), FACET_NAMES,
                 FACETS);
         HippoFacetNavigationBean bean = FacetDeepLink.getDeepLinkBean(facet, filter);
-        HippoFacetNavigationBean target = fetchSubbean(facet, "Periode/last year");
+        HippoFacetNavigationBean target = fetchSubbean(facet, "Periode/next year");
         Assert.assertEquals(target, bean);
     }
 
@@ -187,7 +187,7 @@ public class FacetDeepLinkTest {
         @SuppressWarnings("unchecked")
         Map<String, Object[]> filter = new LinkedMap();
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -12);
+        calendar.add(Calendar.DAY_OF_YEAR, 12);
         filter.put("hsl:subjecttags", new String[] { "over-hl", "hl-media" });
         filter.put("hsl:thematags", new String[] { "management" });
         filter.put("hsl:eventDate", new Object[] { calendar });
@@ -196,7 +196,7 @@ public class FacetDeepLinkTest {
                 FACETS);
         HippoFacetNavigationBean bean = FacetDeepLink.getDeepLinkBean(facet, filter);
         HippoFacetNavigationBean target = fetchSubbean(facet,
-                "Over/over-hl/Over/hl-media/Thema/management/Periode/last 30 days");
+                "Over/over-hl/Over/hl-media/Thema/management/Periode/next 30 days");
         Assert.assertEquals(target, bean);
     }
 

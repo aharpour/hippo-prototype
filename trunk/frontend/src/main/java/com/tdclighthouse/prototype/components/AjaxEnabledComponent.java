@@ -49,7 +49,7 @@ public abstract class AjaxEnabledComponent<M> extends BaseComponent {
     private final ObjectSerializer xmlSerializer = HstServices.getComponentManager().getComponent(
             SpringComponentsConstants.XML_SERIALIZER);
 
-    public abstract M getModel(HstRequest request, HstResponse response) throws HstComponentException;
+    public abstract M getModel(HstRequest request, HstResponse response);
 
     @Override
     public final void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {

@@ -12,9 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.content.beans.standard.HippoFacetNavigationBean;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.joda.time.Months;
-import org.joda.time.Weeks;
-import org.joda.time.Years;
 
 import com.tdclighthouse.prototype.utils.exceptions.FacetDeepLinkExceptoin;
 import com.tdclighthouse.prototype.utils.exceptions.NodeNotFoundExceptoin;
@@ -26,6 +23,7 @@ import com.tdclighthouse.prototype.utils.exceptions.NotFacetedPropertyExceptoin;
  */
 public class FacetDeepLink {
 
+    private static final int NUMBER_OF_MONTHS_IN_YEAR = 12;
     private static final char DOLLAR_SIGN = '$';
 
     private FacetDeepLink() {
@@ -83,18 +81,30 @@ public class FacetDeepLink {
 
     private static int getTimeDiff(Calendar calendar, int res) {
         int result = Integer.MIN_VALUE;
-        DateTime then = new DateTime(calendar);
-        DateTime now = new DateTime();
+        Calendar c = (Calendar) calendar.clone();
+        setCalendarToEndOfTheDay(c);
+        Calendar n = Calendar.getInstance();
+        DateTime then = new DateTime(c);
+        DateTime now = new DateTime(n);
         if (Calendar.DAY_OF_MONTH == res) {
             result = Days.daysBetween(now, then).getDays();
         } else if (Calendar.WEEK_OF_YEAR == res) {
-            result = Weeks.weeksBetween(now, then).getWeeks();
+            n.set(Calendar.DAY_OF_WEEK, n.getMinimum(Calendar.DAY_OF_WEEK));
+            result = new Double(Math.floor(Days.daysBetween(new DateTime(n), then).getDays() / (double) 7)).intValue();
         } else if (Calendar.MONTH == res) {
-            result = Months.monthsBetween(now, then).getMonths();
+            result = calendar.get(res) - n.get(res) + (calendar.get(Calendar.YEAR) - n.get(Calendar.YEAR))
+                    * NUMBER_OF_MONTHS_IN_YEAR;
         } else if (Calendar.YEAR == res) {
-            result = Years.yearsBetween(now, then).getYears();
+            result = calendar.get(res) - n.get(res);
         }
         return result;
+    }
+
+    private static void setCalendarToEndOfTheDay(Calendar cal) {
+        cal.set(Calendar.HOUR_OF_DAY, cal.getMaximum(Calendar.HOUR_OF_DAY));
+        cal.set(Calendar.MINUTE, cal.getMaximum(Calendar.MINUTE));
+        cal.set(Calendar.SECOND, cal.getMaximum(Calendar.SECOND));
+        cal.set(Calendar.MILLISECOND, cal.getMaximum(Calendar.MILLISECOND));
     }
 
     private static int getResolutionAsInteger(String resolution) {
@@ -121,7 +131,8 @@ public class FacetDeepLink {
         }
         if (result == null) {
             if (value != null) {
-                throw new NodeNotFoundExceptoin(value);
+                throw new NodeNotFoundExceptoin("could not find a node \"" + value + "\" at \"" + targetNode.getPath()
+                        + "/" + facetName + "\"");
             } else {
                 result = targetNode;
             }
@@ -229,7 +240,7 @@ public class FacetDeepLink {
         }
 
         public FacetConfig[] getConfig() {
-            return config.clone();
+            return config != null ? config.clone() : null;
         }
 
         public String getProperty() {

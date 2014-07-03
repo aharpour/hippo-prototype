@@ -33,7 +33,7 @@ import com.tdclighthouse.prototype.utils.Constants;
  * 
  */
 @ParametersInfo(type = ContentCatalogInfo.class)
-public class ContentCatalog extends AjaxEnabledComponent<Map<String, Object>> {
+public class ContentCatalog extends AjaxEnabledComponent {
 
     @Override
     public Map<String, Object> getModel(HstRequest request, HstResponse response) {

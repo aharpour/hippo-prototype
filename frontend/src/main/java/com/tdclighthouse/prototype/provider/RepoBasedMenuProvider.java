@@ -54,7 +54,8 @@ public class RepoBasedMenuProvider {
         this.showFacetNavigations = showFacetNavigations;
         String relativeContentPath = request.getRequestContext().getResolvedSiteMapItem().getRelativeContentPath();
         if (relativeContentPath != null) {
-            selectedNodeCanonicalPath = siteContentBaseBean.<HippoBean> getBean(relativeContentPath).getCanonicalPath();
+            HippoBean bean = siteContentBaseBean.<HippoBean> getBean(relativeContentPath);
+            selectedNodeCanonicalPath = bean != null ? bean.getCanonicalPath() : null;
         } else {
             selectedNodeCanonicalPath = null;
         }
@@ -88,7 +89,8 @@ public class RepoBasedMenuProvider {
     private void expandForcedExpandedItems(EditableMenuItem item) {
         String value = getParameterValue(Constants.HstParametersConstants.EXPANDED, item);
         if (Constants.ValuesConstants.TRUE.equals(value)) {
-            String expandeOnlyCurrentItem = getParameterValue(Constants.HstParametersConstants.EXPAND_ONLY_CURRENT_ITEM, item);
+            String expandeOnlyCurrentItem = getParameterValue(
+                    Constants.HstParametersConstants.EXPAND_ONLY_CURRENT_ITEM, item);
             if (Constants.ValuesConstants.TRUE.equals(expandeOnlyCurrentItem)) {
                 markOnlyCurrentItemAsExpanded(item);
             } else {

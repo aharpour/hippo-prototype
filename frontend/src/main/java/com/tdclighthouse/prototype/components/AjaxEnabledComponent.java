@@ -37,7 +37,7 @@ import com.tdclighthouse.prototype.utils.ObjectSerializer;
  * @author Ebrahim Aharpour
  *
  */
-public abstract class AjaxEnabledComponent<M> extends BaseComponent {
+public abstract class AjaxEnabledComponent extends AbstractComponent {
 
     public static final String BLANK_TEMPLATE = "";
 
@@ -48,13 +48,6 @@ public abstract class AjaxEnabledComponent<M> extends BaseComponent {
 
     private final ObjectSerializer xmlSerializer = HstServices.getComponentManager().getComponent(
             SpringComponentsConstants.XML_SERIALIZER);
-
-    public abstract M getModel(HstRequest request, HstResponse response);
-
-    @Override
-    public final void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
-        request.setAttribute(AttributesConstants.MODEL, getModel(request, response));
-    }
 
     public Object getJsonAjaxModel(HstRequest request, HstResponse response) {
         return getModel(request, response);
@@ -88,14 +81,16 @@ public abstract class AjaxEnabledComponent<M> extends BaseComponent {
         try {
             String acceptHeader = request.getHeader("Accept");
             String bestMatch = MIMEParse.bestMatch(ECPECTED_MIME_TYPES, acceptHeader);
-            if (MimeTypeConstants.APPLICATION_JSON.equals(bestMatch) || MimeTypeConstants.TEXT_JAVASCRIPT.equals(bestMatch)) {
+            if (MimeTypeConstants.APPLICATION_JSON.equals(bestMatch)
+                    || MimeTypeConstants.TEXT_JAVASCRIPT.equals(bestMatch)) {
                 if (jsonSerializer != null) {
                     returnJsonResponse(request, response);
                 } else {
                     LOG.error("JSON is not support since a jsonSerializer has not been provied.");
                     returnHtmlResponse(request, response);
                 }
-            } else if (MimeTypeConstants.APPLICATION_XML.equals(bestMatch) || MimeTypeConstants.TEXT_XML.equals(bestMatch)) {
+            } else if (MimeTypeConstants.APPLICATION_XML.equals(bestMatch)
+                    || MimeTypeConstants.TEXT_XML.equals(bestMatch)) {
                 if (xmlSerializer != null) {
                     returnXmlResponse(request, response);
                 } else {

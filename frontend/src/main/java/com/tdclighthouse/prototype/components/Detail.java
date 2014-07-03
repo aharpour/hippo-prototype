@@ -15,7 +15,10 @@
  */
 package com.tdclighthouse.prototype.components;
 
+import java.util.Map;
+
 import org.hippoecm.hst.content.beans.standard.HippoBean;
+import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 
@@ -25,14 +28,16 @@ import com.tdclighthouse.prototype.utils.Constants;
  * @author Ebrahim Aharpour
  * 
  */
-public class Detail extends BaseComponent {
+public class Detail extends AbstractComponent {
 
     @Override
-    public void doBeforeRender(HstRequest request, HstResponse response) {
+    public Map<String, Object> getModel(HstRequest request, HstResponse response) throws HstComponentException {
+
         HippoBean contentBean = request.getRequestContext().getContentBean();
         if (contentBean != null) {
             request.setAttribute(Constants.AttributesConstants.DOCUMENT, contentBean);
         }
+        return null;
     }
 
 }

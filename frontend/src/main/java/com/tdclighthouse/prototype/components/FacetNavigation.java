@@ -32,7 +32,7 @@ import com.tdclighthouse.prototype.utils.Constants;
  *
  */
 @ParametersInfo(type = FacetedOverviewPageInfo.class)
-public class FacetNavigation extends FacetSupport<Map<String, Object>> {
+public class FacetNavigation extends FacetSupport {
 
     @Override
     public Map<String, Object> getModel(HstRequest request, HstResponse response) {

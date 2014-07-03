@@ -241,8 +241,8 @@ public class BaseComponent extends BaseHstComponent {
 
     protected String getLinkPath(HstRequest request, HippoBean bean) {
         HstLink link = getLink(request, bean);
-        return request.getContextPath() + request.getRequestContext().getResolvedMount().getResolvedMountPath()
-                + "/" + link.getPath();
+        return request.getContextPath() + request.getRequestContext().getResolvedMount().getResolvedMountPath() + "/"
+                + link.getPath();
     }
 
     protected HstLink getLink(HstRequest request, HippoBean bean) {

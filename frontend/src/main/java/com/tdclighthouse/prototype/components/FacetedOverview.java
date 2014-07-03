@@ -38,7 +38,7 @@ import com.tdclighthouse.prototype.utils.PaginatorWidget;
  * 
  */
 @ParametersInfo(type = FacetedOverviewPageInfo.class)
-public class FacetedOverview extends FacetSupport<Map<String, Object>> {
+public class FacetedOverview extends FacetSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FacetedOverview.class);
 

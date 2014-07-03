@@ -35,6 +35,7 @@ public class FacetMockUtils {
                     .andReturn(mockHippoFacetsAvailableNavigation(child.getChildren())).anyTimes();
         }
         EasyMock.expect(mock.getBean(EasyMock.anyString())).andReturn(null).anyTimes();
+        EasyMock.expect(mock.getPath()).andReturn("/path/to/facet").anyTimes();
         EasyMock.replay(mock);
         return mock;
     }

@@ -31,7 +31,9 @@ public abstract class AbstractComponent extends BaseComponent {
 
     protected void addToModel(Map<String, Object> map, HstRequest request) {
         HashMap<String, Object> model = getModelObject(request);
-        model.putAll(map);
+        if (map != null) {
+        	model.putAll(map);
+        }
     }
 
     @SuppressWarnings("unchecked")

@@ -316,6 +316,12 @@
 				<version>6.0.37</version>
 				<scope>provided</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.onehippo.cms7.hst</groupId>
+  				<artifactId>hst-mock</artifactId>
+    			<version>${hippo.hst.version}</version>
+    			<scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>

@@ -7,6 +7,9 @@
 <%@ tag trimDirectiveWhitespaces="true" %>
 
 <%@ attribute name="group" type="com.tdclighthouse.commons.simpleform.html.FormItemGroup" rtexprvalue="true" required="true" %>
+
+<hst:setBundle basename="nl.openweb.prototype.Messages"/>
+
 <c:if test="${not empty group}">
 <fieldset class="form-group ${(not empty group.groupType ? group.groupType : '') }" id="${group.name}">
 <c:if test="${not empty group.label}">

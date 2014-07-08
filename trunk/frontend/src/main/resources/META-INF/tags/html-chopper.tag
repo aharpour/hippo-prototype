@@ -11,6 +11,8 @@
 <%@ attribute name="showDots" required="false" type="java.lang.Boolean" rtexprvalue="true"%>
 <%@ attribute name="allowedLengthTolerance" required="false" type="java.lang.Integer" rtexprvalue="true"%>
 
+<hst:setBundle basename="nl.openweb.prototype.Messages"/>
+
 <jsp:useBean id="StringChopper" class="com.tdclighthouse.commons.utils.beans.StringChopperBean" scope="page" />
 
 <hst:html hippohtml="${content }" var="string" />

@@ -10,6 +10,8 @@
 <%@ attribute name="count" rtexprvalue="true" required="true" type="java.lang.Integer" %>
 <%@ attribute name="flexibleblockid" type="java.lang.String" rtexprvalue="true" required="false" %>
 
+<hst:setBundle basename="nl.openweb.prototype.Messages"/>
+
 <hst:headContribution keyHint="generic.swfobject.js">
 	<script type="text/javascript" src="<hst:link path="/js/swfobject.js" />"></script>
 </hst:headContribution>

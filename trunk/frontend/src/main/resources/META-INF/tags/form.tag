@@ -8,6 +8,9 @@
 
 <%@ attribute name="form" type="com.tdclighthouse.commons.simpleform.html.Form" rtexprvalue="true" required="true" %>
 <%@ attribute name="method" type="java.lang.String" rtexprvalue="true" required="false" description="Http method, default value is Post" %>
+
+<hst:setBundle basename="nl.openweb.prototype.Messages"/>
+
 <c:if test="${empty method}">
 	<c:set value="POST" var="method"/>
 </c:if>

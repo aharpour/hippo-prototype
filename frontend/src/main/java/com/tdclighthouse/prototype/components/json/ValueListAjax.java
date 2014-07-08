@@ -26,6 +26,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.collections.SetUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.hippoecm.hst.component.support.bean.BaseHstComponent;
 import org.hippoecm.hst.content.beans.ObjectBeanManagerException;
 import org.hippoecm.hst.content.beans.query.HstQuery;
 import org.hippoecm.hst.content.beans.query.exceptions.QueryException;
@@ -38,10 +39,10 @@ import org.hippoecm.hst.core.parameters.ParametersInfo;
 
 import com.tdclighthouse.prototype.beans.compounds.ListItemBean;
 import com.tdclighthouse.prototype.beans.compounds.ValueListBean;
-import com.tdclighthouse.prototype.components.BaseComponent;
 import com.tdclighthouse.prototype.componentsinfo.BlacklistInfo;
 import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
 import com.tdclighthouse.prototype.componentsinfo.ValueListAjaxInfo;
+import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants;
 
 /**
@@ -53,7 +54,7 @@ import com.tdclighthouse.prototype.utils.Constants;
  * 
  */
 @ParametersInfo(type = ValueListAjaxInfo.class)
-public class ValueListAjax extends BaseComponent {
+public class ValueListAjax extends BaseHstComponent {
 
     @Override
     public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
@@ -78,7 +79,7 @@ public class ValueListAjax extends BaseComponent {
     }
 
     protected HippoBeanIterator getAllValueLists(HstRequest request) throws QueryException {
-        HippoBean scope = getContentBeanViaParameters(request,
+        HippoBean scope = BeanUtils.getContentBeanViaParameters(request,
                 this.<ContentBeanPathInfo> getComponentParametersInfo(request));
         @SuppressWarnings("unchecked")
         HstQuery query = request.getRequestContext().getQueryManager().createQuery(scope, ValueListBean.class);

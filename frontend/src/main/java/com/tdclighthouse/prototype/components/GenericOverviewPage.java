@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hippoecm.hst.component.support.bean.BaseHstComponent;
 import org.hippoecm.hst.content.beans.query.HstQuery;
 import org.hippoecm.hst.content.beans.query.HstQueryResult;
 import org.hippoecm.hst.content.beans.query.exceptions.QueryException;
@@ -31,7 +32,9 @@ import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.parameters.ParametersInfo;
 
 import com.tdclighthouse.prototype.componentsinfo.GenericOverviewPageInfo;
+import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants;
+import com.tdclighthouse.prototype.utils.OverviewUtils;
 import com.tdclighthouse.prototype.utils.PaginatorWidget;
 
 /**
@@ -39,7 +42,7 @@ import com.tdclighthouse.prototype.utils.PaginatorWidget;
  *
  */
 @ParametersInfo(type = GenericOverviewPageInfo.class)
-public class GenericOverviewPage extends BaseComponent {
+public class GenericOverviewPage extends BaseHstComponent {
 
     @Override
     public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
@@ -49,7 +52,8 @@ public class GenericOverviewPage extends BaseComponent {
             GenericOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
             HstQuery query = getQuery(request);
             HstQueryResult queryResult = query.execute();
-            PaginatorWidget paginator = getPaginator(request, getPageSize(request), queryResult.getTotalSize());
+            PaginatorWidget paginator = OverviewUtils.getPaginator(request,
+                    OverviewUtils.getPageSize(request, parametersInfo), queryResult.getTotalSize());
             List<HippoBean> items = getItems(queryResult);
 
             request.setAttribute(Constants.AttributesConstants.ITEMS, items);
@@ -103,8 +107,8 @@ public class GenericOverviewPage extends BaseComponent {
     }
 
     private void setLimitAndOffset(HstRequest request, HstQuery query) {
-        int pageSize = getPageSize(request);
-        int pageNumber = getPageNumber(request);
+        int pageSize = OverviewUtils.getPageSize(request, this.<Object> getComponentParametersInfo(request));
+        int pageNumber = OverviewUtils.getPageNumber(request);
         query.setLimit(pageSize);
         query.setOffset((pageNumber - 1) * pageSize);
     }
@@ -112,7 +116,7 @@ public class GenericOverviewPage extends BaseComponent {
     protected HippoBean getQueryScope(HstRequest request, GenericOverviewPageInfo parametersInfo) {
         HippoBean scope = request.getRequestContext().getContentBean();
         if (!(scope instanceof HippoFolderBean)) {
-            scope = getContentBeanViaParameters(request, parametersInfo);
+            scope = BeanUtils.getContentBeanViaParameters(request, parametersInfo);
         }
         return scope;
     }

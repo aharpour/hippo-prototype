@@ -3,6 +3,7 @@ package com.tdclighthouse.prototype.components;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hippoecm.hst.component.support.bean.BaseHstComponent;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
@@ -13,7 +14,7 @@ import com.tdclighthouse.prototype.utils.Constants.AttributesConstants;
  * @author Ebrahim
  *
  */
-public abstract class AbstractComponent extends BaseComponent {
+public abstract class AbstractComponent extends BaseHstComponent {
 
     private static final String NOT_MAP_ERROR_MESSAGE = "an object which is not of the type Map has already been added to request.";
 

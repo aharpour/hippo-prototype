@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.prototype.componentsinfo.FacetedOverviewPageInfo;
 import com.tdclighthouse.prototype.utils.Constants;
+import com.tdclighthouse.prototype.utils.OverviewUtils;
 import com.tdclighthouse.prototype.utils.PaginatorWidget;
 
 /**
@@ -77,11 +78,11 @@ public class FacetedOverview extends FacetSupport {
         if (facetedNavBean != null) {
             facetedNavBean = applyQueryToFacetBean(request, facetedNavBean);
             HippoResultSetBean resultSet = facetedNavBean.getResultSet();
-            PaginatorWidget paginatorWidget = getPaginator(request, getPageSize(request), resultSet.getCount()
+            FacetedOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
+            PaginatorWidget paginatorWidget = OverviewUtils.getPaginator(request, OverviewUtils.getPageSize(request, parametersInfo), resultSet.getCount()
                     .intValue());
             model.put(Constants.AttributesConstants.FACET_BEAN, facetedNavBean);
-            model.put(Constants.AttributesConstants.ITEMS, getItemsFromResultSet(resultSet, paginatorWidget));
-            FacetedOverviewPageInfo parametersInfo = getComponentParametersInfo(request);
+            model.put(Constants.AttributesConstants.ITEMS, OverviewUtils.getItemsFromResultSet(resultSet, paginatorWidget));
             if (parametersInfo.getShowPaginator()) {
                 request.setAttribute(Constants.AttributesConstants.PAGINATOR, paginatorWidget);
             }

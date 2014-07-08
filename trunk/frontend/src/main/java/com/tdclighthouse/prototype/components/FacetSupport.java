@@ -25,7 +25,9 @@ import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.util.ContentBeanUtils;
 
 import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
+import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants;
+import com.tdclighthouse.prototype.utils.PathUtils;
 import com.tdclighthouse.prototype.utils.SearchQueryUtils;
 
 /**
@@ -42,7 +44,7 @@ public abstract class FacetSupport extends AjaxEnabledComponent {
         } else {
             Object parametersInfo = getComponentParametersInfo(request);
             if (parametersInfo instanceof ContentBeanPathInfo) {
-                HippoBean bean = getContentBeanViaParameters(request, (ContentBeanPathInfo) parametersInfo);
+                HippoBean bean = BeanUtils.getContentBeanViaParameters(request, (ContentBeanPathInfo) parametersInfo);
                 if (bean instanceof HippoFacetNavigationBean) {
                     result = (HippoFacetNavigationBean) bean;
                 }
@@ -57,7 +59,7 @@ public abstract class FacetSupport extends AjaxEnabledComponent {
         if (!(contentBean instanceof HippoFacetNavigationBean)) {
             result = contentBean;
         } else {
-            HippoBean bean = getContentBeanViaParameters(request,
+            HippoBean bean = BeanUtils.getContentBeanViaParameters(request,
                     (ContentBeanPathInfo) getComponentParametersInfo(request));
             if (!(bean instanceof HippoFacetNavigationBean)) {
                 result = bean;
@@ -71,14 +73,14 @@ public abstract class FacetSupport extends AjaxEnabledComponent {
             HstQuery hstQuery = getHstQuery(request);
             if (hstQuery != null) {
                 facetedNavBean = ContentBeanUtils.getFacetNavigationBean(hstQuery,
-                        absolutToRelativePath(facetedNavBean.getPath(), request));
+                        PathUtils.absolutToRelativePath(facetedNavBean.getPath(), request));
             } else {
                 String queryString = getPublicRequestParameter(request, Constants.ParametersConstants.QUERY);
                 if (StringUtils.isNotBlank(queryString)) {
                     queryString = SearchQueryUtils.parseAndEscapeBadCharacters(enhanceQuery(queryString));
                     if (StringUtils.isNotBlank(queryString)) {
                         facetedNavBean = ContentBeanUtils.getFacetNavigationBean(
-                                absolutToRelativePath(facetedNavBean.getPath(), request), queryString);
+                                PathUtils.absolutToRelativePath(facetedNavBean.getPath(), request), queryString);
                     }
                 }
             }

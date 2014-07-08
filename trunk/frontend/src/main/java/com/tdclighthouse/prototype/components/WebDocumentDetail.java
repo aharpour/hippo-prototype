@@ -15,12 +15,14 @@
  */
 package com.tdclighthouse.prototype.components;
 
+import org.hippoecm.hst.component.support.bean.BaseHstComponent;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.parameters.ParametersInfo;
 
 import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
+import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants;
 
 /**
@@ -28,11 +30,11 @@ import com.tdclighthouse.prototype.utils.Constants;
  * 
  */
 @ParametersInfo(type = ContentBeanPathInfo.class)
-public class WebDocumentDetail extends BaseComponent {
+public class WebDocumentDetail extends BaseHstComponent {
 
     @Override
     public void doBeforeRender(HstRequest request, HstResponse response) {
-        HippoBean contentBean = getWebDocumetBean(request);
+        HippoBean contentBean = BeanUtils.getWebDocumetBean(request, getComponentParametersInfo(request));
         if (contentBean != null) {
             request.setAttribute(Constants.AttributesConstants.DOCUMENT, contentBean);
         }

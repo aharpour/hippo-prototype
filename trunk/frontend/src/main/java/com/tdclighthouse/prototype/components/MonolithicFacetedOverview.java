@@ -8,6 +8,7 @@ import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.parameters.ParametersInfo;
 
 import com.tdclighthouse.prototype.componentsinfo.FacetedOverviewPageInfo;
+import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants;
 
 @ParametersInfo(type = FacetedOverviewPageInfo.class)
@@ -28,7 +29,7 @@ public class MonolithicFacetedOverview extends FacetedOverview {
     }
 
     private void setLabels(HstRequest request, Map<String, Object> model) {
-        Map<String, String> labels = getLabels(request);
+        Map<String, String> labels = BeanUtils.getLabels(request, getComponentParametersInfo(request));
         model.put(Constants.AttributesConstants.LABELS, labels);
     }
 }

@@ -25,6 +25,7 @@ import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.parameters.ParametersInfo;
 
 import com.tdclighthouse.prototype.componentsinfo.FacetedOverviewPageInfo;
+import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants;
 
 /**
@@ -41,7 +42,7 @@ public class FacetNavigation extends FacetSupport {
         if (facetedNavBean != null) {
             facetedNavBean = applyQueryToFacetBean(request, facetedNavBean);
             model.put(Constants.AttributesConstants.FACETNAV, facetedNavBean);
-            Map<String, String> labels = getLabels(request);
+            Map<String, String> labels = BeanUtils.getLabels(request, getComponentParametersInfo(request));
             model.put(Constants.AttributesConstants.LABELS, labels);
 
             if (facetedNavBean instanceof HippoFacetChildNavigationBean) {

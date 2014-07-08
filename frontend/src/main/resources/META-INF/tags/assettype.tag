@@ -6,6 +6,8 @@
 <%@ attribute name="asset" rtexprvalue="true" required="true"
 	type="org.hippoecm.hst.content.beans.standard.HippoResource"%>
 
+<hst:setBundle basename="nl.openweb.prototype.Messages"/>
+
 <c:choose>
 	<c:when test="${asset.mimeType eq ''}"><fmt:message key="file.type."/></c:when>
 	<c:when test="${asset.mimeType eq 'application/pdf' or asset.mimeType eq 'application/x-pdf' or asset.mimeType eq 'application/acrobat' or asset.mimeType eq 'applications/vnd.pdf' or asset.mimeType eq 'text/x-pdf' or asset.mimeType eq 'text/pdf'}"><fmt:message key="file.type.pdf"/></c:when>

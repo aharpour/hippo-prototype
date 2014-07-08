@@ -12,6 +12,8 @@
 <%@ attribute name="showDots" required="false" type="java.lang.Boolean" rtexprvalue="true"%>
 <%@ attribute name="allowedLengthTolerance" required="false" type="java.lang.Integer" rtexprvalue="true"%>
 
+<hst:setBundle basename="nl.openweb.prototype.Messages"/>
+
 <jsp:useBean id="StringChopper" class="com.tdclighthouse.commons.utils.beans.StringChopperBean" scope="page" />
 <jsp:setProperty name="StringChopper" property="targetString" value="${bean[stringPath]}" />
 <jsp:setProperty name="StringChopper" property="maxLength" value="${maxLength}" />

@@ -9,6 +9,9 @@
 <%@ attribute name="paginator" type="com.tdclighthouse.prototype.utils.PaginatorWidget" rtexprvalue="true" required="true" %>
 <%@ attribute name="pageParamerter" type="java.lang.String" rtexprvalue="true" required="false" %>
 <%@ attribute name="rowsPerPageParameter" type="java.lang.String" rtexprvalue="true" required="false" %>
+
+<hst:setBundle basename="nl.openweb.prototype.Messages"/>
+
 <c:if test="${empty pageParamerter}">
   <c:set var="pageParamerter" value="page"/>
 </c:if>

@@ -18,10 +18,10 @@ public abstract class AbstractComponent extends BaseHstComponent {
 
     private static final String NOT_MAP_ERROR_MESSAGE = "an object which is not of the type Map has already been added to request.";
 
-    public abstract Map<String, Object> getModel(HstRequest request, HstResponse response) throws HstComponentException;
+    public abstract Map<String, Object> getModel(HstRequest request, HstResponse response);
 
     @Override
-    public final void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+    public final void doBeforeRender(HstRequest request, HstResponse response){
         addToModel(getModel(request, response), request);
     }
 

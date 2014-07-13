@@ -126,11 +126,6 @@
 			<artifactId>servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<scope>runtime</scope>
-		</dependency>
 		<!-- This dependency is only needed for com.tdclighthouse.prototype.utils.URL so If you are not using tomcat then do not url this class -->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>

@@ -153,6 +153,41 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+	<tag>
+		<description>Print value of an attribute it first search the request attributes, if it is not there it search the context attributes</description>
+		<name>out</name>
+		<tag-class>com.tdclighthouse.prototype.tag.OutTag</tag-class>
+		<body-content>JSP</body-content>
+    <attribute>
+        <description>value to be printed.</description>
+        <name>value</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>Expression to be evaluated.</description>
+        <name>expression</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>Default value if the resulting value is null.</description>
+        <name>default</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>
+			Determines whether characters &lt;,&gt;,&amp;,'," in the
+			resulting string should be converted to their
+			corresponding character entity codes. Default value is
+			true.
+        </description>
+        <name>escapeXml</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
 	<function>
 		<name>isSameDayDate</name>
 		<function-class>org.apache.commons.lang3.time.DateUtils</function-class>

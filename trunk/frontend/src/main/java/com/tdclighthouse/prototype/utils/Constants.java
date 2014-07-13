@@ -39,6 +39,8 @@ public class Constants {
         public static final String WEBMASTER_ERROR_MESSAGE = "webmasterErrorMessage";
         public static final String WEBMASTER_WARN_MESSAGE = "webmasterWarningMessage";
         public static final String MENU = "menu";
+        public static final String CHANNEL_INFO = "channelInfo";
+        public static final String PARAM_INFO = "paramInfo";
 
         protected AttributesConstants() {
             super();

@@ -77,6 +77,15 @@ public class BeanUtils {
         return result;
     }
 
+    @SuppressWarnings("unchecked")
+    public static <T extends HippoBean> T getBeanViaAbsolutionPath(String absolutePath, HstRequest request) {
+        try {
+            return (T) request.getRequestContext().getObjectBeanManager().getObject(absolutePath);
+        } catch (ObjectBeanManagerException e) {
+            throw new HstComponentException(e.getMessage(), e);
+        }
+    }
+
     public static Map<String, String> getLabels(HstRequest request, Object parametersInfo) {
         Map<String, String> labels = new HashMap<String, String>();
         if (parametersInfo instanceof LabelsInfo) {

@@ -10,7 +10,7 @@
 <%@ attribute name="applyBlackList" rtexprvalue="true" required="false" type="java.lang.Boolean" %>
 <c:choose>
 <c:when test="${not empty bean}">
-<h4>Inspection of bean of type ${bean.class.name}</h4>
+<h4>Inspection of bean of type ${bean['class']['name']}</h4>
 <pre>
 <%
 BeanInspectionTagSupport.inspectProperties(bean, out, applyBlackList, depth);

@@ -78,7 +78,7 @@ public class BeanUtils {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends HippoBean> T getBeanViaAbsolutionPath(String absolutePath, HstRequest request) {
+    public static <T extends HippoBean> T getBeanViaAbsolutePath(String absolutePath, HstRequest request) {
         try {
             return (T) request.getRequestContext().getObjectBeanManager().getObject(absolutePath);
         } catch (ObjectBeanManagerException e) {

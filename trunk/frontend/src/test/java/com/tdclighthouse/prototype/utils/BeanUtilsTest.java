@@ -26,7 +26,7 @@ public class BeanUtilsTest {
 
         MockHstRequest requestMock = new MockHstRequest();
         requestMock.setRequestContext(createMockHstRequestContext(BEAN_PATH, false, null, true));
-        HippoBean selectedBean = BeanUtils.getBeanViaAbsolutionPath(BEAN_PATH, requestMock);
+        HippoBean selectedBean = BeanUtils.getBeanViaAbsolutePath(BEAN_PATH, requestMock);
         Assert.assertEquals(BEAN_PATH, selectedBean.getPath());
     }
 
@@ -36,7 +36,7 @@ public class BeanUtilsTest {
         try {
             MockHstRequest requestMock = new MockHstRequest();
             requestMock.setRequestContext(createMockHstRequestContext(BEAN_PATH, true, null, false));
-            selectedBean = BeanUtils.getBeanViaAbsolutionPath(BEAN_PATH, requestMock);
+            selectedBean = BeanUtils.getBeanViaAbsolutePath(BEAN_PATH, requestMock);
         } catch (HstComponentException e) {
             Assert.assertEquals(selectedBean, null);
         }

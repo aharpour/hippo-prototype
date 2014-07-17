@@ -8,10 +8,13 @@ import org.apache.commons.beanutils.NestedNullException;
 import org.apache.taglibs.standard.tag.common.core.OutSupport;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OutTag extends OutSupport {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger LOG = LoggerFactory.getLogger(OutTag.class);
 
     public void setValue(Object value) {
         this.value = value;
@@ -38,10 +41,13 @@ public class OutTag extends OutSupport {
             property = BeanUtils.getProperty(bean, expression);
         } catch (IllegalAccessException e) {
             // igonre
+            LOG.debug(e.getMessage(), e);
         } catch (NoSuchMethodException e) {
             // ignore
+            LOG.debug(e.getMessage(), e);
         } catch (NestedNullException e) {
             // ignore
+            LOG.debug(e.getMessage(), e);
         }
         return property;
     }

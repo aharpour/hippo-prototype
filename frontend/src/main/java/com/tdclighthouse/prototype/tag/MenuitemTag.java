@@ -15,6 +15,9 @@ import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.sitemenu.EditableMenuItem;
 import org.hippoecm.hst.util.HstRequestUtils;
 
+import com.tdclighthouse.prototype.provider.RepoBasedMenuProvider;
+import com.tdclighthouse.prototype.utils.Constants.HstParametersConstants;
+
 public class MenuitemTag extends TagSupport {
 
     private static final long serialVersionUID = 1L;
@@ -65,35 +68,43 @@ public class MenuitemTag extends TagSupport {
 
     private void printItemsRecursively(EditableMenuItem item, JspWriter out, int recursionDepth) throws IOException {
         List<EditableMenuItem> children = item.getChildMenuItems();
-        if (item.isSelected()) {
-            printItem(item, out, selectedClass);
-        } else if (item.isExpanded()) {
-            printItem(item, out, expandedClass);
-        } else if (!children.isEmpty() && recursionDepth > 0) {
-            printItem(item, out, unexpandedClass);
-        } else {
-            printItem(item, out, leafClass);
-        }
-        if (!children.isEmpty() && recursionDepth > 0 && (!recurseOnlyExpanded || item.isExpanded())) {
-            out.print("<ul>");
-            for (EditableMenuItem child : children) {
-                printItemsRecursively(child, out, depth);
+        if (!RepoBasedMenuProvider.getBooleanProperty(item, HstParametersConstants.INVISIBLE)) {
+            if (item.isSelected()) {
+                printItem(item, out, selectedClass);
+            } else if (item.isExpanded()) {
+                printItem(item, out, expandedClass);
+            } else if (!children.isEmpty() && recursionDepth > 0) {
+                printItem(item, out, unexpandedClass);
+            } else {
+                printItem(item, out, leafClass);
             }
-            out.print("</ul>");
+            if (!children.isEmpty() && recursionDepth > 0 && (!recurseOnlyExpanded || item.isExpanded())) {
+                out.print("<ul>");
+                for (EditableMenuItem child : children) {
+                    printItemsRecursively(child, out, recursionDepth - 1);
+                }
+                out.print("</ul>");
+            }
+            out.print("</li>");
         }
-        out.print("</li>");
     }
 
     private void printItem(EditableMenuItem item, JspWriter out, String cssClass) throws IOException {
+        boolean disabled = RepoBasedMenuProvider.getBooleanProperty(item, HstParametersConstants.DISABLED);
         out.print("<li ");
         if (StringUtils.isNotBlank(cssClass)) {
             out.print("class=\"" + cssClass + "\"");
         }
-        out.print("><a href=\"");
-        out.print(getLink(item, getRequestContext(), false));
-        out.print("\">");
+        out.print(">");
+        if (!disabled) {
+            out.print("<a href=\"");
+            out.print(getLink(item, getRequestContext(), false));
+            out.print("\">");
+        }
         out.print(StringEscapeUtils.escapeXml(item.getName()));
-        out.print("</a>");
+        if (!disabled) {
+            out.print("</a>");
+        }
     }
 
     private HstRequestContext getRequestContext() {

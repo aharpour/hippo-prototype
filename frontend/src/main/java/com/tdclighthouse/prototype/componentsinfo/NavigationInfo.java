@@ -23,7 +23,10 @@ import org.hippoecm.hst.core.parameters.Parameter;
  */
 public interface NavigationInfo extends SimpleNavigationInfo {
 
-    @Parameter(name = "showFacetedNavigation", defaultValue = "false", displayName = "Show faceted navigation items in the site menu")
+    public static final String SHOW_FACETED_NAVIGATION_DEFAULT = "false";
+    public static final String SHOW_FACETED_NAVIGATION = "showFacetedNavigation";
+
+    @Parameter(name = SHOW_FACETED_NAVIGATION, defaultValue = SHOW_FACETED_NAVIGATION_DEFAULT, displayName = "Show faceted navigation items in the site menu")
     public boolean isShowFacetedNavigation();
 
 }

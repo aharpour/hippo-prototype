@@ -15,11 +15,13 @@
  */
 package com.tdclighthouse.prototype.components;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.component.support.bean.BaseHstComponent;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.parameters.ParametersInfo;
+import org.hippoecm.hst.utils.ParameterUtils;
 
 import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
 import com.tdclighthouse.prototype.utils.BeanUtils;
@@ -38,6 +40,20 @@ public class WebDocumentDetail extends BaseHstComponent {
         if (contentBean != null) {
             request.setAttribute(Constants.AttributesConstants.DOCUMENT, contentBean);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    protected <T> T getComponentParameters(String parameterName, String defaultValue, Class<T> type) {
+        T result = null;
+        String parameterValue = getComponentParameter(parameterName);
+        if (StringUtils.isBlank(parameterValue)) {
+            parameterValue = defaultValue;
+        }
+        Object converted = ParameterUtils.DEFAULT_HST_PARAMETER_VALUE_CONVERTER.convert(parameterValue, type);
+        if (type.isAssignableFrom(converted.getClass())) {
+            result = (T) converted;
+        }
+        return result;
     }
 
 }

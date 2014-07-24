@@ -15,6 +15,8 @@
  */
 package com.tdclighthouse.prototype.components;
 
+import java.io.IOException;
+
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
@@ -40,20 +42,26 @@ public class Navigation extends WebDocumentDetail {
     @Override
     public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
         super.doBeforeRender(request, response);
-        final String menuName = getComponentParameters(NavigationInfo.MENU_NAME, NavigationInfo.MENU_NAME_DEFAULT, String.class);
+        final String menuName = getComponentParameters(NavigationInfo.MENU_NAME, NavigationInfo.MENU_NAME_DEFAULT,
+                String.class);
         EditableMenu editableMenu = TdcUtils.getCachedCall(new Call<EditableMenu>() {
 
             @Override
             public EditableMenu makeCall(HstRequest request) {
-                EditableMenu result = null;
-                HstSiteMenu menu = request.getRequestContext().getHstSiteMenus().getSiteMenu(menuName);
-                if (menu != null) {
-                    result = menu.getEditableMenu();
-                    boolean showFacet = getComponentParameters(NavigationInfo.SHOW_FACETED_NAVIGATION, NavigationInfo.SHOW_FACETED_NAVIGATION_DEFAULT, Boolean.class);
-                    new RepoBasedMenuProvider(request.getRequestContext().getSiteContentBaseBean(), showFacet, request)
-                            .addRepoBasedMenuItems(result);
+                try {
+                    EditableMenu result = null;
+                    HstSiteMenu menu = request.getRequestContext().getHstSiteMenus().getSiteMenu(menuName);
+                    if (menu != null) {
+                        result = menu.getEditableMenu();
+                        boolean showFacet = getComponentParameters(NavigationInfo.SHOW_FACETED_NAVIGATION,
+                                NavigationInfo.SHOW_FACETED_NAVIGATION_DEFAULT, Boolean.class);
+                        new RepoBasedMenuProvider(request.getRequestContext().getSiteContentBaseBean(), showFacet,
+                                request).addRepoBasedMenuItems(result);
+                    }
+                    return result;
+                } catch (IOException e) {
+                    throw new HstComponentException(e.getMessage(), e);
                 }
-                return result;
             }
 
             @Override
@@ -66,6 +74,5 @@ public class Navigation extends WebDocumentDetail {
         request.setAttribute(Constants.AttributesConstants.MENU, editableMenu);
 
     }
-
 
 }

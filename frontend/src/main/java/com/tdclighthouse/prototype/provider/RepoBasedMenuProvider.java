@@ -1,5 +1,6 @@
 package com.tdclighthouse.prototype.provider;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,9 +21,11 @@ import org.hippoecm.hst.core.sitemenu.CommonMenuItem;
 import org.hippoecm.hst.core.sitemenu.EditableMenu;
 import org.hippoecm.hst.core.sitemenu.EditableMenuItem;
 import org.hippoecm.hst.core.sitemenu.EditableMenuItemImpl;
+import org.hippoecm.hst.utils.ParameterUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tdclighthouse.commons.utils.hippo.Essentials;
 import com.tdclighthouse.prototype.beans.Page;
 import com.tdclighthouse.prototype.utils.Constants;
@@ -38,6 +41,8 @@ import com.tdclighthouse.prototype.utils.NavigationUtils;
  * 
  */
 public class RepoBasedMenuProvider {
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     private static final Logger LOG = LoggerFactory.getLogger(RepoBasedMenuProvider.class);
     private final HstRequest request;
@@ -61,26 +66,26 @@ public class RepoBasedMenuProvider {
         }
     }
 
-    public EditableMenu addRepoBasedMenuItems(EditableMenu editableMenu) {
+    public EditableMenu addRepoBasedMenuItems(EditableMenu editableMenu) throws IOException {
         List<EditableMenuItem> menuItems = editableMenu.getMenuItems();
         addRepoBasedMenuItems(menuItems);
         return editableMenu;
     }
 
-    private void addRepoBasedMenuItems(List<EditableMenuItem> menuItems) {
+    private void addRepoBasedMenuItems(List<EditableMenuItem> menuItems) throws IOException {
         for (EditableMenuItem item : menuItems) {
             addRepoBasedMenuItems(item.getChildMenuItems());
             expandForcedExpandedItems(item);
             if (item.isRepositoryBased()) {
-                List<String> locations = getParameterValues(Constants.HstParametersConstants.ROOT, item);
-                HippoBean[] beanOfMenuItems = null;
-                if (locations != null && !locations.isEmpty()) {
-                    beanOfMenuItems = getBeans(locations);
+                List<String> jsons = getParameterValues(Constants.HstParametersConstants.ROOT, item);
+                MenuItemConfig[] menuItemConfig = null;
+                if (jsons != null && !jsons.isEmpty()) {
+                    menuItemConfig = getBeans(jsons);
                 } else {
-                    beanOfMenuItems = new HippoBean[] { getBeanOfMenuItem(item) };
+                    menuItemConfig = new MenuItemConfig[] { getMenuItemConfig(item) };
                 }
-                for (HippoBean hippoBean : beanOfMenuItems) {
-                    addSubitems(item, hippoBean, 1);
+                for (MenuItemConfig config : menuItemConfig) {
+                    addSubitems(item, config, 1);
                 }
             }
         }
@@ -99,35 +104,41 @@ public class RepoBasedMenuProvider {
         }
     }
 
-    private HippoBean[] getBeans(List<String> locations) {
-        HippoBean[] beanOfMenuItems;
-        beanOfMenuItems = new HippoBean[locations.size()];
-        for (int i = 0; i < locations.size(); i++) {
-            beanOfMenuItems[i] = siteContentBaseBean.getBean(locations.get(i));
+    private MenuItemConfig[] getBeans(List<String> jsons) throws IOException {
+        MenuItemConfigJsonBean[] beanOfMenuItems = new MenuItemConfigJsonBean[jsons.size()];
+        for (int i = 0; i < jsons.size(); i++) {
+            beanOfMenuItems[i] = (objectMapper.readValue(jsons.get(i), MenuItemConfigJsonBean.class));
+            beanOfMenuItems[i].setSiteContentBaseBean(this.siteContentBaseBean);
         }
         return beanOfMenuItems;
     }
 
-    private void addSubitems(EditableMenuItem item, HippoBean indexPageBean, int depth) {
+    private void addSubitems(EditableMenuItem item, MenuItemConfig menuItemConfig, int depth) {
         if (item.getDepth() >= depth) {
-            HippoBean childbearingBean = getFolderOrFacet(indexPageBean);
+            HippoBean childbearingBean = getFolderOrFacet(menuItemConfig.getBean());
             if (childbearingBean != null) {
-                List<HippoBean> childbearingChildren = getChildbearingChildren(childbearingBean);
+                List<HippoBean> childbearingChildren = getChildbearingChildren(childbearingBean, menuItemConfig);
                 for (HippoBean childbearingChild : childbearingChildren) {
                     HippoBean foldersIndex = NavigationUtils.getIndexBean(childbearingChild);
                     if (foldersIndex != null) {
-                        EditableMenuItem folderItem = addItem(item, foldersIndex, childbearingChild.getLocalizedName());
-                        addSubitems(folderItem, foldersIndex, depth + 1);
+                        EditableMenuItem folderItem = addItem(item, createMenuItemConfig(menuItemConfig, foldersIndex),
+                                childbearingChild.getLocalizedName());
+                        addSubitems(folderItem, createMenuItemConfig(menuItemConfig, foldersIndex), depth + 1);
                     }
                 }
                 List<HippoDocumentBean> documents = getNonChildbearingChilds(childbearingBean);
                 for (final HippoBean document : documents) {
-                    if (!document.getCanonicalPath().equals(indexPageBean.getCanonicalPath())) {
-                        addItem(item, document, document.getLocalizedName());
+                    if (!document.getCanonicalPath().equals(menuItemConfig.getBean().getCanonicalPath())) {
+                        addItem(item, createMenuItemConfig(menuItemConfig, document), document.getLocalizedName());
                     }
                 }
             }
         }
+    }
+
+    private MenuItemConfigBean createMenuItemConfig(MenuItemConfig parentMenuItemConfig, final HippoBean document) {
+        return new MenuItemConfigBean(document, parentMenuItemConfig.isShowFacetNavigations(),
+                parentMenuItemConfig.isInvisible(), parentMenuItemConfig.isDisabled());
     }
 
     private List<HippoDocumentBean> getNonChildbearingChilds(HippoBean childbearingBean) {
@@ -140,12 +151,12 @@ public class RepoBasedMenuProvider {
         return result;
     }
 
-    private List<HippoBean> getChildbearingChildren(HippoBean childbearingBean) {
+    private List<HippoBean> getChildbearingChildren(HippoBean childbearingBean, MenuItemConfig menuItemConfig) {
         List<HippoBean> result;
         if (childbearingBean instanceof HippoFacetNavigation) {
             result = getChildbearingChildrenOfFacet((HippoFacetNavigation) childbearingBean);
         } else if (childbearingBean instanceof HippoFolderBean) {
-            result = getChildbearingChildrenOfFolder(childbearingBean);
+            result = getChildbearingChildrenOfFolder(childbearingBean, menuItemConfig);
         } else {
             throw new IllegalArgumentException(
                     "Expect childbearingBean to be either a HippoFolderBean or a HippoFacetNavigationBean");
@@ -153,11 +164,15 @@ public class RepoBasedMenuProvider {
         return result;
     }
 
-    private List<HippoBean> getChildbearingChildrenOfFolder(HippoBean childbearingBean) {
+    private List<HippoBean> getChildbearingChildrenOfFolder(HippoBean childbearingBean, MenuItemConfig menuItemConfig) {
         List<HippoBean> items = new ArrayList<HippoBean>();
         items.addAll(((HippoFolderBean) childbearingBean).getFolders());
-        if (showFacetNavigations) {
-            items.addAll(childbearingBean.getChildBeans(HippoFacetNavigation.class));
+        if (!menuItemConfig.isShowFacetNavigations()) {
+            for (int i = items.size() - 1; i >= 0; i--) {
+                if (items.get(i) instanceof HippoFacetNavigation) {
+                    items.remove(i);
+                }
+            }
         }
         return items;
     }
@@ -220,20 +235,22 @@ public class RepoBasedMenuProvider {
         }
     }
 
-   
-
-    private EditableMenuItem addItem(EditableMenuItem item, final HippoBean document, String localizedName) {
+    private EditableMenuItem addItem(EditableMenuItem item, final MenuItemConfig menuItemConfig, String localizedName) {
+        HippoBean document = menuItemConfig.getBean();
         HstLink hstLink = Essentials.createHstLink(document, request);
-        EditableMenuItem repoMenuItem;
+        SimpleEditableMenuItem repoMenuItem;
         if (document instanceof Page) {
             Boolean hideFromSitemap = ((Page) document).getHideFromSitemap();
-            repoMenuItem = new SimpleEditableMenuItem(item, hstLink, localizedName, hideFromSitemap != null && hideFromSitemap);
+            repoMenuItem = new SimpleEditableMenuItem(item, hstLink, localizedName, hideFromSitemap != null
+                    && hideFromSitemap);
         } else {
             repoMenuItem = new SimpleEditableMenuItem(item, hstLink, localizedName);
         }
-        if (document instanceof HippoFacetsAvailableNavigation && repoMenuItem instanceof SimpleEditableMenuItem) {
-            ((SimpleEditableMenuItem)repoMenuItem).setDisabled(true);
+        if ((document instanceof HippoFacetsAvailableNavigation && repoMenuItem instanceof SimpleEditableMenuItem)
+                || menuItemConfig.isDisabled()) {
+            repoMenuItem.setDisabled(true);
         }
+        repoMenuItem.setInvisible(menuItemConfig.isInvisible());
         item.addChildMenuItem(repoMenuItem);
         if (selectedNodeCanonicalPath != null && selectedNodeCanonicalPath.equals(document.getCanonicalPath())) {
             markAsSeleted(repoMenuItem);
@@ -259,16 +276,19 @@ public class RepoBasedMenuProvider {
         return result;
     }
 
-    private HippoBean getBeanOfMenuItem(CommonMenuItem item) {
-        HippoBean bean = null;
+    private MenuItemConfig getMenuItemConfig(CommonMenuItem item) {
+        MenuItemConfig result = null;
         ResolvedSiteMapItem resolveToSiteMapItem = item.resolveToSiteMapItem(request);
         if (resolveToSiteMapItem != null) {
-            bean = siteContentBaseBean.getBean(resolveToSiteMapItem.getRelativeContentPath());
+            HippoBean test = siteContentBaseBean.getBean(resolveToSiteMapItem.getRelativeContentPath());
+            result = new MenuItemConfigBean(test, showFacetNavigations, getParameterValue(
+                    HstParametersConstants.INVISIBLE, item, Boolean.class), getParameterValue(
+                    HstParametersConstants.DISABLED, item, Boolean.class));
         }
-        return bean;
+        return result;
     }
 
-    public static String getParameterValue(String parameterName, EditableMenuItem menuItem) {
+    public static String getParameterValue(String parameterName, CommonMenuItem menuItem) {
         String result = null;
         List<String> values = getParameterValues(parameterName, menuItem);
         if (!values.isEmpty()) {
@@ -277,7 +297,18 @@ public class RepoBasedMenuProvider {
         return result;
     }
 
-    public static List<String> getParameterValues(String parameterName, EditableMenuItem menuItem) {
+    @SuppressWarnings("unchecked")
+    public static <T> T getParameterValue(String parameterName, CommonMenuItem menuItem, Class<T> type) {
+        T result = null;
+        Object converted = ParameterUtils.DEFAULT_HST_PARAMETER_VALUE_CONVERTER.convert(
+                getParameterValue(parameterName, menuItem), type);
+        if (type.isAssignableFrom(converted.getClass())) {
+            result = (T) converted;
+        }
+        return result;
+    }
+
+    public static List<String> getParameterValues(String parameterName, CommonMenuItem menuItem) {
         if (StringUtils.isBlank(parameterName) || menuItem == null) {
             throw new IllegalArgumentException("Both parameterName and menuItem are required.");
         }
@@ -368,6 +399,12 @@ public class RepoBasedMenuProvider {
         public void setDisabled(boolean disabled) {
             if (disabled) {
                 this.properties.put(HstParametersConstants.DISABLED, new String[] { "true" });
+            }
+        }
+
+        public void setInvisible(boolean invisible) {
+            if (invisible) {
+                this.properties.put(HstParametersConstants.INVISIBLE, new String[] { "true" });
             }
         }
 

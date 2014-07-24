@@ -125,6 +125,8 @@ public class Constants {
         public static final String EXPAND_ONLY_CURRENT_ITEM = "expandOnlyCurrentItem";
         public static final String ROOT = "root";
         public static final String TEMPLATE = "template";
+        public static final String INVISIBLE = "invisible";
+        public static final String DISABLED = "disabled";
 
         protected HstParametersConstants() {
             super();

@@ -40,17 +40,16 @@ public class Navigation extends WebDocumentDetail {
     @Override
     public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
         super.doBeforeRender(request, response);
-        final NavigationInfo parametersInfo = this.<NavigationInfo> getComponentParametersInfo(request);
+        final String menuName = getComponentParameters(NavigationInfo.MENU_NAME, NavigationInfo.MENU_NAME_DEFAULT, String.class);
         EditableMenu editableMenu = TdcUtils.getCachedCall(new Call<EditableMenu>() {
 
             @Override
             public EditableMenu makeCall(HstRequest request) {
                 EditableMenu result = null;
-                String menuName = parametersInfo.getMenuName();
                 HstSiteMenu menu = request.getRequestContext().getHstSiteMenus().getSiteMenu(menuName);
                 if (menu != null) {
                     result = menu.getEditableMenu();
-                    boolean showFacet = parametersInfo.isShowFacetedNavigation();
+                    boolean showFacet = getComponentParameters(NavigationInfo.SHOW_FACETED_NAVIGATION, NavigationInfo.SHOW_FACETED_NAVIGATION_DEFAULT, Boolean.class);
                     new RepoBasedMenuProvider(request.getRequestContext().getSiteContentBaseBean(), showFacet, request)
                             .addRepoBasedMenuItems(result);
                 }
@@ -62,10 +61,11 @@ public class Navigation extends WebDocumentDetail {
                 return EditableMenu.class;
             }
 
-        }, request, EDITABLE_MENU_ATTRIBUTE);
+        }, request, EDITABLE_MENU_ATTRIBUTE + menuName);
 
         request.setAttribute(Constants.AttributesConstants.MENU, editableMenu);
 
     }
+
 
 }

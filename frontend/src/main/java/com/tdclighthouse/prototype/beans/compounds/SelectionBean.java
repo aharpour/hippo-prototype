@@ -25,42 +25,42 @@ import java.util.Map;
  */
 public class SelectionBean {
 
-	private final Map<String, String> labelsMap;
-	private final List<SelectionItemBean> items = new ArrayList<SelectionItemBean>();;
+    private final Map<String, ListItemBean> itemsMap;
+    private final List<SelectionItemBean> items = new ArrayList<SelectionItemBean>();;
 
-	public SelectionBean(Map<String, String> labelsMap, Object propertyValue) {
-		this.labelsMap = labelsMap;
-		if (propertyValue != null) {
-			if (propertyValue.getClass().isArray()) {
-				String[] keys = (String[]) propertyValue;
-				for (String key : keys) {
-					addSelectionItemBean(labelsMap, key);
-				}
-			} else {
-				String key = (String) propertyValue;
-				addSelectionItemBean(labelsMap, key);
-			}
-		}
-	}
+    public SelectionBean(Map<String, ListItemBean> itemsMap, Object propertyValue) {
+        this.itemsMap = itemsMap;
+        if (propertyValue != null) {
+            if (propertyValue.getClass().isArray()) {
+                String[] keys = (String[]) propertyValue;
+                for (String key : keys) {
+                    addSelectionItemBean(itemsMap, key);
+                }
+            } else {
+                String key = (String) propertyValue;
+                addSelectionItemBean(itemsMap, key);
+            }
+        }
+    }
 
-	private void addSelectionItemBean(Map<String, String> labelsMap, String key) {
-		items.add(new SelectionItemBean(key, labelsMap.get(key)));
-	}
+    private void addSelectionItemBean(Map<String, ListItemBean> labelsMap, String key) {
+        items.add(new SelectionItemBean(key, labelsMap.get(key)));
+    }
 
-	public Map<String, String> getLabelsMap() {
-		return labelsMap;
-	}
+    public Map<String, ListItemBean> getItemsMap() {
+        return itemsMap;
+    }
 
-	public List<SelectionItemBean> getItems() {
-		return items;
-	}
+    public List<SelectionItemBean> getItems() {
+        return items;
+    }
 
-	public SelectionItemBean getFirstItem() {
-		SelectionItemBean result = null;
-		if (items.size() > 0) {
-			result = items.get(0);
-		}
-		return result;
-	}
+    public SelectionItemBean getFirstItem() {
+        SelectionItemBean result = null;
+        if (items.size() > 0) {
+            result = items.get(0);
+        }
+        return result;
+    }
 
 }

@@ -121,6 +121,6 @@ public class BeanUtils {
         } catch (ObjectBeanManagerException e) {
             throw new HstComponentException(e.getMessage(), e);
         }
-        return TdcUtils.valueListBeanToMap(valueList);
+        return TdcUtils.valueListBeanToLabelMap(valueList);
     }
 }

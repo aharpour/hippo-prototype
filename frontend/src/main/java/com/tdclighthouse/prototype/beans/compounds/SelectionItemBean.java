@@ -15,27 +15,30 @@
  */
 package com.tdclighthouse.prototype.beans.compounds;
 
-
 /**
  * @author Ebrahim Aharpour
  *
  */
 public class SelectionItemBean {
 
-	protected String key;
-	protected String label;
-	
-	public SelectionItemBean(String key, String label) {
-		this.key = key;
-		this.label = label;
-	}
+    protected String key;
+    protected ListItemBean item;
 
-	public final String getKey() {
-		return key;
-	}
+    public SelectionItemBean(String key, ListItemBean item) {
+        this.key = key;
+        this.item = item;
+    }
 
-	public final String getLabel() {
-		return label;
-	}
+    public final String getKey() {
+        return key;
+    }
+
+    public final String getLabel() {
+        return item != null ? item.getLabel() : null;
+    }
+
+    public ListItemBean getItem() {
+        return item;
+    }
 
 }

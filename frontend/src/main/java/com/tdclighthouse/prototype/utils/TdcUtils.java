@@ -97,7 +97,16 @@ public class TdcUtils {
         public Class<T> getType();
     }
 
-    public static Map<String, String> valueListBeanToMap(ValueListBean valueList) {
+    public static Map<String, ListItemBean> valueListBeanToMap(ValueListBean valueList) {
+        List<ListItemBean> listItem = valueList.getListItem();
+        Map<String, ListItemBean> result = new HashMap<String, ListItemBean>(listItem.size());
+        for (ListItemBean listItemBean : listItem) {
+            result.put(listItemBean.getKey(), listItemBean);
+        }
+        return result;
+    }
+    
+    public static Map<String, String> valueListBeanToLabelMap(ValueListBean valueList) {
         List<ListItemBean> listItem = valueList.getListItem();
         Map<String, String> result = new HashMap<String, String>(listItem.size());
         for (ListItemBean listItemBean : listItem) {

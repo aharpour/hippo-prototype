@@ -34,6 +34,7 @@ import org.hippoecm.hst.provider.jcr.JCRValueProvider;
 import org.hippoecm.hst.util.PathUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tdclighthouse.prototype.beans.compounds.ListItemBean;
 import com.tdclighthouse.prototype.beans.compounds.SelectionBean;
 import com.tdclighthouse.prototype.beans.compounds.ValueListBean;
 import com.tdclighthouse.prototype.utils.TdcUtils;
@@ -50,11 +51,11 @@ public class TdcDocument extends HippoDocument {
 
     public SelectionBean getSelectionBean(String propertyName, String listAbslutePath) {
         Object propertyValue = getProperty(propertyName);
-        Map<String, String> labelsMap = getSelectionOptionsMap(listAbslutePath);
+        Map<String, ListItemBean> labelsMap = getSelectionOptionsMap(listAbslutePath);
         return new SelectionBean(labelsMap, propertyValue);
     }
 
-    protected Map<String, String> getSelectionOptionsMap(String path) {
+    protected Map<String, ListItemBean> getSelectionOptionsMap(String path) {
         return TdcUtils.valueListBeanToMap(getValueListBean(path));
     }
 

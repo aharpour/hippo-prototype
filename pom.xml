@@ -57,6 +57,7 @@
 		<easymock.version>3.2</easymock.version>
 		<maven.hippo.plugin.version>0.1.2-SNAPSHOT</maven.hippo.plugin.version>
 		<joda.version>2.3</joda.version>
+        <hst.mixin.support.version>1.1-SNAPSHOT</hst.mixin.support.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -186,7 +187,7 @@
 			<dependency>
 				<groupId>net.sourceforge.hstmixinsupport</groupId>
 				<artifactId>hst-mixin-support</artifactId>
-				<version>1.0</version>
+				<version>${hst.mixin.support.version}</version>
 			</dependency>
 			<!-- Apache libs -->
 			<dependency>

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.jcr.RepositoryException;
 
 import net.sourceforge.hstmixinsupport.DynamicProxyFactory;
+import net.sourceforge.hstmixinsupport.HstMinxinSupportInfo;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.content.beans.ObjectBeanManagerException;
@@ -22,11 +23,12 @@ import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
 import com.tdclighthouse.prototype.componentsinfo.LabelsInfo;
 
 public class BeanUtils {
+
     private BeanUtils() {
     }
 
     private static final DynamicProxyFactory DYNAMIC_PROXY_FACTORY = HstServices.getComponentManager().getComponent(
-            DynamicProxyFactory.class);
+            DynamicProxyFactory.class, HstMinxinSupportInfo.MODULE_NAME);
 
     public static HippoBean getMixinProxy(HippoBean bean) throws RepositoryException {
         return DYNAMIC_PROXY_FACTORY.getProxy(bean);

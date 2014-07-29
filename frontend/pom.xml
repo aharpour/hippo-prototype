@@ -135,7 +135,6 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<version>${joda.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.onehippo.cms7.hst</groupId>

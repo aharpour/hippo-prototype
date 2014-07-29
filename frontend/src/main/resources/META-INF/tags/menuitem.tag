@@ -66,4 +66,3 @@
 		</c:forEach>
 		</ul>
 </c:if>
-</li>

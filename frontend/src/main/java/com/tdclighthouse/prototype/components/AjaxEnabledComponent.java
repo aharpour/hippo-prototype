@@ -26,6 +26,7 @@ import org.hippoecm.hst.site.HstServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.tdclighthouse.prototype.HippoPrototypeFrontendInfo;
 import com.tdclighthouse.prototype.utils.Constants.AttributesConstants;
 import com.tdclighthouse.prototype.utils.Constants.EncodingsConstants;
 import com.tdclighthouse.prototype.utils.Constants.MimeTypeConstants;
@@ -44,10 +45,10 @@ public abstract class AjaxEnabledComponent extends AbstractComponent {
     private static final Logger LOG = LoggerFactory.getLogger(AjaxEnabledComponent.class);
 
     private final ObjectSerializer jsonSerializer = HstServices.getComponentManager().getComponent(
-            SpringComponentsConstants.JSON_SERIALIZER);
+            SpringComponentsConstants.JSON_SERIALIZER, HippoPrototypeFrontendInfo.MODULE_NAME);
 
     private final ObjectSerializer xmlSerializer = HstServices.getComponentManager().getComponent(
-            SpringComponentsConstants.XML_SERIALIZER);
+            SpringComponentsConstants.XML_SERIALIZER, HippoPrototypeFrontendInfo.MODULE_NAME);
 
     public Object getJsonAjaxModel(HstRequest request, HstResponse response) {
         return getModel(request, response);

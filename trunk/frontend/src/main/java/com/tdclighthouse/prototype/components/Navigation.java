@@ -28,6 +28,7 @@ import com.tdclighthouse.prototype.componentsinfo.NavigationInfo;
 import com.tdclighthouse.prototype.provider.RepoBasedMenuProvider;
 import com.tdclighthouse.prototype.utils.Constants;
 import com.tdclighthouse.prototype.utils.TdcUtils;
+import com.tdclighthouse.prototype.utils.Constants.AttributesConstants;
 import com.tdclighthouse.prototype.utils.TdcUtils.Call;
 
 /**
@@ -37,7 +38,7 @@ import com.tdclighthouse.prototype.utils.TdcUtils.Call;
 @ParametersInfo(type = NavigationInfo.class)
 public class Navigation extends WebDocumentDetail {
 
-    private static final String EDITABLE_MENU_ATTRIBUTE = "editableMenu";
+    public static final String EDITABLE_MENU_ATTRIBUTE = "editableMenu";
 
     @Override
     public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
@@ -72,7 +73,7 @@ public class Navigation extends WebDocumentDetail {
         }, request, EDITABLE_MENU_ATTRIBUTE + menuName);
 
         request.setAttribute(Constants.AttributesConstants.MENU, editableMenu);
-
+        request.setAttribute(AttributesConstants.PARAM_INFO, getComponentParametersInfo(request));
     }
 
 }

@@ -313,8 +313,8 @@
 				so If you are not using tomcat then do not url this class -->
 			<dependency>
 				<groupId>org.apache.tomcat</groupId>
-				<artifactId>coyote</artifactId>
-				<version>6.0.37</version>
+				<artifactId>tomcat-coyote</artifactId>
+				<version>7.0.55</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>

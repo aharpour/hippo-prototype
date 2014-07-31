@@ -129,7 +129,7 @@
 		<!-- This dependency is only needed for com.tdclighthouse.prototype.utils.URL so If you are not using tomcat then do not url this class -->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
-			<artifactId>coyote</artifactId>
+			<artifactId>tomcat-coyote</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

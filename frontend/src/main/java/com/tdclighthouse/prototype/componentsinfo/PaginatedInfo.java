@@ -24,7 +24,7 @@ import org.hippoecm.hst.core.parameters.Parameter;
 public interface PaginatedInfo {
 
     @Parameter(name = "defaultPageSize", displayName = "Default page size", defaultValue = "25", description = "Default Number of items per page")
-    public int getDefaultPageSzie();
+    public int getDefaultPageSize();
 
     @Parameter(name = "showPaginaotr", displayName = "Show paginator", defaultValue = "true", description = "Whether to show paginator or not")
     public boolean getShowPaginator();

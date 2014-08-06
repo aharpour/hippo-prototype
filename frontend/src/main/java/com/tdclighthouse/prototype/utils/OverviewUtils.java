@@ -37,7 +37,7 @@ public class OverviewUtils {
 				&& StringUtils.isNumeric(pageSzieString)) {
 			result = Integer.parseInt(pageSzieString);
 		} else if (parametersInfo instanceof PaginatedInfo) {
-			result = ((PaginatedInfo) parametersInfo).getDefaultPageSzie();
+			result = ((PaginatedInfo) parametersInfo).getDefaultPageSize();
 		}
 
 		return result;

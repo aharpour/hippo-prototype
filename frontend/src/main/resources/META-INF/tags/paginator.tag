@@ -21,9 +21,9 @@
   <fmt:message key="paginator.go.to.first" var="goToFirst" />
   <c:choose>
     <c:when test="${1 < paginator.page}">
-      <c:set var="url">
-        <tag:add-query-param key="${pageParamerter}" value="${1}"/>
-      </c:set>
+      <hst:renderURL var="url">
+      	<hst:param name="${pageParamerter}" value="${1}"/>
+      </hst:renderURL>
       <li class="pager-first first"><a href="${url}" title="${goToFirst}">&laquo; <fmt:message key="paginator.first" /></a></li>
     </c:when>
     <c:otherwise>
@@ -33,9 +33,9 @@
   <fmt:message key="paginator.go.to.previous" var="goToPrevious" />
   <c:choose>
     <c:when test="${paginator.page > 1}">
-      <c:set var="url">
-        <tag:add-query-param key="${pageParamerter}" value="${paginator.page - 1}"/>
-      </c:set>
+      <hst:renderURL var="url">
+      	<hst:param name="${pageParamerter}" value="${paginator.page - 1}"/>
+      </hst:renderURL>
       <li class="pager-previous"><a href="${url}" title="${goToPrevious}">&lsaquo; <fmt:message key="paginator.previous" /></a></li>
     </c:when>
     <c:otherwise>
@@ -48,9 +48,9 @@
         <li><span>${index}</span></li>
       </c:when>
       <c:otherwise>
-        <c:set var="url">
-          <tag:add-query-param key="${pageParamerter}" value="${index}"/>
-        </c:set>
+        <hst:renderURL var="url">
+	      <hst:param name="${pageParamerter}" value="${index}"/>
+	    </hst:renderURL>
         <li><a href="${url}">${index}</a></li>
       </c:otherwise>
     </c:choose>
@@ -58,9 +58,9 @@
   <fmt:message key="paginator.go.to.next" var="goToNext" />
   <c:choose>
     <c:when test="${paginator.numberOfPages > paginator.page}">
-      <c:set var="url">
-        <tag:add-query-param key="${pageParamerter}" value="${paginator.page + 1}"/>
-      </c:set>
+      <hst:renderURL var="url">
+      	<hst:param name="${pageParamerter}" value="${paginator.page + 1}"/>
+      </hst:renderURL>
       <li class="pager-next"><a href="${url}" title="${goToNext}"><fmt:message key="paginator.next" /> &rsaquo;</a></li>
     </c:when>
     <c:otherwise>
@@ -70,9 +70,9 @@
   <fmt:message key="paginator.go.to.last" var="goToLast" />
   <c:choose>
     <c:when test="${paginator.numberOfPages != paginator.page}">
-      <c:set var="url">
-        <tag:add-query-param key="${pageParamerter}" value="${paginator.numberOfPages}"/>
-      </c:set>
+	  <hst:renderURL var="url">
+		<hst:param name="${pageParamerter}" value="${paginator.numberOfPages}"/>
+	  </hst:renderURL>
       <li class="pager-last last"><a href="${url}" title="${goToLast}"><fmt:message key="paginator.last" /> &raquo;</a></li>
     </c:when>
     <c:otherwise>

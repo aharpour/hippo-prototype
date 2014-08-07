@@ -20,8 +20,7 @@ public class OverviewUtils {
 
 	public static int getPageNumber(HstRequest request) {
 		int result = 1;
-		String pageString = request.getRequestContext().getServletRequest()
-				.getParameter(Constants.ParametersConstants.PAGE);
+		String pageString = getNamespacedOrSimpleParameter(request, Constants.ParametersConstants.PAGE);
 		if (StringUtils.isNotBlank(pageString)
 				&& StringUtils.isNumeric(pageString)) {
 			result = Integer.parseInt(pageString);
@@ -31,8 +30,7 @@ public class OverviewUtils {
 
 	public static int getPageSize(HstRequest request, Object parametersInfo) {
 		int result = 25;
-		String pageSzieString = request.getRequestContext().getServletRequest()
-				.getParameter(Constants.ParametersConstants.PAGE_SIZE);
+		String pageSzieString = getNamespacedOrSimpleParameter(request, Constants.ParametersConstants.PAGE_SIZE);
 		if (StringUtils.isNotBlank(pageSzieString)
 				&& StringUtils.isNumeric(pageSzieString)) {
 			result = Integer.parseInt(pageSzieString);
@@ -42,6 +40,16 @@ public class OverviewUtils {
 
 		return result;
 	}
+
+    public static String getNamespacedOrSimpleParameter(HstRequest request, String parameterName) {
+        String parameter = request.getParameter(parameterName);
+		if (StringUtils.isBlank(parameter)) {
+		    parameter = request.getRequestContext().getServletRequest()
+		            .getParameter(parameterName);
+		    
+		}
+        return parameter;
+    }
 
 	public static PaginatorWidget getPaginator(HstRequest request,
 			int defaultPageSzie, int totalRows) {

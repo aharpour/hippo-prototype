@@ -21,9 +21,9 @@
   <fmt:message key="paginator.go.to.previous" var="goToPrevious" />
   <c:choose>
     <c:when test="${paginator.page > 1}">
-      <c:set var="url">
-        <tag:add-query-param key="${pageParamerter}" value="${paginator.page - 1}"/>
-      </c:set>
+      <hst:renderURL var="url">
+        <hst:param name="${pageParamerter}" value="${paginator.page - 1}"/>
+      </hst:renderURL>
       <li class="pager-previous"><a href="${url}" title="${goToPrevious}">&lsaquo; <fmt:message key="paginator.previous" /></a></li>
     </c:when>
     <c:otherwise>
@@ -33,9 +33,9 @@
   <fmt:message key="paginator.go.to.next" var="goToNext" />
   <c:choose>
     <c:when test="${paginator.numberOfPages > paginator.page}">
-      <c:set var="url">
-        <tag:add-query-param key="${pageParamerter}" value="${paginator.page + 1}"/>
-      </c:set>
+      <hst:renderURL var="url">
+        <hst:param name="${pageParamerter}" value="${paginator.page + 1}"/>
+      </hst:renderURL>
       <li class="pager-next"><a href="${url}" title="${goToNext}"><fmt:message key="paginator.next" /> &rsaquo;</a></li>
     </c:when>
     <c:otherwise>

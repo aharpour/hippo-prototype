@@ -10,7 +10,9 @@
 <%@ attribute name="pageParamerter" type="java.lang.String" rtexprvalue="true" required="false" %>
 <%@ attribute name="sizeParamerter" type="java.lang.String" rtexprvalue="true" required="false" %>
 <%@ attribute name="namespaced" type="java.lang.Boolean" rtexprvalue="true" required="false" %>
+
 <hst:setBundle basename="nl.openweb.prototype.Messages"/>
+
 <c:if test="${empty pageParamerter}">
   <c:set var="pageParamerter" value="page"/>
 </c:if>

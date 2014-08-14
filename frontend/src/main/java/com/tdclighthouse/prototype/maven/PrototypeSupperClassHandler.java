@@ -75,8 +75,10 @@ public class PrototypeSupperClassHandler extends SupperClassHandler {
             result = new ClassReference(HippoItem.class);
         } else {
             List<String> supertypes = contentTypeBean.getSupertypes();
-            result = extendsGeneratedBean(packageName, supertypes);
-
+            result = extendsInProjectBean(supertypes);
+            if (result == null) {
+                result = extendsGeneratedBean(packageName, supertypes);
+            }
             if (result == null) {
                 result = extendsExistingBeans(supertypes);
             }
@@ -117,6 +119,17 @@ public class PrototypeSupperClassHandler extends SupperClassHandler {
             if (StringUtils.isNotBlank(ns) && getNamespaces().contains(ns) && !getMixins().containsKey(superType)) {
                 result = new ClassReference(getClassName(packageName, superType));
                 break;
+            }
+        }
+        return result;
+    }
+    
+    private ClassReference extendsInProjectBean(List<String> supertypes) {
+        ClassReference result = null;
+        for (String superType : supertypes) {
+            if (getBeansInProject().containsKey(superType)) {
+                HippoBeanClass beanClass = getBeansInProject().get(superType);
+                result = new ClassReference(beanClass.getFullyQualifiedName());
             }
         }
         return result;

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.configuration.HstNodeTypes;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
@@ -331,14 +332,11 @@ public class RepoBasedMenuProvider {
         return result;
     }
 
-    public static boolean getBooleanProperty(CommonMenuItem menuItem, String propertyName) {
+    public static boolean getBooleanProperty(CommonMenuItem menuItem, String parameterName) {
         boolean result = false;
-        Map<String, Object> properties = menuItem.getProperties();
-        if (properties != null) {
-            Object object = properties.get(propertyName);
-            if (object instanceof String[] && ((String[]) object).length == 1) {
-                result = ValuesConstants.TRUE.equalsIgnoreCase(((String[]) object)[0]);
-            }
+        List<String> parameterValues = getParameterValues(parameterName, menuItem);
+        if (parameterValues != null && parameterValues.size() > 0) {
+            result = ValuesConstants.TRUE.equalsIgnoreCase(parameterValues.get(0));
         }
         return result;
     }
@@ -360,7 +358,22 @@ public class RepoBasedMenuProvider {
         public SimpleEditableMenuItem(EditableMenuItem item, HstLink hstLink, String localizedName, boolean invisible) {
             this(item, hstLink, localizedName);
             if (invisible) {
-                getProperties().put(HstParametersConstants.INVISIBLE, new String[] { "true" });
+                setParameter(HstParametersConstants.INVISIBLE, "true");
+            }
+        }
+
+        private void setParameter(String parameterName, String parameterValue) {
+            String[] paramNames = (String[]) this.properties.get(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_NAMES);
+            String[] paramValues = (String[]) this.properties.get(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_VALUES);
+            if (paramNames != null && paramValues != null && paramNames.length == paramValues.length) {
+                this.properties.put(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_NAMES,
+                        ArrayUtils.addAll(paramNames, parameterName));
+                this.properties.put(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_VALUES,
+                        ArrayUtils.addAll(paramValues, parameterValue));
+            } else {
+                this.properties.put(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_NAMES, new String[] { parameterName });
+                this.properties.put(HstNodeTypes.GENERAL_PROPERTY_PARAMETER_VALUES, new String[] { parameterValue });
+
             }
         }
 
@@ -398,13 +411,13 @@ public class RepoBasedMenuProvider {
 
         public void setDisabled(boolean disabled) {
             if (disabled) {
-                this.properties.put(HstParametersConstants.DISABLED, new String[] { "true" });
+                setParameter(HstParametersConstants.DISABLED, "true");
             }
         }
 
         public void setInvisible(boolean invisible) {
             if (invisible) {
-                this.properties.put(HstParametersConstants.INVISIBLE, new String[] { "true" });
+                setParameter(HstParametersConstants.INVISIBLE, "true");
             }
         }
 

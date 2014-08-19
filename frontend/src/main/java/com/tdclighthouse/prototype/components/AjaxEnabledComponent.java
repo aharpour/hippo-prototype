@@ -125,10 +125,10 @@ public abstract class AjaxEnabledComponent extends AbstractComponent {
 
     private void returnJsonResponse(HstRequest request, HstResponse response) throws Exception {
         Object model = getJsonAjaxModel(request, response);
-        jsonSerializer.serialize(model, response.getOutputStream());
         response.setServeResourcePath(BLANK_TEMPLATE);
         response.setContentType(MimeTypeConstants.APPLICATION_JSON);
         response.setCharacterEncoding(getCharacterEndcoding());
+        jsonSerializer.serialize(model, response.getOutputStream());
     }
 
     protected String getCharacterEndcoding() {

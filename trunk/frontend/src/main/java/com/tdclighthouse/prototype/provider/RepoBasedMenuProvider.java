@@ -406,7 +406,7 @@ public class RepoBasedMenuProvider {
         }
 
         public boolean isInvisible() {
-            return getBooleanProperty(this, HstParametersConstants.DISABLED);
+            return getBooleanProperty(this, HstParametersConstants.INVISIBLE);
         }
 
         public void setDisabled(boolean disabled) {

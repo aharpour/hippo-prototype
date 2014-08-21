@@ -81,7 +81,8 @@ public class MenuitemTag extends TagSupport {
             if (!children.isEmpty() && recursionDepth > 0 && (!recurseOnlyExpanded || item.isExpanded())) {
                 out.print("<ul>");
                 for (EditableMenuItem child : children) {
-                    printItemsRecursively(child, out, recursionDepth - 1);
+                    int useDepth = RepoBasedMenuProvider.getBooleanProperty(child, HstParametersConstants.DISABLED) ? recursionDepth : recursionDepth - 1;
+                    printItemsRecursively(child, out, useDepth);
                 }
                 out.print("</ul>");
             }

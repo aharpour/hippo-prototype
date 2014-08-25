@@ -68,21 +68,24 @@ public class MenuitemTag extends TagSupport {
 
     private void printItemsRecursively(EditableMenuItem item, JspWriter out, int recursionDepth) throws IOException {
         List<EditableMenuItem> children = item.getChildMenuItems();
+        int depth= recursionDepth;
         if (!RepoBasedMenuProvider.getBooleanProperty(item, HstParametersConstants.INVISIBLE)) {
             if (item.isSelected()) {
                 printItem(item, out, selectedClass);
             } else if (item.isExpanded()) {
                 printItem(item, out, expandedClass);
-            } else if (!children.isEmpty() && recursionDepth > 0) {
+            } else if (!children.isEmpty() && depth > 0) {
                 printItem(item, out, unexpandedClass);
             } else {
                 printItem(item, out, leafClass);
             }
-            if (!children.isEmpty() && recursionDepth > 0 && (!recurseOnlyExpanded || item.isExpanded())) {
+            
+            depth = RepoBasedMenuProvider.getBooleanProperty(item, HstParametersConstants.DISABLED) ? depth + 1 : depth;
+             
+            if (!children.isEmpty() && depth > 0 && (!recurseOnlyExpanded || item.isExpanded())) {
                 out.print("<ul>");
                 for (EditableMenuItem child : children) {
-                    int useDepth = RepoBasedMenuProvider.getBooleanProperty(child, HstParametersConstants.DISABLED) ? recursionDepth : recursionDepth - 1;
-                    printItemsRecursively(child, out, useDepth);
+                    printItemsRecursively(child, out, depth - 1);
                 }
                 out.print("</ul>");
             }

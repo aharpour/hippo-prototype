@@ -97,11 +97,11 @@ public class GenericOverviewPage extends BaseHstComponent {
         }
 
         setLimitAndOffset(request, query);
-        addFilter(query);
+        addFilter(query, request);
         return query;
     }
 
-    protected void addFilter(HstQuery query) {
+    protected void addFilter(HstQuery query, HstRequest request) {
         // This method is added for potential subclass to extend its
         // functionality
     }

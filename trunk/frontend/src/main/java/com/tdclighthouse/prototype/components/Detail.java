@@ -18,7 +18,6 @@ package com.tdclighthouse.prototype.components;
 import java.util.Map;
 
 import org.hippoecm.hst.content.beans.standard.HippoBean;
-import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 
@@ -31,7 +30,7 @@ import com.tdclighthouse.prototype.utils.Constants;
 public class Detail extends AbstractComponent {
 
     @Override
-    public Map<String, Object> getModel(HstRequest request, HstResponse response) throws HstComponentException {
+    public Map<String, Object> getModel(HstRequest request, HstResponse response) {
 
         HippoBean contentBean = request.getRequestContext().getContentBean();
         if (contentBean != null) {

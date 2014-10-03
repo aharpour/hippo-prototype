@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+   Copyright 2012 Finalist B.V.
+  
+   Licensed under the Apache License, Version 2.0 (the "License")
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+  
+        http://www.apache.org/licenses/LICENSE-2.0
+  
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.tdclighthouse.hippo</groupId>
+		<artifactId>hippo-prototype</artifactId>
+		<version>7.9.35</version>
+	</parent>
+	<name>Hippo prototype frontend</name>
+	<description>Hippo prototype site java files</description>
+	<artifactId>hippo-prototype-frontend</artifactId>
+	<packaging>jar</packaging>
+	<developers>
+		<developer>
+			<name>Ebrahim Aharpour</name>
+			<email>ebrahim.aharpour@gmail.com</email>
+		</developer>
+	</developers>
+	<dependencies>
+		<dependency>
+			<groupId>com.tdclighthouse.hippo</groupId>
+			<artifactId>hippo-prototype-shared</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scilab.forge</groupId>
+			<artifactId>jlatexmath</artifactId>
+		</dependency>
+		
+		<!-- Hippo Maven Plugin dependency -->
+		<dependency>
+			<groupId>com.aharpour.ebrahim</groupId>
+			<artifactId>hippo-maven-plugin</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.onehippo.cms7.hst</groupId>
+					<artifactId>hst-content-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.onehippo.cms7.hst</groupId>
+					<artifactId>hst-client</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- /Hippo Maven Plugin dependency -->
+		
+		<!-- Jackson dependencies -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<!-- /Jackson dependencies -->
+		
+		<!-- Xstream dependency -->
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+		</dependency>
+		<!-- /Xstream dependency -->
+		<dependency>
+			<groupId>com.tdclighthouse.hippo</groupId>
+			<artifactId>hippo-common-tools</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.hstmixinsupport</groupId>
+			<artifactId>hst-mixin-support</artifactId>
+		</dependency>
+		
+		<!-- Apache libs -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<!-- /Apache libs -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.onehippo.cms7.hst.dependencies</groupId>
+			<artifactId>hst-client-dependencies</artifactId>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.onehippo.cms7.hst</groupId>
+			<artifactId>hst-commons</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.jcr</groupId>
+			<artifactId>jcr</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- This dependency is only needed for com.tdclighthouse.prototype.utils.URL so If you are not using tomcat then do not url this class -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-coyote</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.onehippo.cms7.hst</groupId>
+			<artifactId>hst-mock</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.ftl</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+</project>

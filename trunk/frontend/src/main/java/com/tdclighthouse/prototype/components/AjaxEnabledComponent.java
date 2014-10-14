@@ -78,7 +78,7 @@ public abstract class AjaxEnabledComponent extends AbstractComponent {
     }
 
     @Override
-    public final void doBeforeServeResource(HstRequest request, HstResponse response) throws HstComponentException {
+    public final void doBeforeServeResource(HstRequest request, HstResponse response) {
         try {
             String acceptHeader = request.getHeader("Accept");
             String bestMatch = MIMEParse.bestMatch(ECPECTED_MIME_TYPES, acceptHeader);

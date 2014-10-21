@@ -7,7 +7,7 @@
 <jsp:useBean id="queryBean" class="com.tdclighthouse.commons.utils.beans.QueryBean" scope="page" />
 <jsp:setProperty name="queryBean" property="request" value="${pageContext.request}" />
 <%
-String[] split = items.split(com.tdclighthouse.prototype.utils.Constants.Regex.COMMA_SEPARATOR);
+String[] split = items.split(com.tdclighthouse.prototype.utils.Constants.RegexConstants.COMMA_SEPARATOR);
 for(String item : split) {
 	queryBean.remove(item);	
 }

@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.tdclighthouse.hippo</groupId>
 		<artifactId>hippo-prototype</artifactId>
-		<version>7.9.36</version>
+		<version>7.9.37-SNAPSHOT</version>
 	</parent>
 	<artifactId>hippo-prototype-shared</artifactId>
 

@@ -10,7 +10,7 @@
 	
 	<bean id="propertyConfigurer" class="com.tdclighthouse.prototype.utils.SpringConfigurablePropertyPlaceholder">
 		<property name="systemPropertyName" value="importconfig" />
-		<property name="defaultPropertiesFileLocation" value="com/tdclighthouse/prototype/standalone/binaryimporter/importconfig.properties" />
+		<property name="defaultPropertiesFileLocation" value="com/tdclighthouse/prototype/standalone/importer/importconfig.properties" />
 		<property name="ignoreResourceNotFound" value="false" />
 	</bean>
 	
@@ -34,7 +34,7 @@
 		<property name="imageType" value="${image.set.type}"/>
 	</bean>
 	
-	<bean class="com.tdclighthouse.prototype.standalone.binaryimporter.App">
+	<bean class="com.tdclighthouse.prototype.standalone.importer.PackageImporter">
 		<constructor-arg value="${import.folder}"/>
 	</bean>
 </beans>

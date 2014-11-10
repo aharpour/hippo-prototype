@@ -163,14 +163,6 @@ public class ImageCreationCallBack implements SessionCallBack<String> {
             this.width = width;
         }
 
-        public Long getHeight() {
-            return height;
-        }
-
-        public Long getWidth() {
-            return width;
-        }
-
     }
 
 }

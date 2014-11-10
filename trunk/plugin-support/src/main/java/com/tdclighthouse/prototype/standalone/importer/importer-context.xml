@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:lang="http://www.springframework.org/schema/lang" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                            http://www.springframework.org/schema/lang http://www.springframework.org/schema/beans/spring-lang-3.0.xsd
                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
-	<context:annotation-config />
-	
-	<bean id="propertyConfigurer" class="com.tdclighthouse.prototype.utils.SpringConfigurablePropertyPlaceholder">
-		<property name="systemPropertyName" value="importconfig" />
-		<property name="defaultPropertiesFileLocation" value="com/tdclighthouse/prototype/standalone/importer/importconfig.properties" />
-		<property name="ignoreResourceNotFound" value="false" />
-	</bean>
-	
-	<bean id="repositoryConnector" class="com.tdclighthouse.prototype.rmi.RepositoryConnector">
-		<constructor-arg name="username" value="${repo.username}"/>
-		<constructor-arg name="password" value="${repo.password}"/>
-		<constructor-arg name="repositoryUrl" value="${repo.url}"/>
-	</bean>
-	
-	<bean id="sessionTemplate" class="com.tdclighthouse.prototype.support.SessionTemplate">
-		<constructor-arg ref="repositoryConnector"/>
-	</bean>
+  <context:annotation-config />
 
-	<bean name="documentManager" class="com.tdclighthouse.prototype.support.DocumentManager">
-		<constructor-arg ref="sessionTemplate"/>
-	</bean>
+  <bean id="propertyConfigurer" class="com.tdclighthouse.prototype.utils.SpringConfigurablePropertyPlaceholder">
+    <property name="systemPropertyName" value="importconfig" />
+    <property name="defaultPropertiesFileLocation" value="com/tdclighthouse/prototype/standalone/importer/importconfig.properties" />
+    <property name="ignoreResourceNotFound" value="false" />
+  </bean>
 
-	<bean name="folderCreationService" class="com.tdclighthouse.prototype.services.FolderCreationService" />
+  <bean id="repositoryConnector" class="com.tdclighthouse.prototype.rmi.RepositoryConnector">
+    <constructor-arg name="username" value="${repo.username}" />
+    <constructor-arg name="password" value="${repo.password}" />
+    <constructor-arg name="repositoryUrl" value="${repo.url}" />
+  </bean>
 
-	<bean name="binaryImportService" class="com.tdclighthouse.prototype.services.BinaryImportService">
-		<property name="imageType" value="${image.set.type}"/>
-	</bean>
-	
-	<bean class="com.tdclighthouse.prototype.standalone.importer.PackageImporter">
-		<constructor-arg value="${import.folder}"/>
-	</bean>
+  <bean id="sessionTemplate" class="com.tdclighthouse.prototype.support.SessionTemplate">
+    <constructor-arg ref="repositoryConnector" />
+  </bean>
+  
+  <bean name="htmlFieldUpdater" class="com.tdclighthouse.prototype.beanmapper.HtmlFieldUpdater"/>
+
+  <bean name="dynamicNodeWriter" class="com.tdclighthouse.prototype.beanmapper.DynamicNodeWriter">
+    <property name="dateFormat" >
+      <bean class="java.text.SimpleDateFormat">
+        <constructor-arg value="yyyy-MM-dd"/>
+      </bean>
+    </property>
+    <property name="beforeSaveUpdater">
+      <ref bean="htmlFieldUpdater" />
+    </property>
+    <property name="publish" value="false" />
+  </bean>
+
+  <bean id="jaxbContext" class="javax.xml.bind.JAXBContext" factory-method="newInstance">
+    <constructor-arg type="java.lang.String" value="${binding.package}" />
+  </bean>
+
+  <bean name="documentManager" class="com.tdclighthouse.prototype.support.DocumentManager">
+    <constructor-arg ref="sessionTemplate" />
+  </bean>
+
+  <bean name="folderCreationService" class="com.tdclighthouse.prototype.services.FolderCreationService" />
+
+  <bean name="xmlDocumentImportService" class="com.tdclighthouse.prototype.services.XmlDocumentImportService" />
+
+  <bean name="binaryImportService" class="com.tdclighthouse.prototype.services.BinaryImportService">
+    <property name="imageType" value="${image.set.type}" />
+  </bean>
+
+  <bean class="com.tdclighthouse.prototype.standalone.importer.PackageImporter" />
 </beans>

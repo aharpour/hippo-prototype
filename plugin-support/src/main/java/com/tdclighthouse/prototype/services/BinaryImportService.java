@@ -16,7 +16,6 @@
 package com.tdclighthouse.prototype.services;
 
 import java.io.File;
-import java.io.FileFilter;
 
 import javax.jcr.RepositoryException;
 
@@ -34,12 +33,13 @@ import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBa
 import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.utils.ImageUtils;
 import com.tdclighthouse.prototype.utils.PluginConstants;
+import com.tdclighthouse.prototype.utils.RuntimeRepositoryException;
 
 /**
  * @author Ebrahim Aharpour
  *
  */
-public class BinaryImportService {
+public class BinaryImportService extends AbstractImportService {
 
     private static final String FILE_COPY_LOG_MESSAGE = "file: {} is going to be put in {}";
 
@@ -53,44 +53,32 @@ public class BinaryImportService {
 
     private String imageType;
 
-    private final FileFilter fileFilter = new FileFilter() {
-
-        @Override
-        public boolean accept(File file) {
-            return file.isDirectory() && !".svn".equals(file.getName());
-        }
-    };
-    private final FileFilter folderFilter = new FileFilter() {
-
-        @Override
-        public boolean accept(File file) {
-            return !file.isDirectory();
-        }
-    };
-
     @Required
     public void setImageType(String imageType) {
         this.imageType = imageType;
     }
 
-    public void migrateFolder(File folder, String path) throws RepositoryException {
-        // first take cares of the file in the folder
-        File[] files = folder.listFiles(folderFilter);
-        for (File file : files) {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.tdclighthouse.prototype.services.ImportService#importItem(java.
+     * io.File, java.lang.String)
+     */
+    @Override
+    public void importItem(File file, String path) {
+        try {
             if (ImageUtils.isHippoFriendlyImage(file)) {
                 migrateImages(file, path);
             } else {
-                migrateBinaries(file, path);
+                importBinary(file, path);
             }
-        }
-        // then recurse trough sub-folders
-        File[] folders = folder.listFiles(fileFilter);
-        for (File subfolder : folders) {
-            migrateFolder(subfolder, path + "/" + subfolder.getName());
+        } catch (RepositoryException e) {
+            throw new RuntimeRepositoryException(e);
         }
     }
 
-    private void migrateBinaries(File file, String relPath) throws RepositoryException {
+    public void importBinary(File file, String relPath) throws RepositoryException {
         String absPath = folderCreationService.generateFolders(PluginConstants.Paths.ASSETS, relPath,
                 new NewFolderCallBackFactory() {
                     @Override

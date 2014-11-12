@@ -117,7 +117,7 @@ public class PackageImporter {
         return FilenameUtils.removeExtension(FileUtils.getFileName(zipFile.getName()));
     }
 
-    private class FilterFolderByName implements FileFilter {
+    private static class FilterFolderByName implements FileFilter {
         private final String folderName;
 
         public FilterFolderByName(String folderName) {

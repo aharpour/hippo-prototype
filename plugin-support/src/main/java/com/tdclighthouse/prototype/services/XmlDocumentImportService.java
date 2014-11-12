@@ -19,6 +19,7 @@ import com.tdclighthouse.prototype.services.FolderCreationService.NewFolderCallB
 import com.tdclighthouse.prototype.services.callbacks.NewFolderCallBack;
 import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
 import com.tdclighthouse.prototype.support.DocumentManager;
+import com.tdclighthouse.prototype.utils.ImportException;
 import com.tdclighthouse.prototype.utils.PluginConstants;
 
 public class XmlDocumentImportService extends AbstractImportService {

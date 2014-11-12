@@ -40,7 +40,7 @@ public class RepositoryConnector {
 	private String username;
 	private String password;
 	private final String repositoryUrl;
-	private HippoRepository repository;
+	private volatile HippoRepository repository;
 	private ObjectPool<Session> sessionPool;
 	private Config config;
 	

@@ -17,7 +17,6 @@ package com.tdclighthouse.prototype.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,7 +39,6 @@ import org.springframework.core.io.Resource;
 public class Configuration {
     private static final String TIME_FORMAT_STRING = "HH:mm";
     private static final Logger LOG = LoggerFactory.getLogger(Configuration.class);
-    private static final DateFormat TIME_FORMAT = new SimpleDateFormat(TIME_FORMAT_STRING);
     private final Properties properties;
 
     public Configuration(Properties properties) {
@@ -76,7 +74,7 @@ public class Configuration {
             if (StringUtils.isNotBlank(stringDate)) {
 
                 Calendar calendar = new GregorianCalendar();
-                calendar.setTime(TIME_FORMAT.parse(stringDate));
+                calendar.setTime(new SimpleDateFormat(TIME_FORMAT_STRING).parse(stringDate));
                 Calendar now = new GregorianCalendar();
                 calendar.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
                 if (calendar.before(now)) {

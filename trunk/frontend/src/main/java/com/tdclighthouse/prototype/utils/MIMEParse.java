@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * MIME-Type Parser
@@ -137,6 +139,24 @@ public final class MIMEParse {
             } else {
                 return fitness < o.fitness ? -1 : 1;
             }
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            boolean result;
+            if (obj instanceof FitnessAndQuality) {
+                FitnessAndQuality rhs = (FitnessAndQuality) obj;
+                result = new EqualsBuilder().appendSuper(super.equals(obj)).append(fitness, rhs.fitness)
+                        .append(quality, rhs.quality).isEquals();
+            } else {
+                result = false;
+            }
+            return result;
+        }
+
+        @Override
+        public int hashCode() {
+            return new HashCodeBuilder(93, 131).append(fitness).append(quality).toHashCode();
         }
     }
 

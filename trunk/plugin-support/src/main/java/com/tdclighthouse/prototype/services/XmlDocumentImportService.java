@@ -2,20 +2,16 @@ package com.tdclighthouse.prototype.services;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.rmi.RemoteException;
-import java.text.ParseException;
 
 import javax.jcr.RepositoryException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import org.hippoecm.repository.api.WorkflowException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.tdclighthouse.hippo.beanmapper.BadFormatedBeanException;
 import com.tdclighthouse.hippo.beanmapper.annotations.NodeType;
 import com.tdclighthouse.prototype.beanmapper.DynamicNodeWriter;
 import com.tdclighthouse.prototype.jaxb.XmlDocument;
@@ -40,10 +36,10 @@ public class XmlDocumentImportService extends AbstractImportService {
 
     @Autowired
     private DynamicNodeWriter dynamicNodeWriter;
-    
+
     public XmlDocumentImportService() {
         filesFilter = new FileFilter() {
-            
+
             @Override
             public boolean accept(File file) {
                 return file.isFile() && file.getName().endsWith(".xml");
@@ -76,9 +72,7 @@ public class XmlDocumentImportService extends AbstractImportService {
                         file.getAbsolutePath(), relPath, clazz.getName());
             }
 
-        } catch (JAXBException | RepositoryException | RemoteException | ParseException | BadFormatedBeanException
-                | WorkflowException e) {
-            // TODO replace with a new exeption type
+        } catch (JAXBException | RepositoryException e) {
             throw new ImportException(e);
         }
     }

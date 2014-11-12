@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import com.tdclighthouse.hippo.beanmapper.DynamicNode;
 import com.tdclighthouse.hippo.beanmapper.utils.PathParserUtil;
 import com.tdclighthouse.prototype.beanmapper.DynamicNodeWriter.DynamicNodeUpdater;
+import com.tdclighthouse.prototype.services.ImportException;
 import com.tdclighthouse.prototype.utils.FileUtils;
 import com.tdclighthouse.prototype.utils.PluginConstants;
 import com.tdclighthouse.prototype.utils.PluginConstants.NodeType;
@@ -26,51 +27,56 @@ import com.tdclighthouse.prototype.utils.PluginConstants.PropertyName;
 public class HtmlFieldUpdater implements DynamicNodeUpdater {
 
     private final ValueFactory valueFactory = ValueFactoryImpl.getInstance();
-    public static Logger log = LoggerFactory.getLogger(HtmlFieldUpdater.class);
+
+    private static final Logger LOG = LoggerFactory.getLogger(HtmlFieldUpdater.class);
 
     private static final Pattern IMAGE_PATTERN = Pattern
             .compile("<Image\\s*>\\s*<File\\s*>\\s*([^<]*)\\s*</File\\s*>\\s*</Image\\s*>");
 
     @Override
-    public DynamicNode update(DynamicNode dynamicNode) throws RepositoryException {
+    public DynamicNode update(DynamicNode dynamicNode) throws ImportException {
         try {
             if ("estro:Abstract".equals(dynamicNode.getType())) {
-                updateHtmlNode(dynamicNode.getNodeByRelativePath("estro:content(estro:AbstactContent)/estro:summary"));
+                    updateHtmlNode(dynamicNode.getNodeByRelativePath("estro:content(estro:AbstactContent)/estro:summary"));
                 updateHtmlNode(dynamicNode.getNodeByRelativePath("estro:content(estro:AbstactContent)/estro:abstract"));
             }
             return dynamicNode;
         } catch (ParseException e) {
-            // should not happen
-            throw new RuntimeException(e);
+            throw new ImportException(e);
         }
     }
 
-    private void updateHtmlNode(DynamicNode htmlNode) throws ParseException, RepositoryException {
-        Value htmlProperty = (Value) htmlNode.getPropertyByRelativePath(PluginConstants.PropertyName.HIPPOSTD_CONTENT);
-        String html = htmlProperty.getString();
-        Matcher matcher = IMAGE_PATTERN.matcher(html);
-        List<MatchedItem> matchedItems = new ArrayList<HtmlFieldUpdater.MatchedItem>();
-        while (matcher.find()) {
-            String filePath = matcher.group(1);
-            String nodeName = addFacetSelectNode(filePath, htmlNode);
-            String replacement;
-            if (nodeName != null) {
-                replacement = "<img src=\"" + nodeName + "/{_document}/tdc:articleImage\"/>";
-            } else {
-                replacement = "";
-            }
+    private void updateHtmlNode(DynamicNode htmlNode) throws ImportException {
+        try {
+            Value htmlProperty = (Value) htmlNode
+                    .getPropertyByRelativePath(PluginConstants.PropertyName.HIPPOSTD_CONTENT);
+            String html = htmlProperty.getString();
+            Matcher matcher = IMAGE_PATTERN.matcher(html);
+            List<MatchedItem> matchedItems = new ArrayList<HtmlFieldUpdater.MatchedItem>();
+            while (matcher.find()) {
+                String filePath = matcher.group(1);
+                String nodeName = addFacetSelectNode(filePath, htmlNode);
+                String replacement;
+                if (nodeName != null) {
+                    replacement = "<img src=\"" + nodeName + "/{_document}/tdc:articleImage\"/>";
+                } else {
+                    replacement = "";
+                }
 
-            matchedItems.add(new MatchedItem(matcher.start(), matcher.end(), replacement));
-        }
-        if (matchedItems.size() > 0) {
-            String updatedHtml = replace(html, matchedItems);
-            htmlNode.overrideProperty(PluginConstants.PropertyName.HIPPOSTD_CONTENT,
-                    valueFactory.createValue(updatedHtml));
+                matchedItems.add(new MatchedItem(matcher.start(), matcher.end(), replacement));
+            }
+            if (!matchedItems.isEmpty()) {
+                String updatedHtml = replace(html, matchedItems);
+                htmlNode.overrideProperty(PluginConstants.PropertyName.HIPPOSTD_CONTENT,
+                        valueFactory.createValue(updatedHtml));
+            }
+        } catch (ParseException | RepositoryException e) {
+            throw new ImportException(e);
         }
     }
 
     private String replace(String input, List<MatchedItem> matchedItems) {
-        StringBuffer sb = new StringBuffer(input);
+        StringBuilder sb = new StringBuilder(input);
         for (int i = matchedItems.size() - 1; i >= 0; i--) {
             MatchedItem matchedItem = matchedItems.get(i);
             sb.replace(matchedItem.start, matchedItem.end, matchedItem.replacement);
@@ -82,8 +88,9 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
      * @param filePath
      * @param parent
      * @return node name.
+     * @throws ImportException
      */
-    private String addFacetSelectNode(String filePath, DynamicNode parent) {
+    private String addFacetSelectNode(String filePath, DynamicNode parent) throws ImportException {
         try {
             String nodeName = null;
             String fileName = FileUtils.getFileName(filePath);
@@ -100,20 +107,19 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
                 parent.addSubnode(parent, facetSelectNode, nodeName);
             } else {
                 if (StringUtils.isNotBlank(fileName)) {
-                    log.error("the given file path \"" + filePath + "\" does not follow the required syntax");
+                    LOG.error("the given file path \"" + filePath + "\" does not follow the required syntax");
                 } else {
-                    log.error("could not file a file at \"" + filePath
+                    LOG.error("could not file a file at \"" + filePath
                             + "\" therefore the image tag in the html is going to be removed");
                 }
 
             }
             return nodeName;
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            throw new ImportException(e);
         }
     }
 
-    
     private static class MatchedItem {
 
         private final int start;

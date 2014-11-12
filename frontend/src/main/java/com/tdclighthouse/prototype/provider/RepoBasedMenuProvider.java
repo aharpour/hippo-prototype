@@ -60,11 +60,7 @@ public class RepoBasedMenuProvider {
         this.siteContentBaseBean = siteContentBaseBean;
         this.showFacetNavigations = showFacetNavigations;
         HippoBean bean = request.getRequestContext().getContentBean();
-        if (bean != null) {
-            selectedNodeCanonicalPath = bean != null ? bean.getCanonicalPath() : null;
-        } else {
-            selectedNodeCanonicalPath = null;
-        }
+        selectedNodeCanonicalPath = bean != null ? bean.getCanonicalPath() : null;
     }
 
     public EditableMenu addRepoBasedMenuItems(EditableMenu editableMenu) throws IOException {

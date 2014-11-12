@@ -20,9 +20,9 @@ import com.tdclighthouse.hippo.beanmapper.BadFormatedBeanException;
 import com.tdclighthouse.hippo.beanmapper.DynamicNode;
 import com.tdclighthouse.hippo.beanmapper.DynamicNodeGenerator;
 import com.tdclighthouse.hippo.beanmapper.annotations.NodeType;
-import com.tdclighthouse.prototype.services.ImportException;
 import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.support.DocumentManager.NodeModificationCallBack;
+import com.tdclighthouse.prototype.utils.ImportException;
 
 /**
  * @author Ebrahim Aharpour

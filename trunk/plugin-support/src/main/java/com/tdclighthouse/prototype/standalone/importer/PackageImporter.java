@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.tdclighthouse.prototype.services.BinaryImportService;
-import com.tdclighthouse.prototype.services.ImportException;
 import com.tdclighthouse.prototype.services.XmlDocumentImportService;
 import com.tdclighthouse.prototype.utils.FileUtils;
+import com.tdclighthouse.prototype.utils.ImportException;
 import com.tdclighthouse.prototype.utils.PluginConstants;
 
 public class PackageImporter {

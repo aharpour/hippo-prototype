@@ -1,4 +1,4 @@
-package com.tdclighthouse.prototype.services;
+package com.tdclighthouse.prototype.utils;
 
 public class ImportException extends Exception {
 

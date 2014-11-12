@@ -3,6 +3,7 @@ package com.tdclighthouse.prototype.services;
 import java.io.File;
 import java.io.FileFilter;
 
+import com.tdclighthouse.prototype.utils.ImportException;
 import com.tdclighthouse.prototype.utils.PluginConstants;
 
 public abstract class AbstractImportService implements ImportService {

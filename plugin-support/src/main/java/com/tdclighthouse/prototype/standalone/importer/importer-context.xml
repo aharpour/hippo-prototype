@@ -35,7 +35,7 @@
     <property name="beforeSaveUpdater">
       <ref bean="htmlFieldUpdater" />
     </property>
-    <property name="publish" value="false" />
+    <property name="publish" value="${publish.document}"/>
   </bean>
 
   <bean id="jaxbContext" class="javax.xml.bind.JAXBContext" factory-method="newInstance">

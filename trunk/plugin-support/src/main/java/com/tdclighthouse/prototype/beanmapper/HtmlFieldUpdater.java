@@ -3,6 +3,8 @@ package com.tdclighthouse.prototype.beanmapper;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,20 +32,29 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
 
     private static final Logger LOG = LoggerFactory.getLogger(HtmlFieldUpdater.class);
 
-    private static final Pattern IMAGE_PATTERN = Pattern
-            .compile("<Image\\s*>\\s*<File\\s*>\\s*([^<]*)\\s*</File\\s*>\\s*</Image\\s*>");
+    // <img(\s[^>]*)>
+    private static final Pattern IMAGE_PATTERN = Pattern.compile("<img(\\s[^>]*)>");
+
+    // .*src="([^'|^"]*)".*
+    private static final Pattern IMAGE_SOURCE_PATTERN = Pattern.compile(".*src=\"([^'|^\"]*)\".*");
+
+    // <a\s[^>]*href=["|']([^"^']*)["|'][^>]*>([^<]*)</a>
+    private static final Pattern LINK_PATTERN = Pattern
+            .compile("<a\\s[^>]*href=[\"|']([^\"^']*)[\"|'][^>]*>([^<]*)</a>");
 
     @Override
     public DynamicNode update(DynamicNode dynamicNode) throws ImportException {
-        try {
-            if ("estro:Abstract".equals(dynamicNode.getType())) {
-                    updateHtmlNode(dynamicNode.getNodeByRelativePath("estro:content(estro:AbstactContent)/estro:summary"));
-                updateHtmlNode(dynamicNode.getNodeByRelativePath("estro:content(estro:AbstactContent)/estro:abstract"));
+        Set<Entry<String, List<DynamicNode>>> entrySet = dynamicNode.getSubnodes().entrySet();
+        for (Entry<String, List<DynamicNode>> entry : entrySet) {
+            for (DynamicNode n : entry.getValue()) {
+                if ("hippostd:html".equals(n.getType())) {
+                    updateHtmlNode(n);
+                } else {
+                    update(n);
+                }
             }
-            return dynamicNode;
-        } catch (ParseException e) {
-            throw new ImportException(e);
         }
+        return dynamicNode;
     }
 
     private void updateHtmlNode(DynamicNode htmlNode) throws ImportException {
@@ -51,20 +62,9 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
             Value htmlProperty = (Value) htmlNode
                     .getPropertyByRelativePath(PluginConstants.PropertyName.HIPPOSTD_CONTENT);
             String html = htmlProperty.getString();
-            Matcher matcher = IMAGE_PATTERN.matcher(html);
             List<MatchedItem> matchedItems = new ArrayList<HtmlFieldUpdater.MatchedItem>();
-            while (matcher.find()) {
-                String filePath = matcher.group(1);
-                String nodeName = addFacetSelectNode(filePath, htmlNode);
-                String replacement;
-                if (nodeName != null) {
-                    replacement = "<img src=\"" + nodeName + "/{_document}/tdc:articleImage\"/>";
-                } else {
-                    replacement = "";
-                }
-
-                matchedItems.add(new MatchedItem(matcher.start(), matcher.end(), replacement));
-            }
+            processImageTags(htmlNode, html, matchedItems);
+            processLinkTags(htmlNode, html, matchedItems);
             if (!matchedItems.isEmpty()) {
                 String updatedHtml = replace(html, matchedItems);
                 htmlNode.overrideProperty(PluginConstants.PropertyName.HIPPOSTD_CONTENT,
@@ -72,6 +72,55 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
             }
         } catch (ParseException | RepositoryException e) {
             throw new ImportException(e);
+        }
+    }
+
+    private void processLinkTags(DynamicNode htmlNode, String html, List<MatchedItem> matchedItems)
+            throws ImportException {
+        Matcher matcher = LINK_PATTERN.matcher(html);
+        while (matcher.find()) {
+            String link = matcher.group(1);
+            if (!isExternal(link)) {
+                String nodeName = addFacetSelectNode(link, htmlNode);
+                String replacement;
+                if (nodeName != null) {
+                    replacement = nodeName;
+                } else {
+                    replacement = "";
+                }
+                matchedItems.add(new MatchedItem(matcher.start(1), matcher.end(1), replacement));
+            }
+        }
+
+    }
+
+    private boolean isExternal(String link) {
+        boolean result = link.startsWith("http://");
+        result = result || link.startsWith("https://");
+        result = result || link.startsWith("news://");
+        result = result || link.startsWith("ftp://");
+        return result;
+    }
+
+    private void processImageTags(DynamicNode htmlNode, String html, List<MatchedItem> matchedItems)
+            throws ImportException {
+        Matcher matcher = IMAGE_PATTERN.matcher(html);
+        while (matcher.find()) {
+            String attributes = matcher.group(1);
+            Matcher sourceMatcher = IMAGE_SOURCE_PATTERN.matcher(attributes);
+            if (sourceMatcher.matches()) {
+
+                String nodeName = addFacetSelectNode(sourceMatcher.group(1), htmlNode);
+                String replacement;
+                if (nodeName != null) {
+                    replacement = "<img src=\"" + nodeName + "/{_document}/hippogallery:original\"/>";
+                } else {
+                    replacement = "";
+                }
+
+                matchedItems.add(new MatchedItem(matcher.start(), matcher.end(), replacement));
+            }
+
         }
     }
 

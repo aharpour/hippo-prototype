@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.onehippo.cms7</groupId>
+    <artifactId>hippo-cms7-release</artifactId>
+    <version>7.9.4</version>
+  </parent>
+
   <name>Hippo prototype</name>
   <description>Hippo prototype</description>
   <groupId>com.tdclighthouse.hippo</groupId>
@@ -33,12 +40,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>4.11</junit.version>
-    <repository.version>2.26.00</repository.version>
-    <workflow.repository.version>2.22.07</workflow.repository.version>
-    <hippo.gallary.version>2.22.22</hippo.gallary.version>
     <jackson.version>2.2.1</jackson.version>
-    <selection.plugin.version>2.08.00</selection.plugin.version>
-    <hippo.hst.version>2.28.00</hippo.hst.version>
     <easymock.version>3.2</easymock.version>
     <maven.hippo.plugin.version>0.1.2</maven.hippo.plugin.version>
     <joda.version>2.3</joda.version>
@@ -145,21 +147,8 @@
         <artifactId>jdo2-api</artifactId>
         <version>2.3-20090302111651</version>
       </dependency>
-      <dependency>
-        <groupId>org.onehippo.forge</groupId>
-        <artifactId>content-blocks</artifactId>
-        <version>1.09.02</version>
-      </dependency>
-      <dependency>
-        <groupId>org.onehippo.forge.selectionplugins</groupId>
-        <artifactId>selectionplugins-addon-repository</artifactId>
-        <version>${selection.plugin.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.onehippo.forge.selectionplugins</groupId>
-        <artifactId>selectionplugins-addon-cms</artifactId>
-        <version>${selection.plugin.version}</version>
-      </dependency>
+
+      
       <dependency>
         <groupId>com.tdclighthouse.hippo</groupId>
         <artifactId>bean-mapper</artifactId>
@@ -202,59 +191,9 @@
         <artifactId>joda-time</artifactId>
         <version>${joda.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.onehippo.cms7.hst.dependencies</groupId>
-        <artifactId>hst-client-dependencies</artifactId>
-        <version>${hippo.hst.version}</version>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.onehippo.cms7.hst</groupId>
-        <artifactId>hst-api</artifactId>
-        <version>${hippo.hst.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.onehippo.cms7.hst</groupId>
-        <artifactId>hst-commons</artifactId>
-        <version>${hippo.hst.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.onehippo.cms7</groupId>
-        <artifactId>hippo-repository-api</artifactId>
-        <version>${repository.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.onehippo.cms7</groupId>
-        <artifactId>hippo-addon-publication-workflow-repository</artifactId>
-        <version>${workflow.repository.version}</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.onehippo.cms7</groupId>
-        <artifactId>hippo-cms-api</artifactId>
-        <version>${repository.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.onehippo.cms7</groupId>
-        <artifactId>hippo-cms-gallery-common</artifactId>
-        <version>${hippo.gallary.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.onehippo.cms7</groupId>
-        <artifactId>hippo-repository-builtin</artifactId>
-        <version>${repository.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>javax.jcr</groupId>
-        <artifactId>jcr</artifactId>
-        <version>2.0</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.onehippo.cms7</groupId>
-        <artifactId>hippo-repository-connector</artifactId>
-        <version>${repository.version}</version>
-      </dependency>
+
+
+      
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>servlet-api</artifactId>
@@ -320,7 +259,6 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.5</version>
     </dependency>
     <dependency>
       <groupId>org.easymock</groupId>
@@ -379,7 +317,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.4</version>
         <configuration>
           <source>1.7</source>
           <target>1.7</target>

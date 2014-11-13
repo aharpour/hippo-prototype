@@ -11,6 +11,7 @@ import javax.xml.bind.Unmarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.tdclighthouse.hippo.beanmapper.annotations.NodeType;
 import com.tdclighthouse.prototype.beanmapper.DynamicNodeWriter;
@@ -34,6 +35,9 @@ public class XmlDocumentImportService extends AbstractImportService {
 
     @Autowired
     private JAXBContext jaxbContext;
+    
+    @Value("${import.folder}")
+    private String importFolder;
 
     @Autowired
     private DynamicNodeWriter dynamicNodeWriter;
@@ -57,7 +61,7 @@ public class XmlDocumentImportService extends AbstractImportService {
             if (object instanceof XmlDocument && clazz.isAnnotationPresent(NodeType.class)) {
                 XmlDocument doc = (XmlDocument) object;
                 String parentPath = folderCreationService.generateFolders(PluginConstants.Paths.DOCUMENTS,
-                        "hsl/migrated", new NewFolderCallBackFactory() {
+                        importFolder, new NewFolderCallBackFactory() {
 
                             @Override
                             public SessionCallBack<String> getNewFolderCallBack(String parentPath, String folderName) {
@@ -92,5 +96,9 @@ public class XmlDocumentImportService extends AbstractImportService {
 
     public void setDynamicNodeWriter(DynamicNodeWriter dynamicNodeWriter) {
         this.dynamicNodeWriter = dynamicNodeWriter;
+    }
+    
+    public void setImportFolder(String importFolder) {
+        this.importFolder = importFolder;
     }
 }

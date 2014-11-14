@@ -20,7 +20,7 @@ package com.tdclighthouse.prototype.jaxb;
  *
  */
 public interface EventHandler<T> {
-	
-	public void handle(T item, Object parent);
+
+    public void handle(T item, Object parent);
 
 }

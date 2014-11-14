@@ -25,14 +25,14 @@ import javax.activation.MimetypesFileTypeMap;
  */
 public class ImageUtils {
 
-	public static boolean isHippoFriendlyImage(File file) {
-		boolean result = false;
-		MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
-		String contentType = mimetypesFileTypeMap.getContentType(file);
-		if (contentType.startsWith("image/") && !"image/tiff".equals(contentType) && !"image/bmp".equals(contentType)) {
-			result = true;
-		}
-		return result;
-	}
+    public static boolean isHippoFriendlyImage(File file) {
+        boolean result = false;
+        MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
+        String contentType = mimetypesFileTypeMap.getContentType(file);
+        if (contentType.startsWith("image/") && !"image/tiff".equals(contentType) && !"image/bmp".equals(contentType)) {
+            result = true;
+        }
+        return result;
+    }
 
 }

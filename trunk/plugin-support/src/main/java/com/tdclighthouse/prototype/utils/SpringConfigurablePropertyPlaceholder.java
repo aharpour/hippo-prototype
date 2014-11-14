@@ -11,44 +11,44 @@ import org.springframework.core.io.Resource;
 
 public class SpringConfigurablePropertyPlaceholder extends PropertyPlaceholderConfigurer {
 
-	private String systemPropertyName;
-	private String defaultPropertiesFileLocation;
+    private String systemPropertyName;
+    private String defaultPropertiesFileLocation;
 
-	public String getSystemPropertyName() {
-		return systemPropertyName;
-	}
+    public String getSystemPropertyName() {
+        return systemPropertyName;
+    }
 
-	public void setSystemPropertyName(String systemPropertyName) {
-		this.systemPropertyName = systemPropertyName;
-	}
+    public void setSystemPropertyName(String systemPropertyName) {
+        this.systemPropertyName = systemPropertyName;
+    }
 
-	public String getDefaultPropertiesFileLocation() {
-		return defaultPropertiesFileLocation;
-	}
+    public String getDefaultPropertiesFileLocation() {
+        return defaultPropertiesFileLocation;
+    }
 
-	public void setDefaultPropertiesFileLocation(String defaultPropertiesFileLocation) {
-		this.defaultPropertiesFileLocation = defaultPropertiesFileLocation;
-	}
+    public void setDefaultPropertiesFileLocation(String defaultPropertiesFileLocation) {
+        this.defaultPropertiesFileLocation = defaultPropertiesFileLocation;
+    }
 
-	@Override
-	public Properties mergeProperties() throws IOException {
-		return super.mergeProperties();
-	}
+    @Override
+    public Properties mergeProperties() throws IOException {
+        return super.mergeProperties();
+    }
 
-	@Override
-	protected void loadProperties(Properties props) throws IOException {
-		Resource location = null;
-		if (StringUtils.isNotEmpty(systemPropertyName)) {
-			String propertyFilePath = System.getProperties().getProperty(systemPropertyName);
-			if (StringUtils.isNotBlank(propertyFilePath)) {
-				location = new FileSystemResource(propertyFilePath);
-			} else {
-				location = new ClassPathResource(defaultPropertiesFileLocation);
-			}
+    @Override
+    protected void loadProperties(Properties props) throws IOException {
+        Resource location = null;
+        if (StringUtils.isNotEmpty(systemPropertyName)) {
+            String propertyFilePath = System.getProperties().getProperty(systemPropertyName);
+            if (StringUtils.isNotBlank(propertyFilePath)) {
+                location = new FileSystemResource(propertyFilePath);
+            } else {
+                location = new ClassPathResource(defaultPropertiesFileLocation);
+            }
 
-		}
+        }
 
-		setLocation(location);
-		super.loadProperties(props);
-	}
+        setLocation(location);
+        super.loadProperties(props);
+    }
 }

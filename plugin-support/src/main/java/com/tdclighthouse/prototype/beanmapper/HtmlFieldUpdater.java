@@ -99,6 +99,7 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
         result = result || link.startsWith("https://");
         result = result || link.startsWith("news://");
         result = result || link.startsWith("ftp://");
+        result = result || link.startsWith("mailto:");
         return result;
     }
 

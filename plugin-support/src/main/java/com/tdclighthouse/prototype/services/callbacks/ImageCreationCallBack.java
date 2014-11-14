@@ -53,7 +53,7 @@ import com.tdclighthouse.prototype.utils.exceptions.RuntimeIOException;
  */
 public class ImageCreationCallBack implements SessionCallBack<String> {
 
-    private static final int MAX_SUPPORTED_PIXELS = 65500;
+    private static final Long MAX_SUPPORTED_PIXELS = 65500L;
 
     private static final Logger LOG = LoggerFactory.getLogger(ImageCreationCallBack.class);
 

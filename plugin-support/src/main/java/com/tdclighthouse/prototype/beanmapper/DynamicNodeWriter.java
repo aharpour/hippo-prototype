@@ -29,7 +29,7 @@ import com.tdclighthouse.prototype.utils.ImportException;
  */
 public class DynamicNodeWriter {
 
-    private final Logger log = LoggerFactory.getLogger(DynamicNodeWriter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DynamicNodeWriter.class);
 
     @Autowired
     private DocumentManager documentManager;
@@ -43,8 +43,8 @@ public class DynamicNodeWriter {
         try {
             Node node = perpareJcrNode(bean, pathToFolder, name);
             DynamicNode dynamicNode = perpareDynamicNode(bean, node);
-            if (log.isDebugEnabled()) {
-                log.debug("Saving the following dynamic node at \"{}\":\n{}", node.getPath(), dynamicNode.toString());
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Saving the following dynamic node at \"{}\":\n{}", node.getPath(), dynamicNode.toString());
             }
             saveDynamicNode(node, dynamicNode);
             String identifier = DocumentManager.getHandle(node).getIdentifier();
@@ -90,10 +90,10 @@ public class DynamicNodeWriter {
         if (folder.hasNode(nodeName) && folder.getNode(nodeName).hasNode(nodeName)
                 && folder.getNode(nodeName).getNode(nodeName).isNodeType(type)) {
             node = folder.getNode(nodeName);
-            log.debug("Already existing node has been selected at \"{}\" of type \"{}\" to be updated", node.getPath(),
+            LOG.debug("Already existing node has been selected at \"{}\" of type \"{}\" to be updated", node.getPath(),
                     type);
         } else {
-            log.debug("creating a new node at \"{}\" with the name \"{}\" and of type \"{}\"",
+            LOG.debug("creating a new node at \"{}\" with the name \"{}\" and of type \"{}\"",
                     new Object[] { folder.getPath(), nodeName, type });
             String path = documentManager.createDocument(folder, nodeName, type);
             node = documentManager.getNode(path);

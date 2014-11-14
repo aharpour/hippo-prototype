@@ -21,6 +21,6 @@ package com.tdclighthouse.prototype.jaxb;
  */
 public interface EventListener<T> {
 
-	public void setHandler(EventHandler<T> handler);
+    public void setHandler(EventHandler<T> handler);
 
 }

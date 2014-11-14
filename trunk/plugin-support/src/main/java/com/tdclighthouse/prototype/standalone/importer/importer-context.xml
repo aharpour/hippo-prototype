@@ -24,6 +24,8 @@
     <constructor-arg ref="repositoryConnector" />
   </bean>
   
+  <bean id="referenceRegistry" class="com.tdclighthouse.prototype.services.InMemoryReferenceRegistry"/>
+  
   <bean name="htmlFieldUpdater" class="com.tdclighthouse.prototype.beanmapper.HtmlFieldUpdater"/>
 
   <bean name="dynamicNodeWriter" class="com.tdclighthouse.prototype.beanmapper.DynamicNodeWriter">
@@ -48,10 +50,13 @@
 
   <bean name="folderCreationService" class="com.tdclighthouse.prototype.services.FolderCreationService" />
 
-  <bean name="xmlDocumentImportService" class="com.tdclighthouse.prototype.services.XmlDocumentImportService" />
+  <bean name="xmlDocumentImportService" class="com.tdclighthouse.prototype.services.XmlDocumentImportService">
+    <property name="referenceRegistry" ref="referenceRegistry"/>
+  </bean>
 
   <bean name="binaryImportService" class="com.tdclighthouse.prototype.services.BinaryImportService">
     <property name="imageType" value="${image.set.type}" />
+    <property name="referenceRegistry" ref="referenceRegistry"/>
   </bean>
 
   <bean class="com.tdclighthouse.prototype.standalone.importer.PackageImporter" />

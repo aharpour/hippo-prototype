@@ -34,6 +34,7 @@ import org.hippoecm.repository.gallery.GalleryWorkflow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
 import com.tdclighthouse.prototype.utils.PluginConstants;
 import com.tdclighthouse.prototype.utils.exceptions.RuntimeIOException;
@@ -56,8 +57,10 @@ public class BinaryCreationCallBack implements SessionCallBack<String> {
 
     @Override
     public String doInSession(Session session) throws RepositoryException {
+        String uuid = null;
         try {
             Node node = createAssetNode(session, PluginConstants.NodeType.HIPPOGALLERY_EXAMPLE_ASSET_SET);
+            uuid = DocumentManager.getHandle(node).getIdentifier();
             String mimeType = new MimetypesFileTypeMap().getContentType(file);
             Node asset = getNode(node, PluginConstants.NodeName.HIPPOGALLERY_ASSET,
                     PluginConstants.NodeType.HIPPO_RESOURCE);
@@ -71,7 +74,7 @@ public class BinaryCreationCallBack implements SessionCallBack<String> {
         } catch (IOException e) {
             throw new RuntimeIOException(e);
         }
-        return null;
+        return uuid;
     }
 
     private Node createAssetNode(Session session, String type) throws RepositoryException, RemoteException {

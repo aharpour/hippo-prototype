@@ -51,6 +51,8 @@ public class BinaryImportService extends AbstractImportService {
     @Autowired
     private FolderCreationService folderCreationService;
 
+    private ReferenceRegistry referenceRegistry;
+
     private String imageType;
 
     @Required
@@ -61,8 +63,7 @@ public class BinaryImportService extends AbstractImportService {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * com.tdclighthouse.prototype.services.ImportService#importItem(java.
+     * @see com.tdclighthouse.prototype.services.ImportService#importItem(java.
      * io.File, java.lang.String)
      */
     @Override
@@ -86,8 +87,11 @@ public class BinaryImportService extends AbstractImportService {
                         return new NewAssetFolderCallBack(parentPath, folderName);
                     }
                 });
-        LOG.debug(FILE_COPY_LOG_MESSAGE, file.getAbsolutePath(), absPath);
-        documentManager.runInSession(new BinaryCreationCallBack(absPath, file));
+        LOG.info(FILE_COPY_LOG_MESSAGE, file.getAbsolutePath(), absPath);
+        String uuid = documentManager.runInSession(new BinaryCreationCallBack(absPath, file));
+        if (referenceRegistry != null && uuid != null) {
+            referenceRegistry.register(file.toURI().toString(), uuid);
+        }
     }
 
     private void migrateImages(File file, String relPath) throws RepositoryException {
@@ -99,8 +103,11 @@ public class BinaryImportService extends AbstractImportService {
                             return new NewImageFolderCallBack(parentPath, folderName);
                         }
                     });
-            LOG.debug(FILE_COPY_LOG_MESSAGE, file.getAbsolutePath(), absPath);
-            documentManager.runInSession(new ImageCreationCallBack(absPath, file, imageType));
+            LOG.info(FILE_COPY_LOG_MESSAGE, file.getAbsolutePath(), absPath);
+            String uuid = documentManager.runInSession(new ImageCreationCallBack(absPath, file, imageType));
+            if (referenceRegistry != null && uuid != null) {
+                referenceRegistry.register(file.toURI().toString(), uuid);
+            }
         } catch (Exception e) {
             LOG.error("Migration of image \"" + relPath + "\" fail for the following reason.", e);
         }
@@ -112,6 +119,10 @@ public class BinaryImportService extends AbstractImportService {
 
     public void setFolderCreationService(FolderCreationService folderCreationService) {
         this.folderCreationService = folderCreationService;
+    }
+
+    public void setReferenceRegistry(ReferenceRegistry referenceRegistry) {
+        this.referenceRegistry = referenceRegistry;
     }
 
 }

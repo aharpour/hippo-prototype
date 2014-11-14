@@ -45,6 +45,8 @@ public class PluginConstants {
         public static final String FRONTEND_PLUGINCONFIG = "frontend:pluginconfig";
         public static final String HIPPOGALLERY_IMAGE = "hippogallery:image";
         public static final String HIPPO_FACETSELECT = "hippo:facetselect";
+        public static final String HIPPO_FACETSEARCH = "hippo:facetsearch";
+        public static final String HIPPO_MIRROR = "hippo:mirror";
         public static final String HIPPO_RESOURCE = "hippo:resource";
         public static final String HIPPOSTD_HTML = "hippostd:html";
         public static final String HIPPOSTD_FOLDER = "hippostd:folder";
@@ -114,6 +116,8 @@ public class PluginConstants {
         public static final String GALLERY = "/content/gallery";
         public static final String ASSETS = "/content/assets";
         public static final String DOCUMENTS = "/content/documents";
+        public static final String FILE_SEPARATOR = "/";
+        
 
         private Paths() {
         }

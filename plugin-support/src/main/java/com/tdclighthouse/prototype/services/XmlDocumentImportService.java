@@ -27,6 +27,7 @@ public class XmlDocumentImportService extends AbstractImportService {
 
     private static final Logger LOG = LoggerFactory.getLogger(XmlDocumentImportService.class);
 
+    private static final String DOCUMET_IMPORT_LOG_MESSAGE = "Docuemt: {} is going to be improt at {} under the name {}";
     @Autowired
     private DocumentManager documentManager;
 
@@ -35,12 +36,14 @@ public class XmlDocumentImportService extends AbstractImportService {
 
     @Autowired
     private JAXBContext jaxbContext;
-    
+
     @Value("${import.folder}")
     private String importFolder;
 
     @Autowired
     private DynamicNodeWriter dynamicNodeWriter;
+
+    private ReferenceRegistry referenceRegistry;
 
     public XmlDocumentImportService() {
         filesFilter = new FileFilter() {
@@ -68,8 +71,11 @@ public class XmlDocumentImportService extends AbstractImportService {
                                 return new NewFolderCallBack(parentPath, folderName);
                             }
                         });
-                dynamicNodeWriter.createOrUpdateNode(doc, parentPath, doc.getTitle());
-
+                LOG.info(DOCUMET_IMPORT_LOG_MESSAGE, file.getAbsolutePath(), parentPath, doc.getTitle());
+                String uuid = dynamicNodeWriter.createOrUpdateNode(doc, parentPath, doc.getTitle());
+                if (referenceRegistry != null && uuid != null) {
+                    referenceRegistry.register(file.toURI().toString(), uuid);
+                }
             } else {
                 LOG.error("the file at {} could not be imported at {}, because the binding class {} has not been"
                         + " annotated by com.tdclighthouse.hippo.beanmapper.annotations.NodeType or is "
@@ -97,8 +103,12 @@ public class XmlDocumentImportService extends AbstractImportService {
     public void setDynamicNodeWriter(DynamicNodeWriter dynamicNodeWriter) {
         this.dynamicNodeWriter = dynamicNodeWriter;
     }
-    
+
     public void setImportFolder(String importFolder) {
         this.importFolder = importFolder;
+    }
+
+    public void setReferenceRegistry(ReferenceRegistry referenceRegistry) {
+        this.referenceRegistry = referenceRegistry;
     }
 }

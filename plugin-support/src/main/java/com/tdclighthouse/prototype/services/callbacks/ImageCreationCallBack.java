@@ -42,6 +42,7 @@ import org.hippoecm.repository.gallery.GalleryWorkflow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
 import com.tdclighthouse.prototype.utils.PluginConstants;
 import com.tdclighthouse.prototype.utils.exceptions.RuntimeIOException;
@@ -68,9 +69,11 @@ public class ImageCreationCallBack implements SessionCallBack<String> {
 
     @Override
     public String doInSession(Session session) throws RepositoryException {
+        String result = null;
         try {
             // FIXME refactor
             Node node = createImageSetNode(session, contentType);
+            result = DocumentManager.getHandle(node).getIdentifier();
             String mimeType = new MimetypesFileTypeMap().getContentType(file);
             Node galleryProcessorService = session.getNode(PluginConstants.Paths.GALLERY_PROCESSOR_SERVICE);
 
@@ -111,7 +114,7 @@ public class ImageCreationCallBack implements SessionCallBack<String> {
         } catch (IOException e) {
             throw new RuntimeIOException(e);
         }
-        return null;
+        return result;
     }
 
     private Node createImageSetNode(Session session, String type) throws RepositoryException, RemoteException {

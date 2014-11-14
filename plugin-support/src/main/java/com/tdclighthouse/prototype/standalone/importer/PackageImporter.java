@@ -13,6 +13,7 @@ import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
+import javax.jcr.version.VersionManager;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +27,7 @@ import com.tdclighthouse.prototype.services.BinaryImportService;
 import com.tdclighthouse.prototype.services.ReferenceRegistry;
 import com.tdclighthouse.prototype.services.XmlDocumentImportService;
 import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
+import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.support.SessionTemplate;
 import com.tdclighthouse.prototype.utils.FileUtils;
 import com.tdclighthouse.prototype.utils.ImportException;
@@ -158,9 +160,32 @@ public class PackageImporter {
                 && (docbase.length() != 36 || docbase.contains(PluginConstants.Paths.FILE_SEPARATOR))) {
             String uuid = getUuid(docbase, item);
             if (StringUtils.isNotBlank(uuid)) {
-                node.setProperty(PluginConstants.PropertyName.HIPPO_DOCBASE, uuid);
+                Node publishableAncestor = getPublishableNode(node);
+                if (publishableAncestor != null) {
+                    VersionManager versionManager = node.getSession().getWorkspace().getVersionManager();
+                    versionManager.checkout(publishableAncestor.getPath());
+                    node.setProperty(PluginConstants.PropertyName.HIPPO_DOCBASE, uuid);
+                    node.getSession().save();
+                    versionManager.checkin(publishableAncestor.getPath());
+                } else {
+                    node.setProperty(PluginConstants.PropertyName.HIPPO_DOCBASE, uuid);
+                }
             }
         }
+    }
+
+    private Node getPublishableNode(Node node) throws RepositoryException {
+        Node result = null;
+        Node n = node;
+        while (n != null) {
+            if (n.isNodeType("mix:versionable")) {
+                result = n;
+                break;
+            } else {
+                n = n.getParent();
+            }
+        }
+        return result;
     }
 
     private String getUuid(String docbase, Item item) {

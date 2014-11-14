@@ -28,7 +28,6 @@ import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
@@ -39,11 +38,9 @@ import org.hippoecm.frontend.plugins.gallery.imageutil.ImageUtils.ScalingStrateg
 import org.hippoecm.repository.api.Document;
 import org.hippoecm.repository.api.HippoWorkspace;
 import org.hippoecm.repository.gallery.GalleryWorkflow;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
+import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.utils.PluginConstants;
 import com.tdclighthouse.prototype.utils.exceptions.RuntimeIOException;
 
@@ -54,8 +51,6 @@ import com.tdclighthouse.prototype.utils.exceptions.RuntimeIOException;
 public class ImageCreationCallBack implements SessionCallBack<String> {
 
     private static final Long MAX_SUPPORTED_PIXELS = 65500L;
-
-    private static final Logger LOG = LoggerFactory.getLogger(ImageCreationCallBack.class);
 
     private final String parentPath;
     private final File file;
@@ -135,10 +130,9 @@ public class ImageCreationCallBack implements SessionCallBack<String> {
 
     private Node getNode(Node node, String relPath, String nodeType) throws RepositoryException {
         Node subjectNode;
-        try {
+        if (node.hasNode(relPath)) {
             subjectNode = node.getNode(relPath);
-        } catch (PathNotFoundException e) {
-            LOG.debug(e.getMessage(), e);
+        } else {
             subjectNode = node.addNode(relPath, nodeType);
         }
         return subjectNode;

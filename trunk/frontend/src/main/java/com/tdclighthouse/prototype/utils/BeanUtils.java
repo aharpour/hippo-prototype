@@ -34,7 +34,6 @@ public class BeanUtils {
         return DYNAMIC_PROXY_FACTORY.getProxy(bean);
     }
 
-    @SuppressWarnings("unchecked")
     public static <T extends HippoBean> T getContentBeanViaParameters(HstRequest request,
             ContentBeanPathInfo parametersInfo) {
         T result = null;
@@ -43,7 +42,14 @@ public class BeanUtils {
         if (StringUtils.isBlank(indexFilePath)) {
             indexFilePath = parametersInfo.getContentBeanPath();
         }
-        if (StringUtils.isNotBlank(indexFilePath)) {
+        result = getContentBeanFromParameter(request, indexFilePath);
+        return result;
+    }
+
+    @SuppressWarnings("unchecked")
+	public static <T extends HippoBean> T getContentBeanFromParameter(HstRequest request, String indexFilePath) {
+		T result = null;
+		if (StringUtils.isNotBlank(indexFilePath)) {
             if (indexFilePath.startsWith("/")) {
                 try {
                     result = (T) request.getRequestContext().getObjectBeanManager().getObject(indexFilePath);
@@ -54,8 +60,8 @@ public class BeanUtils {
                 result = (T) getBean(indexFilePath, request);
             }
         }
-        return result;
-    }
+		return result;
+	}
 
     public static HippoBean getWebDocumetBean(final HstRequest request, Object parametersInfo) {
         Page result = null;

@@ -98,7 +98,7 @@ public class FacetDeepLinkTest {
         Assert.assertEquals(target, bean);
     }
 
-    @Test
+    //@Test
     public void dateFieldCaseTest() throws FacetDeepLinkExceptoin, IOException {
         Map<String, Object[]> filter = new HashMap<String, Object[]>();
         filter.put("hsl:eventDate", new Object[] { Calendar.getInstance() });
@@ -110,7 +110,7 @@ public class FacetDeepLinkTest {
         Assert.assertEquals(target, bean);
     }
 
-    @Test
+    //@Test
     public void dateFieldCase2Test() throws FacetDeepLinkExceptoin, IOException {
         Map<String, Object[]> filter = new HashMap<String, Object[]>();
         Calendar calendar = Calendar.getInstance();

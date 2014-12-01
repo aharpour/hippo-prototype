@@ -64,7 +64,7 @@ public class XmlDocumentImportService extends AbstractImportService {
             if (object instanceof XmlDocument && clazz.isAnnotationPresent(NodeType.class)) {
                 XmlDocument doc = (XmlDocument) object;
                 String parentPath = folderCreationService.generateFolders(PluginConstants.Paths.DOCUMENTS,
-                        importFolder, new NewFolderCallBackFactory() {
+                        relPath, new NewFolderCallBackFactory() {
 
                             @Override
                             public SessionCallBack<String> getNewFolderCallBack(String parentPath, String folderName) {

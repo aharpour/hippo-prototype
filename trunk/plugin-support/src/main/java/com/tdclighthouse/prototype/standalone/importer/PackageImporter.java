@@ -27,7 +27,6 @@ import com.tdclighthouse.prototype.services.BinaryImportService;
 import com.tdclighthouse.prototype.services.ReferenceRegistry;
 import com.tdclighthouse.prototype.services.XmlDocumentImportService;
 import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
-import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.support.SessionTemplate;
 import com.tdclighthouse.prototype.utils.FileUtils;
 import com.tdclighthouse.prototype.utils.ImportException;

@@ -146,15 +146,17 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
             String fileName = FileUtils.getFileName(filePath);
             if (StringUtils.isNotBlank(fileName) && StringUtils.isNotBlank(filePath)) {
                 nodeName = fileName;
-                DynamicNode facetSelectNode = new DynamicNode(NodeType.HIPPO_FACETSELECT, parent);
+                if (parent.getNodeByRelativePath(fileName) == null) {
+                    DynamicNode facetSelectNode = new DynamicNode(NodeType.HIPPO_FACETSELECT, parent);
 
-                facetSelectNode.addProperty(PathParserUtil.parse(PropertyName.HIPPO_DOCBASE),
-                        valueFactory.createValue(filePath));
-                facetSelectNode.addProperty(PathParserUtil.parse(PropertyName.HIPPO_FACETS), new Value[0]);
-                facetSelectNode.addProperty(PathParserUtil.parse(PropertyName.HIPPO_MODES), new Value[0]);
-                facetSelectNode.addProperty(PathParserUtil.parse(PropertyName.HIPPO_VALUES), new Value[0]);
+                    facetSelectNode.addProperty(PathParserUtil.parse(PropertyName.HIPPO_DOCBASE),
+                            valueFactory.createValue(filePath));
+                    facetSelectNode.addProperty(PathParserUtil.parse(PropertyName.HIPPO_FACETS), new Value[0]);
+                    facetSelectNode.addProperty(PathParserUtil.parse(PropertyName.HIPPO_MODES), new Value[0]);
+                    facetSelectNode.addProperty(PathParserUtil.parse(PropertyName.HIPPO_VALUES), new Value[0]);
 
-                parent.addSubnode(parent, facetSelectNode, nodeName);
+                    parent.addSubnode(parent, facetSelectNode, nodeName);
+                }
             } else {
                 if (StringUtils.isNotBlank(fileName)) {
                     LOG.error("the given file path \"" + filePath + "\" does not follow the required syntax");

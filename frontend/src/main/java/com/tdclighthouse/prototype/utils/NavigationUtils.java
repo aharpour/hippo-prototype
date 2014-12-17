@@ -44,7 +44,7 @@ public class NavigationUtils {
             // document is selected instead
             if (result == null) {
                 List<HippoDocumentBean> documents = folder.getDocuments();
-                result = (!documents.isEmpty() ? documents.get(0) : null);
+                result = (documents != null && !documents.isEmpty() ? documents.get(0) : null);
             }
         } else {
             throw new IllegalArgumentException(

@@ -2,6 +2,7 @@ package com.tdclighthouse.prototype.tag;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -30,6 +31,8 @@ public class MenuitemTag extends TagSupport {
     private String unexpandedClass;
     private String leafClass;
     private HstRequestContext requestContext;
+    @SuppressWarnings("rawtypes")
+    private Map labels;
 
     public MenuitemTag() {
         init();
@@ -50,6 +53,7 @@ public class MenuitemTag extends TagSupport {
         leafClass = "leaf";
         recurseOnlyExpanded = false;
         requestContext = null;
+        labels=null;
     }
 
     @Override
@@ -105,10 +109,24 @@ public class MenuitemTag extends TagSupport {
             out.print(getLink(item, getRequestContext(), false));
             out.print("\">");
         }
-        out.print(StringEscapeUtils.escapeXml(item.getName()));
+        
+        if(labels!=null){            
+            out.print(getLabelValue(StringEscapeUtils.escapeXml(item.getName())));
+        }else{
+            out.print(StringEscapeUtils.escapeXml(item.getName()));
+        }
+        
         if (!disabled) {
             out.print("</a>");
         }
+    }
+    
+    private String getLabelValue(String itemName){
+        String result = itemName;
+        if(labels.get(itemName)!=null){
+            result =  (String) labels.get(itemName);
+        }
+        return result;
     }
 
     private HstRequestContext getRequestContext() {
@@ -160,6 +178,11 @@ public class MenuitemTag extends TagSupport {
 
     public void setRecurseOnlyExpanded(Boolean recurseOnlyExpanded) {
         this.recurseOnlyExpanded = recurseOnlyExpanded;
+    }
+
+    @SuppressWarnings("rawtypes")
+    public void setLabels(Map labels) {
+        this.labels = labels;
     }
 
 }

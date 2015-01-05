@@ -117,6 +117,13 @@
 			<rtexprvalue>true</rtexprvalue>
 			<type>java.lang.Boolean</type>
 		</attribute>
+		<attribute>
+			<description>use labels for facet items</description>
+			<name>labels</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.Map</type>
+		</attribute>
 	</tag>
 	<tag-file>
 		<name>breadcrumbitem</name>

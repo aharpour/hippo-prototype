@@ -12,9 +12,7 @@
 <%@ attribute name="expandedClass" type="java.lang.String" rtexprvalue="true" required="false"%>
 <%@ attribute name="unexpandedClass" type="java.lang.String" rtexprvalue="true" required="false"%>
 <%@ attribute name="leafClass" type="java.lang.String" rtexprvalue="true" required="false"%>
-
-
-
+<%@ attribute name="labels" type="java.util.Map" rtexprvalue="true" required="false" %>
 
 <c:if test="${empty depth }">
 	<c:set var="depth" value="1"/>
@@ -60,9 +58,10 @@
 </c:choose>
 <c:set var="depth" value="${depth - 1 }" />
 <c:if test="${not empty siteMenuItem.childMenuItems and depth >= 0}">
-		<ul>
-		<c:forEach var="child" items="${siteMenuItem.childMenuItems}">
-			<tag:menuitem siteMenuItem="${child}" depth="${depth}" selectedClass="${selectedClass}" expandedClass="${expandedClass}" unexpandedClass="${unexpandedClass}" leafClass="${leafClass}"/>
-		</c:forEach>
-		</ul>
+  <ul>
+	<c:forEach var="child" items="${siteMenuItem.childMenuItems}">
+		<tag:menuitem siteMenuItem="${child}" depth="${depth}" selectedClass="${selectedClass}" expandedClass="${expandedClass}" 
+                      unexpandedClass="${unexpandedClass}" leafClass="${leafClass}" labels="${labels}"/>
+	</c:forEach>
+  </ul>
 </c:if>

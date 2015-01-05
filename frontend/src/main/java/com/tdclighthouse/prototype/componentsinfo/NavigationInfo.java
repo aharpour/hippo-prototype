@@ -21,7 +21,7 @@ import org.hippoecm.hst.core.parameters.Parameter;
  * @author Ebrahim Aharpour
  * 
  */
-public interface NavigationInfo extends SimpleNavigationInfo {
+public interface NavigationInfo extends SimpleNavigationInfo, LabelsInfo {
 
     public static final String SHOW_FACETED_NAVIGATION_DEFAULT = "false";
     public static final String SHOW_FACETED_NAVIGATION = "showFacetedNavigation";

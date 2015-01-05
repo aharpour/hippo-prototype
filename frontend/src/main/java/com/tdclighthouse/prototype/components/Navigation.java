@@ -26,9 +26,9 @@ import org.hippoecm.hst.core.sitemenu.HstSiteMenu;
 
 import com.tdclighthouse.prototype.componentsinfo.NavigationInfo;
 import com.tdclighthouse.prototype.provider.RepoBasedMenuProvider;
-import com.tdclighthouse.prototype.utils.Constants;
-import com.tdclighthouse.prototype.utils.TdcUtils;
+import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants.AttributesConstants;
+import com.tdclighthouse.prototype.utils.TdcUtils;
 import com.tdclighthouse.prototype.utils.TdcUtils.Call;
 
 /**
@@ -41,7 +41,7 @@ public class Navigation extends WebDocumentDetail {
     public static final String EDITABLE_MENU_ATTRIBUTE = "editableMenu";
 
     @Override
-    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+    public void doBeforeRender(HstRequest request, HstResponse response) {
         super.doBeforeRender(request, response);
         final String menuName = getComponentParameters(NavigationInfo.MENU_NAME, NavigationInfo.MENU_NAME_DEFAULT,
                 String.class);
@@ -72,8 +72,9 @@ public class Navigation extends WebDocumentDetail {
 
         }, request, EDITABLE_MENU_ATTRIBUTE + menuName);
 
-        request.setAttribute(Constants.AttributesConstants.MENU, editableMenu);
+        request.setAttribute(AttributesConstants.MENU, editableMenu);
         request.setAttribute(AttributesConstants.PARAM_INFO, getComponentParametersInfo(request));
+        request.setAttribute(AttributesConstants.LABELS, BeanUtils.getLabels(request, getComponentParametersInfo(request)));
     }
 
 }

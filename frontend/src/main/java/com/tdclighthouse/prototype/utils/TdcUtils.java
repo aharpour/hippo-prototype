@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.core.component.HstRequest;
@@ -34,6 +35,7 @@ import org.hippoecm.hst.core.request.HstRequestContext;
 
 import com.tdclighthouse.prototype.beans.compounds.ListItemBean;
 import com.tdclighthouse.prototype.beans.compounds.ValueListBean;
+import com.tdclighthouse.prototype.utils.Constants.RegexConstants;
 
 /**
  * @author Ebrahim Aharpour
@@ -41,6 +43,7 @@ import com.tdclighthouse.prototype.beans.compounds.ValueListBean;
  */
 public class TdcUtils {
 
+    private static final int VIDEO_ID_REGEX_GROUP = 4;
     private static final String GMT = "GMT";
     private static final String DATE_FORMAT = "EEE, d MMM yyyy HH:mm:ss 'GMT'";
 
@@ -105,7 +108,7 @@ public class TdcUtils {
         }
         return result;
     }
-    
+
     public static Map<String, String> valueListBeanToLabelMap(ValueListBean valueList) {
         List<ListItemBean> listItem = valueList.getListItem();
         Map<String, String> result = new HashMap<String, String>(listItem.size());
@@ -135,6 +138,17 @@ public class TdcUtils {
 
     public static boolean mapContainsValue(@SuppressWarnings("rawtypes") Map map, Object value) {
         return map.containsValue(value);
+    }
+
+    public static String getVideoId(String videoUrl) {
+        String videoId = null;
+        if (StringUtils.isNotBlank(videoUrl)) {
+            Matcher matcher = RegexConstants.YOUTUBE_PATTERN.matcher(videoUrl);
+            if (matcher.matches()) {
+                videoId = matcher.group(VIDEO_ID_REGEX_GROUP);
+            }
+        }
+        return videoId;
     }
 
 }

@@ -15,6 +15,8 @@
  */
 package com.tdclighthouse.prototype.utils;
 
+import java.util.regex.Pattern;
+
 /**
  * @author Ebrahim Aharpour
  * 
@@ -167,6 +169,7 @@ public class Constants {
 
     public static class RegexConstants {
         public static final String COMMA_SEPARATOR = "\\s*,\\s*";
+        public static final Pattern YOUTUBE_PATTERN = Pattern.compile("https?://www.youtube.com/.*(embed/|(\\?|&)(video_id=|v=))([^(&\\r\\n\\?)]*).*");
 
         protected RegexConstants() {
             super();

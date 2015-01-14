@@ -79,8 +79,7 @@ public class ValueListAjax extends BaseHstComponent {
     }
 
     protected HippoBeanIterator getAllValueLists(HstRequest request) throws QueryException {
-        HippoBean scope = BeanUtils.getContentBeanViaParameters(request,
-                this.<ContentBeanPathInfo> getComponentParametersInfo(request));
+        HippoBean scope = BeanUtils.getContentBeanViaParameters(this.<ContentBeanPathInfo> getComponentParametersInfo(request));
         @SuppressWarnings("unchecked")
         HstQuery query = request.getRequestContext().getQueryManager().createQuery(scope, ValueListBean.class);
         return query.execute().getHippoBeans();

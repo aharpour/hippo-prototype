@@ -116,7 +116,7 @@ public class GenericOverviewPage extends BaseHstComponent {
     protected HippoBean getQueryScope(HstRequest request, GenericOverviewPageInfo parametersInfo) {
         HippoBean scope = request.getRequestContext().getContentBean();
         if (!(scope instanceof HippoFolderBean)) {
-            scope = BeanUtils.getContentBeanViaParameters(request, parametersInfo);
+            scope = BeanUtils.getContentBeanViaParameters(parametersInfo);
         }
         return scope;
     }

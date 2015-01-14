@@ -74,7 +74,7 @@ public class Navigation extends WebDocumentDetail {
 
         request.setAttribute(AttributesConstants.MENU, editableMenu);
         request.setAttribute(AttributesConstants.PARAM_INFO, getComponentParametersInfo(request));
-        request.setAttribute(AttributesConstants.LABELS, BeanUtils.getLabels(request, getComponentParametersInfo(request)));
+        request.setAttribute(AttributesConstants.LABELS, BeanUtils.getLabels(getComponentParametersInfo(request)));
     }
 
 }

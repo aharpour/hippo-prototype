@@ -42,7 +42,7 @@ public class FacetNavigation extends FacetSupport {
         if (facetedNavBean != null) {
             facetedNavBean = applyQueryToFacetBean(request, facetedNavBean);
             model.put(Constants.AttributesConstants.FACETNAV, facetedNavBean);
-            Map<String, String> labels = BeanUtils.getLabels(request, getComponentParametersInfo(request));
+            Map<String, String> labels = BeanUtils.getLabels(getComponentParametersInfo(request));
             model.put(Constants.AttributesConstants.LABELS, labels);
 
             if (facetedNavBean instanceof HippoFacetChildNavigationBean) {

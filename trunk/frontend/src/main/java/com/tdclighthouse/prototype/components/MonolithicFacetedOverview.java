@@ -29,7 +29,7 @@ public class MonolithicFacetedOverview extends FacetedOverview {
     }
 
     private void setLabels(HstRequest request, Map<String, Object> model) {
-        Map<String, String> labels = BeanUtils.getLabels(request, getComponentParametersInfo(request));
+        Map<String, String> labels = BeanUtils.getLabels(getComponentParametersInfo(request));
         model.put(Constants.AttributesConstants.LABELS, labels);
     }
 }

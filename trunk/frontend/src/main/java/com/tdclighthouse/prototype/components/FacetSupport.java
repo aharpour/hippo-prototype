@@ -44,7 +44,7 @@ public abstract class FacetSupport extends AjaxEnabledComponent {
         } else {
             Object parametersInfo = getComponentParametersInfo(request);
             if (parametersInfo instanceof ContentBeanPathInfo) {
-                HippoBean bean = BeanUtils.getContentBeanViaParameters(request, (ContentBeanPathInfo) parametersInfo);
+                HippoBean bean = BeanUtils.getContentBeanViaParameters((ContentBeanPathInfo) parametersInfo);
                 if (bean instanceof HippoFacetNavigationBean) {
                     result = (HippoFacetNavigationBean) bean;
                 }
@@ -59,8 +59,7 @@ public abstract class FacetSupport extends AjaxEnabledComponent {
         if (!(contentBean instanceof HippoFacetNavigationBean)) {
             result = contentBean;
         } else {
-            HippoBean bean = BeanUtils.getContentBeanViaParameters(request,
-                    (ContentBeanPathInfo) getComponentParametersInfo(request));
+            HippoBean bean = BeanUtils.getContentBeanViaParameters((ContentBeanPathInfo) getComponentParametersInfo(request));
             if (!(bean instanceof HippoFacetNavigationBean)) {
                 result = bean;
             }

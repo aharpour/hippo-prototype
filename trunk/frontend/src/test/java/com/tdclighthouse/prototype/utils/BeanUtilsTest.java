@@ -1,9 +1,13 @@
 package com.tdclighthouse.prototype.utils;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.easymock.EasyMock;
 import org.hippoecm.hst.configuration.hosting.Mount;
 import org.hippoecm.hst.configuration.hosting.VirtualHost;
 import org.hippoecm.hst.configuration.hosting.VirtualHosts;
+import org.hippoecm.hst.container.RequestContextProvider;
 import org.hippoecm.hst.content.beans.ObjectBeanManagerException;
 import org.hippoecm.hst.content.beans.manager.ObjectBeanManager;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
@@ -12,7 +16,6 @@ import org.hippoecm.hst.core.linking.HstLink;
 import org.hippoecm.hst.core.linking.HstLinkCreator;
 import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.request.ResolvedMount;
-import org.hippoecm.hst.mock.core.component.MockHstRequest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -24,19 +27,29 @@ public class BeanUtilsTest {
     @Test
     public void getBeanViaAbsolutionPathTest() throws IllegalStateException, ObjectBeanManagerException {
 
-        MockHstRequest requestMock = new MockHstRequest();
-        requestMock.setRequestContext(createMockHstRequestContext(BEAN_PATH, false, null, true));
-        HippoBean selectedBean = BeanUtils.getBeanViaAbsolutePath(BEAN_PATH, requestMock);
+        setRequestContext(createMockHstRequestContext(BEAN_PATH, false, null, true));
+        HippoBean selectedBean = BeanUtils.getBeanViaAbsolutePath(BEAN_PATH);
         Assert.assertEquals(BEAN_PATH, selectedBean.getPath());
+    }
+
+    private void setRequestContext(HstRequestContext requestContext) {
+        try {
+            Method method = RequestContextProvider.class.getDeclaredMethod("set", HstRequestContext.class);
+            method.setAccessible(true);
+            method.invoke(null, requestContext);
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            // ignore not going to be invoked ever
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
     public void getBeanViaAbsolutionPathExceptionTest() throws IllegalStateException, ObjectBeanManagerException {
         HippoBean selectedBean = null;
         try {
-            MockHstRequest requestMock = new MockHstRequest();
-            requestMock.setRequestContext(createMockHstRequestContext(BEAN_PATH, true, null, false));
-            selectedBean = BeanUtils.getBeanViaAbsolutePath(BEAN_PATH, requestMock);
+            setRequestContext(createMockHstRequestContext(BEAN_PATH, true, null, false));
+            selectedBean = BeanUtils.getBeanViaAbsolutePath(BEAN_PATH);
         } catch (HstComponentException e) {
             Assert.assertEquals(selectedBean, null);
         }

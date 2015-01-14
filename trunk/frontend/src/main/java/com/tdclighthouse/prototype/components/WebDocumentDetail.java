@@ -36,7 +36,7 @@ public class WebDocumentDetail extends BaseHstComponent {
 
     @Override
     public void doBeforeRender(HstRequest request, HstResponse response) {
-        HippoBean contentBean = BeanUtils.getWebDocumetBean(request, getComponentParametersInfo(request));
+        HippoBean contentBean = BeanUtils.getWebDocumetBean(getComponentParametersInfo(request));
         if (contentBean != null) {
             request.setAttribute(Constants.AttributesConstants.DOCUMENT, contentBean);
         }

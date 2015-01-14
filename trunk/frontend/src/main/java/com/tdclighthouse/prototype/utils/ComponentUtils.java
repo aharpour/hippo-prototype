@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.LocaleUtils;
+import org.hippoecm.hst.container.RequestContextProvider;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.content.beans.standard.HippoDocumentBean;
 import org.hippoecm.hst.content.beans.standard.HippoFolderBean;
@@ -24,8 +25,8 @@ public class ComponentUtils {
         return result;
     }
 
-    public static String getLanguage(HstRequest request) {
-        String locale = request.getRequestContext().getResolvedMount().getMount().getLocale();
+    public static String getLanguage() {
+        String locale = RequestContextProvider.get().getResolvedMount().getMount().getLocale();
         return LocaleUtils.toLocale(locale).getLanguage();
     }
 

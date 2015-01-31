@@ -13,7 +13,7 @@ public abstract class EventAware<T> implements EventListener {
 
     private static final Logger LOG = LoggerFactory.getLogger(EventAware.class);
     protected volatile boolean changed;
-    private T cached;
+    private volatile T cached;
 
     public EventAware(Session session, String absPath, String nodeTypeName) throws RepositoryException {
         this(session, absPath, nodeTypeName, true);

@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+   Copyright 2012 Finalist B.V.
+  
+   Licensed under the Apache License, Version 2.0 (the "License")
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+  
+        http://www.apache.org/licenses/LICENSE-2.0
+  
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ -->
+<sv:node xmlns:sv="http://www.jcp.org/jcr/sv/1.0" sv:name="hippo:initialize">
+	<sv:property sv:name="jcr:primaryType" sv:type="Name">
+		<sv:value>hippo:initializefolder</sv:value>
+	</sv:property>
+
+	<!-- Sequence numbers reservation: 
+		Plugins 10000-10999 (external) 
+		Namespaces 11000-11999 
+		Compound types 12000-12499 
+		Document types 12500-12999 
+		Hippo Configuration 13000-13999 
+		HST Configuration 14000-14999 
+		Folders 15000-15999 
+		Content 16000-16999 
+		Updates 17000 - 19999 -->
+	<!-- Namespaces -->
+	<sv:node sv:name="tdc">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>11000</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:namespace" sv:type="String">
+			<sv:value>http://tdclighthouse.com/tdc/nt/1.0</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:nodetypesresource" sv:type="String">
+			<sv:value>namespaces/tdc.cnd</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-namespace">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>11001</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces</sv:value>
+		</sv:property>
+	</sv:node>
+	<!-- /Namespaces -->
+
+	<!-- Compound types -->
+	<sv:node sv:name="tdc-compoundtype-image">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12000</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/image.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-audio">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12001</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/audio.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-videoimage">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12002</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/videoimage.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-videoitem">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12003</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/videoitem.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-qutation">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12004</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/quotation.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-video">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12005</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/video.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+		<sv:node sv:name="tdc-compoundtype-paragraphimage">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12005.5</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/paragraphimage.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-paragraph">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12006</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/paragraph.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-gallery">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12007</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/gallery.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-latex">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12008</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/latex.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-externallink">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12009</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/externallink.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-relateddocumentitem">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12010</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/relateddocumentitem.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-relateddocuments">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12011</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/relateddocuments.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-flexibleblock">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12011</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/flexibleblock.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-compoundtype-internallink">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12012</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/compound/internallink.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<!-- /Compound types -->
+	<!-- Document types -->
+	<sv:node sv:name="tdc-documenttype-basedocument">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12500</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/basedocument.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-documenttype-webdocument">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12501</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/webdocument.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-documenttype-articlepage">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12502</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/articlepage.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-documenttype-tdcimageset">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>12503</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>namespaces/tdc/tdcimageset.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:namespaces/tdc</sv:value>
+		</sv:property>
+	</sv:node>
+	<!-- /Document types -->
+	<!-- Hippo Configuration -->
+	<!-- Security and default available users -->
+	<sv:node sv:name="tdc-user-editor">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>security/user-editor.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:users</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13000</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-user-author">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>security/user-author.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:users</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13001</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-user-siteuser">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>security/user-siteuser.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:users</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13002</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-user-writablesiteuser">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>security/user-writablesiteuser.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:users</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13003</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-groups-author-add">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentpropadd" sv:type="String">
+			<sv:value>author</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:groups/author/hipposys:members</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13004</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-groups-editor-add">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentpropadd" sv:type="String">
+			<sv:value>editor</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:groups/editor/hipposys:members</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13005</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-groups-webmaster-add">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:groups/webmaster/hipposys:members</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13006</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentpropadd" sv:multiple="true" sv:type="String">
+			<sv:value>editor</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-group-sitegroup">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>security/group-sitegroup.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:groups</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13007</sv:value>
+		</sv:property>
+	</sv:node>
+
+	<sv:node sv:name="tdc-group-writable-sitegroup">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>security/group-writable-sitegroup.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:groups</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13008</sv:value>
+		</sv:property>
+	</sv:node>
+
+	<sv:node sv:name="tdc-sitegroup-read-everywhere">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>security/sitegroup-read-everywhere.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:domains/everywhere</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13009</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-lookuptables">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>lookuptables/lookuptables.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/content/documents</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13010</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-translator">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>configuration/translator/tdc-translator.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:frontend/cms/cms-services/</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13011</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-query-new-image-folder">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>configuration/queries/templates/new-image-folder/templates/image-gallery.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:queries/hippo:templates/new-image-folder/hippostd:templates</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13012</sv:value>
+		</sv:property>
+	</sv:node>
+	<sv:node sv:name="tdc-gallery-processor-service-galleryprocessorservice">
+		<sv:property sv:name="jcr:primaryType" sv:type="Name">
+			<sv:value>hippo:initializeitem</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentresource" sv:type="String">
+			<sv:value>configuration/frontend/cms/cms-services/galleryprocessorservice.xml</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:contentroot" sv:type="String">
+			<sv:value>/hippo:configuration/hippo:frontend/cms/cms-services</sv:value>
+		</sv:property>
+		<sv:property sv:name="hippo:sequence" sv:type="Double">
+			<sv:value>13013</sv:value>
+		</sv:property>
+	</sv:node>
+	<!-- /Hippo Configuration -->
+
+</sv:node>

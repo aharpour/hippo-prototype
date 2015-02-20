@@ -56,8 +56,10 @@ public class Navigation extends WebDocumentDetail {
                         result = menu.getEditableMenu();
                         boolean showFacet = getComponentParameters(NavigationInfo.SHOW_FACETED_NAVIGATION,
                                 NavigationInfo.SHOW_FACETED_NAVIGATION_DEFAULT, Boolean.class);
+                        boolean userIndexDocument = getComponentParameters(NavigationInfo.USER_INDEX_DOCUMENT,
+                                NavigationInfo.USER_INDEX_DOCUMENT_DEFAULT, Boolean.class);
                         new RepoBasedMenuProvider(request.getRequestContext().getSiteContentBaseBean(), showFacet,
-                                request).addRepoBasedMenuItems(result);
+                                userIndexDocument, request).addRepoBasedMenuItems(result);
                     }
                     return result;
                 } catch (IOException e) {

@@ -50,15 +50,17 @@ public class RepoBasedMenuProvider {
     private final String selectedNodeCanonicalPath;
     private final HippoBean siteContentBaseBean;
     private final boolean showFacetNavigations;
+    private final boolean userIndexDocument;
 
     public RepoBasedMenuProvider(HippoBean siteContentBaseBean, HstRequest request) {
-        this(siteContentBaseBean, false, request);
+        this(siteContentBaseBean, false, true, request);
     }
 
-    public RepoBasedMenuProvider(HippoBean siteContentBaseBean, boolean showFacetNavigations, HstRequest request) {
+    public RepoBasedMenuProvider(HippoBean siteContentBaseBean, boolean showFacetNavigations, boolean userIndexDocument, HstRequest request) {
         this.request = request;
         this.siteContentBaseBean = siteContentBaseBean;
         this.showFacetNavigations = showFacetNavigations;
+        this.userIndexDocument = userIndexDocument;
         HippoBean bean = request.getRequestContext().getContentBean();
         selectedNodeCanonicalPath = bean != null ? bean.getCanonicalPath() : null;
     }
@@ -116,7 +118,7 @@ public class RepoBasedMenuProvider {
             if (childbearingBean != null) {
                 List<HippoBean> childbearingChildren = getChildbearingChildren(childbearingBean, menuItemConfig);
                 for (HippoBean childbearingChild : childbearingChildren) {
-                    HippoBean foldersIndex = NavigationUtils.getIndexBean(childbearingChild);
+                    HippoBean foldersIndex = getFoldersIndex(childbearingChild);
                     if (foldersIndex != null) {
                         EditableMenuItem folderItem = addItem(item, createMenuItemConfig(menuItemConfig, foldersIndex),
                                 childbearingChild.getLocalizedName());
@@ -131,6 +133,16 @@ public class RepoBasedMenuProvider {
                 }
             }
         }
+    }
+
+    private HippoBean getFoldersIndex(HippoBean childbearingChild) {
+        HippoBean foldersIndex;
+        if (userIndexDocument) {
+            foldersIndex = NavigationUtils.getIndexBean(childbearingChild);
+        } else {
+            foldersIndex = childbearingChild;
+        }
+        return foldersIndex;
     }
 
     private MenuItemConfigBean createMenuItemConfig(MenuItemConfig parentMenuItemConfig, final HippoBean document) {
@@ -244,7 +256,7 @@ public class RepoBasedMenuProvider {
             repoMenuItem = new SimpleEditableMenuItem(item, hstLink, localizedName);
         }
         if ((document instanceof HippoFacetsAvailableNavigation && repoMenuItem instanceof SimpleEditableMenuItem)
-                || menuItemConfig.isDisabled()) {
+                || menuItemConfig.isDisabled() || document instanceof HippoFolderBean) {
             repoMenuItem.setDisabled(true);
         }
         repoMenuItem.setInvisible(menuItemConfig.isInvisible());

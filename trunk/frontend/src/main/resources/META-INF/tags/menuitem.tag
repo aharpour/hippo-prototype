@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tag" uri="http://open-web.nl/hippo/prototype"%>
 
-<%@ attribute name="siteMenuItem" type="org.hippoecm.hst.core.sitemenu.EditableMenuItem" rtexprvalue="true" required="true"%>
+<%@ attribute name="siteMenuItem" type="org.hippoecm.hst.core.sitemenu.CommonMenuItem" rtexprvalue="true" required="true"%>
 <%@ attribute name="depth" type="java.lang.Integer" rtexprvalue="true" required="false" %>
 <%@ attribute name="selectedClass" type="java.lang.String" rtexprvalue="true" required="false"%>
 <%@ attribute name="expandedClass" type="java.lang.String" rtexprvalue="true" required="false"%>
@@ -47,7 +47,7 @@
   		</c:otherwise>
   	</c:choose>
   	<c:choose>
-  		<c:when test="${not empty siteMenuItem.childMenuItems and depth >= 0}">
+  		<c:when test="${not empty tag:getSubmenuItems(siteMenuItem) and depth >= 0}">
   			<li class="${unexpandedClass}"><a href="${link}"><c:out value="${siteMenuItem.name}"/></a>
   		</c:when>
   		<c:otherwise>
@@ -57,7 +57,7 @@
   </c:otherwise>
 </c:choose>
 <c:set var="depth" value="${depth - 1 }" />
-<c:if test="${not empty siteMenuItem.childMenuItems and depth >= 0}">
+<c:if test="${not empty tag:getSubmenuItems(siteMenuItem) and depth >= 0}">
   <ul>
 	<c:forEach var="child" items="${siteMenuItem.childMenuItems}">
 		<tag:menuitem siteMenuItem="${child}" depth="${depth}" selectedClass="${selectedClass}" expandedClass="${expandedClass}" 

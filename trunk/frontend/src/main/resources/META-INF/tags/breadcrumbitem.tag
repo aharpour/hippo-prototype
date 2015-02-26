@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tag" uri="http://open-web.nl/hippo/prototype"%>
 
-<%@ attribute name="parentItem" type="org.hippoecm.hst.core.sitemenu.EditableMenuItem" rtexprvalue="true" required="true"%>
+<%@ attribute name="parentItem" type="org.hippoecm.hst.core.sitemenu.CommonMenuItem" rtexprvalue="true" required="true"%>
 <%@ attribute name="lastItemClass" type="java.lang.String" rtexprvalue="true" required="false"%>
 <c:if test="${empty lastItemClass }">
 	<c:set var="lastItemClass" value="last"/>

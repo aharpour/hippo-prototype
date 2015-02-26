@@ -75,7 +75,7 @@ public class NavigationUtils {
         return result;
     }
 
-    public static List<? extends CommonMenuItem> getItems(CommonMenu menu) {
+    public static List<? extends CommonMenuItem> getMenuItems(CommonMenu menu) {
         List<? extends CommonMenuItem> result;
         if (menu instanceof EditableMenu) {
             result = ((EditableMenu) menu).getMenuItems();

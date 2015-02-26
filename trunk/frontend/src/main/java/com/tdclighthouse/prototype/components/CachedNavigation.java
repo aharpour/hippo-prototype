@@ -50,8 +50,8 @@ public class CachedNavigation extends WebDocumentDetail {
                 .getSiteMenusConfiguration();
         String menuName = getComponentParameters(NavigationInfo.MENU_NAME, NavigationInfo.MENU_NAME_DEFAULT,
                 String.class);
-        HstSiteMenuConfigurationService service = ((HstSiteMenuConfigurationService) siteMenusConfiguration
-                .getSiteMenuConfiguration(menuName));
+        HstSiteMenuConfigurationService service = (HstSiteMenuConfigurationService) siteMenusConfiguration
+                .getSiteMenuConfiguration(menuName);
         return new Key(service.getCanonicalPath());
     }
 
@@ -78,10 +78,11 @@ public class CachedNavigation extends WebDocumentDetail {
                 new RepoBasedMenuProvider(request.getRequestContext().getSiteContentBaseBean(), showFacet,
                         userIndexDocument, request).addRepoBasedMenuItems(editableMenu);
             }
-            return new CacheElementEhCache(getCacheKey(request), new CacheableSiteMenu(editableMenu));
+            return editableMenu != null ? new CacheElementEhCache(getCacheKey(request), new CacheableSiteMenu(
+                    editableMenu)) : null;
         }
 
-    };
+    }
 
     private static class Key {
         private String name;

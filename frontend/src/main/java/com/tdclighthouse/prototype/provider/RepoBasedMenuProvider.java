@@ -50,17 +50,17 @@ public class RepoBasedMenuProvider {
     private final String selectedNodeCanonicalPath;
     private final HippoBean siteContentBaseBean;
     private final boolean showFacetNavigations;
-    private final boolean userIndexDocument;
+    private final boolean useIndexDocument;
 
     public RepoBasedMenuProvider(HippoBean siteContentBaseBean, HstRequest request) {
         this(siteContentBaseBean, false, true, request);
     }
 
-    public RepoBasedMenuProvider(HippoBean siteContentBaseBean, boolean showFacetNavigations, boolean userIndexDocument, HstRequest request) {
+    public RepoBasedMenuProvider(HippoBean siteContentBaseBean, boolean showFacetNavigations, boolean useIndexDocument, HstRequest request) {
         this.request = request;
         this.siteContentBaseBean = siteContentBaseBean;
         this.showFacetNavigations = showFacetNavigations;
-        this.userIndexDocument = userIndexDocument;
+        this.useIndexDocument = useIndexDocument;
         HippoBean bean = request.getRequestContext().getContentBean();
         selectedNodeCanonicalPath = bean != null ? bean.getCanonicalPath() : null;
     }
@@ -137,7 +137,7 @@ public class RepoBasedMenuProvider {
 
     private HippoBean getFoldersIndex(HippoBean childbearingChild) {
         HippoBean foldersIndex;
-        if (userIndexDocument) {
+        if (useIndexDocument) {
             foldersIndex = NavigationUtils.getIndexBean(childbearingChild);
         } else {
             foldersIndex = childbearingChild;

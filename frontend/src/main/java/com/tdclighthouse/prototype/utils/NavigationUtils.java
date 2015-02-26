@@ -15,14 +15,19 @@
  */
 package com.tdclighthouse.prototype.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.content.beans.standard.HippoDocumentBean;
 import org.hippoecm.hst.content.beans.standard.HippoFolderBean;
 import org.hippoecm.hst.content.beans.standard.facetnavigation.HippoFacetNavigation;
+import org.hippoecm.hst.core.sitemenu.CommonMenu;
+import org.hippoecm.hst.core.sitemenu.CommonMenuItem;
 import org.hippoecm.hst.core.sitemenu.EditableMenu;
 import org.hippoecm.hst.core.sitemenu.EditableMenuItem;
+import org.hippoecm.hst.core.sitemenu.HstSiteMenu;
+import org.hippoecm.hst.core.sitemenu.HstSiteMenuItem;
 
 /**
  * @author Ebrahim Aharpour
@@ -70,6 +75,30 @@ public class NavigationUtils {
         return result;
     }
 
+    public static List<? extends CommonMenuItem> getItems(CommonMenu menu) {
+        List<? extends CommonMenuItem> result;
+        if (menu instanceof EditableMenu) {
+            result = ((EditableMenu) menu).getMenuItems();
+        } else if (menu instanceof HstSiteMenu) {
+            result = ((HstSiteMenu) menu).getSiteMenuItems();
+        } else {
+            result = new ArrayList<CommonMenuItem>();
+        }
+        return result;
+    }
+
+    public static List<? extends CommonMenuItem> getSubmenuItems(CommonMenuItem menuItem) {
+        List<? extends CommonMenuItem> result;
+        if (menuItem instanceof EditableMenuItem) {
+            result = ((EditableMenuItem) menuItem).getChildMenuItems();
+        } else if (menuItem instanceof HstSiteMenuItem) {
+            result = ((HstSiteMenuItem) menuItem).getChildMenuItems();
+        } else {
+            result = new ArrayList<CommonMenuItem>();
+        }
+        return result;
+    }
+
     private static EditableMenuItem getSiteMenuItemByPathSegement(List<EditableMenuItem> menuItems, String pathSegment) {
         EditableMenuItem result = null;
         List<EditableMenuItem> currentMenuItems = menuItems;
@@ -89,4 +118,5 @@ public class NavigationUtils {
         }
         return result;
     }
+
 }

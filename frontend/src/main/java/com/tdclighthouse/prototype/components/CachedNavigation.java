@@ -12,6 +12,7 @@ import org.hippoecm.hst.configuration.sitemenu.HstSiteMenusConfiguration;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
+import org.hippoecm.hst.core.parameters.ParametersInfo;
 import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.sitemenu.EditableMenu;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenu;
@@ -23,6 +24,7 @@ import com.tdclighthouse.prototype.provider.RepoBasedMenuProvider;
 import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants.AttributesConstants;
 
+@ParametersInfo(type = NavigationInfo.class)
 public class CachedNavigation extends WebDocumentDetail {
     @Override
     public void doBeforeRender(final HstRequest request, final HstResponse response) {

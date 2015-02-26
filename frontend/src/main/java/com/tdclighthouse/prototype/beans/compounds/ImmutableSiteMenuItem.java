@@ -9,11 +9,12 @@ import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.linking.HstLink;
 import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
 import org.hippoecm.hst.core.sitemenu.CommonMenuItem;
-import org.hippoecm.hst.core.sitemenu.EditableMenu;
+import org.hippoecm.hst.core.sitemenu.EditableMenuItem;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenu;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenuItem;
 
 public class ImmutableSiteMenuItem implements HstSiteMenuItem {
+    
 
     private final String name;
     private final String externalLink;
@@ -41,8 +42,8 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
             addChildren(siteMenu, childrenList, hstSiteMenuItem.getChildMenuItems());
             p = hstSiteMenuItem.getParameters();
             lp = hstSiteMenuItem.getLocalParameters();
-        } else if (menuItem instanceof EditableMenu) {
-            addChildren(siteMenu, childrenList, ((EditableMenu) menuItem).getMenuItems());
+        } else if (menuItem instanceof EditableMenuItem) {
+            addChildren(siteMenu, childrenList, ((EditableMenuItem) menuItem).getChildMenuItems());
         }
         this.parameters = p;
         this.localParameters = lp;

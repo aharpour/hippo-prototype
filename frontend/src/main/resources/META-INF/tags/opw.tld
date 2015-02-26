@@ -73,7 +73,7 @@
 			<name>siteMenuItem</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>org.hippoecm.hst.core.sitemenu.EditableMenuItem</type>
+			<type>org.hippoecm.hst.core.sitemenu.CommonMenuItem</type>
 		</attribute>
 		<attribute>
 			<description>How many generations of children to be displayed.</description>
@@ -269,5 +269,15 @@
 		<name>removeListByCategory</name>
 		<function-class>com.tdclighthouse.prototype.tag.Functions</function-class>
 		<function-signature>java.util.List removeListByCategory(java.lang.String, java.lang.String, org.hippoecm.hst.content.beans.standard.facetnavigation.HippoFacetSubNavigation)</function-signature>
+	</function>
+	<function>
+		<name>getSubmenuItems</name>
+		<function-class>com.tdclighthouse.prototype.utils.NavigationUtils</function-class>
+		<function-signature>java.util.List getSubmenuItems(org.hippoecm.hst.core.sitemenu.CommonMenuItem)</function-signature>
+	</function>
+	<function>
+		<name>getMenuItems</name>
+		<function-class>com.tdclighthouse.prototype.utils.NavigationUtils</function-class>
+		<function-signature>java.util.List getMenuItems(org.hippoecm.hst.core.sitemenu.CommonMenu)</function-signature>
 	</function>
 </taglib>

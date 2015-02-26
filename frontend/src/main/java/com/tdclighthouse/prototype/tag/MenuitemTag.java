@@ -13,24 +13,25 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.core.linking.HstLink;
 import org.hippoecm.hst.core.request.HstRequestContext;
-import org.hippoecm.hst.core.sitemenu.EditableMenuItem;
+import org.hippoecm.hst.core.sitemenu.CommonMenuItem;
 import org.hippoecm.hst.util.HstRequestUtils;
 
 import com.tdclighthouse.prototype.provider.RepoBasedMenuProvider;
 import com.tdclighthouse.prototype.utils.Constants.HstParametersConstants;
+import com.tdclighthouse.prototype.utils.NavigationUtils;
 
 public class MenuitemTag extends TagSupport {
 
     private static final long serialVersionUID = 1L;
 
-    private EditableMenuItem siteMenuItem;
+    private transient CommonMenuItem siteMenuItem;
     private Integer depth;
     private Boolean recurseOnlyExpanded;
     private String selectedClass;
     private String expandedClass;
     private String unexpandedClass;
     private String leafClass;
-    private HstRequestContext requestContext;
+    private transient HstRequestContext requestContext;
     @SuppressWarnings("rawtypes")
     private Map labels;
 
@@ -53,7 +54,7 @@ public class MenuitemTag extends TagSupport {
         leafClass = "leaf";
         recurseOnlyExpanded = false;
         requestContext = null;
-        labels=null;
+        labels = null;
     }
 
     @Override
@@ -70,26 +71,26 @@ public class MenuitemTag extends TagSupport {
         }
     }
 
-    private void printItemsRecursively(EditableMenuItem item, JspWriter out, int recursionDepth) throws IOException {
-        List<EditableMenuItem> children = item.getChildMenuItems();
-        int depth= recursionDepth;
+    private void printItemsRecursively(CommonMenuItem item, JspWriter out, int recursionDepth) throws IOException {
+        List<? extends CommonMenuItem> children = NavigationUtils.getSubmenuItems(item);
+        int d = recursionDepth;
         if (!RepoBasedMenuProvider.getBooleanProperty(item, HstParametersConstants.INVISIBLE)) {
             if (item.isSelected()) {
                 printItem(item, out, selectedClass);
             } else if (item.isExpanded()) {
                 printItem(item, out, expandedClass);
-            } else if (!children.isEmpty() && depth > 0) {
+            } else if (!children.isEmpty() && d > 0) {
                 printItem(item, out, unexpandedClass);
             } else {
                 printItem(item, out, leafClass);
             }
-            
-            depth = RepoBasedMenuProvider.getBooleanProperty(item, HstParametersConstants.DISABLED) ? depth + 1 : depth;
-             
-            if (!children.isEmpty() && depth > 0 && (!recurseOnlyExpanded || item.isExpanded())) {
+
+            d = RepoBasedMenuProvider.getBooleanProperty(item, HstParametersConstants.DISABLED) ? d + 1 : d;
+
+            if (!children.isEmpty() && d > 0 && (!recurseOnlyExpanded || item.isExpanded())) {
                 out.print("<ul>");
-                for (EditableMenuItem child : children) {
-                    printItemsRecursively(child, out, depth - 1);
+                for (CommonMenuItem child : children) {
+                    printItemsRecursively(child, out, d - 1);
                 }
                 out.print("</ul>");
             }
@@ -97,7 +98,7 @@ public class MenuitemTag extends TagSupport {
         }
     }
 
-    private void printItem(EditableMenuItem item, JspWriter out, String cssClass) throws IOException {
+    private void printItem(CommonMenuItem item, JspWriter out, String cssClass) throws IOException {
         boolean disabled = RepoBasedMenuProvider.getBooleanProperty(item, HstParametersConstants.DISABLED);
         out.print("<li ");
         if (StringUtils.isNotBlank(cssClass)) {
@@ -109,22 +110,22 @@ public class MenuitemTag extends TagSupport {
             out.print(getLink(item, getRequestContext(), false));
             out.print("\">");
         }
-        
-        if(labels!=null){            
+
+        if (labels != null) {
             out.print(getLabelValue(StringEscapeUtils.escapeXml(item.getName())));
-        }else{
+        } else {
             out.print(StringEscapeUtils.escapeXml(item.getName()));
         }
-        
+
         if (!disabled) {
             out.print("</a>");
         }
     }
-    
-    private String getLabelValue(String itemName){
+
+    private String getLabelValue(String itemName) {
         String result = itemName;
-        if(labels.get(itemName)!=null){
-            result =  (String) labels.get(itemName);
+        if (labels.get(itemName) != null) {
+            result = (String) labels.get(itemName);
         }
         return result;
     }
@@ -137,7 +138,7 @@ public class MenuitemTag extends TagSupport {
         return requestContext;
     }
 
-    private String getLink(EditableMenuItem item, HstRequestContext requestContext, boolean fullyQualified) {
+    private String getLink(CommonMenuItem item, HstRequestContext requestContext, boolean fullyQualified) {
         String result = "";
         String externalLink = item.getExternalLink();
         if (StringUtils.isNotBlank(externalLink)) {
@@ -152,7 +153,7 @@ public class MenuitemTag extends TagSupport {
         return result;
     }
 
-    public void setSiteMenuItem(EditableMenuItem siteMenuItem) {
+    public void setSiteMenuItem(CommonMenuItem siteMenuItem) {
         this.siteMenuItem = siteMenuItem;
     }
 

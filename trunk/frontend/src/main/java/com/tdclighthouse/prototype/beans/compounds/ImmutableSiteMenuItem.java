@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.linking.HstLink;
+import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
 import org.hippoecm.hst.core.sitemenu.CommonMenuItem;
 import org.hippoecm.hst.core.sitemenu.EditableMenuItem;
@@ -26,6 +27,7 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
     private final Map<String, String> parameters;
     private final Map<String, String> localParameters;
     private final CacheableSiteMenu siteMenu;
+    private final String path;
 
     public ImmutableSiteMenuItem(CacheableSiteMenu siteMenu, CommonMenuItem menuItem, ImmutableSiteMenuItem parent) {
         this.parent = parent;
@@ -33,6 +35,13 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
         this.name = menuItem.getName();
         this.externalLink = menuItem.getExternalLink();
         this.properties = menuItem.getProperties();
+        HstLink hstLink = menuItem.getHstLink();
+        
+        if (hstLink != null) {
+            this.path = hstLink.getPath(); 
+        } else {
+            this.path = null;
+        }
 
         Map<String, String> p = null;
         Map<String, String> lp = null;
@@ -61,8 +70,12 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
 
     @Override
     public HstLink getHstLink() {
-        // TODO Auto-generated method stub
-        return null;
+        HstLink result = null;
+        if (path != null) {
+            HstRequestContext rc =  siteMenu.getRequestContext();
+            result = rc.getHstLinkCreator().create(path, rc.getResolvedMount().getMount());
+        }
+        return result;
     }
 
     @Override

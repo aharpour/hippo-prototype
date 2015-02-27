@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.sitemenu.CommonMenu;
 import org.hippoecm.hst.core.sitemenu.CommonMenuItem;
 import org.hippoecm.hst.core.sitemenu.EditableMenu;
@@ -15,6 +16,7 @@ public class CacheableSiteMenu implements HstSiteMenu {
     
     private final String name;
     private final List<HstSiteMenuItem> children;
+    private final ThreadLocal<HstRequestContext> requestContext = new ThreadLocal<HstRequestContext>();
     
     public CacheableSiteMenu(CommonMenu menu) {
         this.name = menu.getName();
@@ -37,6 +39,14 @@ public class CacheableSiteMenu implements HstSiteMenu {
     @Override
     public String getName() {
         return this.name;
+    }
+    
+    protected HstRequestContext getRequestContext() {
+        return requestContext.get();
+    }
+    
+    public void setRequestContext(HstRequestContext requestContext) {
+        this.requestContext.set(requestContext);
     }
 
     @Override

@@ -33,8 +33,13 @@ public class CachedNavigation extends WebDocumentDetail {
             HstCache cache = HstServices.getComponentManager().getComponent("pageCache");
             Key key = getCacheKey(request);
             CacheElement cacheElement = cache.get(key, new Callback(request));
+            
 
-            request.setAttribute(AttributesConstants.MENU, cacheElement.getContent());
+            CacheableSiteMenu menu = (CacheableSiteMenu) cacheElement.getContent();
+            if (menu != null) {
+                menu.setRequestContext(request.getRequestContext());
+                request.setAttribute(AttributesConstants.MENU, menu);
+            }
             request.setAttribute(AttributesConstants.PARAM_INFO, getComponentParametersInfo(request));
             request.setAttribute(AttributesConstants.LABELS, BeanUtils.getLabels(getComponentParametersInfo(request)));
         } catch (Exception e) {

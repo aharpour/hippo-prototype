@@ -14,8 +14,9 @@ import org.hippoecm.hst.core.sitemenu.EditableMenuItem;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenu;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenuItem;
 
+import com.tdclighthouse.prototype.beans.compounds.CacheableSiteMenu.State;
+
 public class ImmutableSiteMenuItem implements HstSiteMenuItem {
-    
 
     private final String name;
     private final String externalLink;
@@ -36,9 +37,9 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
         this.externalLink = menuItem.getExternalLink();
         this.properties = menuItem.getProperties();
         HstLink hstLink = menuItem.getHstLink();
-        
+
         if (hstLink != null) {
-            this.path = hstLink.getPath(); 
+            this.path = hstLink.getPath();
         } else {
             this.path = null;
         }
@@ -58,7 +59,7 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
         this.localParameters = lp;
 
         this.children = Collections.unmodifiableList(childrenList);
-
+        siteMenu.register(this);
     }
 
     private void addChildren(CacheableSiteMenu siteMenu, List<HstSiteMenuItem> childrenList,
@@ -72,7 +73,7 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
     public HstLink getHstLink() {
         HstLink result = null;
         if (path != null) {
-            HstRequestContext rc =  siteMenu.getRequestContext();
+            HstRequestContext rc = siteMenu.getState().getRequestContext();
             result = rc.getHstLinkCreator().create(path, rc.getResolvedMount().getMount());
         }
         return result;
@@ -80,14 +81,22 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
 
     @Override
     public boolean isExpanded() {
-        // TODO Auto-generated method stub
-        return false;
+        boolean result = false;
+        State state = siteMenu.getState();
+        if (state != null && state.getSelectedPaths() != null && state.getSelectedPaths().contains(path)) {
+            result = true;
+        }
+        return result;
     }
 
     @Override
     public boolean isSelected() {
-        // TODO Auto-generated method stub
-        return false;
+        boolean result = false;
+        State state = siteMenu.getState();
+        if (state != null && state.getCurrentPath().equals(path)) {
+            result = true;
+        }
+        return result;
     }
 
     @Override
@@ -161,6 +170,10 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
     @Override
     public Map<String, String> getLocalParameters() {
         return localParameters;
+    }
+
+    String getPath() {
+        return path;
     }
 
 }

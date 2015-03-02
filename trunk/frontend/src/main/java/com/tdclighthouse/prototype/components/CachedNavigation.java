@@ -37,7 +37,7 @@ public class CachedNavigation extends WebDocumentDetail {
 
             CacheableSiteMenu menu = (CacheableSiteMenu) cacheElement.getContent();
             if (menu != null) {
-                menu.setRequestContext(request.getRequestContext());
+                menu.setState(request);
                 request.setAttribute(AttributesConstants.MENU, menu);
             }
             request.setAttribute(AttributesConstants.PARAM_INFO, getComponentParametersInfo(request));

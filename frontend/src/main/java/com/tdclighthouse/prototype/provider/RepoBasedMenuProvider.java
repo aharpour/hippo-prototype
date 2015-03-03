@@ -56,7 +56,8 @@ public class RepoBasedMenuProvider {
         this(siteContentBaseBean, false, true, request);
     }
 
-    public RepoBasedMenuProvider(HippoBean siteContentBaseBean, boolean showFacetNavigations, boolean useIndexDocument, HstRequest request) {
+    public RepoBasedMenuProvider(HippoBean siteContentBaseBean, boolean showFacetNavigations, boolean useIndexDocument,
+            HstRequest request) {
         this.request = request;
         this.siteContentBaseBean = siteContentBaseBean;
         this.showFacetNavigations = showFacetNavigations;
@@ -255,8 +256,8 @@ public class RepoBasedMenuProvider {
         } else {
             repoMenuItem = new SimpleEditableMenuItem(item, hstLink, localizedName);
         }
-        if ((document instanceof HippoFacetsAvailableNavigation && repoMenuItem instanceof SimpleEditableMenuItem)
-                || menuItemConfig.isDisabled() || document instanceof HippoFolderBean) {
+        if (menuItemConfig.isDisabled()
+                || (document instanceof HippoFolderBean && !(document instanceof HippoFacetSubNavigation) && repoMenuItem instanceof SimpleEditableMenuItem)) {
             repoMenuItem.setDisabled(true);
         }
         repoMenuItem.setInvisible(menuItemConfig.isInvisible());
@@ -343,9 +344,10 @@ public class RepoBasedMenuProvider {
     public static boolean getBooleanProperty(CommonMenuItem menuItem, String parameterName) {
         boolean result = false;
         List<String> parameterValues = getParameterValues(parameterName, menuItem);
-        if (parameterValues != null && parameterValues.size() > 0) {
+        if (parameterValues != null && !parameterValues.isEmpty()) {
             result = ValuesConstants.TRUE.equalsIgnoreCase(parameterValues.get(0));
         }
+
         return result;
     }
 

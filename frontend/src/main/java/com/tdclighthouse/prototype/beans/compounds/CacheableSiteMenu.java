@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.sitemenu.CommonMenu;
@@ -22,7 +23,7 @@ import com.tdclighthouse.prototype.utils.PathUtils;
 public class CacheableSiteMenu implements HstSiteMenu {
 
     private final String name;
-    private final Map<String, List<HstSiteMenuItem>> siteMenuItemRegistery = new HashMap<>();
+    private final Map<String, List<ImmutableSiteMenuItem>> siteMenuItemRegistery = new HashMap<>();
     private final List<HstSiteMenuItem> children;
     private final ThreadLocal<State> state = new ThreadLocal<State>();
 
@@ -41,7 +42,7 @@ public class CacheableSiteMenu implements HstSiteMenu {
         if (siteMenuItemRegistery.containsKey(item.getPath())) {
             siteMenuItemRegistery.get(item.getPath()).add(item);
         } else {
-            List<HstSiteMenuItem> list = new ArrayList<HstSiteMenuItem>();
+            List<ImmutableSiteMenuItem> list = new ArrayList<ImmutableSiteMenuItem>();
             list.add(item);
             siteMenuItemRegistery.put(item.getPath(), list);
         }
@@ -103,19 +104,28 @@ public class CacheableSiteMenu implements HstSiteMenu {
 
         private final HstRequestContext requestContext;
         private final String currentPath;
-        private final Set<String> selectedPaths;
+        private final Set<String> expandedPaths;
 
         public State(HstRequest request, CacheableSiteMenu siteMenu) {
             Set<String> paths = new HashSet<>();
-            this.requestContext = request.getRequestContext();
-            this.currentPath = PathUtils.normalize(request.getPathInfo());
-            if (siteMenu.siteMenuItemRegistery.containsKey(this.currentPath)) {
-                List<HstSiteMenuItem> list = siteMenu.siteMenuItemRegistery.get(currentPath);
-                //TODO
+            requestContext = request.getRequestContext();
+            currentPath = PathUtils.normalize(request.getPathInfo());
+            if (siteMenu.siteMenuItemRegistery.containsKey(currentPath)) {
+                List<ImmutableSiteMenuItem> list = siteMenu.siteMenuItemRegistery.get(currentPath);
+                for (ImmutableSiteMenuItem selectedItem : list) {
+                    ImmutableSiteMenuItem item = selectedItem;
+                    while (item != null) {
+                        if (StringUtils.isNotBlank(item.getPath())) {
+                            paths.add(item.getPath());
+                        }
+                        item = (ImmutableSiteMenuItem) item.getParentItem();
+                    }
+                }
             }
-            
-            this.selectedPaths = Collections.unmodifiableSet(paths);
 
+            expandedPaths = Collections.unmodifiableSet(paths);
+            System.out.println(siteMenu.name);
+            System.out.println(expandedPaths);
         }
 
         public HstRequestContext getRequestContext() {
@@ -126,8 +136,8 @@ public class CacheableSiteMenu implements HstSiteMenu {
             return currentPath;
         }
 
-        public Set<String> getSelectedPaths() {
-            return selectedPaths;
+        public Set<String> getExpandedPaths() {
+            return expandedPaths;
         }
 
     }

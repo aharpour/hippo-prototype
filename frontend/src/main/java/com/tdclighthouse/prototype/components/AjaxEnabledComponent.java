@@ -136,7 +136,7 @@ public abstract class AjaxEnabledComponent extends AbstractComponent {
     }
 
     @SuppressWarnings("unchecked")
-    private final static List<String> ECPECTED_MIME_TYPES = ListUtils.unmodifiableList(new ArrayList<String>() {
+    private static final List<String> ECPECTED_MIME_TYPES = ListUtils.unmodifiableList(new ArrayList<String>() {
         private static final long serialVersionUID = 1L;
 
         {

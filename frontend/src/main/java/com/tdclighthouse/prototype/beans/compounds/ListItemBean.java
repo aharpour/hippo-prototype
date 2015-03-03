@@ -26,23 +26,23 @@ import com.tdclighthouse.prototype.beans.TdcDocument;
 @Node(jcrType = ListItemBean.JCR_NODE)
 public class ListItemBean extends TdcDocument {
 
-	public static final String JCR_NODE = "selection:listitem";
+    public static final String JCR_NODE = "selection:listitem";
 
-	private String key;
-	private String label;
+    private String key;
+    private String label;
 
-	public String getKey() {
-		if (this.key == null) {
-			this.key = getProperty("selection:key");
-		}
-		return key;
-	}
+    public String getKey() {
+        if (this.key == null) {
+            this.key = getProperty("selection:key");
+        }
+        return key;
+    }
 
-	public String getLabel() {
-		if (this.label == null) {
-			this.label = getProperty("selection:label");
-		}
-		return label;
-	}
+    public String getLabel() {
+        if (this.label == null) {
+            this.label = getProperty("selection:label");
+        }
+        return label;
+    }
 
 }

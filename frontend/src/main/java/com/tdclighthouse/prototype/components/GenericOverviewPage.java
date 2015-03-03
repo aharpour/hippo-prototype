@@ -45,7 +45,7 @@ import com.tdclighthouse.prototype.utils.PaginatorWidget;
 public class GenericOverviewPage extends BaseHstComponent {
 
     @Override
-    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+    public void doBeforeRender(HstRequest request, HstResponse response) {
         try {
             setDocumentToRequest(request);
 

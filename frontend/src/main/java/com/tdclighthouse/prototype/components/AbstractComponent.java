@@ -21,25 +21,25 @@ public abstract class AbstractComponent extends BaseHstComponent {
     public abstract Map<String, Object> getModel(HstRequest request, HstResponse response);
 
     @Override
-    public final void doBeforeRender(HstRequest request, HstResponse response){
+    public final void doBeforeRender(HstRequest request, HstResponse response) {
         addToModel(getModel(request, response), request);
     }
 
     protected Object addToModel(String key, Object value, HstRequest request) {
-        HashMap<String, Object> model = getModelObject(request);
+        Map<String, Object> model = getModelObject(request);
         return model.put(key, value);
     }
 
     protected void addToModel(Map<String, Object> map, HstRequest request) {
-        HashMap<String, Object> model = getModelObject(request);
+        Map<String, Object> model = getModelObject(request);
         if (map != null) {
-        	model.putAll(map);
+            model.putAll(map);
         }
     }
 
     @SuppressWarnings("unchecked")
-    private HashMap<String, Object> getModelObject(HstRequest request) {
-        HashMap<String, Object> model;
+    private Map<String, Object> getModelObject(HstRequest request) {
+        Map<String, Object> model;
         Object attribute = request.getAttribute(AttributesConstants.MODEL);
         if (attribute == null) {
             model = new HashMap<String, Object>();

@@ -83,7 +83,7 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
     public boolean isExpanded() {
         boolean result = false;
         State state = siteMenu.getState();
-        if (state != null && state.getExpandedPaths() != null && state.getExpandedPaths().contains(path)) {
+        if (state != null && state.getExpanded() != null && state.getExpanded().contains(this)) {
             result = true;
         }
         return result;

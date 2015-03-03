@@ -42,12 +42,14 @@ public class CacheableSiteMenu implements HstSiteMenu {
     }
 
     void register(ImmutableSiteMenuItem item) {
-        if (siteMenuItemRegistery.containsKey(item.getPath())) {
-            siteMenuItemRegistery.get(item.getPath()).add(item);
-        } else {
-            List<ImmutableSiteMenuItem> list = new ArrayList<ImmutableSiteMenuItem>();
-            list.add(item);
-            siteMenuItemRegistery.put(item.getPath(), list);
+        if (item.getPath() != null) {
+            if (siteMenuItemRegistery.containsKey(item.getPath())) {
+                siteMenuItemRegistery.get(item.getPath()).add(item);
+            } else {
+                List<ImmutableSiteMenuItem> list = new ArrayList<ImmutableSiteMenuItem>();
+                list.add(item);
+                siteMenuItemRegistery.put(item.getPath(), list);
+            }
         }
     }
 
@@ -139,7 +141,7 @@ public class CacheableSiteMenu implements HstSiteMenu {
 
         private boolean contains(CacheableSiteMenu siteMenu, String path) {
             return siteMenu.siteMenuItemRegistery.containsKey(path)
-                    && !siteMenu.siteMenuItemRegistery.get(currentPath).isEmpty();
+                    && !siteMenu.siteMenuItemRegistery.get(path).isEmpty();
         }
 
         private void addSelectedAndAncestorsToExpanded(CacheableSiteMenu siteMenu,

@@ -35,10 +35,14 @@ public class CachedNavigation extends WebDocumentDetail {
         try {
             super.doBeforeRender(request, response);
             Key key = getCacheKey(request);
-            CacheableSiteMenu menu = TdcUtils.getCachedCall(new RequestCachedCallBack(), request, CACHED_MENU
-                    + key.name);
+            // key being null means there is no menu with the given name
+            if (key != null) {
 
-            request.setAttribute(AttributesConstants.MENU, menu);
+                CacheableSiteMenu menu = TdcUtils.getCachedCall(new RequestCachedCallBack(), request, CACHED_MENU
+                        + key.name);
+
+                request.setAttribute(AttributesConstants.MENU, menu);
+            }
             request.setAttribute(AttributesConstants.PARAM_INFO, getComponentParametersInfo(request));
             request.setAttribute(AttributesConstants.LABELS, BeanUtils.getLabels(getComponentParametersInfo(request)));
         } catch (Exception e) {
@@ -48,6 +52,7 @@ public class CachedNavigation extends WebDocumentDetail {
     }
 
     private Key getCacheKey(HstRequest request) {
+        Key result = null;
         HstRequestContext requestContext = request.getRequestContext();
         HstSiteMapItem selectedSiteMapItem = requestContext.getResolvedSiteMapItem().getHstSiteMapItem();
         HstSiteMenusConfiguration siteMenusConfiguration = selectedSiteMapItem.getHstSiteMap().getSite()
@@ -56,7 +61,10 @@ public class CachedNavigation extends WebDocumentDetail {
                 String.class);
         HstSiteMenuConfigurationService service = (HstSiteMenuConfigurationService) siteMenusConfiguration
                 .getSiteMenuConfiguration(menuName);
-        return new Key(service.getCanonicalPath());
+        if (service != null) {
+            result = new Key(service.getCanonicalPath());
+        }
+        return result;
     }
 
     public class RequestCachedCallBack implements Call<CacheableSiteMenu> {

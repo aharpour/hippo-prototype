@@ -57,7 +57,7 @@ import com.tdclighthouse.prototype.utils.Constants;
 public class ValueListAjax extends BaseHstComponent {
 
     @Override
-    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+    public void doBeforeRender(HstRequest request, HstResponse response) {
         JSON json;
         BlackListChecker blackListChecker = new BlackListChecker(request);
         String path = getPath(request);
@@ -74,12 +74,13 @@ public class ValueListAjax extends BaseHstComponent {
     private void setCacheTime(HstRequest request, HstResponse response) {
         double cacheTime = this.<ValueListAjaxInfo> getComponentParametersInfo(request).getCacheTime();
         response.addHeader(Constants.HttpHeaderConstants.AGE, "0");
-        response.addHeader(Constants.HttpHeaderConstants.CACHE_CONTROL,
-                Constants.HttpHeaderConstants.MAX_AGE + "=" + Math.round(cacheTime * 3600));
+        response.addHeader(Constants.HttpHeaderConstants.CACHE_CONTROL, Constants.HttpHeaderConstants.MAX_AGE + "="
+                + Math.round(cacheTime * 3600));
     }
 
     protected HippoBeanIterator getAllValueLists(HstRequest request) throws QueryException {
-        HippoBean scope = BeanUtils.getContentBeanViaParameters(this.<ContentBeanPathInfo> getComponentParametersInfo(request));
+        HippoBean scope = BeanUtils.getContentBeanViaParameters(this
+                .<ContentBeanPathInfo> getComponentParametersInfo(request));
         @SuppressWarnings("unchecked")
         HstQuery query = request.getRequestContext().getQueryManager().createQuery(scope, ValueListBean.class);
         return query.execute().getHippoBeans();

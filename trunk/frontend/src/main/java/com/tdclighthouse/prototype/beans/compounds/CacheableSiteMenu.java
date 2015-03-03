@@ -7,8 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.sitemenu.CommonMenu;
@@ -26,6 +27,8 @@ public class CacheableSiteMenu implements HstSiteMenu {
     private final Map<String, List<ImmutableSiteMenuItem>> siteMenuItemRegistery = new HashMap<>();
     private final List<HstSiteMenuItem> children;
     private final ThreadLocal<State> state = new ThreadLocal<State>();
+
+    private static final Pattern SLASH_PATTERN = Pattern.compile("/");
 
     public CacheableSiteMenu(CommonMenu menu) {
         this.name = menu.getName();
@@ -69,14 +72,18 @@ public class CacheableSiteMenu implements HstSiteMenu {
 
     @Override
     public boolean isExpanded() {
-        // TODO Auto-generated method stub
-        return false;
+        return getState() != null && !getState().getExpanded().isEmpty();
     }
 
     @Override
     public HstSiteMenuItem getSelectSiteMenuItem() {
-        // TODO Auto-generated method stub
-        return null;
+        HstSiteMenuItem result = null;
+        State s = getState();
+        if (s != null && siteMenuItemRegistery.containsKey(s.getCurrentPath())
+                && !siteMenuItemRegistery.get(s.getCurrentPath()).isEmpty()) {
+            result = siteMenuItemRegistery.get(s.getCurrentPath()).get(0);
+        }
+        return result;
     }
 
     @Override
@@ -91,8 +98,7 @@ public class CacheableSiteMenu implements HstSiteMenu {
 
     @Override
     public HstSiteMenuItem getDeepestExpandedItem() {
-        // TODO Auto-generated method stub
-        return null;
+        return getState().getDeepestExpanded();
     }
 
     @Override
@@ -104,28 +110,48 @@ public class CacheableSiteMenu implements HstSiteMenu {
 
         private final HstRequestContext requestContext;
         private final String currentPath;
-        private final Set<String> expandedPaths;
+        private final Set<ImmutableSiteMenuItem> expanded;
+        private final ImmutableSiteMenuItem deepestExpanded;
 
         public State(HstRequest request, CacheableSiteMenu siteMenu) {
-            Set<String> paths = new HashSet<>();
+            Set<ImmutableSiteMenuItem> selectedItems = new HashSet<>();
             requestContext = request.getRequestContext();
             currentPath = PathUtils.normalize(request.getPathInfo());
-            if (siteMenu.siteMenuItemRegistery.containsKey(currentPath)) {
-                List<ImmutableSiteMenuItem> list = siteMenu.siteMenuItemRegistery.get(currentPath);
-                for (ImmutableSiteMenuItem selectedItem : list) {
-                    ImmutableSiteMenuItem item = selectedItem;
-                    while (item != null) {
-                        if (StringUtils.isNotBlank(item.getPath())) {
-                            paths.add(item.getPath());
-                        }
-                        item = (ImmutableSiteMenuItem) item.getParentItem();
+            if (contains(siteMenu, currentPath)) {
+                deepestExpanded = siteMenu.siteMenuItemRegistery.get(currentPath).get(0);
+                addSelectedAndAncestorsToExpanded(siteMenu, selectedItems);
+            } else {
+                Matcher matcher = SLASH_PATTERN.matcher(currentPath);
+                ImmutableSiteMenuItem i = null;
+                while (matcher.find()) {
+                    String path = currentPath.substring(0, matcher.start());
+                    if (contains(siteMenu, path)) {
+                        List<ImmutableSiteMenuItem> list = siteMenu.siteMenuItemRegistery.get(path);
+                        i = list.get(0);
+                        selectedItems.addAll(list);
                     }
                 }
+                deepestExpanded = i;
             }
 
-            expandedPaths = Collections.unmodifiableSet(paths);
-            System.out.println(siteMenu.name);
-            System.out.println(expandedPaths);
+            expanded = Collections.unmodifiableSet(selectedItems);
+        }
+
+        private boolean contains(CacheableSiteMenu siteMenu, String path) {
+            return siteMenu.siteMenuItemRegistery.containsKey(path)
+                    && !siteMenu.siteMenuItemRegistery.get(currentPath).isEmpty();
+        }
+
+        private void addSelectedAndAncestorsToExpanded(CacheableSiteMenu siteMenu,
+                Set<ImmutableSiteMenuItem> selectedItems) {
+            List<ImmutableSiteMenuItem> list = siteMenu.siteMenuItemRegistery.get(currentPath);
+            for (ImmutableSiteMenuItem selectedItem : list) {
+                ImmutableSiteMenuItem item = selectedItem;
+                while (item != null) {
+                    selectedItems.add(item);
+                    item = (ImmutableSiteMenuItem) item.getParentItem();
+                }
+            }
         }
 
         public HstRequestContext getRequestContext() {
@@ -136,8 +162,12 @@ public class CacheableSiteMenu implements HstSiteMenu {
             return currentPath;
         }
 
-        public Set<String> getExpandedPaths() {
-            return expandedPaths;
+        public Set<ImmutableSiteMenuItem> getExpanded() {
+            return expanded;
+        }
+
+        public ImmutableSiteMenuItem getDeepestExpanded() {
+            return deepestExpanded;
         }
 
     }

@@ -26,7 +26,7 @@ import java.util.Map;
 public class SelectionBean {
 
     private final Map<String, ListItemBean> itemsMap;
-    private final List<SelectionItemBean> items = new ArrayList<SelectionItemBean>();;
+    private final List<SelectionItemBean> items = new ArrayList<SelectionItemBean>();
 
     public SelectionBean(Map<String, ListItemBean> itemsMap, Object propertyValue) {
         this.itemsMap = itemsMap;
@@ -57,7 +57,7 @@ public class SelectionBean {
 
     public SelectionItemBean getFirstItem() {
         SelectionItemBean result = null;
-        if (items.size() > 0) {
+        if (items.isEmpty()) {
             result = items.get(0);
         }
         return result;

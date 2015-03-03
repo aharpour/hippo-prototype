@@ -28,13 +28,13 @@ import com.tdclighthouse.prototype.beans.TdcDocument;
 @Node(jcrType = ValueListBean.JCR_NODE)
 public class ValueListBean extends TdcDocument {
 
-	public static final String JCR_NODE = "selection:valuelist";
-	private List<ListItemBean> listItem;
+    public static final String JCR_NODE = "selection:valuelist";
+    private List<ListItemBean> listItem;
 
-	public List<ListItemBean> getListItem() {
-		if (listItem == null) {
-			listItem = getChildBeansByName("selection:listitem");
-		}
-		return listItem;
-	}
+    public List<ListItemBean> getListItem() {
+        if (listItem == null) {
+            listItem = getChildBeansByName("selection:listitem");
+        }
+        return listItem;
+    }
 }

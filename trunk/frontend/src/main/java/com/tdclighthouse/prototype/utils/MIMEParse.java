@@ -181,7 +181,7 @@ public final class MIMEParse {
                             .equals(ASTERISK))) {
                 for (String k : target.params.keySet()) {
                     int paramMatches = 0;
-                    if (!k.equals("q") && range.params.containsKey(k)
+                    if (!"q".equals(k) && range.params.containsKey(k)
                             && target.params.get(k).equals(range.params.get(k))) {
                         paramMatches++;
                     }

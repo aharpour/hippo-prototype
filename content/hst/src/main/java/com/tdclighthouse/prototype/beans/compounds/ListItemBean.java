@@ -16,33 +16,32 @@
 package com.tdclighthouse.prototype.beans.compounds;
 
 import org.hippoecm.hst.content.beans.Node;
-
-import com.tdclighthouse.prototype.beans.TdcDocument;
+import org.hippoecm.hst.content.beans.standard.HippoItem;
 
 /**
  * @author Ebrahim Aharpour
  * 
  */
 @Node(jcrType = ListItemBean.JCR_NODE)
-public class ListItemBean extends TdcDocument {
+public class ListItemBean extends HippoItem {
 
-	public static final String JCR_NODE = "selection:listitem";
+    public static final String JCR_NODE = "selection:listitem";
 
-	private String key;
-	private String label;
+    private String key;
+    private String label;
 
-	public String getKey() {
-		if (this.key == null) {
-			this.key = getProperty("selection:key");
-		}
-		return key;
-	}
+    public String getKey() {
+        if (this.key == null) {
+            this.key = getProperty("selection:key");
+        }
+        return key;
+    }
 
-	public String getLabel() {
-		if (this.label == null) {
-			this.label = getProperty("selection:label");
-		}
-		return label;
-	}
+    public String getLabel() {
+        if (this.label == null) {
+            this.label = getProperty("selection:label");
+        }
+        return label;
+    }
 
 }

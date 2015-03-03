@@ -34,32 +34,9 @@ public class CachedNavigation extends WebDocumentDetail {
     public void doBeforeRender(final HstRequest request, final HstResponse response) {
         try {
             super.doBeforeRender(request, response);
-            final Key key = getCacheKey(request);
-            CacheableSiteMenu menu = TdcUtils.getCachedCall(new Call<CacheableSiteMenu>() {
-
-                @Override
-                public CacheableSiteMenu makeCall(HstRequest request) {
-                    try {
-                        HstCache cache = HstServices.getComponentManager().getComponent("pageCache");
-                        CacheElement cacheElement;
-                        cacheElement = cache.get(key, new Callback(request));
-                        CacheableSiteMenu menu = (CacheableSiteMenu) cacheElement.getContent();
-                        if (menu != null) {
-                            menu.setState(request);
-                        }
-                        return menu;
-                    } catch (Exception e) {
-                        throw new HstComponentException(e.getMessage(), e);
-                    }
-
-                }
-
-                @Override
-                public Class<CacheableSiteMenu> getType() {
-                    return CacheableSiteMenu.class;
-                }
-
-            }, request, CACHED_MENU + key.name);
+            Key key = getCacheKey(request);
+            CacheableSiteMenu menu = TdcUtils.getCachedCall(new RequestCachedCallBack(), request, CACHED_MENU
+                    + key.name);
 
             request.setAttribute(AttributesConstants.MENU, menu);
             request.setAttribute(AttributesConstants.PARAM_INFO, getComponentParametersInfo(request));
@@ -82,11 +59,43 @@ public class CachedNavigation extends WebDocumentDetail {
         return new Key(service.getCanonicalPath());
     }
 
-    private class Callback implements Callable<CacheElementEhCache> {
+    public class RequestCachedCallBack implements Call<CacheableSiteMenu> {
+
+        @Override
+        public CacheableSiteMenu makeCall(HstRequest request) {
+
+            return getCachedMenu(request);
+
+        }
+
+        private CacheableSiteMenu getCachedMenu(HstRequest request) {
+            try {
+                Key key = getCacheKey(request);
+                HstCache cache = HstServices.getComponentManager().getComponent("pageCache");
+                CacheElement cacheElement;
+                cacheElement = cache.get(key, new HippoCachedCallback(request));
+                CacheableSiteMenu menu = (CacheableSiteMenu) cacheElement.getContent();
+                if (menu != null) {
+                    menu.setState(request);
+                }
+                return menu;
+            } catch (Exception e) {
+                throw new HstComponentException(e.getMessage(), e);
+            }
+        }
+
+        @Override
+        public Class<CacheableSiteMenu> getType() {
+            return CacheableSiteMenu.class;
+        }
+
+    }
+
+    private class HippoCachedCallback implements Callable<CacheElementEhCache> {
 
         private final HstRequest request;
 
-        public Callback(HstRequest request) {
+        public HippoCachedCallback(HstRequest request) {
             this.request = request;
         }
 

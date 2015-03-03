@@ -16,15 +16,14 @@
 package com.tdclighthouse.prototype.beans.compounds;
 
 import org.hippoecm.hst.content.beans.Node;
-
-import com.tdclighthouse.prototype.beans.TdcDocument;
+import org.hippoecm.hst.content.beans.standard.HippoItem;
 
 /**
  * @author Ebrahim Aharpour
  * 
  */
 @Node(jcrType = ListItemBean.JCR_NODE)
-public class ListItemBean extends TdcDocument {
+public class ListItemBean extends HippoItem {
 
     public static final String JCR_NODE = "selection:listitem";
 

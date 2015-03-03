@@ -26,23 +26,23 @@ import org.hippoecm.hst.content.beans.standard.HippoGalleryImageSet;
 @Node(jcrType = TdcImageSetBean.JCR_TYPE)
 public class TdcImageSetBean extends HippoGalleryImageSet {
 
-	public static final String JCR_TYPE = "tdc:TdcImageSet";
+    public static final String JCR_TYPE = "tdc:TdcImageSet";
 
-	private HippoGalleryImageBean articleImage;
-	private HippoGalleryImageBean paragraphImage;
+    private HippoGalleryImageBean articleImage;
+    private HippoGalleryImageBean paragraphImage;
 
-	public HippoGalleryImageBean getArticleImage() {
-		if (this.articleImage == null) {
-			this.articleImage = getBean("tdc:articleImage");
-		}
-		return articleImage;
-	}
+    public HippoGalleryImageBean getArticleImage() {
+        if (this.articleImage == null) {
+            this.articleImage = getBean("tdc:articleImage");
+        }
+        return articleImage;
+    }
 
-	public HippoGalleryImageBean getParagraphImage() {
-		if (this.paragraphImage == null) {
-			this.paragraphImage = getBean("tdc:paragraphImage");
-		}
-		return paragraphImage;
-	}
+    public HippoGalleryImageBean getParagraphImage() {
+        if (this.paragraphImage == null) {
+            this.paragraphImage = getBean("tdc:paragraphImage");
+        }
+        return paragraphImage;
+    }
 
 }

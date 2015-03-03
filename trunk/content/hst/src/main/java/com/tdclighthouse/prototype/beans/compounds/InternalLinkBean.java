@@ -28,31 +28,31 @@ import com.tdclighthouse.prototype.beans.TdcDocument;
 @Node(jcrType = InternalLinkBean.JCR_TYPE)
 public class InternalLinkBean extends TdcDocument {
 
-	public static final String JCR_TYPE = "tdc:InternalLink";
+    public static final String JCR_TYPE = "tdc:InternalLink";
 
-	private String label;
-	private HippoMirror link;
-	private HippoDocument linkBean;
+    private String label;
+    private HippoMirror link;
+    private HippoDocument linkBean;
 
-	public String getLabel() {
-		if (this.label == null) {
-			this.label = getProperty("tdc:label");
-		}
-		return label;
-	}
+    public String getLabel() {
+        if (this.label == null) {
+            this.label = getProperty("tdc:label");
+        }
+        return label;
+    }
 
-	public HippoMirror getLink() {
-		if (this.link == null) {
-			this.link = getBean("tdc:link");
-		}
-		return link;
-	}
+    public HippoMirror getLink() {
+        if (this.link == null) {
+            this.link = getBean("tdc:link");
+        }
+        return link;
+    }
 
-	public HippoDocument getLinkBean() {
-		if (this.linkBean == null) {
-			this.linkBean = getLinkedBean("tdc:link", HippoDocument.class);
-		}
-		return linkBean;
-	}
+    public HippoDocument getLinkBean() {
+        if (this.linkBean == null) {
+            this.linkBean = getLinkedBean("tdc:link", HippoDocument.class);
+        }
+        return linkBean;
+    }
 
 }

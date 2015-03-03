@@ -26,23 +26,23 @@ import com.tdclighthouse.prototype.beans.TdcDocument;
 @Node(jcrType = ExternalLinkBean.JCR_TYPE)
 public class ExternalLinkBean extends TdcDocument {
 
-	public static final String JCR_TYPE = "tdc:ExternalLink";
+    public static final String JCR_TYPE = "tdc:ExternalLink";
 
-	private String url;
-	private String relationship;
+    private String url;
+    private String relationship;
 
-	public String getUrl() {
-		if (this.url == null) {
-			this.url = getProperty("tdc:url");
-		}
-		return url;
-	}
+    public String getUrl() {
+        if (this.url == null) {
+            this.url = getProperty("tdc:url");
+        }
+        return url;
+    }
 
-	public String getRelationship() {
-		if (this.relationship == null) {
-			this.relationship = getProperty("tdc:relationship");
-		}
-		return relationship;
-	}
+    public String getRelationship() {
+        if (this.relationship == null) {
+            this.relationship = getProperty("tdc:relationship");
+        }
+        return relationship;
+    }
 
 }

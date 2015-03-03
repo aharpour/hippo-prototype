@@ -15,49 +15,45 @@ import com.tdclighthouse.prototype.componentsinfo.PaginatedInfo;
 
 public class OverviewUtils {
 
-	private OverviewUtils() {
-	}
+    private OverviewUtils() {
+    }
 
-	public static int getPageNumber(HstRequest request) {
-		int result = 1;
-		String pageString = getNamespacedOrSimpleParameter(request, Constants.ParametersConstants.PAGE);
-		if (StringUtils.isNotBlank(pageString)
-				&& StringUtils.isNumeric(pageString)) {
-			result = Integer.parseInt(pageString);
-		}
-		return result;
-	}
+    public static int getPageNumber(HstRequest request) {
+        int result = 1;
+        String pageString = getNamespacedOrSimpleParameter(request, Constants.ParametersConstants.PAGE);
+        if (StringUtils.isNotBlank(pageString) && StringUtils.isNumeric(pageString)) {
+            result = Integer.parseInt(pageString);
+        }
+        return result;
+    }
 
-	public static int getPageSize(HstRequest request, Object parametersInfo) {
-		int result = 25;
-		String pageSzieString = getNamespacedOrSimpleParameter(request, Constants.ParametersConstants.PAGE_SIZE);
-		if (StringUtils.isNotBlank(pageSzieString)
-				&& StringUtils.isNumeric(pageSzieString)) {
-			result = Integer.parseInt(pageSzieString);
-		} else if (parametersInfo instanceof PaginatedInfo) {
-			result = ((PaginatedInfo) parametersInfo).getDefaultPageSize();
-		}
+    public static int getPageSize(HstRequest request, Object parametersInfo) {
+        int result = 25;
+        String pageSzieString = getNamespacedOrSimpleParameter(request, Constants.ParametersConstants.PAGE_SIZE);
+        if (StringUtils.isNotBlank(pageSzieString) && StringUtils.isNumeric(pageSzieString)) {
+            result = Integer.parseInt(pageSzieString);
+        } else if (parametersInfo instanceof PaginatedInfo) {
+            result = ((PaginatedInfo) parametersInfo).getDefaultPageSize();
+        }
 
-		return result;
-	}
+        return result;
+    }
 
     public static String getNamespacedOrSimpleParameter(HstRequest request, String parameterName) {
         String parameter = request.getParameter(parameterName);
-		if (StringUtils.isBlank(parameter)) {
-		    parameter = request.getRequestContext().getServletRequest()
-		            .getParameter(parameterName);
-		    
-		}
+        if (StringUtils.isBlank(parameter)) {
+            parameter = request.getRequestContext().getServletRequest().getParameter(parameterName);
+
+        }
         return parameter;
     }
 
-	public static PaginatorWidget getPaginator(HstRequest request,
-			int defaultPageSzie, int totalRows) {
-		return new PaginatorWidget(totalRows, getPageNumber(request),
-				defaultPageSzie);
-	}
-	
-    public static List<HippoDocumentBean> getItemsFromResultSet(HippoFolderBean resultSet, PaginatorWidget paginatorWidget) {
+    public static PaginatorWidget getPaginator(HstRequest request, int defaultPageSzie, int totalRows) {
+        return new PaginatorWidget(totalRows, getPageNumber(request), defaultPageSzie);
+    }
+
+    public static List<HippoDocumentBean> getItemsFromResultSet(HippoFolderBean resultSet,
+            PaginatorWidget paginatorWidget) {
         HippoDocumentIterator<HippoDocumentBean> documentIterator = resultSet
                 .getDocumentIterator(HippoDocumentBean.class);
         return getItemsFromHippoDocumentIterator(documentIterator, paginatorWidget);
@@ -67,7 +63,7 @@ public class OverviewUtils {
         HippoBeanIterator hippoBeans = resultSet.getHippoBeans();
         return getItemsFromHippoBeanIterator(hippoBeans, paginatorWidget);
     }
-    
+
     public static <T> List<T> getItemsFromHippoDocumentIterator(HippoDocumentIterator<T> documentIterator,
             PaginatorWidget paginatorWidget) {
         List<T> items = new ArrayList<T>(paginatorWidget.getRowsPerPage());
@@ -78,7 +74,7 @@ public class OverviewUtils {
         }
         return items;
     }
-    
+
     @SuppressWarnings("unchecked")
     public static <T> List<T> getItemsFromHippoBeanIterator(HippoBeanIterator documentIterator,
             PaginatorWidget paginatorWidget) {

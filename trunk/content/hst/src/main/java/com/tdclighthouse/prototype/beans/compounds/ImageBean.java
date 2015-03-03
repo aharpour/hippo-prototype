@@ -31,57 +31,57 @@ import com.tdclighthouse.prototype.beans.TdcDocument;
 @Node(jcrType = ImageBean.JCR_TYPE)
 public class ImageBean extends TdcDocument {
 
-	public static final String JCR_TYPE = "tdc:Image";
+    public static final String JCR_TYPE = "tdc:Image";
 
-	private String title;
-	private String alt;
-	private String caption;
-	private HippoMirror link;
-	private HippoGalleryImageSetBean linkBean;
-	private String credit;
+    private String title;
+    private String alt;
+    private String caption;
+    private HippoMirror link;
+    private HippoGalleryImageSetBean linkBean;
+    private String credit;
 
-	public String getTitle() {
-		if (this.title == null) {
-			this.title = getProperty("tdc:title");
-		}
-		return title;
-	}
+    public String getTitle() {
+        if (this.title == null) {
+            this.title = getProperty("tdc:title");
+        }
+        return title;
+    }
 
-	public String getAlt() {
-		if (this.alt == null) {
-			this.alt = getProperty("tdc:alt");
-		}
-		return alt;
-	}
+    public String getAlt() {
+        if (this.alt == null) {
+            this.alt = getProperty("tdc:alt");
+        }
+        return alt;
+    }
 
-	public String getCaption() {
-		if (this.caption == null) {
-			this.caption = getProperty("tdc:caption");
-		}
-		return caption;
-	}
+    public String getCaption() {
+        if (this.caption == null) {
+            this.caption = getProperty("tdc:caption");
+        }
+        return caption;
+    }
 
-	@JsonIgnore
-	@XmlTransient
-	public HippoMirror getLink() {
-		if (this.link == null) {
-			this.link = getBean("tdc:link");
-		}
-		return link;
-	}
+    @JsonIgnore
+    @XmlTransient
+    public HippoMirror getLink() {
+        if (this.link == null) {
+            this.link = getBean("tdc:link");
+        }
+        return link;
+    }
 
-	public HippoGalleryImageSetBean getLinkBean() {
-		if (this.linkBean == null) {
-			this.linkBean = getLinkedBean("tdc:link", HippoGalleryImageSetBean.class);
-		}
-		return linkBean;
-	}
+    public HippoGalleryImageSetBean getLinkBean() {
+        if (this.linkBean == null) {
+            this.linkBean = getLinkedBean("tdc:link", HippoGalleryImageSetBean.class);
+        }
+        return linkBean;
+    }
 
-	public String getCredit() {
-		if (this.credit == null) {
-			this.credit = getProperty("tdc:credit");
-		}
-		return credit;
-	}
+    public String getCredit() {
+        if (this.credit == null) {
+            this.credit = getProperty("tdc:credit");
+        }
+        return credit;
+    }
 
 }

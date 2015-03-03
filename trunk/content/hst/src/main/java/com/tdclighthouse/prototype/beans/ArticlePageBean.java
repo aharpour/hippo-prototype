@@ -30,31 +30,32 @@ import com.tdclighthouse.prototype.beans.compounds.ParagraphImageBean;
  */
 @Node(jcrType = ArticlePageBean.JCR_TYPE)
 public class ArticlePageBean extends WebDocumentBean {
-	public static final String JCR_TYPE = "tdc:ArticlePage";
+    public static final String JCR_TYPE = "tdc:ArticlePage";
 
-	private List<HippoBean> flexibleBlock;
+    private List<HippoBean> flexibleBlock;
 
-	public List<HippoBean> getFlexibleBlock() {
-		if (flexibleBlock == null) {
-			flexibleBlock = getChildBeansByName("tdc:flexibleBlock");
-		}
-		return flexibleBlock;
-	}
+    public List<HippoBean> getFlexibleBlock() {
+        if (flexibleBlock == null) {
+            flexibleBlock = getChildBeansByName("tdc:flexibleBlock");
+        }
+        return flexibleBlock;
+    }
 
-	public ImageBean getImage() {
-		ImageBean result = null;
-		List<HippoBean> list = getFlexibleBlock();
-		for (HippoBean hippoBean : list) {
-			if (hippoBean instanceof ParagraphBean) {
-				ParagraphBean paragraph = (ParagraphBean) hippoBean;
-				ParagraphImageBean image = paragraph.getImage();
-				if (image != null && image.getLink().getReferencedBean() != null && image.getLink().getReferencedBean() != null) {
-					result = image;
-					break;
-				}
-			}
-		}
-		return result;
-	}
+    public ImageBean getImage() {
+        ImageBean result = null;
+        List<HippoBean> list = getFlexibleBlock();
+        for (HippoBean hippoBean : list) {
+            if (hippoBean instanceof ParagraphBean) {
+                ParagraphBean paragraph = (ParagraphBean) hippoBean;
+                ParagraphImageBean image = paragraph.getImage();
+                if (image != null && image.getLink().getReferencedBean() != null
+                        && image.getLink().getReferencedBean() != null) {
+                    result = image;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
 
 }

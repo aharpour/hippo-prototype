@@ -27,30 +27,30 @@ import com.tdclighthouse.prototype.beans.TdcDocument;
 @Node(jcrType = ParagraphBean.JCR_TYPE)
 public class ParagraphBean extends TdcDocument {
 
-	public static final String JCR_TYPE = "tdc:Paragraph";
+    public static final String JCR_TYPE = "tdc:Paragraph";
 
-	private String title;
-	private HippoHtml content;
-	private ParagraphImageBean image;
+    private String title;
+    private HippoHtml content;
+    private ParagraphImageBean image;
 
-	public String getTitle() {
-		if (this.title == null) {
-			this.title = getProperty("tdc:title");
-		}
-		return title;
-	}
+    public String getTitle() {
+        if (this.title == null) {
+            this.title = getProperty("tdc:title");
+        }
+        return title;
+    }
 
-	public HippoHtml getContent() {
-		if (this.content == null) {
-			this.content = getHippoHtml("tdc:content");
-		}
-		return content;
-	}
+    public HippoHtml getContent() {
+        if (this.content == null) {
+            this.content = getHippoHtml("tdc:content");
+        }
+        return content;
+    }
 
-	public ParagraphImageBean getImage() {
-		if (this.image == null) {
-			this.image = getBean("tdc:image");
-		}
-		return image;
-	}
+    public ParagraphImageBean getImage() {
+        if (this.image == null) {
+            this.image = getBean("tdc:image");
+        }
+        return image;
+    }
 }

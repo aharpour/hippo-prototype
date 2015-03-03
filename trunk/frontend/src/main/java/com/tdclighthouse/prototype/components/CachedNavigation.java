@@ -23,23 +23,45 @@ import com.tdclighthouse.prototype.componentsinfo.NavigationInfo;
 import com.tdclighthouse.prototype.provider.RepoBasedMenuProvider;
 import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants.AttributesConstants;
+import com.tdclighthouse.prototype.utils.TdcUtils;
+import com.tdclighthouse.prototype.utils.TdcUtils.Call;
 
 @ParametersInfo(type = NavigationInfo.class)
 public class CachedNavigation extends WebDocumentDetail {
+    private static final String CACHED_MENU = "cachedMenu-";
+
     @Override
     public void doBeforeRender(final HstRequest request, final HstResponse response) {
         try {
             super.doBeforeRender(request, response);
-            HstCache cache = HstServices.getComponentManager().getComponent("pageCache");
-            Key key = getCacheKey(request);
-            CacheElement cacheElement = cache.get(key, new Callback(request));
-            
+            final Key key = getCacheKey(request);
+            CacheableSiteMenu menu = TdcUtils.getCachedCall(new Call<CacheableSiteMenu>() {
 
-            CacheableSiteMenu menu = (CacheableSiteMenu) cacheElement.getContent();
-            if (menu != null) {
-                menu.setState(request);
-                request.setAttribute(AttributesConstants.MENU, menu);
-            }
+                @Override
+                public CacheableSiteMenu makeCall(HstRequest request) {
+                    try {
+                        HstCache cache = HstServices.getComponentManager().getComponent("pageCache");
+                        CacheElement cacheElement;
+                        cacheElement = cache.get(key, new Callback(request));
+                        CacheableSiteMenu menu = (CacheableSiteMenu) cacheElement.getContent();
+                        if (menu != null) {
+                            menu.setState(request);
+                        }
+                        return menu;
+                    } catch (Exception e) {
+                        throw new HstComponentException(e.getMessage(), e);
+                    }
+
+                }
+
+                @Override
+                public Class<CacheableSiteMenu> getType() {
+                    return CacheableSiteMenu.class;
+                }
+
+            }, request, CACHED_MENU + key.name);
+
+            request.setAttribute(AttributesConstants.MENU, menu);
             request.setAttribute(AttributesConstants.PARAM_INFO, getComponentParametersInfo(request));
             request.setAttribute(AttributesConstants.LABELS, BeanUtils.getLabels(getComponentParametersInfo(request)));
         } catch (Exception e) {

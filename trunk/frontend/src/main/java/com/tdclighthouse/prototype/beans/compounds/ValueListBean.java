@@ -18,14 +18,14 @@ package com.tdclighthouse.prototype.beans.compounds;
 import java.util.List;
 
 import org.hippoecm.hst.content.beans.Node;
-import org.hippoecm.hst.content.beans.standard.HippoItem;
+import org.hippoecm.hst.content.beans.standard.HippoCompound;
 
 /**
  * @author Ebrahim Aharpour
  *
  */
 @Node(jcrType = ValueListBean.JCR_NODE)
-public class ValueListBean extends HippoItem {
+public class ValueListBean extends HippoCompound {
 
     public static final String JCR_NODE = "selection:valuelist";
     private List<ListItemBean> listItem;

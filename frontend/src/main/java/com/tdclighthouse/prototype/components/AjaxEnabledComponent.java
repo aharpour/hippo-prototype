@@ -15,10 +15,11 @@
  */
 package com.tdclighthouse.prototype.components;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.collections.ListUtils;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
@@ -107,7 +108,7 @@ public abstract class AjaxEnabledComponent extends AbstractComponent {
 
     }
 
-    private final void returnHtmlResponse(HstRequest request, HstResponse response) throws Exception {
+    private final void returnHtmlResponse(HstRequest request, HstResponse response) {
         request.setAttribute(AttributesConstants.MODEL, getHtmlAjaxModel(request, response));
         String ajaxTemplate = getAjaxTemplate(request, response);
         if (ajaxTemplate != null) {
@@ -115,7 +116,7 @@ public abstract class AjaxEnabledComponent extends AbstractComponent {
         }
     }
 
-    private void returnXmlResponse(HstRequest request, HstResponse response) throws Exception {
+    private void returnXmlResponse(HstRequest request, HstResponse response) throws IOException {
         Object model = getXmlAjaxModel(request, response);
         response.setServeResourcePath(BLANK_TEMPLATE);
         response.setContentType(MimeTypeConstants.APPLICATION_XML);
@@ -123,7 +124,7 @@ public abstract class AjaxEnabledComponent extends AbstractComponent {
         xmlSerializer.serialize(model, response.getOutputStream());
     }
 
-    private void returnJsonResponse(HstRequest request, HstResponse response) throws Exception {
+    private void returnJsonResponse(HstRequest request, HstResponse response) throws IOException {
         Object model = getJsonAjaxModel(request, response);
         response.setServeResourcePath(BLANK_TEMPLATE);
         response.setContentType(MimeTypeConstants.APPLICATION_JSON);
@@ -135,18 +136,17 @@ public abstract class AjaxEnabledComponent extends AbstractComponent {
         return EncodingsConstants.UTF8;
     }
 
-    @SuppressWarnings("unchecked")
-    private static final List<String> ECPECTED_MIME_TYPES = ListUtils.unmodifiableList(new ArrayList<String>() {
-        private static final long serialVersionUID = 1L;
+    private static final List<String> ECPECTED_MIME_TYPES;
 
-        {
-            add(MimeTypeConstants.TEXT_HTML);
-            add(MimeTypeConstants.APPLICATION_XHTML_XML);
-            add(MimeTypeConstants.APPLICATION_JSON);
-            add(MimeTypeConstants.TEXT_JAVASCRIPT);
-            add(MimeTypeConstants.APPLICATION_XML);
-            add(MimeTypeConstants.TEXT_XML);
-        }
-    });
+    static {
+        List<String> list = new ArrayList<String>();
+        list.add(MimeTypeConstants.TEXT_HTML);
+        list.add(MimeTypeConstants.APPLICATION_XHTML_XML);
+        list.add(MimeTypeConstants.APPLICATION_JSON);
+        list.add(MimeTypeConstants.TEXT_JAVASCRIPT);
+        list.add(MimeTypeConstants.APPLICATION_XML);
+        list.add(MimeTypeConstants.TEXT_XML);
+        ECPECTED_MIME_TYPES = Collections.unmodifiableList(list);
+    }
 
 }

@@ -29,40 +29,40 @@ import com.thoughtworks.xstream.converters.Converter;
  */
 public class XStreamSerializer implements ObjectSerializer {
 
-	private XStream xStream;
-	private Map<Class<?>, List<String>> exclusionMap;
-	private List<Converter> converters;
+    private XStream xStream;
+    private Map<Class<?>, List<String>> exclusionMap;
+    private List<Converter> converters;
 
-	@Override
-	public void serialize(Object source, OutputStream outputStream) {
-		xStream.toXML(source, outputStream);
-	}
+    @Override
+    public void serialize(Object source, OutputStream outputStream) {
+        xStream.toXML(source, outputStream);
+    }
 
-	public void setxStream(XStream xStream) {
-		this.xStream = xStream;
-	}
+    public void setxStream(XStream xStream) {
+        this.xStream = xStream;
+    }
 
-	public void setExclusionMap(Map<Class<?>, List<String>> exclusionMap) {
-		this.exclusionMap = exclusionMap;
-	}
+    public void setExclusionMap(Map<Class<?>, List<String>> exclusionMap) {
+        this.exclusionMap = exclusionMap;
+    }
 
-	public void setConverters(List<Converter> converters) {
-		this.converters = converters;
-	}
+    public void setConverters(List<Converter> converters) {
+        this.converters = converters;
+    }
 
-	public void initialize() throws Exception {
+    public void initialize() throws Exception {
 
-		for (Converter converter : converters) {
-			xStream.registerConverter(converter);
-		}
+        for (Converter converter : converters) {
+            xStream.registerConverter(converter);
+        }
 
-		for (Iterator<Class<?>> iterator = exclusionMap.keySet().iterator(); iterator.hasNext();) {
-			Class<?> clazz = iterator.next();
-			List<String> fields = exclusionMap.get(clazz);
-			for (String field : fields) {
-				xStream.omitField(clazz, field);
-			}
-		}
+        for (Iterator<Class<?>> iterator = exclusionMap.keySet().iterator(); iterator.hasNext();) {
+            Class<?> clazz = iterator.next();
+            List<String> fields = exclusionMap.get(clazz);
+            for (String field : fields) {
+                xStream.omitField(clazz, field);
+            }
+        }
 
-	}
+    }
 }

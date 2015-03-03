@@ -28,23 +28,23 @@ import com.tdclighthouse.prototype.beans.TdcDocument;
 @Node(jcrType = RelatedDocumentsBean.JCR_TYPE)
 public class RelatedDocumentsBean extends TdcDocument {
 
-	public static final String JCR_TYPE = "tdc:RelatedDocuments";
+    public static final String JCR_TYPE = "tdc:RelatedDocuments";
 
-	private String title;
-	private List<RelatedDocumentItemBean> relateddocumentitem;
+    private String title;
+    private List<RelatedDocumentItemBean> relateddocumentitem;
 
-	public String getTitle() {
-		if (this.title == null) {
-			this.title = getProperty("tdc:title");
-		}
-		return title;
-	}
+    public String getTitle() {
+        if (this.title == null) {
+            this.title = getProperty("tdc:title");
+        }
+        return title;
+    }
 
-	public List<RelatedDocumentItemBean> getRelateddocumentitem() {
-		if (this.relateddocumentitem == null) {
-			this.relateddocumentitem = getChildBeans(RelatedDocumentItemBean.JCR_TYPE);
-		}
-		return relateddocumentitem;
-	}
+    public List<RelatedDocumentItemBean> getRelateddocumentitem() {
+        if (this.relateddocumentitem == null) {
+            this.relateddocumentitem = getChildBeans(RelatedDocumentItemBean.JCR_TYPE);
+        }
+        return relateddocumentitem;
+    }
 
 }

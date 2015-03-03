@@ -28,39 +28,39 @@ import com.tdclighthouse.prototype.beans.TdcDocument;
 @Node(jcrType = RelatedDocumentItemBean.JCR_TYPE)
 public class RelatedDocumentItemBean extends TdcDocument {
 
-	public static final String JCR_TYPE = "tdc:RelatedDocumentItem";
+    public static final String JCR_TYPE = "tdc:RelatedDocumentItem";
 
-	private String label;
-	private HippoMirror internalLink;
-	private HippoDocument internalLinkBean;
-	private ExternalLinkBean externalLink;
+    private String label;
+    private HippoMirror internalLink;
+    private HippoDocument internalLinkBean;
+    private ExternalLinkBean externalLink;
 
-	public String getLabel() {
-		if (this.label == null) {
-			this.label = getProperty("tdc:label");
-		}
-		return label;
-	}
+    public String getLabel() {
+        if (this.label == null) {
+            this.label = getProperty("tdc:label");
+        }
+        return label;
+    }
 
-	public HippoMirror getInternalLink() {
-		if (this.internalLink == null) {
-			this.internalLink = getBean("tdc:internalLink");
-		}
-		return internalLink;
-	}
+    public HippoMirror getInternalLink() {
+        if (this.internalLink == null) {
+            this.internalLink = getBean("tdc:internalLink");
+        }
+        return internalLink;
+    }
 
-	public HippoDocument getInternalLinkBean() {
-		if (this.internalLinkBean == null) {
-			this.internalLinkBean = getLinkedBean("tdc:internalLink", HippoDocument.class);
-		}
-		return internalLinkBean;
-	}
+    public HippoDocument getInternalLinkBean() {
+        if (this.internalLinkBean == null) {
+            this.internalLinkBean = getLinkedBean("tdc:internalLink", HippoDocument.class);
+        }
+        return internalLinkBean;
+    }
 
-	public ExternalLinkBean getExternalLink() {
-		if (this.externalLink == null) {
-			this.externalLink = getBean("tdc:externalLink");
-		}
-		return externalLink;
-	}
+    public ExternalLinkBean getExternalLink() {
+        if (this.externalLink == null) {
+            this.externalLink = getBean("tdc:externalLink");
+        }
+        return externalLink;
+    }
 
 }

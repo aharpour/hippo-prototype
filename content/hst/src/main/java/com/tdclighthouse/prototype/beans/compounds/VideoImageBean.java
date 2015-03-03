@@ -27,23 +27,23 @@ import com.tdclighthouse.prototype.beans.TdcDocument;
 @Node(jcrType = VideoImageBean.JCR_TYPE)
 public class VideoImageBean extends TdcDocument {
 
-	public static final String JCR_TYPE = "tdc:VideoImage";
+    public static final String JCR_TYPE = "tdc:VideoImage";
 
-	private String url;
-	private HippoMirror image;
+    private String url;
+    private HippoMirror image;
 
-	public String getUrl() {
-		if (this.url == null) {
-			this.url = getProperty("tdc:url");
-		}
-		return url;
-	}
+    public String getUrl() {
+        if (this.url == null) {
+            this.url = getProperty("tdc:url");
+        }
+        return url;
+    }
 
-	public HippoMirror getImage() {
-		if (this.image == null) {
-			this.image = getBean("tdc:image");
-		}
-		return image;
-	}
+    public HippoMirror getImage() {
+        if (this.image == null) {
+            this.image = getBean("tdc:image");
+        }
+        return image;
+    }
 
 }

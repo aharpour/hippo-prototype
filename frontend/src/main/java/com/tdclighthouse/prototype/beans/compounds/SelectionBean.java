@@ -57,7 +57,7 @@ public class SelectionBean {
 
     public SelectionItemBean getFirstItem() {
         SelectionItemBean result = null;
-        if (items.isEmpty()) {
+        if (!items.isEmpty()) {
             result = items.get(0);
         }
         return result;

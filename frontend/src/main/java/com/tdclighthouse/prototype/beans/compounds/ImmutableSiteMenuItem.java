@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.configuration.hosting.NotFoundException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.linking.HstLink;
@@ -115,8 +116,10 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
         ResolvedSiteMapItem resolvedSiteMapItem = null;
         try {
             HstRequestContext ctx = request.getRequestContext();
-            resolvedSiteMapItem = ctx.getSiteMapMatcher().match(this.getPath(),
-                    ctx.getResolvedSiteMapItem().getResolvedMount());
+            if (StringUtils.isNotBlank(this.getPath())) {
+                resolvedSiteMapItem = ctx.getSiteMapMatcher().match(this.getPath(),
+                        ctx.getResolvedSiteMapItem().getResolvedMount());
+            }
         } catch (NotFoundException e) {
             // ignore
         }

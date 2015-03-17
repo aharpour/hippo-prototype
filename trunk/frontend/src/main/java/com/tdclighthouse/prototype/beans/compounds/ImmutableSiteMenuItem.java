@@ -1,5 +1,6 @@
 package com.tdclighthouse.prototype.beans.compounds;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.configuration.hosting.NotFoundException;
+import org.hippoecm.hst.container.RequestContextProvider;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.linking.HstLink;
 import org.hippoecm.hst.core.request.HstRequestContext;
@@ -22,19 +24,19 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
 
     private final String name;
     private final String externalLink;
-    private final ImmutableSiteMenuItem parent;
+    private final WeakReference<ImmutableSiteMenuItem> parent;
     private final List<HstSiteMenuItem> children;
     // this map only contains String, Boolean, Int, Long, Double or Calendar
     // Objects which are all immutable and can be safely cached.
     private final Map<String, Object> properties;
     private final Map<String, String> parameters;
     private final Map<String, String> localParameters;
-    private final CacheableSiteMenu siteMenu;
+    private final WeakReference<CacheableSiteMenu> siteMenu;
     private final String path;
 
     public ImmutableSiteMenuItem(CacheableSiteMenu siteMenu, CommonMenuItem menuItem, ImmutableSiteMenuItem parent) {
-        this.parent = parent;
-        this.siteMenu = siteMenu;
+        this.parent = new WeakReference<ImmutableSiteMenuItem>(parent);
+        this.siteMenu = new WeakReference<CacheableSiteMenu>(siteMenu);
         this.name = menuItem.getName();
         this.externalLink = menuItem.getExternalLink();
         this.properties = menuItem.getProperties();
@@ -75,7 +77,7 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
     public HstLink getHstLink() {
         HstLink result = null;
         if (path != null) {
-            HstRequestContext rc = siteMenu.getState().getRequestContext();
+            HstRequestContext rc = RequestContextProvider.get();
             result = rc.getHstLinkCreator().create(path, rc.getResolvedMount().getMount());
         }
         return result;
@@ -84,7 +86,7 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
     @Override
     public boolean isExpanded() {
         boolean result = false;
-        State state = siteMenu.getState();
+        State state = siteMenu.get() != null ? siteMenu.get().getState() : null;
         if (state != null && state.getExpanded() != null && state.getExpanded().contains(this)) {
             result = true;
         }
@@ -94,7 +96,7 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
     @Override
     public boolean isSelected() {
         boolean result = false;
-        State state = siteMenu.getState();
+        State state = siteMenu.get() != null ? siteMenu.get().getState() : null;
         if (state != null && state.getCurrentPath().equals(path)) {
             result = true;
         }
@@ -148,12 +150,12 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
 
     @Override
     public HstSiteMenuItem getParentItem() {
-        return parent;
+        return parent.get();
     }
 
     @Override
     public HstSiteMenu getHstSiteMenu() {
-        return siteMenu;
+        return siteMenu.get();
     }
 
     @Override

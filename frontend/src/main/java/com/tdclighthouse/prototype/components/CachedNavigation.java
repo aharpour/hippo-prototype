@@ -23,12 +23,9 @@ import com.tdclighthouse.prototype.componentsinfo.NavigationInfo;
 import com.tdclighthouse.prototype.provider.RepoBasedMenuProvider;
 import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants.AttributesConstants;
-import com.tdclighthouse.prototype.utils.TdcUtils;
-import com.tdclighthouse.prototype.utils.TdcUtils.Call;
 
 @ParametersInfo(type = NavigationInfo.class)
 public class CachedNavigation extends WebDocumentDetail {
-    private static final String CACHED_MENU = "cachedMenu-";
 
     @Override
     public void doBeforeRender(final HstRequest request, final HstResponse response) {
@@ -38,9 +35,12 @@ public class CachedNavigation extends WebDocumentDetail {
             // key being null means there is no menu with the given name
             if (key != null) {
 
-                CacheableSiteMenu menu = TdcUtils.getCachedCall(new RequestCachedCallBack(), request, CACHED_MENU
-                        + key.name);
-
+                HstCache cache = HstServices.getComponentManager().getComponent("pageCache");
+                CacheElement cacheElement = cache.get(key, new HippoCachedCallback(request));
+                CacheableSiteMenu menu = (CacheableSiteMenu) cacheElement.getContent();
+                if (menu != null) {
+                    menu.setState(request);
+                }
                 request.setAttribute(AttributesConstants.MENU, menu);
             }
             request.setAttribute(AttributesConstants.PARAM_INFO, getComponentParametersInfo(request));
@@ -67,37 +67,7 @@ public class CachedNavigation extends WebDocumentDetail {
         return result;
     }
 
-    public class RequestCachedCallBack implements Call<CacheableSiteMenu> {
 
-        @Override
-        public CacheableSiteMenu makeCall(HstRequest request) {
-
-            return getCachedMenu(request);
-
-        }
-
-        private CacheableSiteMenu getCachedMenu(HstRequest request) {
-            try {
-                Key key = getCacheKey(request);
-                HstCache cache = HstServices.getComponentManager().getComponent("pageCache");
-                CacheElement cacheElement;
-                cacheElement = cache.get(key, new HippoCachedCallback(request));
-                CacheableSiteMenu menu = (CacheableSiteMenu) cacheElement.getContent();
-                if (menu != null) {
-                    menu.setState(request);
-                }
-                return menu;
-            } catch (Exception e) {
-                throw new HstComponentException(e.getMessage(), e);
-            }
-        }
-
-        @Override
-        public Class<CacheableSiteMenu> getType() {
-            return CacheableSiteMenu.class;
-        }
-
-    }
 
     private class HippoCachedCallback implements Callable<CacheElementEhCache> {
 

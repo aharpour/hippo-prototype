@@ -1,36 +1,42 @@
 package com.tdclighthouse.prototype.beans.compounds;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.hippoecm.hst.core.component.HstRequest;
-import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.sitemenu.CommonMenu;
 import org.hippoecm.hst.core.sitemenu.CommonMenuItem;
 import org.hippoecm.hst.core.sitemenu.EditableMenu;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenu;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenuItem;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.prototype.utils.PathUtils;
 
 public class CacheableSiteMenu implements HstSiteMenu {
 
+    private static final Logger LOG = LoggerFactory.getLogger(CacheableSiteMenu.class);
+
     private final String name;
-    private final Map<String, List<ImmutableSiteMenuItem>> siteMenuItemRegistery = new HashMap<>();
+    
+    private final Map<String, List<ImmutableSiteMenuItem>> siteMenuItemRegistery = new WeakHashMap<String, List<ImmutableSiteMenuItem>>();
     private final List<HstSiteMenuItem> children;
     private final ThreadLocal<State> state = new ThreadLocal<State>();
 
     private static final Pattern SLASH_PATTERN = Pattern.compile("/");
 
     public CacheableSiteMenu(CommonMenu menu) {
+        LOG.debug("A CacheableSiteMenu is being created for menu: {}.", menu.getName());
         this.name = menu.getName();
         List<HstSiteMenuItem> childrenList = new ArrayList<>();
         if (menu instanceof EditableMenu) {
@@ -57,6 +63,12 @@ public class CacheableSiteMenu implements HstSiteMenu {
         for (CommonMenuItem item : menuItems) {
             childrenList.add(new ImmutableSiteMenuItem(this, item, null));
         }
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        LOG.debug("A CacheableSiteMenu for menu {} is being collected.", name);
     }
 
     @Override
@@ -110,17 +122,16 @@ public class CacheableSiteMenu implements HstSiteMenu {
 
     public static class State {
 
-        private final HstRequestContext requestContext;
         private final String currentPath;
-        private final Set<ImmutableSiteMenuItem> expanded;
-        private final ImmutableSiteMenuItem deepestExpanded;
+        private final WeakReference<Set<ImmutableSiteMenuItem>> expanded;
+        private final WeakReference<ImmutableSiteMenuItem> deepestExpanded;
 
         public State(HstRequest request, CacheableSiteMenu siteMenu) {
             Set<ImmutableSiteMenuItem> selectedItems = new HashSet<>();
-            requestContext = request.getRequestContext();
             currentPath = PathUtils.normalize(request.getPathInfo());
             if (contains(siteMenu, currentPath)) {
-                deepestExpanded = siteMenu.siteMenuItemRegistery.get(currentPath).get(0);
+                deepestExpanded = new WeakReference<ImmutableSiteMenuItem>(siteMenu.siteMenuItemRegistery.get(
+                        currentPath).get(0));
                 addSelectedAndAncestorsToExpanded(siteMenu, selectedItems);
             } else {
                 Matcher matcher = SLASH_PATTERN.matcher(currentPath);
@@ -133,10 +144,10 @@ public class CacheableSiteMenu implements HstSiteMenu {
                         selectedItems.addAll(list);
                     }
                 }
-                deepestExpanded = i;
+                deepestExpanded = new WeakReference<ImmutableSiteMenuItem>(i);
             }
 
-            expanded = Collections.unmodifiableSet(selectedItems);
+            expanded = new WeakReference<Set<ImmutableSiteMenuItem>>(Collections.unmodifiableSet(selectedItems));
         }
 
         private boolean contains(CacheableSiteMenu siteMenu, String path) {
@@ -156,20 +167,16 @@ public class CacheableSiteMenu implements HstSiteMenu {
             }
         }
 
-        public HstRequestContext getRequestContext() {
-            return requestContext;
-        }
-
         public String getCurrentPath() {
             return currentPath;
         }
 
         public Set<ImmutableSiteMenuItem> getExpanded() {
-            return expanded;
+            return expanded.get();
         }
 
         public ImmutableSiteMenuItem getDeepestExpanded() {
-            return deepestExpanded;
+            return deepestExpanded.get();
         }
 
     }

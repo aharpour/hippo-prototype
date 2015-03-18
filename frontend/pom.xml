@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.tdclighthouse.hippo</groupId>
     <artifactId>hippo-prototype</artifactId>
-    <version>7.9.44-SNAPSHOT</version>
+    <version>7.9.44</version>
   </parent>
   <name>Hippo prototype frontend</name>
   <description>Hippo prototype site java files</description>

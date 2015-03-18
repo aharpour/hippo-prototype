@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>com.tdclighthouse.hippo</groupId>
 		<artifactId>hippo-prototype-content</artifactId>
-		<version>7.9.44-SNAPSHOT</version>
+		<version>7.9.44</version>
 	</parent>
 	<name>Hippo prototype content addon</name>
 	<description>Hippo prototype Content addon</description>

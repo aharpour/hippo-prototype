@@ -3,11 +3,11 @@ package com.tdclighthouse.prototype.beans.compounds;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.WeakHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,8 +28,8 @@ public class CacheableSiteMenu implements HstSiteMenu {
     private static final Logger LOG = LoggerFactory.getLogger(CacheableSiteMenu.class);
 
     private final String name;
-    
-    private final Map<String, List<ImmutableSiteMenuItem>> siteMenuItemRegistery = new WeakHashMap<String, List<ImmutableSiteMenuItem>>();
+
+    private final Map<String, List<ImmutableSiteMenuItem>> siteMenuItemRegistery = new HashMap<String, List<ImmutableSiteMenuItem>>();
     private final List<HstSiteMenuItem> children;
     private final ThreadLocal<State> state = new ThreadLocal<State>();
 
@@ -63,12 +63,6 @@ public class CacheableSiteMenu implements HstSiteMenu {
         for (CommonMenuItem item : menuItems) {
             childrenList.add(new ImmutableSiteMenuItem(this, item, null));
         }
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        LOG.debug("A CacheableSiteMenu for menu {} is being collected.", name);
     }
 
     @Override

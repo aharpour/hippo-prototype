@@ -198,7 +198,14 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
     }
 
     private State getstate() {
-        return siteMenu != null && siteMenu.get() != null ? siteMenu.get().getState() : null;
+        State result = null;
+        if (siteMenu != null) {
+            CacheableSiteMenu cacheableSiteMenu = siteMenu.get();
+            if (cacheableSiteMenu != null) {
+                result = cacheableSiteMenu.getState();
+            }
+        }
+        return result;
     }
 
     String getPath() {

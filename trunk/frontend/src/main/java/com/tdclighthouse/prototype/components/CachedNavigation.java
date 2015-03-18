@@ -25,7 +25,10 @@ import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants.AttributesConstants;
 import com.tdclighthouse.prototype.utils.TdcUtils;
 import com.tdclighthouse.prototype.utils.TdcUtils.Call;
-
+/**
+ * @author Ebrahim Aharpour
+ * 
+ */
 @ParametersInfo(type = NavigationInfo.class)
 public class CachedNavigation extends WebDocumentDetail {
     private static final String CACHED_MENU = "cachedMenu-";

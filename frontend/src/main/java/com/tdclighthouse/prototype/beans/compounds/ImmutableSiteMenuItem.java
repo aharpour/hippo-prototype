@@ -17,15 +17,19 @@ import org.hippoecm.hst.core.sitemenu.CommonMenuItem;
 import org.hippoecm.hst.core.sitemenu.EditableMenuItem;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenu;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenuItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.prototype.beans.compounds.CacheableSiteMenu.State;
 
 public class ImmutableSiteMenuItem implements HstSiteMenuItem {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ImmutableSiteMenuItem.class);
+
     private final String name;
     private final String externalLink;
     private final WeakReference<ImmutableSiteMenuItem> parent;
-    private final List<HstSiteMenuItem> children;
+    private final List<WeakReference<HstSiteMenuItem>> children;
     // this map only contains String, Boolean, Int, Long, Double or Calendar
     // Objects which are all immutable and can be safely cached.
     private final Map<String, Object> properties;
@@ -50,7 +54,7 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
 
         Map<String, String> p = null;
         Map<String, String> lp = null;
-        List<HstSiteMenuItem> childrenList = new ArrayList<>();
+        List<WeakReference<HstSiteMenuItem>> childrenList = new ArrayList<>();
         if (menuItem instanceof HstSiteMenuItem) {
             HstSiteMenuItem hstSiteMenuItem = (HstSiteMenuItem) menuItem;
             addChildren(siteMenu, childrenList, hstSiteMenuItem.getChildMenuItems());
@@ -66,10 +70,10 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
         siteMenu.register(this);
     }
 
-    private void addChildren(CacheableSiteMenu siteMenu, List<HstSiteMenuItem> childrenList,
+    private void addChildren(CacheableSiteMenu siteMenu, List<WeakReference<HstSiteMenuItem>> childrenList,
             List<? extends CommonMenuItem> menuItems) {
         for (CommonMenuItem item : menuItems) {
-            childrenList.add(new ImmutableSiteMenuItem(siteMenu, item, this));
+            childrenList.add(new WeakReference<HstSiteMenuItem>(new ImmutableSiteMenuItem(siteMenu, item, this)));
         }
     }
 
@@ -86,7 +90,7 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
     @Override
     public boolean isExpanded() {
         boolean result = false;
-        State state = siteMenu.get() != null ? siteMenu.get().getState() : null;
+        State state = getstate();
         if (state != null && state.getExpanded() != null && state.getExpanded().contains(this)) {
             result = true;
         }
@@ -96,7 +100,7 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
     @Override
     public boolean isSelected() {
         boolean result = false;
-        State state = siteMenu.get() != null ? siteMenu.get().getState() : null;
+        State state = getstate();
         if (state != null && state.getCurrentPath().equals(path)) {
             result = true;
         }
@@ -123,7 +127,7 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
                         ctx.getResolvedSiteMapItem().getResolvedMount());
             }
         } catch (NotFoundException e) {
-            // ignore
+            LOG.error(e.getMessage(), e);
         }
         return resolvedSiteMapItem;
     }
@@ -145,7 +149,14 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
 
     @Override
     public List<HstSiteMenuItem> getChildMenuItems() {
-        return children;
+        List<HstSiteMenuItem> result = new ArrayList<HstSiteMenuItem>();
+        for (WeakReference<HstSiteMenuItem> weakReference : children) {
+            HstSiteMenuItem hstSiteMenuItem = weakReference.get();
+            if (hstSiteMenuItem != null) {
+                result.add(hstSiteMenuItem);
+            }
+        }
+        return result;
     }
 
     @Override
@@ -184,6 +195,10 @@ public class ImmutableSiteMenuItem implements HstSiteMenuItem {
     @Override
     public Map<String, String> getLocalParameters() {
         return localParameters;
+    }
+
+    private State getstate() {
+        return siteMenu != null && siteMenu.get() != null ? siteMenu.get().getState() : null;
     }
 
     String getPath() {

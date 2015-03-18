@@ -23,6 +23,10 @@ import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.prototype.utils.PathUtils;
 
+/**
+ * @author Ebrahim Aharpour
+ * 
+ */
 public class CacheableSiteMenu implements HstSiteMenu {
 
     private static final Logger LOG = LoggerFactory.getLogger(CacheableSiteMenu.class);

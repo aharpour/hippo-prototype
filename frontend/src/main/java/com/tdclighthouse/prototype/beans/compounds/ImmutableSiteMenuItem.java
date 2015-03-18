@@ -22,6 +22,10 @@ import org.slf4j.LoggerFactory;
 
 import com.tdclighthouse.prototype.beans.compounds.CacheableSiteMenu.State;
 
+/**
+ * @author Ebrahim Aharpour
+ * 
+ */
 public class ImmutableSiteMenuItem implements HstSiteMenuItem {
 
     private static final Logger LOG = LoggerFactory.getLogger(ImmutableSiteMenuItem.class);

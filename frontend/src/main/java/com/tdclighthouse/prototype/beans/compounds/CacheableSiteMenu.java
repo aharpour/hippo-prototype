@@ -121,11 +121,11 @@ public class CacheableSiteMenu implements HstSiteMenu {
     public static class State {
 
         private final String currentPath;
-        private final WeakReference<Set<ImmutableSiteMenuItem>> expanded;
+        private final Set<WeakReference<ImmutableSiteMenuItem>> expanded;
         private final WeakReference<ImmutableSiteMenuItem> deepestExpanded;
 
         public State(HstRequest request, CacheableSiteMenu siteMenu) {
-            Set<ImmutableSiteMenuItem> selectedItems = new HashSet<>();
+            Set<WeakReference<ImmutableSiteMenuItem>> selectedItems = new HashSet<>();
             currentPath = PathUtils.normalize(request.getPathInfo());
             if (contains(siteMenu, currentPath)) {
                 deepestExpanded = new WeakReference<ImmutableSiteMenuItem>(siteMenu.siteMenuItemRegistery.get(
@@ -139,13 +139,15 @@ public class CacheableSiteMenu implements HstSiteMenu {
                     if (contains(siteMenu, path)) {
                         List<ImmutableSiteMenuItem> list = siteMenu.siteMenuItemRegistery.get(path);
                         i = list.get(0);
-                        selectedItems.addAll(list);
+                        for (ImmutableSiteMenuItem listItem : list) {
+                            selectedItems.add(new WeakReference<ImmutableSiteMenuItem>(listItem));
+                        }
                     }
                 }
                 deepestExpanded = new WeakReference<ImmutableSiteMenuItem>(i);
             }
 
-            expanded = new WeakReference<Set<ImmutableSiteMenuItem>>(Collections.unmodifiableSet(selectedItems));
+            expanded = Collections.unmodifiableSet(selectedItems);
         }
 
         private boolean contains(CacheableSiteMenu siteMenu, String path) {
@@ -154,12 +156,12 @@ public class CacheableSiteMenu implements HstSiteMenu {
         }
 
         private void addSelectedAndAncestorsToExpanded(CacheableSiteMenu siteMenu,
-                Set<ImmutableSiteMenuItem> selectedItems) {
+                Set<WeakReference<ImmutableSiteMenuItem>> selectedItems) {
             List<ImmutableSiteMenuItem> list = siteMenu.siteMenuItemRegistery.get(currentPath);
             for (ImmutableSiteMenuItem selectedItem : list) {
                 ImmutableSiteMenuItem item = selectedItem;
                 while (item != null) {
-                    selectedItems.add(item);
+                    selectedItems.add(new WeakReference<ImmutableSiteMenuItem>(item));
                     item = (ImmutableSiteMenuItem) item.getParentItem();
                 }
             }
@@ -170,7 +172,14 @@ public class CacheableSiteMenu implements HstSiteMenu {
         }
 
         public Set<ImmutableSiteMenuItem> getExpanded() {
-            return expanded.get();
+            Set<ImmutableSiteMenuItem> result = new HashSet<>();
+            for (WeakReference<ImmutableSiteMenuItem> weakReference : expanded) {
+                ImmutableSiteMenuItem menuItem = weakReference.get();
+                if (menuItem != null) {
+                    result.add(menuItem);
+                }
+            }
+            return result;
         }
 
         public ImmutableSiteMenuItem getDeepestExpanded() {

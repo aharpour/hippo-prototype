@@ -11,7 +11,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.hippoecm.hst.container.RequestContextProvider;
 import org.hippoecm.hst.core.component.HstRequest;
+import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.sitemenu.CommonMenu;
 import org.hippoecm.hst.core.sitemenu.CommonMenuItem;
 import org.hippoecm.hst.core.sitemenu.EditableMenu;
@@ -29,13 +31,14 @@ import com.tdclighthouse.prototype.utils.PathUtils;
  */
 public class CacheableSiteMenu implements HstSiteMenu {
 
+    private static final String MENU_STATE_MAP = "menuStateMap";
+
     private static final Logger LOG = LoggerFactory.getLogger(CacheableSiteMenu.class);
 
     private final String name;
 
     private final Map<String, List<ImmutableSiteMenuItem>> siteMenuItemRegistery = new HashMap<String, List<ImmutableSiteMenuItem>>();
     private final List<HstSiteMenuItem> children;
-    private final ThreadLocal<State> state = new ThreadLocal<State>();
 
     private static final Pattern SLASH_PATTERN = Pattern.compile("/");
 
@@ -75,11 +78,28 @@ public class CacheableSiteMenu implements HstSiteMenu {
     }
 
     public State getState() {
-        return state.get();
+        Map<CacheableSiteMenu, State> menuStateMap = getMenuStateMap(RequestContextProvider.get());
+        return menuStateMap.get(this);
     }
 
     public void setState(HstRequest request) {
-        this.state.set(new State(request, this));
+        State state = new State(request, this);
+        HstRequestContext requestContext = request.getRequestContext();
+        Map<CacheableSiteMenu, State> map = getMenuStateMap(requestContext);
+        map.put(this, state);
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<CacheableSiteMenu, State> getMenuStateMap(HstRequestContext requestContext) {
+        Object attribute = requestContext.getAttribute(MENU_STATE_MAP);
+        Map<CacheableSiteMenu, State> map;
+        if (attribute instanceof Map) {
+            map = (Map<CacheableSiteMenu, State>) attribute;
+        } else {
+            map = new HashMap<>();
+            requestContext.setAttribute(MENU_STATE_MAP, map);
+        }
+        return map;
     }
 
     @Override

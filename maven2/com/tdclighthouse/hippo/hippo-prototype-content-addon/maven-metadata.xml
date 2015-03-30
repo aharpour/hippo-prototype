@@ -3,7 +3,7 @@
   <groupId>com.tdclighthouse.hippo</groupId>
   <artifactId>hippo-prototype-content-addon</artifactId>
   <versioning>
-    <release>7.9.45</release>
+    <release>7.9.46</release>
     <versions>
       <version>7.9.35</version>
       <version>7.9.36</version>
@@ -16,7 +16,8 @@
       <version>7.9.43</version>
       <version>7.9.44</version>
       <version>7.9.45</version>
+      <version>7.9.46</version>
     </versions>
-    <lastUpdated>20150319160450</lastUpdated>
+    <lastUpdated>20150330160330</lastUpdated>
   </versioning>
 </metadata>

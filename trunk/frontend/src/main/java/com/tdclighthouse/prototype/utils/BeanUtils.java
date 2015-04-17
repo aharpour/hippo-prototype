@@ -16,9 +16,9 @@ import org.hippoecm.hst.content.beans.standard.HippoBean;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.site.HstServices;
 import org.hippoecm.hst.util.PathUtils;
+import org.onehippo.forge.selection.hst.contentbean.ValueList;
 
 import com.tdclighthouse.prototype.beans.Page;
-import com.tdclighthouse.prototype.beans.compounds.ValueListBean;
 import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
 import com.tdclighthouse.prototype.componentsinfo.LabelsInfo;
 
@@ -109,17 +109,17 @@ public class BeanUtils {
     }
 
     public static Map<String, String> getSelectionOptionsMap(String path, String langauge) {
-        ValueListBean valueList;
+        ValueList valueList;
 
         try {
             ObjectBeanManager objectBeanManager = RequestContextProvider.get().getObjectBeanManager();
             Object object = objectBeanManager.getObject(path);
-            if (object instanceof ValueListBean) {
-                valueList = (ValueListBean) object;
+            if (object instanceof ValueList) {
+                valueList = (ValueList) object;
                 if (StringUtils.isNotBlank(langauge)) {
                     HippoBean translation = valueList.getAvailableTranslations().getTranslation(langauge);
-                    if (translation instanceof ValueListBean) {
-                        valueList = (ValueListBean) translation;
+                    if (translation instanceof ValueList) {
+                        valueList = (ValueList) translation;
                     }
                 }
             } else {

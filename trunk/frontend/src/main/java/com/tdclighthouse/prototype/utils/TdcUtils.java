@@ -32,9 +32,9 @@ import java.util.regex.Matcher;
 import org.apache.commons.lang3.StringUtils;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.request.HstRequestContext;
+import org.onehippo.forge.selection.hst.contentbean.ValueList;
+import org.onehippo.forge.selection.hst.contentbean.ValueListItem;
 
-import com.tdclighthouse.prototype.beans.compounds.ListItemBean;
-import com.tdclighthouse.prototype.beans.compounds.ValueListBean;
 import com.tdclighthouse.prototype.utils.Constants.RegexConstants;
 
 /**
@@ -100,19 +100,19 @@ public class TdcUtils {
         public Class<T> getType();
     }
 
-    public static Map<String, ListItemBean> valueListBeanToMap(ValueListBean valueList) {
-        List<ListItemBean> listItem = valueList.getListItem();
-        Map<String, ListItemBean> result = new HashMap<String, ListItemBean>(listItem.size());
-        for (ListItemBean listItemBean : listItem) {
+    public static Map<String, ValueListItem> valueListBeanToMap(ValueList valueList) {
+        List<ValueListItem> listItem = valueList.getItems();
+        Map<String, ValueListItem> result = new HashMap<String, ValueListItem>(listItem.size());
+        for (ValueListItem listItemBean : listItem) {
             result.put(listItemBean.getKey(), listItemBean);
         }
         return result;
     }
 
-    public static Map<String, String> valueListBeanToLabelMap(ValueListBean valueList) {
-        List<ListItemBean> listItem = valueList.getListItem();
+    public static Map<String, String> valueListBeanToLabelMap(ValueList valueList) {
+        List<ValueListItem> listItem = valueList.getItems();
         Map<String, String> result = new HashMap<String, String>(listItem.size());
-        for (ListItemBean listItemBean : listItem) {
+        for (ValueListItem listItemBean : listItem) {
             result.put(listItemBean.getKey(), listItemBean.getLabel());
         }
         return result;

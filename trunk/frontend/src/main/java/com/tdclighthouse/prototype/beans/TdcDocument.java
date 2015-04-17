@@ -32,11 +32,11 @@ import org.hippoecm.hst.content.beans.standard.HippoDocument;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.provider.jcr.JCRValueProvider;
 import org.hippoecm.hst.util.PathUtils;
+import org.onehippo.forge.selection.hst.contentbean.ValueList;
+import org.onehippo.forge.selection.hst.contentbean.ValueListItem;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tdclighthouse.prototype.beans.compounds.ListItemBean;
 import com.tdclighthouse.prototype.beans.compounds.SelectionBean;
-import com.tdclighthouse.prototype.beans.compounds.ValueListBean;
 import com.tdclighthouse.prototype.utils.TdcUtils;
 
 /**
@@ -51,26 +51,26 @@ public class TdcDocument extends HippoDocument {
 
     public SelectionBean getSelectionBean(String propertyName, String listAbslutePath) {
         Object propertyValue = getProperty(propertyName);
-        Map<String, ListItemBean> labelsMap = getSelectionOptionsMap(listAbslutePath);
+        Map<String, ValueListItem> labelsMap = getSelectionOptionsMap(listAbslutePath);
         return new SelectionBean(labelsMap, propertyValue);
     }
 
-    protected Map<String, ListItemBean> getSelectionOptionsMap(String path) {
+    protected Map<String, ValueListItem> getSelectionOptionsMap(String path) {
         return TdcUtils.valueListBeanToMap(getValueListBean(path));
     }
 
-    protected ValueListBean getValueListBean(String path) {
+    protected ValueList getValueListBean(String path) {
         try {
-            ValueListBean valueListBean;
+            ValueList valueListBean;
             Node listValueNode = getNode().getSession().getRootNode().getNode(PathUtils.normalizePath(path));
             Object object = getObjectConverter().getObject(listValueNode);
-            if (object instanceof ValueListBean) {
-                valueListBean = (ValueListBean) object;
+            if (object instanceof ValueList) {
+                valueListBean = (ValueList) object;
                 String localeString = getLocaleString();
                 if (StringUtils.isNotBlank(localeString)) {
                     HippoBean translation = valueListBean.getAvailableTranslations().getTranslation(localeString);
-                    if (translation instanceof ValueListBean) {
-                        valueListBean = (ValueListBean) translation;
+                    if (translation instanceof ValueList) {
+                        valueListBean = (ValueList) translation;
                     }
                 }
             } else {

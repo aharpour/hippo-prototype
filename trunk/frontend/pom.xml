@@ -135,6 +135,10 @@
       <groupId>com.google.zxing</groupId>
       <artifactId>javase</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.onehippo.forge.selectionplugins</groupId>
+      <artifactId>selectionplugins-hst-client</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <resources>

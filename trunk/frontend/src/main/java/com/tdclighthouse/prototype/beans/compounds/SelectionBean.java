@@ -19,16 +19,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.onehippo.forge.selection.hst.contentbean.ValueListItem;
+
 /**
  * @author Ebrahim Aharpour
  *
  */
 public class SelectionBean {
 
-    private final Map<String, ListItemBean> itemsMap;
+    private final Map<String, ValueListItem> itemsMap;
     private final List<SelectionItemBean> items = new ArrayList<SelectionItemBean>();
 
-    public SelectionBean(Map<String, ListItemBean> itemsMap, Object propertyValue) {
+    public SelectionBean(Map<String, ValueListItem> itemsMap, Object propertyValue) {
         this.itemsMap = itemsMap;
         if (propertyValue != null) {
             if (propertyValue.getClass().isArray()) {
@@ -43,11 +45,11 @@ public class SelectionBean {
         }
     }
 
-    private void addSelectionItemBean(Map<String, ListItemBean> labelsMap, String key) {
+    private void addSelectionItemBean(Map<String, ValueListItem> labelsMap, String key) {
         items.add(new SelectionItemBean(key, labelsMap.get(key)));
     }
 
-    public Map<String, ListItemBean> getItemsMap() {
+    public Map<String, ValueListItem> getItemsMap() {
         return itemsMap;
     }
 

@@ -15,6 +15,8 @@
  */
 package com.tdclighthouse.prototype.beans.compounds;
 
+import org.onehippo.forge.selection.hst.contentbean.ValueListItem;
+
 /**
  * @author Ebrahim Aharpour
  *
@@ -22,9 +24,9 @@ package com.tdclighthouse.prototype.beans.compounds;
 public class SelectionItemBean {
 
     protected String key;
-    protected ListItemBean item;
+    protected ValueListItem item;
 
-    public SelectionItemBean(String key, ListItemBean item) {
+    public SelectionItemBean(String key, ValueListItem item) {
         this.key = key;
         this.item = item;
     }
@@ -37,7 +39,7 @@ public class SelectionItemBean {
         return item != null ? item.getLabel() : null;
     }
 
-    public ListItemBean getItem() {
+    public ValueListItem getItem() {
         return item;
     }
 

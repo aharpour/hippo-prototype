@@ -36,9 +36,9 @@ import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.parameters.ParametersInfo;
+import org.onehippo.forge.selection.hst.contentbean.ValueList;
+import org.onehippo.forge.selection.hst.contentbean.ValueListItem;
 
-import com.tdclighthouse.prototype.beans.compounds.ListItemBean;
-import com.tdclighthouse.prototype.beans.compounds.ValueListBean;
 import com.tdclighthouse.prototype.componentsinfo.BlacklistInfo;
 import com.tdclighthouse.prototype.componentsinfo.ContentBeanPathInfo;
 import com.tdclighthouse.prototype.componentsinfo.ValueListAjaxInfo;
@@ -82,7 +82,7 @@ public class ValueListAjax extends BaseHstComponent {
         HippoBean scope = BeanUtils.getContentBeanViaParameters(this
                 .<ContentBeanPathInfo> getComponentParametersInfo(request));
         @SuppressWarnings("unchecked")
-        HstQuery query = request.getRequestContext().getQueryManager().createQuery(scope, ValueListBean.class);
+        HstQuery query = request.getRequestContext().getQueryManager().createQuery(scope, ValueList.class);
         return query.execute().getHippoBeans();
     }
 
@@ -113,11 +113,11 @@ public class ValueListAjax extends BaseHstComponent {
         try {
             JSONObject json = new JSONObject();
             Object object = request.getRequestContext().getObjectBeanManager().getObject(path);
-            if (object instanceof ValueListBean) {
-                ValueListBean bean = (ValueListBean) object;
+            if (object instanceof ValueList) {
+                ValueList bean = (ValueList) object;
                 if (!blackListChecker.isBlackListed(bean)) {
-                    List<ListItemBean> listItem = bean.getListItem();
-                    for (ListItemBean listItemBean : listItem) {
+                    List<ValueListItem> listItem = bean.getItems();
+                    for (ValueListItem listItemBean : listItem) {
                         json.put(listItemBean.getKey(), listItemBean.getLabel());
                     }
                 } else {
@@ -144,7 +144,7 @@ public class ValueListAjax extends BaseHstComponent {
 
         while (valueLists.hasNext()) {
             HippoBean hippoBean = valueLists.nextHippoBean();
-            if ((hippoBean instanceof ValueListBean) && !blackListChecker.isBlackListed(hippoBean)) {
+            if ((hippoBean instanceof ValueList) && !blackListChecker.isBlackListed(hippoBean)) {
                 json.put(hippoBean.getName(), hippoBean.getPath());
             }
         }

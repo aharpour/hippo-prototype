@@ -37,12 +37,12 @@ import org.hippoecm.frontend.plugins.gallery.imageutil.ImageUtils;
 import org.hippoecm.frontend.plugins.gallery.imageutil.ImageUtils.ScalingStrategy;
 import org.hippoecm.repository.api.Document;
 import org.hippoecm.repository.api.HippoWorkspace;
+import org.hippoecm.repository.api.WorkflowException;
 import org.hippoecm.repository.gallery.GalleryWorkflow;
 
 import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
 import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.utils.PluginConstants;
-import com.tdclighthouse.prototype.utils.exceptions.RuntimeIOException;
 
 /**
  * @author Ebrahim Aharpour
@@ -104,15 +104,13 @@ public class ImageCreationCallBack implements SessionCallBack<String> {
                 }
             }
 
-        } catch (RemoteException e) {
+        } catch (IOException | WorkflowException e) {
             throw new RepositoryException(e);
-        } catch (IOException e) {
-            throw new RuntimeIOException(e);
-        }
+        } 
         return result;
     }
 
-    private Node createImageSetNode(Session session, String type) throws RepositoryException, RemoteException {
+    private Node createImageSetNode(Session session, String type) throws RepositoryException, RemoteException, WorkflowException {
         Node result;
         HippoWorkspace workspace = (HippoWorkspace) session.getWorkspace();
         Node parent = session.getNode(parentPath);

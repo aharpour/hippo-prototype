@@ -30,14 +30,14 @@ import javax.jcr.Session;
 import org.apache.jackrabbit.util.Text;
 import org.hippoecm.repository.api.Document;
 import org.hippoecm.repository.api.HippoWorkspace;
+import org.hippoecm.repository.api.WorkflowException;
 import org.hippoecm.repository.gallery.GalleryWorkflow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
+import com.tdclighthouse.prototype.support.DocumentManager;
 import com.tdclighthouse.prototype.utils.PluginConstants;
-import com.tdclighthouse.prototype.utils.exceptions.RuntimeIOException;
 
 /**
  * @author Ebrahim Aharpour
@@ -69,15 +69,13 @@ public class BinaryCreationCallBack implements SessionCallBack<String> {
             asset.setProperty(PluginConstants.PropertyName.JCR_MIME_TYPE, mimeType);
             asset.setProperty(PluginConstants.PropertyName.JCR_LAST_MODIFIED, new GregorianCalendar());
 
-        } catch (RemoteException e) {
+        } catch (WorkflowException | IOException e) {
             throw new RepositoryException(e);
-        } catch (IOException e) {
-            throw new RuntimeIOException(e);
         }
         return uuid;
     }
 
-    private Node createAssetNode(Session session, String type) throws RepositoryException, RemoteException {
+    private Node createAssetNode(Session session, String type) throws RepositoryException, RemoteException, WorkflowException {
         Node result;
         HippoWorkspace workspace = (HippoWorkspace) session.getWorkspace();
         Node parent = session.getNode(parentPath);

@@ -15,6 +15,9 @@ import com.tdclighthouse.prototype.componentsinfo.PaginatedInfo;
 
 public class OverviewUtils {
 
+    private static final int DEFAULT_PAGE_SIZE = 25;
+    private static final int MAXIMUM_PAGE_SIZE = 500;
+
     private OverviewUtils() {
     }
 
@@ -28,15 +31,14 @@ public class OverviewUtils {
     }
 
     public static int getPageSize(HstRequest request, Object parametersInfo) {
-        int result = 25;
+        int result = DEFAULT_PAGE_SIZE;
         String pageSzieString = getNamespacedOrSimpleParameter(request, Constants.ParametersConstants.PAGE_SIZE);
         if (StringUtils.isNotBlank(pageSzieString) && StringUtils.isNumeric(pageSzieString)) {
             result = Integer.parseInt(pageSzieString);
         } else if (parametersInfo instanceof PaginatedInfo) {
             result = ((PaginatedInfo) parametersInfo).getDefaultPageSize();
         }
-
-        return result;
+        return Math.min(result, MAXIMUM_PAGE_SIZE);
     }
 
     public static String getNamespacedOrSimpleParameter(HstRequest request, String parameterName) {

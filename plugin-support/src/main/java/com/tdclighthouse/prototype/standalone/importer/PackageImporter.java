@@ -196,6 +196,8 @@ public class PackageImporter {
             if (StringUtils.isNotBlank(uuid)) {
                 result = uuid;
                 LOG.debug("dereference {} to {}", docbase, uuid);
+            } else {
+                LOG.error("failed to dereference  \"{}\".", reference);
             }
         }
         return result;

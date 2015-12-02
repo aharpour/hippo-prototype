@@ -38,9 +38,9 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
     // .*src="([^'|^"]*)".*
     private static final Pattern IMAGE_SOURCE_PATTERN = Pattern.compile(".*src=\"([^'|^\"]*)\".*");
 
-    // <a\s[^>]*href=["|']([^"^']*)["|'][^>]*>([^<]*)</a>
+    // <a\s[^>]*href=["|']([^"^']*)["|'][^>]*>((?!</a).*)</a>
     private static final Pattern LINK_PATTERN = Pattern
-            .compile("<a\\s[^>]*href=[\"|']([^\"^']*)[\"|'][^>]*>([^<]*)</a>");
+            .compile("<a\\s[^>]*href=[\"|']([^\"^']*)[\"|'][^>]*>((?!</a).*)</a>");
 
     @Override
     public DynamicNode update(DynamicNode dynamicNode) throws ImportException {

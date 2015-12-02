@@ -20,16 +20,17 @@ public abstract class AbstractImportService implements ImportService {
      */
     @Override
     public void importFolder(File folder, String relPath) throws ImportException {
-        // first take cares of the file in the folder
-        File[] files = folder.listFiles(filesFilter);
-        for (File file : files) {
-            importItem(file, relPath);
-        }
-        // then recurse trough sub-folders
+        // first recurse trough sub-folders
         File[] folders = folder.listFiles(foldersFilter);
         for (File subfolder : folders) {
             importFolder(subfolder, relPath + "/" + subfolder.getName());
         }
+        // then take cares of the file in the folder
+        File[] files = folder.listFiles(filesFilter);
+        for (File file : files) {
+            importItem(file, relPath);
+        }
+        
     }
 
     @Override

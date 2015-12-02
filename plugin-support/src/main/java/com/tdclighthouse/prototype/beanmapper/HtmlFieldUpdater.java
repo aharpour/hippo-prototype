@@ -61,22 +61,21 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
         try {
             Value htmlProperty = (Value) htmlNode
                     .getPropertyByRelativePath(PluginConstants.PropertyName.HIPPOSTD_CONTENT);
+
             String html = htmlProperty.getString();
-            List<MatchedItem> matchedItems = new ArrayList<HtmlFieldUpdater.MatchedItem>();
-            processImageTags(htmlNode, html, matchedItems);
-            processLinkTags(htmlNode, html, matchedItems);
-            if (!matchedItems.isEmpty()) {
-                String updatedHtml = replace(html, matchedItems);
-                htmlNode.overrideProperty(PluginConstants.PropertyName.HIPPOSTD_CONTENT,
-                        valueFactory.createValue(updatedHtml));
-            }
+
+            html = processImageTags(htmlNode, html);
+            html = processLinkTags(htmlNode, html);
+
+            htmlNode.overrideProperty(PluginConstants.PropertyName.HIPPOSTD_CONTENT, valueFactory.createValue(html));
         } catch (ParseException | RepositoryException e) {
             throw new ImportException(e);
         }
     }
 
-    private void processLinkTags(DynamicNode htmlNode, String html, List<MatchedItem> matchedItems)
-            throws ImportException {
+    private String processLinkTags(DynamicNode htmlNode, String html) throws ImportException {
+        String result = html;
+        List<MatchedItem> matchedItems = new ArrayList<HtmlFieldUpdater.MatchedItem>();
         Matcher matcher = LINK_PATTERN.matcher(html);
         while (matcher.find()) {
             String link = matcher.group(1);
@@ -91,6 +90,10 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
                 matchedItems.add(new MatchedItem(matcher.start(1), matcher.end(1), replacement));
             }
         }
+        if (!matchedItems.isEmpty()) {
+            result = replace(html, matchedItems);
+        }
+        return result;
 
     }
 
@@ -103,8 +106,9 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
         return result;
     }
 
-    private void processImageTags(DynamicNode htmlNode, String html, List<MatchedItem> matchedItems)
-            throws ImportException {
+    private String processImageTags(DynamicNode htmlNode, String html) throws ImportException {
+        String result = html;
+        List<MatchedItem> matchedItems = new ArrayList<HtmlFieldUpdater.MatchedItem>();
         Matcher matcher = IMAGE_PATTERN.matcher(html);
         while (matcher.find()) {
             String attributes = matcher.group(1);
@@ -121,8 +125,11 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
 
                 matchedItems.add(new MatchedItem(matcher.start(), matcher.end(), replacement));
             }
-
         }
+        if (!matchedItems.isEmpty()) {
+            result = replace(html, matchedItems);
+        }
+        return result;
     }
 
     private String replace(String input, List<MatchedItem> matchedItems) {

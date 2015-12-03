@@ -71,5 +71,10 @@ public class FileUtils {
         int lastIndexOf = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\'));
         return path.substring(lastIndexOf + 1);
     }
+    
+    public static String removeExtention(String fileName) {
+        int dotIndex = fileName.lastIndexOf('.');
+        return dotIndex > 0 ? fileName.substring(0, dotIndex) : fileName;  
+    }
 
 }

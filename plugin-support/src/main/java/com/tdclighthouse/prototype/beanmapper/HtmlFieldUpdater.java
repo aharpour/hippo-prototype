@@ -79,7 +79,7 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
         Matcher matcher = LINK_PATTERN.matcher(html);
         while (matcher.find()) {
             String link = matcher.group(1);
-            if (!isExternal(link)) {
+            if (!isExternal(link) && !isAnchorLink(link)) {
                 String nodeName = addFacetSelectNode(link, htmlNode);
                 String replacement;
                 if (nodeName != null) {
@@ -95,6 +95,10 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
         }
         return result;
 
+    }
+    
+    private boolean isAnchorLink(String link) {
+        return StringUtils.isBlank(link) || link.startsWith("#");
     }
 
     private boolean isExternal(String link) {

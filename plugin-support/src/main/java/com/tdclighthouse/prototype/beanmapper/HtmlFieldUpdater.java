@@ -150,7 +150,7 @@ public class HtmlFieldUpdater implements DynamicNodeUpdater {
     private String addFacetSelectNode(String filePath, DynamicNode parent) throws ImportException {
         try {
             String nodeName = null;
-            String fileName = FileUtils.removeExtention(FileUtils.getFileName(filePath));
+            String fileName = FileUtils.getFileName(filePath);
             if (StringUtils.isNotBlank(fileName) && StringUtils.isNotBlank(filePath)) {
                 nodeName = fileName;
                 if (parent.getNodeByRelativePath(fileName) == null) {

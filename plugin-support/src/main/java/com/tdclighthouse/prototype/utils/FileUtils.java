@@ -72,7 +72,7 @@ public class FileUtils {
         return path.substring(lastIndexOf + 1);
     }
     
-    public static String removeExtention(String fileName) {
+    public static String removeExtension(String fileName) {
         int dotIndex = fileName.lastIndexOf('.');
         return dotIndex > 0 ? fileName.substring(0, dotIndex) : fileName;  
     }

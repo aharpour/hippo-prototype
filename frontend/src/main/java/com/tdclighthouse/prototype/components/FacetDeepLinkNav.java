@@ -18,6 +18,7 @@ import org.hippoecm.hst.util.PathUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tdclighthouse.prototype.beans.FacetLinkConfigBean;
 import com.tdclighthouse.prototype.componentsinfo.FacetDeepLinkNavInfo;
+import com.tdclighthouse.prototype.utils.BeanUtils;
 import com.tdclighthouse.prototype.utils.Constants.AttributesConstants;
 import com.tdclighthouse.prototype.utils.FacetDeepLink;
 import com.tdclighthouse.prototype.utils.exceptions.FacetDeepLinkExceptoin;
@@ -34,10 +35,11 @@ public class FacetDeepLinkNav extends BaseHstComponent {
     private Map<String, Object> getModel(HstRequest request, HstResponse response) {
         try {
             Map<String, Object> model = new HashMap<String, Object>();
+            Object parametersInfo = getComponentParametersInfo(request);
             HippoBean hippoBean = FacetDeepLink.getDeepLinkBean(getFacet(request), getFilters(request));
             model.put(AttributesConstants.FACET_BEAN, hippoBean);
-            model.put(AttributesConstants.LABELS, new HashMap<String, String>());
-            model.put(AttributesConstants.PARAM_INFO, getComponentParametersInfo(request));
+            model.put(AttributesConstants.LABELS, BeanUtils.getLabels(parametersInfo));
+            model.put(AttributesConstants.PARAM_INFO, parametersInfo);
             return model;
         } catch (FacetDeepLinkExceptoin e) {
             throw new HstComponentException(e.getMessage(), e);

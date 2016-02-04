@@ -109,6 +109,12 @@ public class MenuitemTag extends TagSupport {
             out.print("<a href=\"");
             out.print(getLink(item, getRequestContext(), false));
             out.print("\">");
+        } else {
+            out.print("<span ");
+            if (StringUtils.isNotBlank(cssClass)) {
+                out.print("class=\"" + cssClass + "\"");
+            }
+            out.print(">");
         }
 
         if (labels != null) {
@@ -119,6 +125,8 @@ public class MenuitemTag extends TagSupport {
 
         if (!disabled) {
             out.print("</a>");
+        } else {
+            out.print("</span>");
         }
     }
 

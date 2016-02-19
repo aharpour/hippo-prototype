@@ -22,15 +22,15 @@
   </developers>
   <inceptionYear>2012</inceptionYear>
   <scm>
-    <connection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/trunk/</connection>
-    <developerConnection>scm:svn:https://svn.code.sf.net/p/hippoprototype/code/trunk/</developerConnection>
-    <url>https://svn.code.sf.net/p/hippoprototype/code/trunk/</url>
+    <url>https://github.com/aharpour/hippo-prototype</url>
+    <connection>scm:git:git://github.com:aharpour/hippo-prototype.git</connection>
+    <developerConnection>scm:git:git@github.com:aharpour/hippo-prototype.git</developerConnection>
   </scm>
   <ciManagement />
   <distributionManagement>
     <repository>
-      <id>sf-hippo-prototype-repo</id>
-      <url>svn:https://svn.code.sf.net/p/hippoprototype/code/maven2/</url>
+      <id>openweb-maven-releases</id>
+      <url>https://maven.open-web.nl/content/repositories/releases/</url>
     </repository>
     <snapshotRepository>
       <id>openweb-nexus-snapshots</id>
@@ -198,12 +198,6 @@
         <groupId>javax.servlet</groupId>
         <artifactId>servlet-api</artifactId>
         <version>2.5</version>
-        <scope>provided</scope>
-      </dependency>
-      <dependency>
-        <groupId>taglibs</groupId>
-        <artifactId>standard</artifactId>
-        <version>1.1.2</version>
         <scope>provided</scope>
       </dependency>
       <dependency>

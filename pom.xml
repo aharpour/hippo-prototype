@@ -12,7 +12,7 @@
   <description>Hippo prototype</description>
   <groupId>com.tdclighthouse.hippo</groupId>
   <artifactId>hippo-prototype</artifactId>
-  <version>7.9.48-SNAPSHOT</version>
+  <version>7.9.48</version>
   <packaging>pom</packaging>
   <developers>
     <developer>
@@ -25,6 +25,7 @@
     <url>https://github.com/aharpour/hippo-prototype</url>
     <connection>scm:git:git://github.com:aharpour/hippo-prototype.git</connection>
     <developerConnection>scm:git:git@github.com:aharpour/hippo-prototype.git</developerConnection>
+    <tag>7.9.48</tag>
   </scm>
   <ciManagement />
   <distributionManagement>

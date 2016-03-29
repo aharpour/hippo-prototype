@@ -15,33 +15,21 @@
  */
 package com.tdclighthouse.prototype.support;
 
+import javax.jcr.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.rmi.RemoteException;
 
-import javax.jcr.ImportUUIDBehavior;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
+import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
+import com.tdclighthouse.prototype.utils.PluginConstants;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jackrabbit.util.Text;
-import org.hippoecm.repository.api.Document;
-import org.hippoecm.repository.api.HippoNode;
-import org.hippoecm.repository.api.HippoWorkspace;
-import org.hippoecm.repository.api.MappingException;
-import org.hippoecm.repository.api.Workflow;
-import org.hippoecm.repository.api.WorkflowException;
-import org.hippoecm.repository.api.WorkflowManager;
+import org.hippoecm.repository.api.*;
 import org.hippoecm.repository.gallery.GalleryWorkflow;
-import org.hippoecm.repository.reviewedactions.FullReviewedActionsWorkflow;
 import org.hippoecm.repository.standardworkflow.EditableWorkflow;
 import org.hippoecm.repository.standardworkflow.FolderWorkflow;
-
-import com.tdclighthouse.prototype.support.AbstractSessionTemplate.SessionCallBack;
-import com.tdclighthouse.prototype.utils.PluginConstants;
+import org.onehippo.repository.documentworkflow.DocumentWorkflow;
 
 /**
  * @author Ebrahim Aharpour
@@ -120,7 +108,7 @@ public class DocumentManager {
                 @Override
                 public Object doInSession(Session session) throws RepositoryException {
                     try {
-                        FullReviewedActionsWorkflow reviewWorkflow = getFullReviewedActionsWorkflow(unpublishedNode,
+                        DocumentWorkflow reviewWorkflow = getFullReviewedActionsWorkflow(unpublishedNode,
                                 session);
                         reviewWorkflow.delete();
                         return null;
@@ -150,7 +138,7 @@ public class DocumentManager {
                 @Override
                 public Object doInSession(Session session) throws RepositoryException {
                     try {
-                        FullReviewedActionsWorkflow reviewWorkflow = getFullReviewedActionsWorkflow(publishedNode,
+                        DocumentWorkflow reviewWorkflow = getFullReviewedActionsWorkflow(publishedNode,
                                 session);
                         try {
                             reviewWorkflow.depublish();
@@ -254,7 +242,7 @@ public class DocumentManager {
                 @Override
                 public Object doInSession(Session session) throws RepositoryException {
                     try {
-                        FullReviewedActionsWorkflow reviewWorkflow = getFullReviewedActionsWorkflow(targetNode, session);
+                        DocumentWorkflow reviewWorkflow = getFullReviewedActionsWorkflow(targetNode, session);
                         try {
                             reviewWorkflow.publish();
                         } catch (WorkflowException e) {
@@ -338,12 +326,12 @@ public class DocumentManager {
         return result;
     }
 
-    private FullReviewedActionsWorkflow getFullReviewedActionsWorkflow(final Node node, Session session)
+    private DocumentWorkflow getFullReviewedActionsWorkflow(final Node node, Session session)
             throws MappingException, RepositoryException {
-        FullReviewedActionsWorkflow result;
+        DocumentWorkflow result;
         Workflow workflow = getWorkflow(node, session, PluginConstants.WorkflowName.DEFAULT);
-        if (workflow instanceof FullReviewedActionsWorkflow) {
-            result = (FullReviewedActionsWorkflow) workflow;
+        if (workflow instanceof DocumentWorkflow) {
+            result = (DocumentWorkflow) workflow;
         } else {
             throw new IllegalArgumentException("the obtained workflow can not be casted to FullReviewedActionsWorkflow");
         }

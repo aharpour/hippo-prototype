@@ -31,11 +31,7 @@ public class ComponentUtils {
     }
 
     public static Map<String, String[]> getPublicRequestParameterMap(HstRequest request) {
-        String contextNamespaceReference = request.getRequestContext().getContextNamespace();
-        if (contextNamespaceReference == null) {
-            contextNamespaceReference = "";
-        }
-        return request.getParameterMap(contextNamespaceReference);
+        return request.getParameterMap();
     }
 
     public static String getComponentSpecificParameterName(HstRequest request, String name) {

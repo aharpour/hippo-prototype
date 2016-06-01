@@ -11,13 +11,7 @@
 <%  
 HstRequest hstRequest = ((HstRequest)request);
 
-String contextNamespaceReference = hstRequest.getRequestContext().getContextNamespace();
-
-if (contextNamespaceReference == null) {
-    contextNamespaceReference = "";
-}
-
-Map<String, String []> namespaceLessParameters = hstRequest.getParameterMap(contextNamespaceReference);
+Map<String, String []> namespaceLessParameters = hstRequest.getParameterMap("");
 String [] paramValues = namespaceLessParameters.get(name);
 boolean result = false;
 if (paramValues != null) {

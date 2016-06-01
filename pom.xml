@@ -43,7 +43,7 @@
     <junit.version>4.11</junit.version>
     <jackson.version>2.2.1</jackson.version>
     <easymock.version>3.2</easymock.version>
-    <maven.hippo.plugin.version>0.1.2</maven.hippo.plugin.version>
+    <maven.hippo.plugin.version>10.2.01-SNAPSHOT</maven.hippo.plugin.version>
     <joda.version>2.3</joda.version>
     <hst.mixin.support.version>10.2.00</hst.mixin.support.version>
     <zxing.version>3.1.0</zxing.version>

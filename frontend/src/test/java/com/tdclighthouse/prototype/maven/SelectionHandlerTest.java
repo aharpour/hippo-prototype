@@ -35,6 +35,27 @@ public class SelectionHandlerTest {
     }
 
     @Test
+    public void normalMultivalueCaseTest() throws GeneratorException {
+        SelectionHandler selectionHandler = new SelectionHandler(null, null, null, null);
+
+        ContentTypeBean contentTypeBean = EasyMock.createMock(ContentTypeBean.class);
+        Item item = createMockItem(contentTypeBean, "ns:myField", "myField", true, "DynamicDropdown");
+        Template template = createMockTemplate("/path/to/value/list");
+        EasyMock.expect(contentTypeBean.getTemplate(item)).andReturn(template);
+
+        EasyMock.replay(contentTypeBean, template);
+
+        ImportRegistry importRegistry = new ImportRegistry();
+        HandlerResponse handle = selectionHandler.handle(item, importRegistry);
+        Assert.assertEquals(1, handle.getPropertyGenerators().size());
+        Assert.assertEquals(1, handle.getMethodGenerators().size());
+        Assert.assertEquals("private SelectionBean myField;", handle.getPropertyGenerators().get(0).getFragment());
+        Assert.assertEquals(
+                "public SelectionBean getMyField() {\n    if (this.myField == null) {\n        this.myField = getSelectionBean(\"ns:myField\", \"/path/to/value/list\");\n    }\n    return this.myField;\n}",
+                handle.getMethodGenerators().get(0).getFragment());
+    }
+
+    @Test
     public void noTemplateTest() throws GeneratorException {
         SelectionHandler selectionHandler = new SelectionHandler(null, null, null, null);
 

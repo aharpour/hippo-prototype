@@ -16,27 +16,25 @@ package com.tdclighthouse.prototype.maven;
  *   limitations under the License.
  *   
  */
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.sourceforge.mavenhippo.gen.ClassReference;
+import com.tdclighthouse.prototype.beans.compounds.SelectionBean;
+
+import net.sourceforge.mavenhippo.gen.*;
 import net.sourceforge.mavenhippo.gen.ContentTypeItemAnalyzer.AnalyzerResult;
 import net.sourceforge.mavenhippo.gen.ContentTypeItemAnalyzer.Type;
-import net.sourceforge.mavenhippo.gen.ContentTypeItemHandler;
-import net.sourceforge.mavenhippo.gen.DefaultPropertyGenerator;
-import net.sourceforge.mavenhippo.gen.HandlerResponse;
-import net.sourceforge.mavenhippo.gen.ImportRegistry;
-import net.sourceforge.mavenhippo.gen.MethodGenerator;
-import net.sourceforge.mavenhippo.gen.PackageHandler;
-import net.sourceforge.mavenhippo.gen.PropertyGenerator;
 import net.sourceforge.mavenhippo.gen.annotation.Weight;
 import net.sourceforge.mavenhippo.model.ContentTypeBean.Item;
 import net.sourceforge.mavenhippo.model.ContentTypeBean.Template;
 import net.sourceforge.mavenhippo.model.HippoBeanClass;
 
-import com.tdclighthouse.prototype.beans.compounds.SelectionBean;
+import org.apache.commons.lang3.StringUtils;
+
+
 
 /**
  * @author Ebrahim Aharpour
@@ -45,8 +43,10 @@ import com.tdclighthouse.prototype.beans.compounds.SelectionBean;
 @Weight(value = -10.0)
 public class SelectionHandler extends ContentTypeItemHandler {
 
+    private static final String VALUELIST_OPTIONS = "valuelist.options";
+
     public SelectionHandler(Map<String, HippoBeanClass> beansOnClassPath, Map<String, HippoBeanClass> beansInProject,
-            Set<String> namespaces, PackageHandler packageHandler) {
+                            Set<String> namespaces, PackageHandler packageHandler) {
         super(beansOnClassPath, beansInProject, namespaces, packageHandler);
     }
 
@@ -57,15 +57,18 @@ public class SelectionHandler extends ContentTypeItemHandler {
             Template template = item.getContentType().getTemplate(item);
             if (template != null) {
                 String pathToValueList = template.getOptionsValue("source");
+                if (StringUtils.isBlank(pathToValueList)) {
+                    pathToValueList = template.getSubnodePropertyValue(VALUELIST_OPTIONS, "source");
+                }
                 if (pathToValueList != null) {
-                    ClassReference reutrnType = new ClassReference(SelectionBean.class);
-                    importRegistry.register(reutrnType);
+                    ClassReference returnType = new ClassReference(SelectionBean.class);
+                    importRegistry.register(returnType);
                     List<PropertyGenerator> propertyGenerators = Collections
-                            .singletonList((PropertyGenerator) new DefaultPropertyGenerator(new AnalyzerResult(
-                                    Type.PROPERTY, reutrnType), item, importRegistry));
+                            .singletonList(new SelectionPropertyGenerator(new AnalyzerResult(
+                                    Type.PROPERTY, returnType), item, importRegistry));
                     List<MethodGenerator> methodGenerators = Collections
-                            .singletonList((MethodGenerator) new SelectionMethodGenerator(item, pathToValueList,
-                                    reutrnType));
+                            .singletonList(new SelectionMethodGenerator(item, pathToValueList,
+                                    returnType));
 
                     result = new HandlerResponse(propertyGenerators, methodGenerators);
 
@@ -74,5 +77,4 @@ public class SelectionHandler extends ContentTypeItemHandler {
         }
         return result;
     }
-
 }

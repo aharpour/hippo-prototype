@@ -5,14 +5,14 @@
   <parent>
     <groupId>org.onehippo.cms7</groupId>
     <artifactId>hippo-cms7-release</artifactId>
-    <version>7.9.9</version>
+    <version>10.2.0</version>
   </parent>
 
   <name>Hippo prototype</name>
   <description>Hippo prototype</description>
   <groupId>com.tdclighthouse.hippo</groupId>
   <artifactId>hippo-prototype</artifactId>
-  <version>7.9.50-SNAPSHOT</version>
+  <version>10.2.02-SNAPSHOT</version>
   <packaging>pom</packaging>
   <developers>
     <developer>
@@ -43,9 +43,10 @@
     <junit.version>4.11</junit.version>
     <jackson.version>2.9.8</jackson.version>
     <easymock.version>3.2</easymock.version>
-    <maven.hippo.plugin.version>0.1.2</maven.hippo.plugin.version>
+    <maven.hippo.plugin.version>10.2.01</maven.hippo.plugin.version>
+    <hippo.common.tools.version>10.2.00</hippo.common.tools.version>
     <joda.version>2.3</joda.version>
-    <hst.mixin.support.version>1.1</hst.mixin.support.version>
+    <hst.mixin.support.version>10.2.00</hst.mixin.support.version>
     <zxing.version>3.1.0</zxing.version>
   </properties>
   <repositories>
@@ -139,7 +140,7 @@
       <dependency>
         <groupId>com.tdclighthouse.hippo</groupId>
         <artifactId>hippo-common-tools</artifactId>
-        <version>0.4.21</version>
+        <version>${hippo.common.tools.version}</version>
       </dependency>
       <dependency>
         <groupId>net.sourceforge.hstmixinsupport</groupId>
@@ -282,82 +283,39 @@
     </profile>
   </profiles>
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.jvnet.wagon-svn</groupId>
-        <artifactId>wagon-svn</artifactId>
-        <version>1.9</version>
-      </extension>
-    </extensions>
     <pluginManagement>
       <plugins>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
-          <version>2.4.1</version>
+          <version>2.5.3</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.10.3</version>
+          <inherited>true</inherited>
           <configuration>
-            <releaseProfiles>release</releaseProfiles>
-            <goals>install deploy</goals>
+            <show>private</show>
+            <additionalparam>-Xdoclint:none</additionalparam>
           </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>org.apache.maven.scm</groupId>
-              <artifactId>maven-scm-api</artifactId>
-              <version>1.8.1</version>
-            </dependency>
-            <dependency>
-              <groupId>org.apache.maven.scm</groupId>
-              <artifactId>maven-scm-provider-gitexe</artifactId>
-              <version>1.8.1</version>
-            </dependency>
-          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.5.1</version>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.3.2</version>
-        <inherited>true</inherited>
-        <configuration>
-          <allowTimestampedSnapshots>false</allowTimestampedSnapshots>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <arguments>-DskipTests=true</arguments>
-          <tagNameFormat>@{project.version}</tagNameFormat>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin> -->
-    </plugins>
   </build>
   <modules>
     <module>content</module>

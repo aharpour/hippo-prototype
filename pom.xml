@@ -50,6 +50,15 @@
   </properties>
   <repositories>
     <repository>
+      <id>central</id>
+      <name>Maven Repository Switchboard</name>
+      <layout>default</layout>
+      <url>http://repo1.maven.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
       <id>hippo</id>
       <name>Hippo maven 2 repository.</name>
       <url>http://maven.onehippo.com/maven2/</url>
@@ -57,46 +66,18 @@
     <repository>
       <id>hippo-forge</id>
       <name>Hippo Forge</name>
-      <url>http://maven.onehippo.com/maven2-forge/</url>
+      <url>https://maven.onehippo.com/maven2-forge/</url>
       <releases>
         <updatePolicy>never</updatePolicy>
       </releases>
     </repository>
     <repository>
-      <id>sf-hippo-common-tools-repo</id>
-      <url>http://svn.code.sf.net/p/hippocommontool/code/maven2/</url>
-      <name>Source forge hippo common tools repo</name>
+      <id>openweb-public-repository</id>
+      <name>Open Web public repo</name>
+      <url>https://maven.open-web.nl/content/groups/public/</url>
       <releases>
         <updatePolicy>never</updatePolicy>
       </releases>
-    </repository>
-    <repository>
-      <id>hippo-forge-beanmapper</id>
-      <url>http://forge.onehippo.org/svn/beanmapper/maven2/</url>
-      <name>Hippo forge bean mapper repo</name>
-      <releases>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-    </repository>
-    <repository>
-      <id>sf-hst-mixin-support</id>
-      <url>http://svn.code.sf.net/p/hstmixinsupport/code/maven2/</url>
-      <name>Source forge HST mixin support module</name>
-      <releases>
-        <updatePolicy>never</updatePolicy>
-        <checksumPolicy>fail</checksumPolicy>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>sf-hippo-maven-plugin-repo</id>
-      <name>Hippo maven plugin repository.</name>
-      <url>http://svn.code.sf.net/p/mavenhippo/code/maven2/</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
     </repository>
   </repositories>
   <dependencyManagement>

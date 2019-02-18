@@ -41,7 +41,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>4.11</junit.version>
-    <jackson.version>2.2.1</jackson.version>
+    <jackson.version>2.9.8</jackson.version>
     <easymock.version>3.2</easymock.version>
     <maven.hippo.plugin.version>0.1.2</maven.hippo.plugin.version>
     <joda.version>2.3</joda.version>
